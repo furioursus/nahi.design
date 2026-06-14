@@ -1,0 +1,156 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+
+interface Props {
+	title: string;
+	info: string[];
+	shipStatus: string;
+	summary: string;
+	imagePath: string;
+	altText: string;
+}
+
+const { title, info, shipStatus, summary, imagePath, altText } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+	"/src/img/*.{jpeg,jpg,png,gif}",
+);
+if (!images[imagePath])
+	throw new Error(
+		`"${imagePath}" does not exist in glob: "/src/img/*.{jpeg,jpg,png,gif}"`,
+	);
+---
+
+<article class="case-study-thumb">
+	<div class="content">
+		<div class="meta">
+			<div class="info-list">
+				{
+					info.map((item, idx) => (
+						<span class="info-item">
+							{item}
+							{idx < info.length - 1 && <span aria-hidden class="dot" />}
+						</span>
+					))
+				}
+			</div>
+			<div aria-hidden class="separator"></div>
+			<div class="ship-date">
+				{shipStatus}
+			</div>
+		</div>
+		<h3 class="title">{title}</h3>
+		<p class="summary">{summary}</p>
+	</div>
+	<div class="image-wrapper">
+		<Image src={images[imagePath]()} alt={altText} />
+	</div>
+</article>
+
+<style>
+	.case-study-thumb {
+		display: grid;
+		grid-template-rows: subgrid;
+		grid-row: span 2;
+		gap: var(--space-6);
+		padding: var(--space-6);
+		text-decoration: none;
+		color: inherit;
+		border: 1px solid transparent;
+		box-shadow: none;
+		border-radius: var(--rounded-edge);
+
+		transition:
+			box-shadow 0.2s ease,
+			border 0.2s ease;
+
+		&:hover {
+			border: 1px solid var(--bowstring);
+			box-shadow: 0px 2px 6px 6px #1c191608;
+		}
+	}
+
+	.image-wrapper {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		border-radius: var(--space-2);
+		border: 1px solid var(--bowstring);
+		background-color: var(--grey-white);
+	}
+
+	.image-wrapper img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.2s ease;
+	}
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+	}
+
+	.meta {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-family: var(--text-font-heading);
+		font-size: var(--text-2xs);
+		font-weight: var(--weight-medium);
+		text-transform: uppercase;
+		letter-spacing: var(--letter-spacing-loose);
+		color: var(--oubliette);
+	}
+
+	.info-list {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+	}
+
+	.info-item {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+	}
+
+	.dot {
+		content: "";
+		display: inline-flex;
+		border-radius: 100%;
+		width: var(--space-1);
+		height: var(--space-1);
+		justify-content: center;
+		background-color: var(--dovetail);
+	}
+
+	.separator {
+		flex: 1;
+		height: 1px;
+		content: "";
+		display: inline-flex;
+		background-color: var(--rampart);
+		margin: 0 var(--space-4);
+	}
+
+	.ship-date {
+		color: var(--dovetail);
+	}
+
+	.title {
+		font-family: var(--text-font-heading);
+		font-size: var(--text-xl);
+		font-weight: var(--weight-regular);
+		line-height: var(--leading-snug);
+		letter-spacing: var(--letter-spacing-tight);
+	}
+
+	.summary {
+		font-family: var(--text-font-body);
+		font-size: var(--text-sm);
+		line-height: var(--leading-normal);
+		color: var(--black-umber);
+	}
+</style>

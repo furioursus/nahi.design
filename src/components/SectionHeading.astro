@@ -1,0 +1,50 @@
+---
+import Caption from "./Caption.astro";
+export interface Props {
+	title: string;
+	number?: number;
+	caption?: string;
+}
+
+const { title, number, caption } = Astro.props;
+---
+
+<h2>
+	{
+		number ? (
+			<span class="number-lead">
+				{number < 10 ? `0${number}` : `${number}`}
+			</span>
+		) : null
+	}
+	<span class="title">{title}</span>
+	{caption ? <Caption>{caption}</Caption> : null}
+</h2>
+
+<style>
+	h2 {
+		font-family: var(--text-font-heading);
+		font-size: var(--text-3xl);
+		font-weight: var(--weight-bold);
+		line-height: var(--leading-tight);
+		letter-spacing: var(--letter-spacing-tighter);
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		align-items: center;
+	}
+
+	.number-lead {
+		font-size: var(--text-3xs);
+		font-weight: var(--weight-regular);
+		color: var(--dovetail);
+		margin-right: var(--space-6);
+		font-style: italic;
+		line-height: var(--leading-tight);
+		letter-spacing: var(--letter-spacing-tight);
+	}
+
+	.title {
+		flex: 1;
+	}
+</style>

@@ -1,0 +1,71 @@
+<nav class="navbar" aria-labelledby="mainmenulabel">
+	<h2 class="visually-hidden" id="mainmenulabel">Main Menu</h2>
+	<div class="nav navbar-nav menu container">
+		<a class="logo" href="/">
+			<img
+				src="/img/nav-logo.png"
+				srcset="/img/nav-logo.png 1x, /img/nav-logo@2x.png 2x, /img/nav-logo@3x.png 3x, /img/nav-logo@4x.png 4x"
+				alt=""
+				width="112"
+				height="24"
+			/>
+			<span class="visually-hidden">Home</span></a
+		>
+		<div class="nav-items">
+			<a class="nav-item" href="#">Case Studies</a>
+			<a class="nav-item active" href="#">About</a>
+			<a class="nav-item" href="#">Contact</a>
+		</div>
+	</div>
+</nav>
+
+<style>
+	.navbar {
+		background-color: var(--black-umber);
+		font-family: var(--text-font-heading);
+		font-size: var(--text-xs);
+		padding: var(--space-8) 0;
+		position: sticky;
+	}
+	.nav {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-7);
+		@media (min-width: 30rem) {
+			flex-direction: row;
+			justify-content: space-between;
+		}
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+	}
+
+	.nav-items {
+		display: flex;
+		gap: var(--space-7);
+	}
+
+	.nav-item {
+		color: var(--rampart);
+		text-decoration: none;
+		position: relative;
+		&:hover,
+		&.active {
+			color: var(--crystal-cut);
+		}
+		&.active {
+			&::after {
+				content: "";
+				position: absolute;
+				bottom: -2px;
+				left: 0;
+				width: 100%;
+				height: 1px;
+				background-color: var(--crystal-cut);
+			}
+		}
+	}
+</style>

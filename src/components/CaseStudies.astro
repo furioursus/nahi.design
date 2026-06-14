@@ -1,0 +1,98 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+import CaseStudyThumb from "./CaseStudyThumb.astro";
+
+const caseStudies = [
+	{
+		title: "From Grand Vision to Shippable MVP",
+		info: ["QuantaLyric", "BI Dashboard"],
+		shipStatus: "PoC Shipped, 2025",
+		summary:
+			"A full-stack engagement designing the MVP, brand, and design system for QuantaLyric's DecisionSigma, an AI energy forecasting tool launching to Australian traders.",
+		imgUrl: "/src/img/ql_thumb.png",
+	},
+	{
+		title: "An AI Troubleshooting Agent for HPE",
+		info: ["HPE", "Debugging", "Agentic AI"],
+		shipStatus: "PoC Shipped, 2024",
+		summary:
+			"From ideation to execution, designed a proof-of-concept AI agent that reads HPE data pipeline logs, surfaces errors, and recommends remediation steps — laying the groundwork for a fully autonomous MLOps assistant.",
+		imgUrl: "/src/img/hpe-ai_thumb.png",
+	},
+	{
+		title: "Unifying Pipeline Code Injection in a Permissions-Stratified UI",
+		info: ["Data Pipelines", "Console UI", "Product Design"],
+		shipStatus: "Shipped, 2023",
+		summary:
+			"I designed an in-app CRUD experience for injecting code into AI model data pipelines, replacing a fragmented CLI-plus-monitoring workflow while navigating the simultaneous rollout of granular roles and permissions across three injection scopes: cluster, project, and individual pipeline.",
+		imgUrl: "/src/img/pachyderm-crud_thumb.png",
+	},
+	{
+		title: "From Hours to Seconds: Redesigning Data Lineage at IBM",
+		info: ["IBM", "DevOps", "Data Visualization"],
+		shipStatus: "Shipped, 2019",
+		summary:
+			"As design lead, drove the full research, concept, and delivery process to replace IBM Infosphere with a performant, watsonx-integrated data lineage experience, cutting retrieval time from hours to seconds and earning a Red Dot Award.",
+		imgUrl: "/src/img/ibm_thumb.png",
+	},
+	{
+		title: "An Internal Career Site for IBM’s Designers",
+		info: ["IBM", "Service Design"],
+		shipStatus: "Shipped, 2019",
+		summary:
+			"Consolidating IBM’s disparate career resources into one site and developing internal guidance for designers and design managers who are hiring from the internal pool of people who are looking to change product teams.",
+		imgUrl: "/src/img/ibm-dom_thumb.png",
+	},
+	{
+		title: "Lowering the Barriers to HIV Care for Arizona DHHS",
+		info: ["APIAHF", "Public Health"],
+		shipStatus: "Shipped, 2018",
+		summary:
+			"Drawing on lived experience as an HIV+ person, conducted primary research, co-creation workshops, and concept design for Arizona DHHS, delivering a tone-first, guidance-driven redesign that achieved a 4x improvement in mobile bounce rate and increased utilization of home delivery testing kits.",
+		imgUrl: "/src/img/api_thumb.png",
+	},
+];
+---
+
+<div class="container">
+	<main>
+		<SectionHeading
+			title="Case Studies"
+			number={1}
+			caption="NDAs, we know the drill."
+		/>
+		<div class="case-studies-grid">
+			{
+				caseStudies.map((study) => (
+					<CaseStudyThumb
+						title={study.title}
+						info={study.info}
+						shipStatus={study.shipStatus}
+						summary={study.summary}
+						imagePath={study.imgUrl}
+						altText={study.title}
+					/>
+				))
+			}
+		</div>
+	</main>
+</div>
+
+<style>
+	main {
+		padding-top: var(--space-10);
+		margin: var(--space-10) 0 var(--space-20);
+		border-top: 1px solid var(--dovetail);
+	}
+
+	.case-studies-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-10);
+		margin-top: var(--space-12);
+
+		@media (min-width: 48rem) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+</style>

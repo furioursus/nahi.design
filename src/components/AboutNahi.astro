@@ -1,0 +1,69 @@
+---
+import Caption from "./Caption.astro";
+---
+
+<div class="about-nahi">
+	<div class="container">
+		<div class="section-inner">
+			<Caption>Grounded • Craftsman</Caption>
+			<h2 class="h1">Nahi Kennedy-Nuñez</h2>
+			<p class="description">
+				I'm a UX designer with a steady, disciplined approach to my craft —
+				equally at home shaping wood by hand, watching my fish drift through
+				their little world, getting outvoted by my two cats, or losing an
+				afternoon to a good museum.
+			</p>
+			<div class="video-grid">
+				<video autoplay loop muted>
+					<source src="/video/woodworking.mp4" type="video/mp4" />
+				</video>
+				<video autoplay loop muted>
+					<source src="/video/pea-puffer.mp4" type="video/mp4" />
+				</video>
+				<video autoplay loop muted>
+					<source src="/video/mercer-lab.mp4" type="video/mp4" />
+				</video>
+				<video autoplay loop muted>
+					<source src="/video/dante.mp4" type="video/mp4" />
+				</video>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.about-nahi {
+		background-color: var(--black-umber);
+		color: var(--crystal-cut);
+	}
+
+	.section-inner {
+		padding-top: var(--space-40);
+		padding-bottom: var(--space-10);
+		border-top: 1px solid var(--rampart);
+	}
+
+	h2 {
+		margin: var(--space-4) 0;
+	}
+
+	.description {
+		font-family: var(--text-font-heading);
+		font-size: var(--text-sm);
+		color: var(--rampart);
+		line-height: var(--leading-normal);
+		max-width: 35rem;
+	}
+
+	.video-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: var(--space-10);
+		margin-top: 12.5rem;
+	}
+	video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+</style>

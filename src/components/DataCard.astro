@@ -1,0 +1,51 @@
+---
+import Caption from "./Caption.astro";
+export interface Props {
+	title: string;
+	number?: number;
+	tags?: string[];
+}
+
+const { title, number, tags } = Astro.props;
+---
+
+<article>
+	<Caption>{number}</Caption>
+	<div class="content">
+		<h3 class="title">{title}</h3>
+		<slot />
+	</div>
+	{tags && <p class="tags">{tags.join(" · ")}</p>}
+</article>
+
+<style>
+	article {
+		border-top: 1px solid var(--oubliette);
+		padding-top: var(--space-4);
+	}
+	.title {
+		font-family: var(--text-font-heading);
+		font-size: var(--text-sm);
+		font-weight: var(--weight-bold);
+		line-height: var(--leading-snug);
+		letter-spacing: var(--letter-spacing-tight);
+		margin-top: var(--space-2);
+		margin-bottom: var(--space-2);
+	}
+	.content {
+		font-family: var(--text-font-body);
+		color: var(--rampart);
+		font-size: var(--text-xs);
+		line-height: var(--leading-normal);
+		letter-spacing: var(--letter-spacing-normal);
+	}
+	.tags {
+		font-family: var(--text-font-heading);
+		color: var(--dovetail);
+		font-size: var(--text-3xs);
+		font-style: italic;
+		line-height: var(--leading-tight);
+		letter-spacing: var(--letter-spacing-tight);
+		margin-top: var(--space-2);
+	}
+</style>

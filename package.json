@@ -12,6 +12,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.3.5"
+    "@astrojs/mdx": "^5.0.6",
+    "@twodft/astro-icon": "^1.2.4",
+    "astro": "^6.3.5",
+    "astro-font": "^1.1.0",
+    "sharp": "^0.34.3"
   }
 }
