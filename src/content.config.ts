@@ -11,10 +11,12 @@ const caseStudies = defineCollection({
     z.object({
       title: z.string(),
       heroImage: image(),
+      heroImageAlt: z.string(),
       status: z.string(),
       statusLastUpdated: z.coerce.date(),
       services: z.array(z.string()),
       tags: z.array(z.string()),
+      thumbSummary: z.string(),
       summary: z.string(),
       gridThumbImage: image(),
     }),

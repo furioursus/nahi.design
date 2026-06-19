@@ -81,6 +81,16 @@ h6,
     letter-spacing: var(--letter-spacing-relaxed);
 }
 
+.full-width-breakout {
+    position: relative;
+    right: 50%;
+    left: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    max-width: 100vw;
+    width: 100vw;
+}
+
 .visually-hidden,
 .visually-hidden-focusable:not(:focus, :focus-within) {
     border: 0 !important;

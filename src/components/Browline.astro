@@ -1,25 +1,25 @@
 ---
 interface Props {
-	marginBottom?: boolean;
+    marginBottom?: boolean;
 }
 
 const { marginBottom } = Astro.props;
 ---
 
 <div class:list={["browline", { "above-heading": marginBottom }]}>
-	<slot />
+    <slot />
 </div>
 
 <style>
-	.browline {
-		color: var(--dovetail);
-		font-family: var(--text-font-heading);
-		font-size: var(--text-2xs);
-		font-weight: var(--weight-regular);
-		line-height: var(--leading-snug);
-		letter-spacing: var(--letter-spacing-loosest);
-	}
-	.above-heading {
-		margin-bottom: var(--space-4);
-	}
+    .browline {
+        color: var(--dovetail);
+        font-family: var(--text-font-heading);
+        font-size: var(--text-2xs);
+        font-weight: var(--weight-regular);
+        line-height: var(--leading-snug);
+        letter-spacing: var(--letter-spacing-loose);
+    }
+    .above-heading {
+        margin-bottom: var(--space-4);
+    }
 </style>

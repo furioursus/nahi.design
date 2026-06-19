@@ -5,12 +5,15 @@ import "../styles/global.css";
 import NavBar from "../components/NavBar.astro";
 import Contact from "../components/Contact.astro";
 
+const isDev = import.meta.env.DEV;
+
 interface Props {
     title: string;
     description?: string;
+    compactContact?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, compactContact = false } = Astro.props;
 ---
 
 <html lang="en">
@@ -22,7 +25,7 @@ const { title, description } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         {description && <meta name="description" content={description} />}
         <title>{title}</title>
-        <ClientRouter />
+        {!isDev && <ClientRouter />}
         <AstroFont
             config={[
                 {
@@ -51,7 +54,7 @@ const { title, description } = Astro.props;
     <body>
         <NavBar />
         <slot />
-        <Contact />
+        <Contact compact={compactContact} />
         <script>
             document.addEventListener("astro:page-load", () => {
                 const { hash } = location;
