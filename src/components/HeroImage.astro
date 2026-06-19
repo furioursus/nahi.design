@@ -5,7 +5,8 @@ interface Props {
     image: ImageMetadata;
     alt: string;
     breakout?: boolean;
+    transitionName?: string;
 }
 
-const { image, alt, breakout = false } = Astro.props;
+const { image, alt, breakout = false, transitionName } = Astro.props;
 ---

@@ -1,5 +1,6 @@
 ---
 import { AstroFont } from "astro-font";
+import { ClientRouter } from "astro:transitions";
 import "../styles/global.css";
 import NavBar from "../components/NavBar.astro";
 import Contact from "../components/Contact.astro";
@@ -21,6 +22,7 @@ const { title, description } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         {description && <meta name="description" content={description} />}
         <title>{title}</title>
+        <ClientRouter />
         <AstroFont
             config={[
                 {
@@ -50,5 +52,20 @@ const { title, description } = Astro.props;
         <NavBar />
         <slot />
         <Contact />
+        <script>
+            document.addEventListener("astro:page-load", () => {
+                const { hash } = location;
+                if (!hash) return;
+                const target = document.querySelector(hash);
+                if (!target) return;
+                const navbarHeight =
+                    document.querySelector(".navbar")?.clientHeight ?? 0;
+                const top =
+                    target.getBoundingClientRect().top +
+                    window.scrollY -
+                    navbarHeight;
+                window.scrollTo({ top, behavior: "instant" });
+            });
+        </script>
     </body>
 </html>

@@ -27,6 +27,7 @@ const caseStudies = (await getCollection("case-studies")).sort(
                         summary={study.data.summary}
                         gridThumbImage={study.data.gridThumbImage}
                         href={`/case-studies/${study.id}`}
+                        transitionName={`hero-image-${study.id}`}
                     />
                 ))
             }

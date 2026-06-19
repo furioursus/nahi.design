@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
+import HeroImage from "../components/HeroImage.astro";
 
 interface Props {
     entry: CollectionEntry<"case-studies">;
@@ -26,6 +27,12 @@ const { title, status, services, tags, summary } = entry.data;
             <h1 class="title">{title}</h1>
             <p class="summary">{summary}</p>
         </header>
+
+        <HeroImage
+            image={entry.data.heroImage}
+            alt={title}
+            transitionName={`hero-image-${entry.id}`}
+        />
 
         <article class="case-study-body">
             <slot />

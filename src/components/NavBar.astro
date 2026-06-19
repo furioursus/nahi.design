@@ -25,8 +25,8 @@ const isHome = Astro.url.pathname === "/";
 			) : (
 				<>
 					<a class="nav-item active" href="/#case-studies">Case Studies</a>
-					<a class="nav-item" href="/#about">About</a>
-					<a class="nav-item" href="/#contact">Contact</a>
+						<a class="nav-item" href="/#about-nahi">About</a>
+						<a class="nav-item" href="/#contact">Contact</a>
 				</>
 			)}
 		</div>
@@ -35,37 +35,42 @@ const isHome = Astro.url.pathname === "/";
 
 {isHome && (
 	<script>
-		const navItems = document.querySelectorAll<HTMLAnchorElement>(".nav-item[data-section]");
-		const sections = Array.from(navItems).map((link) => {
-			const id = link.dataset.section!;
-			return { link, section: document.getElementById(id) };
-		});
+		function initNav() {
+			const navItems = document.querySelectorAll<HTMLAnchorElement>(".nav-item[data-section]");
+			const sections = Array.from(navItems).map((link) => {
+				const id = link.dataset.section!;
+				return { link, section: document.getElementById(id) };
+			});
 
-		function setActiveFromHash(hash: string) {
-			const id = hash.replace("#", "");
-			for (const { link } of sections) {
-				link.classList.toggle("active", link.dataset.section === id);
+			function setActiveFromHash(hash: string) {
+				const id = hash.replace("#", "");
+				for (const { link } of sections) {
+					link.classList.toggle("active", link.dataset.section === id);
+				}
 			}
-		}
 
-		for (const { link } of sections) {
-			link.addEventListener("click", () => setActiveFromHash(link.hash));
-		}
-
-		// Set initial state from hash if present
-		if (location.hash) {
-			setActiveFromHash(location.hash);
-		}
-
-		// Logo scrolls to top on the home page
-		document.querySelector(".logo")?.addEventListener("click", (e) => {
-			e.preventDefault();
-			window.scrollTo({ top: 0, behavior: "smooth" });
-			history.pushState("", "", "/");
 			for (const { link } of sections) {
-				link.classList.remove("active");
+				link.addEventListener("click", () => setActiveFromHash(link.hash));
 			}
-		});
+
+			// Set initial state from hash if present
+			if (location.hash) {
+				setActiveFromHash(location.hash);
+			}
+
+			// Logo scrolls to top when already on the home page
+			document.querySelector(".logo")?.addEventListener("click", (e) => {
+				if (location.pathname !== "/") return;
+				e.preventDefault();
+				window.scrollTo({ top: 0, behavior: "smooth" });
+				history.pushState("", "", "/");
+				for (const { link } of sections) {
+					link.classList.remove("active");
+				}
+			});
+		}
+
+		document.addEventListener("astro:page-load", initNav);
 	</script>
 )}
 
