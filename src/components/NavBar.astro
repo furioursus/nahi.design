@@ -1,3 +1,7 @@
+---
+const isHome = Astro.url.pathname === "/";
+---
+
 <nav class="navbar" aria-labelledby="mainmenulabel">
 	<h2 class="visually-hidden" id="mainmenulabel">Main Menu</h2>
 	<div class="nav navbar-nav menu container">
@@ -9,15 +13,61 @@
 				width="112"
 				height="24"
 			/>
-			<span class="visually-hidden">Home</span></a
-		>
+			<span class="visually-hidden">Home</span>
+		</a>
 		<div class="nav-items">
-			<a class="nav-item" href="#">Case Studies</a>
-			<a class="nav-item active" href="#">About</a>
-			<a class="nav-item" href="#">Contact</a>
+			{isHome ? (
+				<>
+					<a class="nav-item" href="#case-studies" data-section="case-studies">Case Studies</a>
+					<a class="nav-item" href="#about-nahi" data-section="about-nahi">About</a>
+					<a class="nav-item" href="#contact" data-section="contact">Contact</a>
+				</>
+			) : (
+				<>
+					<a class="nav-item active" href="/#case-studies">Case Studies</a>
+					<a class="nav-item" href="/#about">About</a>
+					<a class="nav-item" href="/#contact">Contact</a>
+				</>
+			)}
 		</div>
 	</div>
 </nav>
+
+{isHome && (
+	<script>
+		const navItems = document.querySelectorAll<HTMLAnchorElement>(".nav-item[data-section]");
+		const sections = Array.from(navItems).map((link) => {
+			const id = link.dataset.section!;
+			return { link, section: document.getElementById(id) };
+		});
+
+		function setActiveFromHash(hash: string) {
+			const id = hash.replace("#", "");
+			for (const { link } of sections) {
+				link.classList.toggle("active", link.dataset.section === id);
+			}
+		}
+
+		for (const { link } of sections) {
+			link.addEventListener("click", () => setActiveFromHash(link.hash));
+		}
+
+		// Set initial state from hash if present
+		if (location.hash) {
+			setActiveFromHash(location.hash);
+		}
+
+		// Logo scrolls to top on the home page
+		document.querySelector(".logo")?.addEventListener("click", (e) => {
+			e.preventDefault();
+			window.scrollTo({ top: 0, behavior: "smooth" });
+			history.pushState("", "", "/");
+			for (const { link } of sections) {
+				link.classList.remove("active");
+			}
+		});
+	</script>
+)}
 
 <style>
 	.navbar {
@@ -26,6 +76,8 @@
 		font-size: var(--text-xs);
 		padding: var(--space-8) 0;
 		position: sticky;
+		top: 0;
+		z-index: 100;
 	}
 	.nav {
 		display: flex;

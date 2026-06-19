@@ -1,0 +1,12 @@
+---
+import type { ImageMetadata } from "astro";
+
+interface Props {
+	browline: string;
+	description: string;
+	image: ImageMetadata;
+	imageAlt: string;
+}
+
+const { browline, description, image, imageAlt } = Astro.props;
+---
