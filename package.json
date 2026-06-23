@@ -16,6 +16,7 @@
     "@twodft/astro-icon": "^1.2.4",
     "astro": "^6.3.5",
     "astro-font": "^1.1.0",
+    "astro-mail-obfuscation": "^2.3.4",
     "sharp": "^0.34.3"
   }
 }
