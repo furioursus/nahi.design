@@ -4,74 +4,71 @@ import DataCard from "./DataCard.astro";
 ---
 
 <div class="how-its-built" id="how-its-built">
-    <div class="container">
-        <div class="section-inner">
-            <SectionHeading
-                title="How I Built This Portfolio"
-                number={2}
-                caption="Design tooling is so wild nowadays."
-            />
-            <div class="data-cards">
-                <DataCard
-                    number={1}
-                    title="Built a Database"
-                    tags={["Claude", "Notion"]}
-                >
-                    <p>
-                        I had Claude create a database in Notion that distilled
-                        takeaways from NN/g articles and research papers.
-                    </p>
-                </DataCard>
-                <DataCard
-                    number={2}
-                    title="UX and UI"
-                    tags={["Claude", "Claude Design", "Windsurf"]}
-                >
-                    <p>
-                        I had Claude reference the database to guide it while
-                        building wireframes and mock ups. I, also, fed it images
-                        of Japanese notebooks to build an aesthetic.
-                    </p>
-                </DataCard>
-                <DataCard
-                    number={3}
-                    title="Design Execution"
-                    tags={["Claude", "Figma"]}
-                >
-                    <p>
-                        I had Claude push the the UI elements into Figma as a
-                        design system, and made manual adjustments.
-                    </p>
-                </DataCard>
-                <DataCard
-                    number={4}
-                    title="Spousal Privileges"
-                    tags={["My Wonderful Amazing Beautiful Talented Spouse"]}
-                >
-                    <p>
-                        Instead of vibe coding, I worked with my developer
-                        spouse.
-                    </p>
-                </DataCard>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="section-inner">
+			<SectionHeading
+				title="How I Built This Portfolio"
+				number={2}
+				caption="Design tooling is so wild nowadays."
+			/>
+			<div class="data-cards">
+				<DataCard
+					number={1}
+					title="Built a Database"
+					tags={["Claude", "Notion"]}
+				>
+					<p>
+						I had Claude create a database in Notion that distilled takeaways
+						from NN/g articles and research papers.
+					</p>
+				</DataCard>
+				<DataCard
+					number={2}
+					title="UX and UI"
+					tags={["Claude", "Claude Design", "Windsurf"]}
+				>
+					<p>
+						I had Claude reference the database to guide it while building
+						wireframes and mock ups. I, also, fed it images of Japanese
+						notebooks to build an aesthetic.
+					</p>
+				</DataCard>
+				<DataCard
+					number={3}
+					title="Design Execution"
+					tags={["Claude", "Figma"]}
+				>
+					<p>
+						I had Claude push the the UI elements into Figma as a design system,
+						and made manual adjustments.
+					</p>
+				</DataCard>
+				<DataCard
+					number={4}
+					title="Spousal Privileges"
+					tags={["My Wonderful Amazing Beautiful Talented Spouse"]}
+				>
+					<p>Instead of vibe coding, I worked with my developer spouse.</p>
+				</DataCard>
+			</div>
+		</div>
+	</div>
 </div>
 
 <style>
-    .how-its-built {
-        background-color: var(--black-umber);
-        color: var(--crystal-cut);
-    }
+	.how-its-built {
+		background-color: var(--black-umber);
+		color: var(--crystal-cut);
+	}
 
-    .section-inner {
-        padding-top: var(--space-20);
-        padding-bottom: var(--space-20);
-    }
-    .data-cards {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: var(--space-6);
-        margin-top: var(--space-8);
-    }
+	.section-inner {
+		padding-top: var(--space-20);
+		padding-bottom: var(--space-20);
+	}
+	.data-cards {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: var(--space-6);
+		margin-top: var(--space-8);
+	}
 </style>

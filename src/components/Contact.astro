@@ -3,51 +3,51 @@ import SectionHeading from "./SectionHeading.astro";
 import Button from "./Button.astro";
 
 interface Props {
-    compact?: boolean;
+	compact?: boolean;
 }
 
 const { compact = false } = Astro.props;
 ---
 
 <div class:list={["contact", { compact }]} id="contact">
-    <div class="container">
-        <div class="section-inner">
-            <SectionHeading
-                title="Contact Info"
-                number={3}
-                caption="Why did 213 show up on your caller ID?"
-            />
-            <p class="description">
-                I'm a Senior UX Designer based in NYC, currently exploring
-                full-time opportunities with mission-driven organizations where
-                thoughtful design can make a real difference. If you're working
-                on something meaningful, I'd love to hear from you.
-            </p>
-            <div class="button-container">
-                <Button href="/resume.pdf">Download Resume</Button>
-                <Button href="mailto:hello@nahi.design">Email Me</Button>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="section-inner">
+			<SectionHeading
+				title="Contact Info"
+				number={3}
+				caption="Why did 213 show up on your caller ID?"
+			/>
+			<p class="description">
+				I'm a Senior UX Designer based in NYC, currently exploring full-time
+				opportunities with mission-driven organizations where thoughtful design
+				can make a real difference. If you're working on something meaningful,
+				I'd love to hear from you.
+			</p>
+			<div class="button-container">
+				<Button href="/resume.pdf">Download Resume</Button>
+				<Button href="mailto:hello@nahi.design">Email Me</Button>
+			</div>
+		</div>
+	</div>
 </div>
 
 <style>
-    .contact {
-        margin: 26rem 0;
-    }
-    .contact.compact {
-        margin: 8rem 0;
-    }
-    .description {
-        font-family: var(--text-font-heading);
-        font-size: var(--text-sm);
-        color: var(--oubliette);
-        line-height: var(--leading-normal);
-        max-width: 35rem;
-        margin: var(--space-4) 0 var(--space-5);
-    }
-    .button-container {
-        display: flex;
-        gap: var(--space-7);
-    }
+	.contact {
+		margin: 26rem 0;
+	}
+	.contact.compact {
+		margin: 8rem 0;
+	}
+	.description {
+		font-family: var(--text-font-heading);
+		font-size: var(--text-sm);
+		color: var(--oubliette);
+		line-height: var(--leading-normal);
+		max-width: 35rem;
+		margin: var(--space-4) 0 var(--space-5);
+	}
+	.button-container {
+		display: flex;
+		gap: var(--space-7);
+	}
 </style>

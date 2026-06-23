@@ -3,11 +3,11 @@ import { getCollection, render } from "astro:content";
 import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
 
 export async function getStaticPaths() {
-    const entries = await getCollection("case-studies");
-    return entries.map((entry) => ({
-        params: { slug: entry.id },
-        props: { entry },
-    }));
+	const entries = await getCollection("case-studies");
+	return entries.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
 }
 
 const { entry } = Astro.props;
@@ -15,5 +15,5 @@ const { Content } = await render(entry);
 ---
 
 <CaseStudyLayout entry={entry}>
-    <Content />
+	<Content />
 </CaseStudyLayout>

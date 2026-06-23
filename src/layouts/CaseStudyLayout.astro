@@ -5,112 +5,112 @@ import HeroImage from "../components/HeroImage.astro";
 import Browline from "../components/Browline.astro";
 
 interface Props {
-    entry: CollectionEntry<"case-studies">;
-    compactContact?: boolean;
+	entry: CollectionEntry<"case-studies">;
+	compactContact?: boolean;
 }
 
 const { entry, compactContact = true } = Astro.props;
 const { title, status, services, tags, summary, thumbSummary, heroImageAlt } =
-    entry.data;
+	entry.data;
 ---
 
 <BaseLayout
-    title={`${title} — Nahi Kennedy-Nuñez`}
-    description={thumbSummary}
-    compactContact={compactContact}
+	title={`${title} — Nahi Kennedy-Nuñez`}
+	description={thumbSummary}
+	compactContact={compactContact}
 >
-    <div class="container">
-        <header class="case-study-hero">
-            <div class="case-study-intro">
-                <Browline marginBottom>
-                    {
-                        tags.map((item, idx) => (
-                            <span class="info-item">
-                                {item}
-                                {idx < tags.length - 1 && " • "}
-                            </span>
-                        ))
-                    }
-                </Browline>
-                <h1 class="title">{title}</h1>
-                <p class="intro">{summary}</p>
-            </div>
-            <div class="sidebar">
-                <ul>
-                    <li>
-                        <Browline>Status</Browline>
-                        <p>{status}</p>
-                    </li>
-                    <li>
-                        <Browline>Services</Browline>
-                        <!-- Map services onto a line for each node -->
-                        <ul class="services">
-                            {
-                                services.map((item, idx) => (
-                                    <li class="service-item">{item}</li>
-                                ))
-                            }
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </header>
+	<div class="container">
+		<header class="case-study-hero">
+			<div class="case-study-intro">
+				<Browline marginBottom>
+					{
+						tags.map((item, idx) => (
+							<span class="info-item">
+								{item}
+								{idx < tags.length - 1 && " • "}
+							</span>
+						))
+					}
+				</Browline>
+				<h1 class="title">{title}</h1>
+				<p class="intro">{summary}</p>
+			</div>
+			<div class="sidebar">
+				<ul>
+					<li>
+						<Browline>Status</Browline>
+						<p>{status}</p>
+					</li>
+					<li>
+						<Browline>Services</Browline>
+						<!-- Map services onto a line for each node -->
+						<ul class="services">
+							{
+								services.map((item, idx) => (
+									<li class="service-item">{item}</li>
+								))
+							}
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</header>
 
-        <HeroImage
-            image={entry.data.heroImage}
-            alt={heroImageAlt}
-            transitionName={`hero-image-${entry.id}`}
-        />
+		<HeroImage
+			image={entry.data.heroImage}
+			alt={heroImageAlt}
+			transitionName={`hero-image-${entry.id}`}
+		/>
 
-        <article class="case-study-body">
-            <slot />
-        </article>
-    </div>
+		<article class="case-study-body">
+			<slot />
+		</article>
+	</div>
 </BaseLayout>
 
 <style>
-    .case-study-hero {
-        padding-top: var(--space-20);
-        padding-bottom: var(--space-20);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        @media (min-width: 48rem) {
-            flex-direction: row;
-            align-items: stretch;
-        }
-    }
-    .case-study-intro {
-        flex: 1;
-    }
+	.case-study-hero {
+		padding-top: var(--space-20);
+		padding-bottom: var(--space-20);
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		@media (min-width: 48rem) {
+			flex-direction: row;
+			align-items: stretch;
+		}
+	}
+	.case-study-intro {
+		flex: 1;
+	}
 
-    .title {
-        font-size: var(--text-3xl);
-        margin-bottom: var(--space-4);
-    }
+	.title {
+		font-size: var(--text-3xl);
+		margin-bottom: var(--space-4);
+	}
 
-    .intro {
-        font-family: var(--text-font-body);
-        font-family: var(--text-base);
-        line-height: var(--leading-normal);
-        max-width: 35rem;
-    }
+	.intro {
+		font-family: var(--text-font-body);
+		font-family: var(--text-base);
+		line-height: var(--leading-normal);
+		max-width: 35rem;
+	}
 
-    .sidebar {
-        font-family: var(--text-font-heading);
-        font-size: var(--text-xs);
-        border-left: solid 1px var(--dovetail);
-        min-width: 104px;
-        padding-left: var(--space-6);
-        display: flex;
-        align-items: center;
-    }
-    ul {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-4);
-        &.services {
-            gap: 0;
-        }
-    }
+	.sidebar {
+		font-family: var(--text-font-heading);
+		font-size: var(--text-xs);
+		border-left: solid 1px var(--dovetail);
+		min-width: 104px;
+		padding-left: var(--space-6);
+		display: flex;
+		align-items: center;
+	}
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-4);
+		&.services {
+			gap: 0;
+		}
+	}
 </style>

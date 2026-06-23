@@ -4,52 +4,52 @@ import SectionHeading from "./SectionHeading.astro";
 import CaseStudyThumb from "./CaseStudyThumb.astro";
 
 const caseStudies = (await getCollection("case-studies")).sort(
-    (a, b) =>
-        b.data.statusLastUpdated.getTime() - a.data.statusLastUpdated.getTime(),
+	(a, b) =>
+		b.data.statusLastUpdated.getTime() - a.data.statusLastUpdated.getTime(),
 );
 ---
 
 <div class="container" id="case-studies">
-    <main>
-        <SectionHeading
-            title="Case Studies"
-            number={1}
-            caption="NDAs, we know the drill."
-        />
-        <div class="case-studies-grid">
-            {
-                caseStudies.map((study) => (
-                    <CaseStudyThumb
-                        title={study.data.title}
-                        info={study.data.tags}
-                        status={study.data.status}
-                        statusLastUpdated={study.data.statusLastUpdated}
-                        summary={study.data.thumbSummary}
-                        gridThumbImage={study.data.gridThumbImage}
-                        href={`/case-studies/${study.id}`}
-                        transitionName={`hero-image-${study.id}`}
-                    />
-                ))
-            }
-        </div>
-    </main>
+	<main>
+		<SectionHeading
+			title="Case Studies"
+			number={1}
+			caption="NDAs, we know the drill."
+		/>
+		<div class="case-studies-grid">
+			{
+				caseStudies.map((study) => (
+					<CaseStudyThumb
+						title={study.data.title}
+						info={study.data.tags}
+						status={study.data.status}
+						statusLastUpdated={study.data.statusLastUpdated}
+						summary={study.data.thumbSummary}
+						gridThumbImage={study.data.gridThumbImage}
+						href={`/case-studies/${study.id}`}
+						transitionName={`hero-image-${study.id}`}
+					/>
+				))
+			}
+		</div>
+	</main>
 </div>
 
 <style>
-    main {
-        padding-top: var(--space-10);
-        margin: var(--space-10) 0 var(--space-20);
-        border-top: 1px solid var(--dovetail);
-    }
+	main {
+		padding-top: var(--space-10);
+		margin: var(--space-10) 0 var(--space-20);
+		border-top: 1px solid var(--dovetail);
+	}
 
-    .case-studies-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: var(--space-10);
-        margin-top: var(--space-12);
+	.case-studies-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-10);
+		margin-top: var(--space-12);
 
-        @media (min-width: 48rem) {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
+		@media (min-width: 48rem) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
 </style>

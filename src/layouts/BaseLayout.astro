@@ -8,67 +8,65 @@ import Contact from "../components/Contact.astro";
 const isDev = import.meta.env.DEV;
 
 interface Props {
-    title: string;
-    description?: string;
-    compactContact?: boolean;
+	title: string;
+	description?: string;
+	compactContact?: boolean;
 }
 
 const { title, description, compactContact = false } = Astro.props;
 ---
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        {description && <meta name="description" content={description} />}
-        <title>{title}</title>
-        {!isDev && <ClientRouter />}
-        <AstroFont
-            config={[
-                {
-                    src: [],
-                    name: "Source Sans 3",
-                    googleFontsURL:
-                        "https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap",
-                    preload: true,
-                    display: "swap",
-                    selector: "body",
-                    fallback: "sans-serif",
-                },
-                {
-                    src: [],
-                    name: "Space Mono",
-                    googleFontsURL:
-                        "https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap",
-                    preload: true,
-                    display: "swap",
-                    selector: ".browline, .code, h2, h3, h4, h5, h6",
-                    fallback: "monospace",
-                },
-            ]}
-        />
-    </head>
-    <body>
-        <NavBar />
-        <slot />
-        <Contact compact={compactContact} />
-        <script>
-            document.addEventListener("astro:page-load", () => {
-                const { hash } = location;
-                if (!hash) return;
-                const target = document.querySelector(hash);
-                if (!target) return;
-                const navbarHeight =
-                    document.querySelector(".navbar")?.clientHeight ?? 0;
-                const top =
-                    target.getBoundingClientRect().top +
-                    window.scrollY -
-                    navbarHeight;
-                window.scrollTo({ top, behavior: "instant" });
-            });
-        </script>
-    </body>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		{description && <meta name="description" content={description} />}
+		<title>{title}</title>
+		{!isDev && <ClientRouter />}
+		<AstroFont
+			config={[
+				{
+					src: [],
+					name: "Source Sans 3",
+					googleFontsURL:
+						"https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap",
+					preload: true,
+					display: "swap",
+					selector: "body",
+					fallback: "sans-serif",
+				},
+				{
+					src: [],
+					name: "Space Mono",
+					googleFontsURL:
+						"https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap",
+					preload: true,
+					display: "swap",
+					selector: ".browline, .code, h2, h3, h4, h5, h6",
+					fallback: "monospace",
+				},
+			]}
+		/>
+	</head>
+	<body>
+		<NavBar />
+		<slot />
+		<Contact compact={compactContact} />
+		<script>
+			document.addEventListener("astro:page-load", () => {
+				const { hash } = location;
+				if (!hash) return;
+				const target = document.querySelector(hash);
+				if (!target) return;
+				const navbarHeight =
+					document.querySelector(".navbar")?.clientHeight ?? 0;
+				const top =
+					target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+				window.scrollTo({ top, behavior: "instant" });
+			});
+		</script>
+	</body>
 </html>
