@@ -1,0 +1,18 @@
+---
+import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
+import { caseStudies } from "../../data/case-studies";
+
+const meta = caseStudies.find((s) => s.id === "quantalyric-mvp")!;
+---
+
+<CaseStudyLayout {...meta}>
+	<h2>Overview</h2>
+
+	<p>Write your case study content here.</p>
+
+	<h2>The Ask</h2>
+
+	<h2>The Approach</h2>
+
+	<h2>The Outcome</h2>
+</CaseStudyLayout>

@@ -1,17 +1,25 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import type { CaseStudyMeta } from "../data/case-studies";
 import BaseLayout from "./BaseLayout.astro";
 import HeroImage from "../components/HeroImage.astro";
 import Browline from "../components/Browline.astro";
 
-interface Props {
-	entry: CollectionEntry<"case-studies">;
+interface Props extends CaseStudyMeta {
 	compactContact?: boolean;
 }
 
-const { entry, compactContact = true } = Astro.props;
-const { title, status, services, tags, summary, thumbSummary, heroImageAlt } =
-	entry.data;
+const { compactContact = true, ...meta } = Astro.props;
+const {
+	id,
+	title,
+	status,
+	services,
+	tags,
+	summary,
+	thumbSummary,
+	heroImage,
+	heroImageAlt,
+} = meta;
 ---
 
 <BaseLayout
@@ -43,13 +51,8 @@ const { title, status, services, tags, summary, thumbSummary, heroImageAlt } =
 					</li>
 					<li>
 						<Browline>Services</Browline>
-						<!-- Map services onto a line for each node -->
 						<ul class="services">
-							{
-								services.map((item, idx) => (
-									<li class="service-item">{item}</li>
-								))
-							}
+							{services.map((item) => <li class="service-item">{item}</li>)}
 						</ul>
 					</li>
 				</ul>
@@ -57,9 +60,9 @@ const { title, status, services, tags, summary, thumbSummary, heroImageAlt } =
 		</header>
 
 		<HeroImage
-			image={entry.data.heroImage}
+			image={heroImage}
 			alt={heroImageAlt}
-			transitionName={`hero-image-${entry.id}`}
+			transitionName={`hero-image-${id}`}
 		/>
 
 		<article class="case-study-body">

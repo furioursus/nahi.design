@@ -1,12 +1,7 @@
 ---
-import { getCollection } from "astro:content";
+import { caseStudies } from "../data/case-studies";
 import SectionHeading from "./SectionHeading.astro";
 import CaseStudyThumb from "./CaseStudyThumb.astro";
-
-const caseStudies = (await getCollection("case-studies")).sort(
-	(a, b) =>
-		b.data.statusLastUpdated.getTime() - a.data.statusLastUpdated.getTime(),
-);
 ---
 
 <div class="container" id="case-studies">
@@ -20,12 +15,12 @@ const caseStudies = (await getCollection("case-studies")).sort(
 			{
 				caseStudies.map((study) => (
 					<CaseStudyThumb
-						title={study.data.title}
-						info={study.data.tags}
-						status={study.data.status}
-						statusLastUpdated={study.data.statusLastUpdated}
-						summary={study.data.thumbSummary}
-						gridThumbImage={study.data.gridThumbImage}
+						title={study.title}
+						info={study.tags}
+						status={study.status}
+						statusLastUpdated={study.statusLastUpdated}
+						summary={study.thumbSummary}
+						gridThumbImage={study.gridThumbImage}
 						href={`/case-studies/${study.id}`}
 						transitionName={`hero-image-${study.id}`}
 					/>
