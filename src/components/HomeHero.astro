@@ -1,5 +1,6 @@
 ---
 import Browline from "./Browline.astro";
+import Description from "./Description.astro";
 ---
 
 <div class="hero-wrapper">
@@ -7,13 +8,11 @@ import Browline from "./Browline.astro";
 		<div class="hero-intro">
 			<Browline marginBottom>UX Designer • Facilitator</Browline>
 			<h1>Nahi Kennedy-Nuñez</h1>
-			<div class="intro">
-				<p>
-					I'm a UX/UI designer who transforms complex systems, from AI platforms
-					and data infrastructure to public health, into experiences that are
-					intuitive, accessible, and built to last.
-				</p>
-			</div>
+			<Description color="var(--color-oubliette)">
+				I'm a UX/UI designer who transforms complex systems, from AI platforms
+				and data infrastructure to public health, into experiences that are
+				intuitive, accessible, and built to last.
+			</Description>
 		</div>
 		<div class="sidebar">
 			<ul>
@@ -57,17 +56,10 @@ import Browline from "./Browline.astro";
 	h1 {
 		margin-bottom: var(--space-4);
 	}
-	.intro {
-		font-family: var(--text-font-heading);
-		font-size: var(--text-sm);
-		color: var(--oubliette);
-		letter-spacing: var(--letter-spacing-normal);
-		max-width: 35rem;
-	}
 	.sidebar {
 		font-family: var(--text-font-heading);
 		font-size: var(--text-xs);
-		border-left: solid 1px var(--dovetail);
+		border-left: solid 1px var(--color-dovetail);
 		min-width: 104px;
 		padding-left: var(--space-6);
 		display: flex;

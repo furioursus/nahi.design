@@ -4,15 +4,20 @@ export interface Props {
 	title: string;
 	number?: number;
 	caption?: string;
+	numberLeadSmall?: boolean;
 }
 
-const { title, number, caption } = Astro.props;
+const { title, number, caption, numberLeadSmall } = Astro.props;
 ---
 
 <h2>
 	{
 		number ? (
-			<span class="number-lead">
+			<span
+				class:list={[
+					numberLeadSmall ? "number-lead lead-small" : "number-lead",
+				]}
+			>
 				{number < 10 ? `0${number}` : `${number}`}
 			</span>
 		) : null
@@ -26,7 +31,7 @@ const { title, number, caption } = Astro.props;
 		font-family: var(--text-font-heading);
 		font-size: var(--text-3xl);
 		font-weight: var(--weight-bold);
-		line-height: var(--leading-tight);
+		line-height: var(--line-height-tight);
 		letter-spacing: var(--letter-spacing-tighter);
 		display: flex;
 		justify-content: space-between;
@@ -37,11 +42,14 @@ const { title, number, caption } = Astro.props;
 	.number-lead {
 		font-size: var(--text-3xs);
 		font-weight: var(--weight-regular);
-		color: var(--dovetail);
+		color: var(--color-dovetail);
 		font-style: italic;
-		line-height: var(--leading-tight);
+		line-height: var(--line-height-tight);
 		letter-spacing: var(--letter-spacing-tight);
-		width: var(--space-6);
+		width: var(--space-10);
+		&.lead-small {
+			width: var(--space-6);
+		}
 	}
 
 	.title {

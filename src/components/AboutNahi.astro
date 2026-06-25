@@ -1,5 +1,6 @@
 ---
 import Caption from "./Caption.astro";
+import Description from "./Description.astro";
 ---
 
 <div class="about-nahi" id="about-nahi">
@@ -7,12 +8,12 @@ import Caption from "./Caption.astro";
 		<div class="section-inner">
 			<Caption>Grounded • Craftsman</Caption>
 			<h2 class="h1">Nahi Kennedy-Nuñez</h2>
-			<p class="description">
+			<Description>
 				I'm a UX designer with a steady, disciplined approach to my craft —
 				equally at home shaping wood by hand, watching my fish drift through
 				their little world, getting outvoted by my two cats, or losing an
 				afternoon to a good museum.
-			</p>
+			</Description>
 			<div class="video-grid">
 				<video autoplay loop muted>
 					<source src="/video/woodworking.mp4" type="video/mp4" />
@@ -33,26 +34,18 @@ import Caption from "./Caption.astro";
 
 <style>
 	.about-nahi {
-		background-color: var(--black-umber);
-		color: var(--crystal-cut);
+		background-color: var(--color-black-umber);
+		color: var(--color-crystal-cut);
 	}
 
 	.section-inner {
 		padding-top: var(--space-40);
 		padding-bottom: var(--space-10);
-		border-top: 1px solid var(--rampart);
+		border-top: 1px solid var(--color-rampart);
 	}
 
 	h2 {
 		margin: var(--space-4) 0;
-	}
-
-	.description {
-		font-family: var(--text-font-heading);
-		font-size: var(--text-sm);
-		color: var(--rampart);
-		line-height: var(--leading-normal);
-		max-width: 35rem;
 	}
 
 	.video-grid {

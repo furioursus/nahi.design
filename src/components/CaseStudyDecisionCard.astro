@@ -1,0 +1,263 @@
+---
+export interface Props {
+	title: string;
+	description: string;
+	nonDecision?: string;
+	theDecision?: string;
+	outcome?: string;
+	internalSignals?: [string, string][];
+	externalSignals?: [string, string][];
+	fullOutcome?: string;
+}
+
+const {
+	title,
+	description,
+	nonDecision,
+	theDecision,
+	outcome,
+	internalSignals,
+	externalSignals,
+	fullOutcome,
+} = Astro.props;
+---
+
+<div class="decision-card-wrapper">
+	<div class="decision-card">
+		<div class="decision-content">
+			<h3 class="lead-item">{title}</h3>
+			<p set:html={description} />
+			<dl class="decision-and-outcome">
+				<div class="decision-row">
+					<dt class="non-decision">{nonDecision}</dt>
+					<dd class="the-decision">{theDecision}</dd>
+				</div>
+				<div class="outcome-row">
+					<dt class="outcome-heading">Outcome</dt>
+					<dd class="outcome-text">{outcome}</dd>
+				</div>
+			</dl>
+		</div>
+		<button class="reasoning-button" aria-expanded="true"
+			>Hide the Reasoning</button
+		>
+		<div class="reasoning-content">
+			<div class="reasoning-inner">
+				<div class="reasoning-text">
+					<div class="signals internal-signals">
+						<h4 class="lead-item">Internal Signals</h4>
+						<ul>
+							{
+								internalSignals?.map(([label, value]) => (
+									<li>
+										—<strong>{label}</strong>: {value}
+									</li>
+								))
+							}
+						</ul>
+					</div>
+					<div class="signals external-signals">
+						<h4 class="lead-item">External Signals</h4>
+						<ul>
+							{
+								externalSignals?.map(([label, value]) => (
+									<li>
+										—<strong>{label}</strong>: {value}
+									</li>
+								))
+							}
+						</ul>
+					</div>
+				</div>
+				<div class="full-outcome-footer">
+					<h4>Full Outcome</h4>
+					<p>{fullOutcome}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.decision-card-wrapper {
+		padding: var(--space-0) var(--space-10);
+	}
+
+	.decision-card {
+		border: 1px solid var(--color-rampart);
+		margin-top: var(--space-16);
+	}
+
+	.decision-content {
+		padding: var(--space-8) var(--space-8) var(--space-8) var(--space-24);
+	}
+
+	h3 {
+		font-weight: var(--weight-bold);
+		letter-spacing: var(--letter-spacing-tight);
+	}
+
+	.lead-item {
+		position: relative;
+		&::before {
+			content: "";
+			display: inline-block;
+			width: var(--space-3);
+			height: var(--space-3);
+			background-color: var(--color-bowstring);
+			border-radius: 100%;
+			position: absolute;
+			left: -50px;
+			top: calc(50% - var(--space-3) / 2);
+		}
+	}
+
+	.decision-and-outcome {
+		margin-top: var(--space-5);
+		div {
+			padding: var(--space-5) var(--space-0);
+		}
+		dt,
+		dd {
+			font-family: var(--text-font-heading);
+			font-size: var(--text-sm);
+			line-height: var(--line-height-normal);
+		}
+	}
+	.decision-row,
+	.outcome-row {
+		padding: var(--space-5) var(--space-0);
+	}
+	.decision-row {
+		border-top: 1px solid var(--color-dovetail);
+	}
+	.outcome-row {
+		border-top: 1px dashed var(--color-dovetail);
+	}
+	.non-decision,
+	.outcome-heading {
+		font-size: var(--text-xs);
+		color: var(--color-dovetail);
+		line-height: var(--line-height-none);
+	}
+	.non-decision {
+		display: inline-block;
+		position: relative;
+		&::before {
+			content: "";
+			display: inline-block;
+			width: 100%;
+			height: var(--space-px-rem);
+			background-color: var(--color-dovetail);
+			border-radius: 100%;
+			position: absolute;
+			left: 0;
+			top: calc(50% - var(--space-px-rem) / 2);
+		}
+	}
+	.reasoning-button {
+		font-family: var(--text-font-heading);
+		font-size: var(--text-sm);
+		background-color: var(--color-sunbleached);
+		border-top: solid 1px var(--color-rampart);
+		border-bottom: none;
+		width: 100%;
+		text-align: left;
+		padding-top: var(--space-3);
+		padding-bottom: var(--space-3);
+		padding-left: var(--space-12);
+		cursor: pointer;
+	}
+	.reasoning-content {
+		display: grid;
+		grid-template-rows: 1fr;
+		transition: grid-template-rows 0.35s ease;
+		&.is-collapsed {
+			grid-template-rows: 0fr;
+		}
+	}
+	.reasoning-inner {
+		overflow: hidden;
+		background-color: var(--color-romance);
+		font-family: var(--text-font-body);
+		font-size: var(--text-sm);
+		padding: var(--space-8);
+		border-top: solid 1px var(--color-rampart);
+		opacity: 1;
+		transition:
+			padding 0.35s ease,
+			opacity 0.35s ease;
+
+		.is-collapsed & {
+			padding: 0 var(--space-8);
+			opacity: 0;
+		}
+	}
+
+	.reasoning-text {
+		padding-left: var(--space-16);
+	}
+
+	.signals {
+		h4 {
+			font-family: var(--text-font-heading);
+			font-size: var(--text-xs);
+			line-height: var(--line-height-none);
+			margin-bottom: var(--space-4);
+		}
+		li {
+			margin-bottom: var(--space-5);
+			&:last-of-type {
+				margin-bottom: 0;
+			}
+		}
+	}
+	.external-signals {
+		margin-top: var(--space-10);
+	}
+
+	.full-outcome-footer {
+		margin-top: var(--space-5);
+		padding: var(--space-5);
+		border-radius: var(--rounded-edge);
+		border: 1px solid var(--color-rampart);
+		border-left: 3px solid var(--color-deep-nurse);
+		h4 {
+			font-size: var(--text-base);
+			line-height: var(--line-height-none);
+			margin-bottom: var(--space-4);
+		}
+		p {
+			font-family: var(--text-font-heading);
+			font-size: var(--text-2xs);
+			color: var(--color-oubliette);
+			line-height: var(--line-height-normal);
+		}
+	}
+</style>
+
+<script>
+	function setupReasoningButtons() {
+		document
+			.querySelectorAll(".reasoning-button:not([data-ready])")
+			.forEach((button) => {
+				button.dataset.ready = "true";
+				button.addEventListener("click", () => {
+					const card = button.closest(".decision-card");
+					const content = card?.querySelector(".reasoning-content");
+					if (!content) return;
+
+					const isCollapsed = content.classList.toggle("is-collapsed");
+					button.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
+					button.textContent = isCollapsed
+						? "Show the Reasoning"
+						: "Hide the Reasoning";
+				});
+			});
+	}
+
+	// Runs on client-side navigations (ClientRouter active in production)
+	document.addEventListener("astro:page-load", setupReasoningButtons);
+	// Runs on initial load and in dev mode (ClientRouter disabled)
+	setupReasoningButtons();
+</script>

@@ -6,13 +6,12 @@ html {
 }
 
 body {
-	background-color: var(--crystal-cut);
+	background-color: var(--color-crystal-cut);
 	font-family: var(--text-font-body);
 	font-size: var(--text-base);
-	font-weight: var(--weight-regular);
 	letter-spacing: var(--letter-spacing-normal);
-	line-height: var(--leading-normal);
-	color: var(--black-umber);
+	line-height: var(--line-height-normal);
+	color: var(--color-black-umber);
 }
 
 h1,
@@ -20,7 +19,7 @@ h1,
 	font-family: var(--text-font-heading);
 	font-size: var(--text-5xl);
 	font-weight: var(--weight-bold);
-	line-height: var(--leading-tighter);
+	line-height: var(--line-height-tighter);
 	letter-spacing: var(--letter-spacing-tightest);
 }
 
@@ -29,7 +28,7 @@ h3,
 	font-family: var(--text-font-heading);
 	font-size: var(--text-xl);
 	font-weight: var(--weight-regular);
-	line-height: var(--leading-snug);
+	line-height: var(--line-height-snug);
 	letter-spacing: var(--letter-spacing-tight);
 }
 
@@ -38,7 +37,7 @@ h4,
 	font-family: var(--text-font-heading);
 	font-size: var(--text-base);
 	font-weight: var(--weight-bold);
-	line-height: var(--leading-snug);
+	line-height: var(--line-height-snug);
 	letter-spacing: var(--letter-spacing-loose);
 }
 
@@ -47,7 +46,7 @@ h5,
 	font-family: var(--text-font-heading);
 	font-size: var(--text-sm);
 	font-weight: var(--weight-bold);
-	line-height: var(--leading-snug);
+	line-height: var(--line-height-snug);
 	letter-spacing: var(--letter-spacing-normal);
 	text-transform: uppercase;
 }
@@ -57,27 +56,35 @@ h6,
 	font-family: var(--text-font-heading);
 	font-size: var(--text-2xs);
 	font-weight: var(--weight-bold);
-	line-height: var(--leading-snug);
+	line-height: var(--line-height-snug);
 	letter-spacing: var(--letter-spacing-looser);
 	text-transform: uppercase;
+}
+
+strong {
+	font-weight: var(--weight-bold);
+}
+
+em {
+	font-style: italic;
 }
 
 .mono {
 	font-family: var(--text-font-mono);
 	font-size: var(--text-sm);
 	font-weight: var(--weight-regular);
-	line-height: var(--leading-normal);
+	line-height: var(--line-height-normal);
 	letter-spacing: var(--letter-spacing-normal);
 }
 
 .small {
 	font-size: var(--text-xs);
-	line-height: var(--leading-snug);
+	line-height: var(--line-height-snug);
 }
 
 .large {
 	font-size: var(--text-md);
-	line-height: var(--leading-relaxed);
+	line-height: var(--line-height-relaxed);
 	letter-spacing: var(--letter-spacing-relaxed);
 }
 

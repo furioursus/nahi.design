@@ -1,12 +1,87 @@
 ---
 import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 
 interface Props {
 	browline: string;
-	description: string;
 	image: ImageMetadata;
 	imageAlt: string;
 }
 
-const { browline, description, image, imageAlt } = Astro.props;
+const { browline, image, imageAlt } = Astro.props;
 ---
+
+<div class="text-and-image-block">
+	<div class="text-wrapper">
+		<div class="text">
+			<p class="text-title">{browline}</p>
+			<div class="image-block-description">
+				<slot />
+			</div>
+		</div>
+	</div>
+	<div class="image">
+		<Image src={image} alt={imageAlt} />
+	</div>
+</div>
+
+<style>
+	.text-and-image-block {
+		margin-top: var(--space-16);
+		padding: 0 var(--space-10);
+		display: grid;
+		gap: var(--space-2);
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-areas: "text image image";
+	}
+	.text-wrapper {
+		grid-area: text;
+		padding: var(--space-2) var(--space-0);
+	}
+	.text {
+		padding-right: var(--space-6);
+		border-right: 1px solid var(--color-rampart);
+	}
+	.image {
+		grid-area: image;
+	}
+	.text-title {
+		font-family: var(--text-font-heading);
+		font-size: var(--text-2xs);
+		line-height: var(--line-height-none);
+		letter-spacing: var(--letter-spacing-loose);
+		color: var(--color-dovetail);
+		margin-bottom: var(--space-1);
+	}
+	.image-block-description {
+		font-size: var(--text-base);
+		line-height: var(--line-height-relaxed);
+
+		> p {
+			margin-top: var(--space-6);
+			+ ul {
+				margin-top: 0;
+			}
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+		ul {
+			margin-bottom: var(--space-6);
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+	.image {
+		overflow: hidden;
+		border-radius: var(--rounded-edge-heavy);
+		box-shadow: var(--space-0) var(--space-1) var(--space-1) var(--space-0)
+			rgba(0, 0, 0, 0.1);
+		img {
+			display: block;
+			max-width: 100%;
+			height: auto;
+		}
+	}
+</style>

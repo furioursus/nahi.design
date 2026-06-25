@@ -1,18 +1,120 @@
 ---
-import CaseStudyLayout from "../../layouts/CaseStudyLayout.astro";
-import { caseStudies } from "../../data/case-studies";
-
+import CaseStudyLayout from "@layouts/CaseStudyLayout.astro";
+import { caseStudies } from "@data/case-studies";
 const meta = caseStudies.find((s) => s.id === "quantalyric-mvp")!;
+import SectionHeading from "@components/SectionHeading.astro";
+import Description from "@components/Description.astro";
+import CaseStudyStatCard from "@components/CaseStudyStatCard.astro";
+import CaseStudyDecisionCard from "@components/CaseStudyDecisionCard.astro";
+import TextAndImageBlock from "@components/TextAndImageBlock.astro";
+import QuantaLyricUX from "@img/quantalyric-user-research.png";
 ---
 
 <CaseStudyLayout {...meta}>
-	<h2>Overview</h2>
-
-	<p>Write your case study content here.</p>
-
-	<h2>The Ask</h2>
-
-	<h2>The Approach</h2>
-
-	<h2>The Outcome</h2>
+	<section>
+		<SectionHeading title="Constraints, but not barriers." number={2} />
+		<Description
+			fontFamily="var(--text-font-body)"
+			size="var(--text-base)"
+			color="var(--color-black-umber)"
+			margin="var(--space-4) var(--space-0) var(--space-16)"
+		>
+			I had to translate this grand vision into a realistic and achievable goal.
+			They are a pre-seed startup with limited people, time, and
+			resources.Together we honed in on the one big idea that gets them funded:
+			state of the art AI/ML methodologies that produce more accurate
+			forecasting models.
+		</Description>
+		<div class="stat-cards">
+			<CaseStudyStatCard value="90" label="Hours" />
+			<CaseStudyStatCard value="5" label="Projects" />
+			<CaseStudyStatCard value="1" label="Designer" />
+			<CaseStudyStatCard value="1 → 2" label="Developers" />
+			<CaseStudyStatCard value="4" label="Design Disciplines" />
+		</div>
+		<CaseStudyDecisionCard
+			title="Cut the MVP from two audiences to one."
+			description="The original MVP served energy traders <strong>and</strong> ML engineers with both business intelligence and operational tooling. I pushed to ship forecasting for traders first — and design the rest, but not build it yet."
+			nonDecision="Cover both audiences"
+			theDecision="Ship a sharp investor demo"
+			outcome="Scope cut roughly in half"
+			internalSignals={[
+				[
+					"Team capacity",
+					"one part-time developer at the beginning and expanded to two developers for the last project — building two parallel product surfaces was not realistic.",
+				],
+				[
+					"Founder energy",
+					"in workshops was highest when describing the forecasting accuracy story; MLOps tooling was talked about as “table stakes.”",
+				],
+				[
+					"One-sentence value prop",
+					"the forecasting model was the only thing I could explain in one sentence — that’s the thing investors would remember.",
+				],
+			]}
+			externalSignals={[
+				[
+					"User pain",
+					"traders had dollar-attached losses every week; ML engineers had workarounds.",
+				],
+				[
+					"Competitive gap",
+					"competitor MLOps was mature; competitor forecasting accuracy claims were vague. That gap was the wedge.",
+				],
+				[
+					"Pitch feedback",
+					"consistently asked “what’s the moat” — accuracy demos answered it; admin tooling didn’t.",
+				],
+			]}
+			fullOutcome="Scope cut roughly in half. The full product was still designed end-to-end so the team could communicate vision, but build priority focused on the trader-facing forecast surface."
+		/>
+		<TextAndImageBlock
+			browline="Scope control."
+			image={QuantaLyricUX}
+			imageAlt="Quantalyric UX research."
+		>
+			<p>
+				An MVE is the simplest version of a product that's ready for real users;
+				it covers every surface they'd need. An MVP can be narrower: a technical
+				demo built for one audience. QuantaLyric needed both, but not both
+				built. I designed the MVE so the team could communicate the full vision,
+				and built the MVP: the reporting surface, as the technical demo for
+				investors.
+			</p>
+			<p>
+				From my research, the AI/ML lifecycle has four phases: model
+				experimentation, production development, reporting, and CI/CD. Reporting
+				is where QuantaLyric's value proposition is fully realized, so that's
+				the phase we prioritized for funding.
+			</p>
+		</TextAndImageBlock>
+		<TextAndImageBlock
+			browline="The supporting ecosystem of the MVE."
+			image={QuantaLyricUX}
+			imageAlt="Quantalyric UX research."
+		>
+			<p>
+				ML engineers and data scientists are our secondary personas, and their
+				surfaces are essential to the MVE. These are surfaces that explain
+				whether a model is working correctly or not. As an example, this mock up
+				shows logs and metadata for processing the data from a model that will
+				be used to create a forecast report. Our secondary personas can take
+				this information and use it to fix faulty models in their preferred
+				tools (like Weights and Biases and Jupyter Notebooks).
+			</p>
+		</TextAndImageBlock>
+	</section>
 </CaseStudyLayout>
+
+<style>
+	section {
+		padding: var(--space-20) 0;
+	}
+	.stat-cards {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: var(--space-2);
+		justify-content: space-between;
+		padding: var(--space-0) var(--space-10);
+	}
+</style>

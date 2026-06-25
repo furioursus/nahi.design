@@ -20,31 +20,31 @@ const { title, number, tags } = Astro.props;
 
 <style>
 	article {
-		border-top: 1px solid var(--oubliette);
+		border-top: 1px solid var(--color-oubliette);
 		padding-top: var(--space-4);
 	}
 	.title {
 		font-family: var(--text-font-heading);
 		font-size: var(--text-sm);
 		font-weight: var(--weight-bold);
-		line-height: var(--leading-snug);
+		line-height: var(--line-height-snug);
 		letter-spacing: var(--letter-spacing-tight);
 		margin-top: var(--space-2);
 		margin-bottom: var(--space-2);
 	}
 	.content {
 		font-family: var(--text-font-body);
-		color: var(--rampart);
+		color: var(--color-rampart);
 		font-size: var(--text-xs);
-		line-height: var(--leading-normal);
+		line-height: var(--line-height-normal);
 		letter-spacing: var(--letter-spacing-normal);
 	}
 	.tags {
 		font-family: var(--text-font-heading);
-		color: var(--dovetail);
+		color: var(--color-dovetail);
 		font-size: var(--text-3xs);
 		font-style: italic;
-		line-height: var(--leading-tight);
+		line-height: var(--line-height-tight);
 		letter-spacing: var(--letter-spacing-tight);
 		margin-top: var(--space-2);
 	}

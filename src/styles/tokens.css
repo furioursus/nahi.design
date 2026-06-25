@@ -1,4 +1,9 @@
 :root {
+	--desc-font: initial;
+	--desc-color: initial;
+	--desc-margin: initial;
+	--desc-size: initial;
+
 	--text-font-body: "Source Sans 3";
 	--text-font-heading: "Space Mono";
 	--text-font-mono: "Space Mono";
@@ -16,12 +21,12 @@
 	--text-4xl: 3rem;
 	--text-5xl: 3.75rem;
 
-	--leading-none: 1;
-	--leading-tighter: 1.1;
-	--leading-tight: 1.2;
-	--leading-snug: 1.4;
-	--leading-normal: 1.6;
-	--leading-relaxed: 1.8;
+	--line-height-none: 1;
+	--line-height-tighter: 1.1;
+	--line-height-tight: 1.2;
+	--line-height-snug: 1.4;
+	--line-height-normal: 1.6;
+	--line-height-relaxed: 1.8;
 
 	--letter-spacing-tightest: -2%;
 	--letter-spacing-tighter: -1.5%;
@@ -40,22 +45,26 @@
 	--weight-extrabold: 800;
 	--weight-black: 900;
 
-	--crystal-cut: #f7f4ed; /* Crystal Cut */
-	--sunbleached: #e4e0d7; /* Sunbleached */
-	--bowstring: #d6d2c8; /* Bowstring */
-	--grey-white: #d8d4cb; /* Grey White */
+	--color-crystal-cut: #f7f4ed; /* Crystal Cut */
+	--color-romance: #f4f0e6; /* Romance */
+	--color-sunbleached: #e4e0d7; /* Sunbleached */
+	--color-bowstring: #d6d2c8; /* Bowstring */
+	--color-grey-white: #d8d4cb; /* Grey White */
 
-	--black-umber: #1c1916; /* Black Umber */
-	--oubliette: #4e4a44; /* Oubliette */
-	--dovetail: #8e8a84; /* Dovetail */
-	--rampart: #bdb9b2; /* Rampart */
+	--color-black-umber: #1c1916; /* Black Umber */
+	--color-oubliette: #4e4a44; /* Oubliette */
+	--color-dovetail: #8e8a84; /* Dovetail */
+	--color-rampart: #bdb9b2; /* Rampart */
 
-	--deep-nurse: #2d3f6c; /* Deep Nurse */
-	--sea-white: #e8ebf4; /* Sea White */
+	--color-deep-nurse: #2d3f6c; /* Deep Nurse */
+	--color-sea-white: #e8ebf4; /* Sea White */
 
 	--rounded-edge: 2px;
+	--rounded-edge-heavy: 10px;
 
 	--space-0: 0;
+	--space-px: 1px;
+	--space-px-rem: 0.0625rem;
 	--space-1: 0.25rem;
 	--space-2: 0.5rem;
 	--space-3: 0.75rem;

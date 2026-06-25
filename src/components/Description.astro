@@ -1,0 +1,33 @@
+---
+interface Props {
+	fontFamily?: string;
+	color?: string;
+	margin?: string;
+	size?: string;
+}
+
+const { fontFamily, color, margin, size } = Astro.props;
+---
+
+<p
+	class="description"
+	style={{
+		"--desc-font": fontFamily,
+		"--desc-color": color,
+		"--desc-margin": margin,
+		"--desc-size": size,
+	}}
+>
+	<slot />
+</p>
+
+<style>
+	.description {
+		font-family: var(--desc-font, var(--text-font-heading));
+		font-size: var(--desc-size, var(--text-sm));
+		color: var(--desc-color, var(--color-rampart));
+		line-height: var(--line-height-normal);
+		margin: var(--desc-margin, var(--space-0));
+		max-width: 35rem;
+	}
+</style>

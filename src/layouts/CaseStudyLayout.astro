@@ -1,8 +1,10 @@
 ---
-import type { CaseStudyMeta } from "../data/case-studies";
+import type { CaseStudyMeta } from "@data/case-studies";
 import BaseLayout from "./BaseLayout.astro";
-import HeroImage from "../components/HeroImage.astro";
-import Browline from "../components/Browline.astro";
+import HeroImage from "@components/HeroImage.astro";
+import Browline from "@components/Browline.astro";
+import Description from "@components/Description.astro";
+import CaseStudySummary from "@components/CaseStudySummary.astro";
 
 interface Props extends CaseStudyMeta {
 	compactContact?: boolean;
@@ -19,6 +21,10 @@ const {
 	thumbSummary,
 	heroImage,
 	heroImageAlt,
+	summaryDetail,
+	theAsk,
+	theApproach,
+	theOutcome,
 } = meta;
 ---
 
@@ -41,7 +47,13 @@ const {
 					}
 				</Browline>
 				<h1 class="title">{title}</h1>
-				<p class="intro">{summary}</p>
+				<Description
+					fontFamily="var(--text-font-body)"
+					size="var(--text-base)"
+					color="var(--color-black-umber)"
+				>
+					{summary}
+				</Description>
 			</div>
 			<div class="sidebar">
 				<ul>
@@ -66,6 +78,12 @@ const {
 		/>
 
 		<article class="case-study-body">
+			<CaseStudySummary
+				summaryDetail={summaryDetail}
+				theAsk={theAsk}
+				theApproach={theApproach}
+				theOutcome={theOutcome}
+			/>
 			<slot />
 		</article>
 	</div>
@@ -92,17 +110,10 @@ const {
 		margin-bottom: var(--space-4);
 	}
 
-	.intro {
-		font-family: var(--text-font-body);
-		font-family: var(--text-base);
-		line-height: var(--leading-normal);
-		max-width: 35rem;
-	}
-
 	.sidebar {
 		font-family: var(--text-font-heading);
 		font-size: var(--text-xs);
-		border-left: solid 1px var(--dovetail);
+		border-left: solid 1px var(--color-dovetail);
 		min-width: 104px;
 		padding-left: var(--space-6);
 		display: flex;

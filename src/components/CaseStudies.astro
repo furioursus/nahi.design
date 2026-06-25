@@ -1,5 +1,5 @@
 ---
-import { caseStudies } from "../data/case-studies";
+import { caseStudies } from "@data/case-studies";
 import SectionHeading from "./SectionHeading.astro";
 import CaseStudyThumb from "./CaseStudyThumb.astro";
 ---
@@ -10,6 +10,7 @@ import CaseStudyThumb from "./CaseStudyThumb.astro";
 			title="Case Studies"
 			number={1}
 			caption="NDAs, we know the drill."
+			numberLeadSmall
 		/>
 		<div class="case-studies-grid">
 			{
@@ -34,7 +35,7 @@ import CaseStudyThumb from "./CaseStudyThumb.astro";
 	main {
 		padding-top: var(--space-10);
 		margin: var(--space-10) 0 var(--space-20);
-		border-top: 1px solid var(--dovetail);
+		border-top: 1px solid var(--color-dovetail);
 	}
 
 	.case-studies-grid {

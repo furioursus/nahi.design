@@ -1,0 +1,32 @@
+---
+interface Props {
+	value: string;
+	label: string;
+}
+
+const { value, label } = Astro.props;
+---
+
+<div class="stat-card">
+	<p><span>{value}</span> {label}</p>
+</div>
+
+<style>
+	.stat-card {
+		font-family: var(--text-font-heading);
+		background-color: var(--color-romance);
+		padding: var(--space-4) var(--space-5);
+		border-radius: var(--rounded-edge);
+		font-size: var(--text-2xs);
+		border: solid 1px var(--color-rampart);
+		line-height: var(--line-height-none);
+		color: var(--color-oubliette);
+
+		span {
+			font-size: var(--text-3xl);
+			display: block;
+			margin-bottom: var(--space-4);
+			color: var(--color-black-umber);
+		}
+	}
+</style>
