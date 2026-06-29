@@ -50,7 +50,7 @@ const {
 							{
 								internalSignals?.map(([label, value]) => (
 									<li>
-										—<strong>{label}</strong>: {value}
+										—<strong>{label}</strong> {value}
 									</li>
 								))
 							}
@@ -62,7 +62,7 @@ const {
 							{
 								externalSignals?.map(([label, value]) => (
 									<li>
-										—<strong>{label}</strong>: {value}
+										—<strong>{label}</strong> {value}
 									</li>
 								))
 							}
@@ -217,7 +217,7 @@ const {
 	}
 
 	.full-outcome-footer {
-		margin-top: var(--space-5);
+		margin-top: var(--space-10);
 		padding: var(--space-5);
 		border-radius: var(--rounded-edge);
 		border: 1px solid var(--color-rampart);
@@ -239,7 +239,9 @@ const {
 <script>
 	function setupReasoningButtons() {
 		document
-			.querySelectorAll(".reasoning-button:not([data-ready])")
+			.querySelectorAll<HTMLButtonElement>(
+				".reasoning-button:not([data-ready])",
+			)
 			.forEach((button) => {
 				button.dataset.ready = "true";
 				button.addEventListener("click", () => {

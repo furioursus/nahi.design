@@ -1,5 +1,6 @@
 ---
 import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 
 interface Props {
 	title: string;
@@ -11,3 +12,90 @@ interface Props {
 
 const { title, quote, subtitle, image, imageAlt } = Astro.props;
 ---
+
+<div class="testimonial-container">
+	<div class="testimonial">
+		{
+			image && imageAlt && (
+				<div class="photo-container">
+					<Image
+						src={image}
+						alt={imageAlt}
+						layout="constrained"
+						width={400}
+						height={400}
+					/>
+				</div>
+			)
+		}
+		<div class="text-container">
+			<p class="title">{title}</p>
+			<blockquote class="quote">{quote}</blockquote>
+			<p class="subtitle">{subtitle}</p>
+		</div>
+	</div>
+</div>
+
+<style>
+	.testimonial-container {
+		margin-top: var(--space-16);
+		padding-left: var(--space-10);
+		padding-right: var(--space-10);
+	}
+
+	.testimonial {
+		background-color: var(--color-romance);
+		border: 1px solid var(--color-rampart);
+		padding: var(--space-6);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-6);
+	}
+
+	.photo-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		img {
+			border-radius: 50%;
+			aspect-ratio: 1 / 1;
+			width: auto;
+			height: var(--space-32);
+		}
+	}
+
+	.text-container {
+		font-family: var(--text-font-heading);
+	}
+
+	.title {
+		font-size: var(--text-md);
+		font-weight: bold;
+		margin-bottom: var(--space-2);
+		letter-spacing: var(--letter-spacing-tight);
+	}
+
+	.quote {
+		font-size: var(--text-2xs);
+	}
+
+	.subtitle {
+		position: relative;
+		font-size: var(--text-3xs);
+		color: var(--color-dovetail);
+		letter-spacing: var(--letter-spacing-loosest);
+		line-height: var(--line-height-none);
+		margin-top: var(--space-6);
+
+		&::before {
+			content: "";
+			background-color: var(--color-dovetail);
+			width: 33%;
+			height: var(--space-px-rem);
+			position: absolute;
+			top: calc(var(--space-3) * -1);
+		}
+	}
+</style>

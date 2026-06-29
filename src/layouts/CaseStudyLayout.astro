@@ -7,10 +7,11 @@ import Description from "@components/Description.astro";
 import CaseStudySummary from "@components/CaseStudySummary.astro";
 
 interface Props extends CaseStudyMeta {
-	compactContact?: boolean;
+	nextUrl?: string;
+	nextUrlText?: string;
 }
 
-const { compactContact = true, ...meta } = Astro.props;
+const { nextUrl, nextUrlText, ...meta } = Astro.props;
 const {
 	id,
 	title,
@@ -28,11 +29,7 @@ const {
 } = meta;
 ---
 
-<BaseLayout
-	title={`${title} — Nahi Kennedy-Nuñez`}
-	description={thumbSummary}
-	compactContact={compactContact}
->
+<BaseLayout title={`${title} — Nahi Kennedy-Nuñez`} description={thumbSummary}>
 	<div class="container">
 		<header class="case-study-hero">
 			<div class="case-study-intro">
@@ -86,6 +83,19 @@ const {
 			/>
 			<slot />
 		</article>
+		<footer class="full-width-breakout">
+			<div class="container">
+				<div class="footer-links">
+					<div class="go-to-next">
+						{nextUrl && nextUrlText && <a href={nextUrl}>{nextUrlText} →</a>}
+					</div>
+					<div class="contact-links">
+						<a href="mailto:hello@nahi.design">hello@nahi.design</a>
+						<a href="https://www.linkedin.com/in/nahidesign/">LinkedIn</a>
+					</div>
+				</div>
+			</div>
+		</footer>
 	</div>
 </BaseLayout>
 
@@ -125,6 +135,33 @@ const {
 		gap: var(--space-4);
 		&.services {
 			gap: 0;
+		}
+	}
+	footer {
+		background-color: var(--color-black-umber);
+		color: var(--color-crystal-cut);
+		font-family: var(--text-font-heading);
+	}
+	.footer-links {
+		padding: var(--space-20) var(--space-0);
+		display: flex;
+		gap: var(--space-8);
+		a {
+			color: var(--color-crystal-cut);
+			text-decoration: none;
+		}
+		.contact-links {
+			font-size: var(--text-xs);
+			display: flex;
+			gap: var(--space-4);
+			align-items: center;
+			justify-content: flex-end;
+			flex: 1;
+			text-align: right;
+
+			a {
+				color: var(--color-rampart);
+			}
 		}
 	}
 </style>

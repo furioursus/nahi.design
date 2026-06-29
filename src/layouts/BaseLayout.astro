@@ -3,17 +3,15 @@ import { AstroFont } from "astro-font";
 import { ClientRouter } from "astro:transitions";
 import "@styles/global.css";
 import NavBar from "@components/NavBar.astro";
-import Contact from "@components/Contact.astro";
 
 const isDev = import.meta.env.DEV;
 
 interface Props {
 	title: string;
 	description?: string;
-	compactContact?: boolean;
 }
 
-const { title, description, compactContact = false } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <html lang="en">
@@ -54,7 +52,6 @@ const { title, description, compactContact = false } = Astro.props;
 	<body>
 		<NavBar />
 		<slot />
-		<Contact compact={compactContact} />
 		<script>
 			document.addEventListener("astro:page-load", () => {
 				const { hash } = location;

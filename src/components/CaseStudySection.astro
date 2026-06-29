@@ -1,0 +1,20 @@
+---
+interface Props {
+	paddingBottom?: boolean;
+}
+
+const { paddingBottom } = Astro.props;
+---
+
+<section class:list={paddingBottom ? "padding-bottom-huge" : undefined}>
+	<slot />
+</section>
+
+<style>
+	section {
+		padding: var(--space-20) 0;
+		&.padding-bottom-huge {
+			padding-bottom: 28rem;
+		}
+	}
+</style>

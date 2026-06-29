@@ -5,10 +5,11 @@ import { Image } from "astro:assets";
 interface Props {
 	browline: string;
 	image: ImageMetadata;
+	imagesIsTransparent?: boolean;
 	imageAlt: string;
 }
 
-const { browline, image, imageAlt } = Astro.props;
+const { browline, image, imagesIsTransparent, imageAlt } = Astro.props;
 ---
 
 <div class="text-and-image-block">
@@ -20,7 +21,7 @@ const { browline, image, imageAlt } = Astro.props;
 			</div>
 		</div>
 	</div>
-	<div class="image">
+	<div class={`image ${imagesIsTransparent ? "transparent-png" : ""}`}>
 		<Image src={image} alt={imageAlt} />
 	</div>
 </div>
@@ -67,6 +68,8 @@ const { browline, image, imageAlt } = Astro.props;
 			}
 		}
 		ul {
+			list-style: disc;
+			padding-left: var(--space-6);
 			margin-bottom: var(--space-6);
 			&:last-child {
 				margin-bottom: 0;
@@ -76,8 +79,17 @@ const { browline, image, imageAlt } = Astro.props;
 	.image {
 		overflow: hidden;
 		border-radius: var(--rounded-edge-heavy);
-		box-shadow: var(--space-0) var(--space-1) var(--space-1) var(--space-0)
-			rgba(0, 0, 0, 0.1);
+		box-shadow: var(--space-0) var(--space-1) var(--space-1) rgba(0, 0, 0, 0.1);
+		&.transparent-png {
+			box-shadow: none;
+			border-radius: 0;
+			overflow: visible;
+			img {
+				filter: drop-shadow(
+					var(--space-0) var(--space-1) var(--space-1) rgba(0, 0, 0, 0.1)
+				);
+			}
+		}
 		img {
 			display: block;
 			max-width: 100%;

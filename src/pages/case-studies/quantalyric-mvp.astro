@@ -2,29 +2,37 @@
 import CaseStudyLayout from "@layouts/CaseStudyLayout.astro";
 import { caseStudies } from "@data/case-studies";
 const meta = caseStudies.find((s) => s.id === "quantalyric-mvp")!;
+import CaseStudySection from "@components/CaseStudySection.astro";
 import SectionHeading from "@components/SectionHeading.astro";
-import Description from "@components/Description.astro";
+import CaseStudyIntroText from "@components/CaseStudyIntroText.astro";
 import CaseStudyStatCard from "@components/CaseStudyStatCard.astro";
 import CaseStudyDecisionCard from "@components/CaseStudyDecisionCard.astro";
 import TextAndImageBlock from "@components/TextAndImageBlock.astro";
+import Testimonial from "@components/Testimonial.astro";
+
 import QuantaLyricUX from "@img/quantalyric-user-research.png";
+import QuantaLyricRun from "@img/quantalyric-run.png";
+import QuantaLyricBeforeVisual from "@img/quantalyric-before-visual.png";
+import QuantaLyricDesktopFilter from "@img/quantalyric-desktop-filter.png";
+import QuantaLyricMVE from "@img/quantalyric-mve.png";
+import QuantaLyricColorPalette from "@img/quantalyric-color-palette.png";
+import TestimonialJosephPhoto from "@img/testimonial-joseph-nunez.jpg";
 ---
 
-<CaseStudyLayout {...meta}>
-	<section>
+<CaseStudyLayout
+	nextUrl="/case-studies/ibm-data-lineage"
+	nextUrlText="Next Case Study: Data Lineage for IBM"
+	{...meta}
+>
+	<CaseStudySection>
 		<SectionHeading title="Constraints, but not barriers." number={2} />
-		<Description
-			fontFamily="var(--text-font-body)"
-			size="var(--text-base)"
-			color="var(--color-black-umber)"
-			margin="var(--space-4) var(--space-0) var(--space-16)"
-		>
+		<CaseStudyIntroText>
 			I had to translate this grand vision into a realistic and achievable goal.
 			They are a pre-seed startup with limited people, time, and
 			resources.Together we honed in on the one big idea that gets them funded:
 			state of the art AI/ML methodologies that produce more accurate
 			forecasting models.
-		</Description>
+		</CaseStudyIntroText>
 		<div class="stat-cards">
 			<CaseStudyStatCard value="90" label="Hours" />
 			<CaseStudyStatCard value="5" label="Projects" />
@@ -40,7 +48,7 @@ import QuantaLyricUX from "@img/quantalyric-user-research.png";
 			outcome="Scope cut roughly in half"
 			internalSignals={[
 				[
-					"Team capacity",
+					"Team capacity:",
 					"one part-time developer at the beginning and expanded to two developers for the last project — building two parallel product surfaces was not realistic.",
 				],
 				[
@@ -48,17 +56,17 @@ import QuantaLyricUX from "@img/quantalyric-user-research.png";
 					"in workshops was highest when describing the forecasting accuracy story; MLOps tooling was talked about as “table stakes.”",
 				],
 				[
-					"One-sentence value prop",
+					"One-sentence value prop:",
 					"the forecasting model was the only thing I could explain in one sentence — that’s the thing investors would remember.",
 				],
 			]}
 			externalSignals={[
 				[
-					"User pain",
+					"User pain:",
 					"traders had dollar-attached losses every week; ML engineers had workarounds.",
 				],
 				[
-					"Competitive gap",
+					"Competitive gap:",
 					"competitor MLOps was mature; competitor forecasting accuracy claims were vague. That gap was the wedge.",
 				],
 				[
@@ -74,8 +82,8 @@ import QuantaLyricUX from "@img/quantalyric-user-research.png";
 			imageAlt="Quantalyric UX research."
 		>
 			<p>
-				An MVE is the simplest version of a product that's ready for real users;
-				it covers every surface they'd need. An MVP can be narrower: a technical
+				An MVE is the simplest version of a product that’s ready for real users;
+				it covers every surface they’d need. An MVP can be narrower: a technical
 				demo built for one audience. QuantaLyric needed both, but not both
 				built. I designed the MVE so the team could communicate the full vision,
 				and built the MVP: the reporting surface, as the technical demo for
@@ -84,14 +92,14 @@ import QuantaLyricUX from "@img/quantalyric-user-research.png";
 			<p>
 				From my research, the AI/ML lifecycle has four phases: model
 				experimentation, production development, reporting, and CI/CD. Reporting
-				is where QuantaLyric's value proposition is fully realized, so that's
+				is where QuantaLyric’s value proposition is fully realized, so that’s
 				the phase we prioritized for funding.
 			</p>
 		</TextAndImageBlock>
 		<TextAndImageBlock
 			browline="The supporting ecosystem of the MVE."
-			image={QuantaLyricUX}
-			imageAlt="Quantalyric UX research."
+			image={QuantaLyricRun}
+			imageAlt="Quantalyric run"
 		>
 			<p>
 				ML engineers and data scientists are our secondary personas, and their
@@ -103,13 +111,212 @@ import QuantaLyricUX from "@img/quantalyric-user-research.png";
 				tools (like Weights and Biases and Jupyter Notebooks).
 			</p>
 		</TextAndImageBlock>
-	</section>
+	</CaseStudySection>
+	<CaseStudySection>
+		<SectionHeading title="Pushing on the value proposition." number={3} />
+		<CaseStudyIntroText>
+			My client offers a more accurate prediction of energy demand and pricing
+			over the government issued projections. Visual clarity became a design
+			pillar because users would be comparing the two. This chart and the data
+			visualization work that followed (see next section) were the most
+			important hours spent from the 90-hour pool of my contract.
+		</CaseStudyIntroText>
+		<CaseStudyDecisionCard
+			title="Redesign the reading experience for two competing forecasts, rather than display them side by side."
+			description="The government forecast wasn’t a simple line — it was 30–40 individual model runs, three summary lines, and a half-hour period x-axis that required mental math to read. Adding QuantaLyric’s forecast on top didn’t just create a visual problem; it created a literacy problem: users would need to understand both charts before they could trust the comparison."
+			nonDecision="Preserve the government chart’s conventions, add QuantaLyric’s forecast alongside it"
+			theDecision="Redesign the reading experience for both, optimizing for the comparison itself"
+			outcome="A single unified chart where both forecasts coexist legibly — the overlap between them readable at a glance, the detail available on demand."
+			internalSignals={[
+				[
+					"The x-axis alone was a blocker:",
+					"“half-hour periods” starting at 1 and incrementing by 4 meant a trader reading the government chart had to mentally convert tick marks to timestamps before they could act on anything. Matching that convention would have imported the confusion directly into QuantaLyric’s product.",
+				],
+				[
+					"Visual literacy compounds:",
+					"two independently complex charts placed side by side don’t halve the cognitive load — they multiply it. A trader comparing forecast accuracy under time pressure needs one surface to read, not two.",
+				],
+				[
+					"The 30–40 individual model runs",
+					"in the government chart existed to communicate margin of error and risk, but required interpretation. The design problem was finding a way to surface that same information — range, confidence, risk — without requiring the user to hold 40 lines in their head simultaneously.",
+				],
+			]}
+			externalSignals={[
+				[
+					"The founder, formerly the Director of Energy Infrastructure for the Australian government,",
+					"described his own reading experience with the government chart as the reference point: what he wanted most was clarity while reading, with the option to add detail when tracking a specific model’s forecast. That framing — clarity first, detail on demand — became the organizing principle for the chart’s interaction model.",
+				],
+				[
+					"Higher forecast accuracy directly translates to cost savings",
+					"on generator dispatch and prevention of undersupply. That meant the accuracy comparison wasn’t decorative — it was the core decision support surface. If a trader couldn’t immediately see whether QuantaLyric’s forecast was better than the government’s, the entire value proposition failed at the moment it mattered most.",
+				],
+			]}
+			fullOutcome="Both forecasts rendered as range charts with transparent overlap areas, so the region where they agree is immediately visible and the divergence — where QuantaLyric’s model makes a different prediction — reads as signal rather than noise. The x-axis was redrawn with actual date and time labels, eliminating the half-period mental conversion entirely. Hover interactions activate a vertical slice through both forecasts simultaneously, surfacing the exact values at any moment in time without requiring the trader to estimate from the line’s position. The 30–40 individual model runs, rather than being shown as separate lines, informed the confidence band’s width — present as information, invisible as clutter. The founder’s stated goal — clarity by default, detail on demand — became the organizing principle for the chart’s interaction model. The PoC shipped with the individual model lines visible; a simplified/detailed toggle that lets traders show or hide them is currently in the product backlog — the concept survived scope cuts and made it onto the roadmap."
+		/>
+		<TextAndImageBlock
+			browline="The before."
+			image={QuantaLyricBeforeVisual}
+			imageAlt="QuantaLyric “Before” chart forecast"
+		>
+			<p>
+				This chart shows a simplified forecast a trader would receive from the
+				government. The challenge here is to get both forecasts to exist in
+				harmony.
+			</p>
+		</TextAndImageBlock>
+		<TextAndImageBlock
+			browline="The after."
+			image={QuantaLyricDesktopFilter}
+			imageAlt="QuantaLyric “After” chart forecast"
+		>
+			<p>
+				Managing cognitive load is the way we get both forecasts to co-exist in
+				the same space. Formatting, composition, and micro-interactions do the
+				heavy lifting here.
+			</p>
+			<p>For example:</p>
+			<ul>
+				<li>
+					Both forecasts are shown with range line charts with transparent areas
+					to show where QuantaLyric’s and the government forecast overlap.
+				</li>
+				<li>
+					The x-axis is labeled with date and time, and hover interactions
+					highlight a vertical slice through the chart. No mental math needed,
+					just the facts.
+				</li>
+			</ul>
+		</TextAndImageBlock>
+		<Testimonial
+			title="Joseph Nunez"
+			quote="I had engaged Nahi for several projects. These projects involved UI/UX design for energy market mathematical models and stochastic modelling processes using state-of-the-art ML/AI methodologies. Nahi was able to break down the core experience, expectations and requirements that helped reduce the mental load of an already complex process. Of note is the design of an analytics dashboard that catered for several forms of color blindness and other key accessibility features. I highly recommend Nahi particularly around UI/UX work involving data and modelling."
+			subtitle="QuantaLyric Founder"
+			image={TestimonialJosephPhoto}
+			imageAlt="Professional headshot of Joseph Nunez"
+		/>
+	</CaseStudySection>
+	<CaseStudySection>
+		<SectionHeading title="The tactical, and practical." number={4} />
+		<CaseStudyIntroText>
+			Returning to the constraints of the project, with the limited resource we
+			had as a team. I had to make choices about where I would invest my
+			efforts.
+		</CaseStudyIntroText>
+		<CaseStudyDecisionCard
+			title="Radix UI as the foundation, not a custom design system."
+			description="A bespoke system would have looked more distinctive on day one. I chose Radix as the foundation and kept custom work for the moments that actually carry the product."
+			nonDecision="Distinctive from the first commit"
+			theDecision="Months of dev capacity back"
+			outcome="Radix carried the workhorse surfaces. As the team grew, custom data-viz components layered on top — including the accessible chart palette and the forecast confidence band — without ever rewriting Radix primitives."
+			internalSignals={[
+				[
+					"Solo designer, one part-time engineer",
+					"— every custom primitive was a week we wouldn’t get back.",
+				],
+				[
+					"Identity lives in charts",
+					"and the forecast confidence story, not in buttons and inputs. Generic primitives are fine there",
+				],
+				["Accessibility primitives", "in Radix would survive scrutiny later."],
+			]}
+			externalSignals={[
+				[
+					"Limited financial resources",
+					"meant custom UI components would take 6-8 weeks to build, which would be a oversized allocation of money to a problem that has already been solved.",
+				],
+				[
+					"Hiring is slow",
+					"in Australian energy — when the team eventually grew, Radix would scale with it without requiring a component rewrite.",
+				],
+				[
+					"Trader preference",
+					"showed “calm, familiar” interfaces won trust; flashy custom UI read as untrustworthy in a high-stakes purchase context.",
+				],
+			]}
+			fullOutcome="Using an open source design system expedited all the work done by both design and development. the extra cycles went directly into the forecast confidence band and the mobile experience, both of which shipped in the PoC."
+		/>
+		<TextAndImageBlock
+			browline="Lower overhead means we can do mobile as part of the pitch."
+			image={QuantaLyricMVE}
+			imageAlt="Quantalyric MVE"
+			imagesIsTransparent
+		>
+			<p>
+				Because I pushed for using Radix to lower overhead, it meant that we
+				could hit a stretch goal of providing a mobile experience. Mobile would
+				be the first touch point in a pitch, so a proof of concept that worked
+				on mobile covers an important use case for the product.
+			</p>
+		</TextAndImageBlock>
+		<CaseStudyDecisionCard
+			title="Color-blindness accessibility from day one."
+			description="Accessibility is usually a “fast follow.” I argued it had to be a constraint from the first chart, not the last QA pass — even though it meant a tighter palette and more iteration up front. An arbitrary color palette would have been fast and easy, but would harm credibility with known potential investors who were color blind."
+			nonDecision="Wider creative palette"
+			theDecision="Government & regulated deals stay open"
+			outcome="Strong accessibility foundation"
+			internalSignals={[
+				[
+					"Prior IBM and HPE work",
+					"showed how expensive late-stage accessibility rework is — color systems rebuilt, charts re-tested.",
+				],
+				[
+					"Brand direction",
+					"(Dark mode) already pulled toward a tight palette — accessibility aligned with the aesthetic, not against it.",
+				],
+				[
+					"Single-owner advantage",
+					"owning product and brand let palette decisions propagate without negotiation.",
+				],
+			]}
+			externalSignals={[
+				[
+					"Regulated industry",
+					"Australian energy government buyers were on the realistic customer list, and gov procurement requires WCAG conformance.",
+				],
+				[
+					"Audience prevalence",
+					"roughly 1 in 12 men have some form of color vision deficiency; energy trading floors skew male.",
+				],
+				[
+					"Competitor failure mode",
+					"competing dashboards relied on red/green deltas. Designing past that was differentiation, not just compliance.",
+				],
+			]}
+			fullOutcome="A documented chart palette with semantic roles that passes simulation for the major CVD types. And, a strong preventative measure against sudden spikes in development cycles in the future. Government and regulated deals stay open, and if additional accessibility work is needed it will be at a substantially lower cost.x"
+		/>
+		<TextAndImageBlock
+			browline="A starter categorical palette."
+			image={QuantaLyricColorPalette}
+			imageAlt="Quantalyric color palette"
+			imagesIsTransparent
+		>
+			<p>
+				ML engineers and data scientists are our secondary personas, and their
+				surfaces are essential to the MVE. These are surfaces that explain
+				whether a model is working correctly or not. As an example, this mock up
+				shows logs and metadata for processing the data from a model that will
+				be used to create a forecast report. Our secondary personas can take
+				this information and use it to fix faulty models in their preferred
+				tools (like Weights and Biases and Jupyter Notebooks).
+			</p>
+		</TextAndImageBlock>
+	</CaseStudySection>
+	<CaseStudySection paddingBottom>
+		<SectionHeading title="Lessons learned for the next time." number={5} />
+		<CaseStudyIntroText margin="var(--space-4) var(--space-0) var(--space-0)">
+			Putting together that limited color palette took far more time than I was
+			comfortable with. The commitment to using Radix's color primitives was
+			likely a sunk cost fallacy on my part. If I were to do it again, I'd use a
+			WCAG 3 color calculator to define the lowest and highest contrast up
+			front, and build a custom palette specifically for data visualization
+			rather than extending Radix's primitives. The same instinct that cut the
+			MVP to one audience should have cut the color system to one source of
+			truth from the start.
+		</CaseStudyIntroText>
+	</CaseStudySection>
 </CaseStudyLayout>
 
 <style>
-	section {
-		padding: var(--space-20) 0;
-	}
 	.stat-cards {
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
