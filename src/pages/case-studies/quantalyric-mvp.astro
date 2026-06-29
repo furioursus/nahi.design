@@ -5,6 +5,7 @@ const meta = caseStudies.find((s) => s.id === "quantalyric-mvp")!;
 import CaseStudySection from "@components/CaseStudySection.astro";
 import SectionHeading from "@components/SectionHeading.astro";
 import CaseStudyIntroText from "@components/CaseStudyIntroText.astro";
+import CaseStudyStatCards from "@components/CaseStudyStatCards.astro";
 import CaseStudyStatCard from "@components/CaseStudyStatCard.astro";
 import CaseStudyDecisionCard from "@components/CaseStudyDecisionCard.astro";
 import TextAndImageBlock from "@components/TextAndImageBlock.astro";
@@ -33,13 +34,13 @@ import TestimonialJosephPhoto from "@img/testimonial-joseph-nunez.jpg";
 			state of the art AI/ML methodologies that produce more accurate
 			forecasting models.
 		</CaseStudyIntroText>
-		<div class="stat-cards">
+		<CaseStudyStatCards>
 			<CaseStudyStatCard value="90" label="Hours" />
 			<CaseStudyStatCard value="5" label="Projects" />
 			<CaseStudyStatCard value="1" label="Designer" />
 			<CaseStudyStatCard value="1 → 2" label="Developers" />
 			<CaseStudyStatCard value="4" label="Design Disciplines" />
-		</div>
+		</CaseStudyStatCards>
 		<CaseStudyDecisionCard
 			title="Cut the MVP from two audiences to one."
 			description="The original MVP served energy traders <strong>and</strong> ML engineers with both business intelligence and operational tooling. I pushed to ship forecasting for traders first — and design the rest, but not build it yet."
@@ -315,13 +316,3 @@ import TestimonialJosephPhoto from "@img/testimonial-joseph-nunez.jpg";
 		</CaseStudyIntroText>
 	</CaseStudySection>
 </CaseStudyLayout>
-
-<style>
-	.stat-cards {
-		display: grid;
-		grid-template-columns: repeat(5, 1fr);
-		gap: var(--space-2);
-		justify-content: space-between;
-		padding: var(--space-0) var(--space-10);
-	}
-</style>

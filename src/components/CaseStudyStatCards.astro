@@ -1,0 +1,17 @@
+---
+
+---
+
+<div class="stat-cards">
+	<slot />
+</div>
+
+<style>
+	.stat-cards {
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+		gap: var(--space-2);
+		justify-content: space-between;
+		padding: var(--space-0) var(--space-10);
+	}
+</style>
