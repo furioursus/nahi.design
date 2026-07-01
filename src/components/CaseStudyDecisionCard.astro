@@ -38,9 +38,15 @@ const {
 				</div>
 			</dl>
 		</div>
-		<button class="reasoning-button" aria-expanded="false"
-			>Show the Reasoning</button
-		>
+		<button class="reasoning-button" aria-expanded="false">
+			<img
+				class="caret-icon"
+				src="/img/icon-caret.svg"
+				alt=""
+				aria-hidden="true"
+			/>
+			<span class="button-label">Show the Reasoning</span>
+		</button>
 		<div class="reasoning-content is-collapsed">
 			<div class="reasoning-inner">
 				<div class="reasoning-text">
@@ -162,11 +168,25 @@ const {
 		border-top: solid 1px var(--color-rampart);
 		border-bottom: none;
 		width: 100%;
-		text-align: left;
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
 		padding-top: var(--space-3);
 		padding-bottom: var(--space-3);
 		padding-left: var(--space-12);
 		cursor: pointer;
+		&:hover {
+			background-color: var(--color-bowstring);
+		}
+	}
+	.caret-icon {
+		width: 0.625rem;
+		flex-shrink: 0;
+		transform: rotate(180deg);
+		transition: transform 0.35s ease;
+		.reasoning-button[aria-expanded="true"] & {
+			transform: rotate(0deg);
+		}
 	}
 	.reasoning-content {
 		display: grid;
@@ -249,15 +269,13 @@ const {
 					const content = card?.querySelector(".reasoning-content");
 					if (!content) return;
 
-					const isCollapsed =
-						content.classList.toggle("is-collapsed");
-					button.setAttribute(
-						"aria-expanded",
-						isCollapsed ? "false" : "true",
-					);
-					button.textContent = isCollapsed
-						? "Show the Reasoning"
-						: "Hide the Reasoning";
+					const isCollapsed = content.classList.toggle("is-collapsed");
+					button.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
+					const label = button.querySelector<HTMLSpanElement>(".button-label");
+					if (label)
+						label.textContent = isCollapsed
+							? "Show the Reasoning"
+							: "Hide the Reasoning";
 				});
 			});
 	}
