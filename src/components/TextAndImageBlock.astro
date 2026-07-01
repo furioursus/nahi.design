@@ -7,9 +7,18 @@ interface Props {
 	image: ImageMetadata;
 	imagesIsTransparent?: boolean;
 	imageAlt: string;
+	imageRatio?: "16/9" | "4/3" | "1/1";
+	imagePosition?: string;
 }
 
-const { browline, image, imagesIsTransparent, imageAlt } = Astro.props;
+const {
+	browline,
+	image,
+	imagesIsTransparent,
+	imageAlt,
+	imageRatio,
+	imagePosition,
+} = Astro.props;
 ---
 
 <div class="text-and-image-block">
@@ -21,7 +30,13 @@ const { browline, image, imagesIsTransparent, imageAlt } = Astro.props;
 			</div>
 		</div>
 	</div>
-	<div class={`image ${imagesIsTransparent ? "transparent-png" : ""}`}>
+	<div
+		class:list={[
+			"image",
+			{ "transparent-png": imagesIsTransparent, "has-ratio": imageRatio },
+		]}
+		style={{ "--image-ratio": imageRatio, "--image-position": imagePosition }}
+	>
 		<Image src={image} alt={imageAlt} />
 	</div>
 </div>
@@ -80,6 +95,15 @@ const { browline, image, imagesIsTransparent, imageAlt } = Astro.props;
 		overflow: hidden;
 		border-radius: var(--rounded-edge-heavy);
 		box-shadow: var(--space-0) var(--space-1) var(--space-1) rgba(0, 0, 0, 0.1);
+		&.has-ratio {
+			aspect-ratio: var(--image-ratio);
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: var(--image-position, center);
+			}
+		}
 		&.transparent-png {
 			box-shadow: none;
 			border-radius: 0;
