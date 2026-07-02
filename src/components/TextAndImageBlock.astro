@@ -21,7 +21,7 @@ const {
 } = Astro.props;
 ---
 
-<div class="text-and-image-block">
+<div class="text-and-image-block inner-padding">
 	<div class="text-wrapper">
 		<div class="text">
 			<p class="text-title">{browline}</p>
@@ -44,11 +44,13 @@ const {
 <style>
 	.text-and-image-block {
 		margin-top: var(--space-16);
-		padding: 0 var(--space-10);
 		display: grid;
 		gap: var(--space-2);
-		grid-template-columns: repeat(3, 1fr);
-		grid-template-areas: "text image image";
+		grid-template-areas: "image" "text";
+		@media screen and (min-width: 48rem) {
+			grid-template-columns: repeat(3, 1fr);
+			grid-template-areas: "text image image";
+		}
 	}
 	.text-wrapper {
 		grid-area: text;

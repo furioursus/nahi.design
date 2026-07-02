@@ -37,13 +37,25 @@ const { compact = false } = Astro.props;
 
 <style>
 	.contact {
-		margin: 26rem 0;
+		padding: var(--space-20) 0;
+		&.compact {
+			padding: var(--space-10) 0;
+		}
 	}
-	.contact.compact {
-		margin: 8rem 0;
+	@media screen and (min-width: 48rem) {
+		.contact {
+			padding: var(--space-80) 0;
+			&.compact {
+				padding: var(--space-20) 0;
+			}
+		}
 	}
 	.button-container {
-		display: flex;
+		display: inline-flex;
+		flex-direction: column;
 		gap: var(--space-7);
+		@media screen and (min-width: 48rem) {
+			flex-direction: row;
+		}
 	}
 </style>

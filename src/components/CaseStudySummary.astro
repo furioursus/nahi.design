@@ -22,7 +22,7 @@ const { summaryDetail, theAsk, theApproach, theOutcome } = Astro.props;
 	>
 		{summaryDetail}
 	</Description>
-	<ul class="ask-approach-outcome-grid">
+	<ul class="ask-approach-outcome-grid inner-padding">
 		<li class="ask-approach-outcome-item">
 			<h3>The Ask</h3>
 			<p>{theAsk}</p>
@@ -46,10 +46,10 @@ const { summaryDetail, theAsk, theApproach, theOutcome } = Astro.props;
 
 	.ask-approach-outcome-grid {
 		display: grid;
-		grid-template-columns: repeat(3, 19.375rem);
 		gap: var(--space-3);
-		padding-left: var(--space-10);
-		padding-right: var(--space-10);
+		@media screen and (min-width: 48rem) {
+			grid-template-columns: repeat(3, 19.375rem);
+		}
 	}
 
 	.ask-approach-outcome-item {

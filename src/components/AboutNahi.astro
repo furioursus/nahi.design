@@ -7,7 +7,7 @@ import Description from "./Description.astro";
 	<div class="container">
 		<div class="section-inner">
 			<Caption>Grounded • Craftsman</Caption>
-			<h2 class="h1">Nahi Kennedy-Nuñez</h2>
+			<h2 class="h1">Nahi Kennedy&#8209;Nuñez</h2>
 			<Description>
 				I'm a UX designer with a steady, disciplined approach to my craft —
 				equally at home shaping wood by hand, watching my fish drift through
@@ -39,9 +39,13 @@ import Description from "./Description.astro";
 	}
 
 	.section-inner {
-		padding-top: var(--space-40);
-		padding-bottom: var(--space-10);
+		padding-top: var(--space-20);
+		padding-bottom: var(--space-20);
 		border-top: 1px solid var(--color-rampart);
+		@media screen and (min-width: 48rem) {
+			padding-top: var(--space-40);
+			padding-bottom: var(--space-40);
+		}
 	}
 
 	h2 {
@@ -52,7 +56,10 @@ import Description from "./Description.astro";
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: var(--space-10);
-		margin-top: 12.5rem;
+		margin-top: var(--space-20);
+		@media screen and (min-width: 48rem) {
+			margin-top: var(--space-40);
+		}
 	}
 	video {
 		width: 100%;

@@ -357,12 +357,14 @@ import TestimonialLaurenPhoto from "@img/ibm-lauren-chen.jpg";
 
 <style>
 	.outcome-summary {
-		grid-column: span 2;
 		padding: var(--space-5);
 		border-radius: var(--rounded-edge);
 		background-color: var(--color-romance);
 		border: 1px solid var(--color-rampart);
 		border-left: 3px solid var(--color-deep-nurse);
+		@media screen and (min-width: 48rem) {
+			grid-column: span 2;
+		}
 		h4 {
 			font-size: var(--text-base);
 			line-height: var(--line-height-none);

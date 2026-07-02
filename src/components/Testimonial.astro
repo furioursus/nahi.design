@@ -13,7 +13,7 @@ interface Props {
 const { title, quote, subtitle, image, imageAlt } = Astro.props;
 ---
 
-<div class="testimonial-container">
+<div class="testimonial-container inner-padding">
 	<div class="testimonial">
 		{
 			image && imageAlt && (
@@ -39,8 +39,6 @@ const { title, quote, subtitle, image, imageAlt } = Astro.props;
 <style>
 	.testimonial-container {
 		margin-top: var(--space-16);
-		padding-left: var(--space-10);
-		padding-right: var(--space-10);
 	}
 
 	.testimonial {

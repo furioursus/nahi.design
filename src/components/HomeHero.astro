@@ -7,7 +7,7 @@ import Description from "./Description.astro";
 	<div class="hero container">
 		<div class="hero-intro">
 			<Browline marginBottom>UX Designer • Facilitator</Browline>
-			<h1>Nahi Kennedy-Nuñez</h1>
+			<h1>Nahi Kennedy&#8209;Nuñez</h1>
 			<Description color="var(--color-oubliette)">
 				I'm a UX/UI designer who transforms complex systems, from AI platforms
 				and data infrastructure to public health, into experiences that are
@@ -59,15 +59,29 @@ import Description from "./Description.astro";
 	.sidebar {
 		font-family: var(--text-font-heading);
 		font-size: var(--text-xs);
-		border-left: solid 1px var(--color-dovetail);
-		min-width: 104px;
-		padding-left: var(--space-6);
+		border-color: var(--color-sunbleached);
+		border-width: 1px;
+		border-left: none;
+		border-top-style: solid;
+		padding-top: var(--space-3);
+		margin-top: var(--space-3);
+		@media (min-width: 48rem) {
+			border-top: none;
+			border-left: solid 1px var(--color-dovetail);
+			padding-top: var(--space-0);
+			margin-top: var(--space-0);
+			padding-left: var(--space-6);
+			margin-left: var(--space-6);
+		}
 		display: flex;
 		align-items: center;
 	}
 	ul {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-4);
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--space-8);
+		@media screen and (min-width: 48rem) {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>

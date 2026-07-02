@@ -133,3 +133,10 @@ input[type="reset"] {
 	cursor: pointer;
 	outline: inherit;
 }
+
+img,
+video,
+picture {
+	max-width: 100%;
+	height: auto;
+}

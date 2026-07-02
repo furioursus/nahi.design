@@ -23,23 +23,31 @@ const { title, number, caption, numberLeadSmall } = Astro.props;
 		) : null
 	}
 	<span class="title">{title}</span>
-	{caption ? <Caption>{caption}</Caption> : null}
+	{caption ? <Caption classes="grid-caption">{caption}</Caption> : null}
 </h2>
 
 <style>
 	h2 {
 		font-family: var(--text-font-heading);
-		font-size: var(--text-3xl);
+		font-size: var(--text-2xl);
 		font-weight: var(--weight-bold);
 		line-height: var(--line-height-tight);
 		letter-spacing: var(--letter-spacing-tighter);
 		display: flex;
-		justify-content: space-between;
-		width: 100%;
-		align-items: center;
+		flex-direction: column;
+		@media screen and (min-width: 30rem) {
+			font-size: var(--text-3xl);
+		}
+		@media screen and (min-width: 48rem) {
+			padding: 0 var(--space-6) 0 0;
+			font-size: var(--text-4xl);
+			align-items: center;
+			flex-direction: row;
+		}
 	}
 
 	.number-lead {
+		display: block;
 		font-size: var(--text-3xs);
 		font-weight: var(--weight-regular);
 		color: var(--color-dovetail);
@@ -53,6 +61,16 @@ const { title, number, caption, numberLeadSmall } = Astro.props;
 	}
 
 	.title {
-		flex: 1;
+		flex-grow: 4;
+	}
+</style>
+
+<style is:global>
+	.grid-caption {
+		grid-column: 2;
+		@media screen and (min-width: 48rem) {
+			text-align: right;
+			grid-column: initial;
+		}
 	}
 </style>
