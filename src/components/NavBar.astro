@@ -4,7 +4,7 @@ const isHome = Astro.url.pathname === "/";
 
 <nav class="navbar" aria-labelledby="mainmenulabel">
 	<h2 class="visually-hidden" id="mainmenulabel">Main Menu</h2>
-	<div class="nav navbar-nav menu container">
+	<div class="nav container">
 		<a class="logo" href="/">
 			<img
 				src="/img/nav-logo.png"
@@ -15,64 +15,154 @@ const isHome = Astro.url.pathname === "/";
 			/>
 			<span class="visually-hidden">Home</span>
 		</a>
-		<div class="nav-items">
-			{isHome ? (
-				<>
-					<a class="nav-item" href="#case-studies" data-section="case-studies">Case Studies</a>
-					<a class="nav-item" href="#about-nahi" data-section="about-nahi">About</a>
-					<a class="nav-item" href="#contact" data-section="contact">Contact</a>
-				</>
-			) : (
-				<>
-					<a class="nav-item active" href="/#case-studies">Case Studies</a>
-						<a class="nav-item" href="/#about-nahi">About</a>
-						<a class="nav-item" href="/#contact">Contact</a>
-				</>
-			)}
+		<button
+			class="menu-button"
+			aria-expanded="false"
+			aria-controls="primary-nav"
+		>
+			<svg
+				class="menu-icon"
+				viewBox="0 0 20 20"
+				width="20"
+				height="20"
+				fill="currentColor"
+				aria-hidden="true"
+			>
+				<g class="icon-open">
+					<rect x="2" y="4" width="16" height="2" rx="1"></rect>
+					<rect x="2" y="9" width="16" height="2" rx="1"></rect>
+					<rect x="2" y="14" width="16" height="2" rx="1"></rect>
+				</g>
+				<g class="icon-close">
+					<rect
+						x="2"
+						y="9"
+						width="16"
+						height="2"
+						rx="1"
+						transform="rotate(45 10 10)"></rect>
+					<rect
+						x="2"
+						y="9"
+						width="16"
+						height="2"
+						rx="1"
+						transform="rotate(-45 10 10)"></rect>
+				</g>
+			</svg>
+			<span class="visually-hidden">Menu</span>
+		</button>
+		<div class="nav-items" id="primary-nav">
+			<div class="nav-items-inner">
+				{
+					isHome ? (
+						<>
+							<a
+								class="nav-item"
+								href="#case-studies"
+								data-section="case-studies"
+							>
+								Case Studies
+							</a>
+							<a class="nav-item" href="#about-nahi" data-section="about-nahi">
+								About
+							</a>
+							<a class="nav-item" href="#contact" data-section="contact">
+								Contact
+							</a>
+						</>
+					) : (
+						<>
+							<a class="nav-item active" href="/#case-studies">
+								Case Studies
+							</a>
+							<a class="nav-item" href="/#about-nahi">
+								About
+							</a>
+							<a class="nav-item" href="/#contact">
+								Contact
+							</a>
+						</>
+					)
+				}
+			</div>
 		</div>
 	</div>
 </nav>
 
-{isHome && (
-	<script>
-		function initNav() {
-			const navItems = document.querySelectorAll<HTMLAnchorElement>(".nav-item[data-section]");
-			const sections = Array.from(navItems).map((link) => {
-				const id = link.dataset.section!;
-				return { link, section: document.getElementById(id) };
+<script>
+	function initMobileMenu() {
+		const navbar = document.querySelector<HTMLElement>(".navbar");
+		const menuButton = document.querySelector<HTMLButtonElement>(
+			".menu-button:not([data-ready])",
+		);
+		if (!navbar || !menuButton) return;
+
+		menuButton.dataset.ready = "true";
+
+		menuButton.addEventListener("click", () => {
+			const isOpen = navbar.classList.toggle("is-open");
+			menuButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
+		});
+
+		// Close the menu when any nav item is clicked
+		document.querySelectorAll<HTMLAnchorElement>(".nav-item").forEach((link) => {
+			link.addEventListener("click", () => {
+				navbar.classList.remove("is-open");
+				menuButton.setAttribute("aria-expanded", "false");
 			});
+		});
+	}
 
-			function setActiveFromHash(hash: string) {
-				const id = hash.replace("#", "");
-				for (const { link } of sections) {
-					link.classList.toggle("active", link.dataset.section === id);
+	document.addEventListener("astro:page-load", initMobileMenu);
+	initMobileMenu();
+</script>
+
+{
+	isHome && (
+		<script>
+			function initNav() {
+				const navItems =
+					document.querySelectorAll<HTMLAnchorElement>(
+						".nav-item[data-section]",
+					);
+				const sections = Array.from(navItems).map((link) => {
+					const id = link.dataset.section!;
+					return { link, section: document.getElementById(id) };
+				});
+
+				function setActiveFromHash(hash: string) {
+					const id = hash.replace("#", "");
+					for (const { link } of sections) {
+						link.classList.toggle("active", link.dataset.section === id);
+					}
 				}
-			}
 
-			for (const { link } of sections) {
-				link.addEventListener("click", () => setActiveFromHash(link.hash));
-			}
-
-			// Set initial state from hash if present
-			if (location.hash) {
-				setActiveFromHash(location.hash);
-			}
-
-			// Logo scrolls to top when already on the home page
-			document.querySelector(".logo")?.addEventListener("click", (e) => {
-				if (location.pathname !== "/") return;
-				e.preventDefault();
-				window.scrollTo({ top: 0, behavior: "smooth" });
-				history.pushState("", "", "/");
 				for (const { link } of sections) {
-					link.classList.remove("active");
+					link.addEventListener("click", () =>
+						setActiveFromHash(link.hash),
+					);
 				}
-			});
-		}
 
-		document.addEventListener("astro:page-load", initNav);
-	</script>
-)}
+				if (location.hash) {
+					setActiveFromHash(location.hash);
+				}
+
+				document.querySelector(".logo")?.addEventListener("click", (e) => {
+					if (location.pathname !== "/") return;
+					e.preventDefault();
+					window.scrollTo({ top: 0, behavior: "smooth" });
+					history.pushState("", "", "/");
+					for (const { link } of sections) {
+						link.classList.remove("active");
+					}
+				});
+			}
+
+			document.addEventListener("astro:page-load", initNav);
+		</script>
+	)
+}
 
 <style>
 	.navbar {
@@ -84,25 +174,90 @@ const isHome = Astro.url.pathname === "/";
 		top: 0;
 		z-index: 100;
 	}
+
 	.nav {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-7);
-		@media (min-width: 30rem) {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		grid-template-areas:
+			"logo btn"
+			"nav  nav";
+		align-items: center;
+
+		@media (min-width: 40rem) {
+			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
+			align-items: center;
 		}
 	}
 
 	.logo {
+		grid-area: logo;
 		display: flex;
 		align-items: center;
 		gap: var(--space-2);
 	}
 
-	.nav-items {
+	.menu-button {
+		grid-area: btn;
+		background: none;
+		border: none;
+		padding: var(--space-2);
+		cursor: pointer;
+		color: var(--color-rampart);
 		display: flex;
-		gap: var(--space-7);
+		align-items: center;
+		justify-content: center;
+
+		&:hover {
+			color: var(--color-crystal-cut);
+		}
+
+		@media (min-width: 40rem) {
+			display: none;
+		}
+	}
+
+	.icon-close {
+		display: none;
+	}
+	.menu-button[aria-expanded="true"] .icon-open {
+		display: none;
+	}
+	.menu-button[aria-expanded="true"] .icon-close {
+		display: block;
+	}
+
+	.nav-items {
+		grid-area: nav;
+		display: grid;
+		grid-template-rows: 0fr;
+		overflow: hidden;
+		transition: grid-template-rows 0.3s ease;
+
+		.navbar.is-open & {
+			grid-template-rows: 1fr;
+		}
+
+		@media (min-width: 40rem) {
+			display: flex;
+			overflow: visible;
+		}
+	}
+
+	.nav-items-inner {
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-5);
+		padding: var(--space-6) 0;
+
+		@media (min-width: 40rem) {
+			overflow: visible;
+			flex-direction: row;
+			gap: var(--space-7);
+			padding: 0;
+		}
 	}
 
 	.nav-item {
