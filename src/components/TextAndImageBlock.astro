@@ -30,14 +30,16 @@ const {
 			</div>
 		</div>
 	</div>
-	<div
-		class:list={[
-			"image",
-			{ "transparent-png": imagesIsTransparent, "has-ratio": imageRatio },
-		]}
-		style={{ "--image-ratio": imageRatio, "--image-position": imagePosition }}
-	>
-		<Image src={image} alt={imageAlt} />
+	<div class="image-wrapper">
+		<div
+			class:list={[
+				"image",
+				{ "transparent-png": imagesIsTransparent, "has-ratio": imageRatio },
+			]}
+			style={{ "--image-ratio": imageRatio, "--image-position": imagePosition }}
+		>
+			<Image src={image} alt={imageAlt} />
+		</div>
 	</div>
 </div>
 
@@ -45,9 +47,14 @@ const {
 	.text-and-image-block {
 		margin-top: var(--space-16);
 		display: grid;
-		gap: var(--space-2);
+		gap: var(--space-3);
 		grid-template-areas: "image" "text";
 		@media screen and (min-width: 48rem) {
+			gap: var(--space-6);
+			grid-template-columns: repeat(2, 1fr);
+			grid-template-areas: "text image image";
+		}
+		@media screen and (min-width: 60rem) {
 			grid-template-columns: repeat(3, 1fr);
 			grid-template-areas: "text image image";
 		}
@@ -57,10 +64,12 @@ const {
 		padding: var(--space-2) var(--space-0);
 	}
 	.text {
-		padding-right: var(--space-6);
-		border-right: 1px solid var(--color-rampart);
+		@media screen and (min-width: 48rem) {
+			padding-right: var(--space-6);
+			border-right: 1px solid var(--color-rampart);
+		}
 	}
-	.image {
+	.image-wrapper {
 		grid-area: image;
 	}
 	.text-title {

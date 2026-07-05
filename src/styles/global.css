@@ -127,11 +127,13 @@ em {
 }
 
 .inner-padding {
-	padding: var(--space-0) var(--space-10);
+	@media screen and (min-width: 64rem) {
+		padding: var(--space-0) var(--space-10);
+	}
 }
 
 .container {
-	max-width: 90rem;
+	max-width: 76rem;
 	margin: 0 auto;
 	padding: 0 1.5rem;
 
@@ -143,7 +145,5 @@ em {
 	}
 	@media (min-width: 80rem) {
 		padding: 0 4rem;
-	}
-	@media (min-width: 96rem) {
 	}
 }

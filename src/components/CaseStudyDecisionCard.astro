@@ -124,7 +124,6 @@ const {
 			}
 		}
 	}
-}
 
 	.decision-and-outcome {
 		margin-top: var(--space-5);
@@ -185,6 +184,9 @@ const {
 		cursor: pointer;
 		&:hover {
 			background-color: var(--color-bowstring);
+			.reasoning-content.is-collapsed {
+				background-color: var(--color-bowstring);
+			}
 		}
 	}
 	.caret-icon {
@@ -199,8 +201,12 @@ const {
 	.reasoning-content {
 		display: grid;
 		grid-template-rows: 1fr;
-		transition: grid-template-rows 0.35s ease;
+		transition:
+			grid-template-rows 0.35s ease,
+			background-color 0.35s ease;
+		background-color: var(--color-romance);
 		&.is-collapsed {
+			background-color: var(--color-sunbleached);
 			grid-template-rows: 0fr;
 		}
 	}
@@ -223,7 +229,9 @@ const {
 	}
 
 	.reasoning-text {
-		padding-left: var(--space-16);
+		@media screen and (min-width: 48rem) {
+			padding-left: var(--space-16);
+		}
 	}
 
 	.signals {
