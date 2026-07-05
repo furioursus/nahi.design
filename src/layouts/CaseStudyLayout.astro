@@ -174,11 +174,16 @@ const {
 		.contact-links {
 			font-size: var(--text-xs);
 			display: flex;
-			gap: var(--space-4);
-			align-items: center;
-			justify-content: flex-end;
+			gap: 0 var(--space-4);
+			align-items: end;
+			justify-content: center;
 			flex: 1;
 			text-align: right;
+			flex-direction: column;
+			@media screen and (min-width: 48rem) {
+				flex-direction: row;
+				justify-content: end;
+			}
 
 			a {
 				color: var(--color-rampart);
