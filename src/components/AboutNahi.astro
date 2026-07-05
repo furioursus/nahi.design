@@ -1,6 +1,7 @@
 ---
 import Caption from "./Caption.astro";
 import Description from "./Description.astro";
+const VideoUrls = ["/video/woodworking.mp4", "/video/pea-puffer.mp4", "/video/mercer-lab.mp4", "/video/dante.mp4"];
 ---
 
 <div class="about-nahi" id="about-nahi">
@@ -15,18 +16,11 @@ import Description from "./Description.astro";
 				afternoon to a good museum.
 			</Description>
 			<div class="video-grid">
-				<video autoplay loop muted>
-					<source src="/video/woodworking.mp4" type="video/mp4" />
-				</video>
-				<video autoplay loop muted>
-					<source src="/video/pea-puffer.mp4" type="video/mp4" />
-				</video>
-				<video autoplay loop muted>
-					<source src="/video/mercer-lab.mp4" type="video/mp4" />
-				</video>
-				<video autoplay loop muted>
-					<source src="/video/dante.mp4" type="video/mp4" />
-				</video>
+				{VideoUrls.map((video) => (
+					<video autoplay muted playsinline loop>
+						<source src={video} type="video/mp4" />
+					</video>
+				))}
 			</div>
 		</div>
 	</div>
