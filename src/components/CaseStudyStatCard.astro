@@ -23,10 +23,16 @@ const { value, label } = Astro.props;
 		color: var(--color-oubliette);
 
 		span {
-			font-size: var(--text-3xl);
+			font-size: var(--text-xl);
 			display: block;
 			margin-bottom: var(--space-4);
 			color: var(--color-black-umber);
+			@media screen and (min-width: 40rem) {
+				font-size: var(--text-2xl);
+			}
+			@media screen and (min-width: 60rem) {
+				font-size: var(--text-3xl);
+			}
 		}
 	}
 </style>

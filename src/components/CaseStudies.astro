@@ -51,6 +51,9 @@ import CaseStudyThumb from "./CaseStudyThumb.astro";
 
 		@media (min-width: 48rem) {
 			grid-template-columns: repeat(2, 1fr);
+			> *:first-child {
+				grid-column: span 2;
+			}
 		}
 	}
 </style>

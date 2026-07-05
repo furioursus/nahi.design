@@ -10,7 +10,6 @@ import CaseStudyStatCards from "@components/CaseStudyStatCards.astro";
 import CaseStudyStatCard from "@components/CaseStudyStatCard.astro";
 import CaseStudyDecisionCard from "@components/CaseStudyDecisionCard.astro";
 import TextAndImageBlock from "@components/TextAndImageBlock.astro";
-import Testimonial from "@components/Testimonial.astro";
 
 import HPEFirstUseFlow from "@img/hpe-first-use-flow.png";
 import HPEProofOfConcept from "@img/hpe-proof-of-concept.png";
@@ -18,7 +17,7 @@ import HPESummaryUserJourney from "@img/hpe-summary-user-journey.png";
 import HPEUserWorkshopFeedback from "@img/hpe-user-workshop-feedback.png";
 ---
 
-<CaseStudyLayout {...meta}>
+<CaseStudyLayout nextUrl="/" nextUrlText="Return Home" {...meta}>
 	<div slot="after-summary">
 		<CaseStudyStatCards heading="Project Resources" columnNumber={3}>
 			<CaseStudyStatCard value="1" label="Week" />
