@@ -20,7 +20,7 @@ const { summaryDetail, theAsk, theApproach, theOutcome } = Astro.props;
 		color="var(--color-black-umber)"
 		margin="var(--space-4) var(--space-0) var(--space-16)"
 	>
-		{summaryDetail}
+		<span set:html={summaryDetail} />
 	</Description>
 	<ul class="ask-approach-outcome-grid inner-padding">
 		<li class="ask-approach-outcome-item the-ask">

@@ -1,10 +1,265 @@
 ---
 import CaseStudyLayout from "@layouts/CaseStudyLayout.astro";
 import { caseStudies } from "@data/case-studies";
-
 const meta = caseStudies.find((s) => s.id === "hpe-ai-troubleshooting-agent")!;
+
+import CaseStudySection from "@components/CaseStudySection.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import CaseStudyIntroText from "@components/CaseStudyIntroText.astro";
+import CaseStudyStatCards from "@components/CaseStudyStatCards.astro";
+import CaseStudyStatCard from "@components/CaseStudyStatCard.astro";
+import CaseStudyDecisionCard from "@components/CaseStudyDecisionCard.astro";
+import TextAndImageBlock from "@components/TextAndImageBlock.astro";
+import Testimonial from "@components/Testimonial.astro";
+
+import HPEFirstUseFlow from "@img/hpe-first-use-flow.png";
+import HPEProofOfConcept from "@img/hpe-proof-of-concept.png";
+import HPESummaryUserJourney from "@img/hpe-summary-user-journey.png";
+import HPEUserWorkshopFeedback from "@img/hpe-user-workshop-feedback.png";
 ---
 
 <CaseStudyLayout {...meta}>
-	<h2>Overview</h2>
+	<div slot="after-summary">
+		<CaseStudyStatCards heading="Project Resources" columnNumber={3}>
+			<CaseStudyStatCard value="1" label="Week" />
+			<CaseStudyStatCard value="1" label="Designer" />
+			<CaseStudyStatCard value="1" label="Workshop" />
+			<CaseStudyStatCard value="1" label="Dev intern" />
+			<CaseStudyStatCard value="1" label="ChatGPT model trained on our docs" />
+		</CaseStudyStatCards>
+	</div>
+	<CaseStudySection>
+		<SectionHeading title="Refrmaing our shared perspective" number={2} />
+		<CaseStudyIntroText>
+			For years, there was a mad dash to create parity in technical capability
+			between our web app and our command line. This focus on CLI parity had the
+			unintended consequence of creating a preference towards ML engineers
+			instead of creating a UX that supported an ecosystem of personas. That
+			alienated a whole group of users, and blocked our land and expand business
+			strategy. If our ML engineer persona can’t convince their closest
+			partners, they wouldn’t convince other teams to adopt our product.
+		</CaseStudyIntroText>
+		<CaseStudyStatCards heading="The business case" columnNumber={2}>
+			<CaseStudyStatCard
+				value="$10,000s/day"
+				label="Cost of running a pipeline"
+			/>
+			<CaseStudyStatCard value="4-7 days" label="Typical pipeline runtime" />
+		</CaseStudyStatCards>
+		<CaseStudyStatCards
+			heading="Important usage stats"
+			columnNumber={2}
+			marginTop={"var(--space-16)"}
+		>
+			<CaseStudyStatCard
+				value="100s sessions per week"
+				label="During pipeline creation or debugging"
+			/>
+			<CaseStudyStatCard
+				value="1-10 sessions per week"
+				label="During stable pipeline performance"
+			/>
+		</CaseStudyStatCards>
+		<CaseStudyDecisionCard
+			title="Create a UX that resolves events, rather than a technology showcase."
+			description="The leadership team came in wanting an AI feature. Research said <strong>10 out of 10 participants</strong> named miscommunication between Data Scientists and ML Engineers as a major issue — and the strongest emotional signal was Data Scientists feeling guilty, not stuck."
+			nonDecision="A clean “ship an AI feature” brief"
+			theDecision="The right user problem to solve with AI"
+			outcome="AI stayed the response — but the problem statement became “reduce the cost of a missed handoff,” not “add AI to the product.”"
+			internalSignals={[
+				[
+					"Cross-functional team",
+					"(Product + Dev + me) needed a problem statement that wasn’t “AI assistant” — otherwise scope creep would be infinite and success would be undefined.",
+				],
+				[
+					"One-week timeframe",
+					"meant the problem statement had to be sharp enough to design and prototype in days. “Miscommunication between two specific roles” was that sharp.",
+				],
+				[
+					"Big-Ideas exercise",
+					"later weighed AI against alternatives. That weighing only worked because the problem was framed as a communication gap, not a missing feature.",
+				],
+			]}
+			externalSignals={[
+				[
+					"10 / 10 interviews",
+					"independently surfaced miscommunication. That kind of unanimity changes the brief — it means you’re looking at the disease, not a symptom.",
+				],
+				[
+					"Emotional language",
+					"(“guilt”) came from Data Scientists unprompted. The pain wasn’t “I lack tools,” it was “I’m letting my teammate down.” That’s a relationship problem.",
+				],
+				[
+					"$10k/day & 4–7-day runs",
+					"meant every missed handoff carried real dollars and real time. The business case for the reframe wrote itself.",
+				],
+			]}
+			fullOutcome="The reframe shifted what the AI had to do. Instead of “generate clever explanations,” it had to “give both roles the same shared starting point so the conversation can begin.” That spec is much more testable than “be helpful,” and it shaped every downstream design decision — including the log-row selection pattern and the suggested-action chips."
+		/>
+		<TextAndImageBlock
+			browline="It’s inefficient process, not technical capacity."
+			image={HPESummaryUserJourney}
+			imageAlt="Summary of HPE’s customer user journey gathered in card form on a UX journey maap"
+		>
+			<p>
+				The team had just spent considerable resources deeply expanding our
+				documentation, and implementing ChatGPT to parse the docs for our users.
+				Our leadership team wanted to use our docs as a training manual for the
+				product. The hope was that ML engineers and data scientists would create
+				pipelines with fewer errors by becoming more educated about the product
+				and how it works with its supporting ecosystem.
+			</p>
+		</TextAndImageBlock>
+	</CaseStudySection>
+	<CaseStudySection>
+		<SectionHeading title="Grooming a BHAG" number={3} />
+		<CaseStudyIntroText>
+			I got started with behavioral design with my very first design job in 2017
+			which was in the healthcare sector. The decision to rework the docs was
+			correct, but has an unintended message of “this is how you get better at
+			using the product.” What we need for our data scientist persona is
+			experiences that say, “this is how we can support you in this moment.”
+		</CaseStudyIntroText>
+		<CaseStudyDecisionCard
+			title="Run our workshop through a behavioral design lens, not a purely ideation one."
+			description="I used IBM’s Big Ideas exercise to weigh concepts — but I enriched it with the <strong>Behavioral Design Toolkit</strong> from the Illinois Institute of Technology. The pain we were solving was emotional (guilt, frustration), and a feature-cost-benefit lens alone would have missed that."
+			nonDecision="A faster, lighter ideation cadence"
+			theDecision="Concepts pressure-tested for behavior change"
+			outcome="AI assistant won as the “Big Idea” — not because it scored highest on features, but because it removed the cost of asking for help."
+			internalSignals={[
+				[
+					"Big Ideas alone",
+					"tends to reward novelty and ambition. With one week to ship a PoC, ambition needed to be checked by “will users actually change behavior?”",
+				],
+				[
+					"Behavioral Design Toolkit",
+					"gave us shared vocabulary for friction, motivation, and ability — concepts the engineering side of the team understood faster than UX jargon.",
+				],
+				[
+					"I’d run this combination before.",
+					"Bringing a known method into a one-week project reduced facilitation risk.",
+				],
+			]}
+			externalSignals={[
+				[
+					"Guilt as the pain point:",
+					"people don’t fix guilt with features, they fix it by lowering the social cost of asking. That insight maps directly to behavioral-design’s “reduce friction” lever.",
+				],
+				[
+					"Interview language",
+					"kept landing on relationship verbs — “ping,” “interrupt,” “bother.” Those are behavioral signals, not feature requests.",
+				],
+				[
+					"Cross-domain analogues:",
+					"developer tools that succeeded in similar spaces (Sentry, Datadog AI summaries) won on lowering the cost of asking the next question, not on raw analytical power.",
+				],
+			]}
+			fullOutcome="The AI assistant scored highest because it changes who has to ask. A Data Scientist who reads the AI explanation arrives at the ML Engineer’s desk with informed questions, not apologies. That’s the behavior change the toolkit pointed us at — and it’s the success criterion the user test will measure."
+		/>
+		<TextAndImageBlock
+			browline="The big hairy audacious goal."
+			image={HPEUserWorkshopFeedback}
+			imageAlt="Highlight from user research asking “What is the experience like? which is answered with “It’s like having blood work done, and having a a doctor with good bedside manner explain your test results in a way that you can easily understand."
+		>
+			<p>
+				When our users are in a state of stress — hemorrhaging tens of thousands
+				of dollars a day, the last thing they need to hear is “get better at the
+				product.” The workshop led to this idea of an AI assistant that parses
+				the logs, the pipeline specifications, and historical performance data
+				to identify why the pipeline isn’t working.
+			</p>
+		</TextAndImageBlock>
+		<TextAndImageBlock
+			browline="Trimmed, scoped, and achievable."
+			image={HPEFirstUseFlow}
+			imageAlt="The first user flow of the HPE AI troubleshooting agent"
+		>
+			<p>
+				6 screens and a user flow on rails, that was the result. An “explain
+				logs” button where users would already be during debugging invited them
+				in to quickly get a summary of issues, and provided them the docs and
+				actions that they could take to remedy the situation. This would shift
+				the conversation between personas from “I don’t know how to fix this.”
+				to “here’s what I know how to fix, and this is where I need your help.”
+			</p>
+		</TextAndImageBlock>
+	</CaseStudySection>
+	<CaseStudySection>
+		<SectionHeading title="Proving it for real" number={4} />
+		<CaseStudyIntroText>
+			With one week on the clock and a single developer as the only engineering
+			partner, the team faced a choice that would shape what the eventual user
+			test could actually measure: build something that looked real, or build
+			something that behaved like the real thing. Design is mostly judgment, not
+			pixels — and this was the highest-leverage judgment call left in the
+			project.
+		</CaseStudyIntroText>
+		<CaseStudyDecisionCard
+			title="Ship a coded proof-of-concept, not a Figma prototype."
+			description="A clickable Figma would have tested layout and copy. I argued for a <strong>fully-coded PoC with a RAG model trained on real internal docs</strong> — because the user behaviors we needed to study only show up when the AI’s answers feel real, not scripted."
+			nonDecision="A polished, fast Figma walkthrough"
+			theDecision="A test that surfaces actual AI behaviors"
+			outcome="Built end-to-end in a week. Now ready for in-depth user testing against the behavior-change spec, not just usability."
+			internalSignals={[
+				[
+					"Development partner",
+					"was already capable of standing up a RAG model on the team’s docs. The marginal cost of “real” over “scripted” was small.",
+				],
+				[
+					"Edge-case planning",
+					"token limits, model switching, chat history reversion — only matters if you’re testing a real assistant. A Figma can’t simulate any of it.",
+				],
+				[
+					"Trust-in-AI",
+					"was the riskiest unknown. The team needed signal on whether participants would accept the AI’s answers, not whether they could tap a button.",
+				],
+			]}
+			externalSignals={[
+				[
+					"AI quality is non-linear:",
+					"Figma can’t show that a hallucinated answer breaks trust for the next 10 real ones. A coded PoC reveals that immediately.",
+				],
+				[
+					"RAG-specific quirks",
+					"citations, refusal language, suggested follow-ups — only render fidelity in a working system. Users react to them differently than to mocked UI strings.",
+				],
+				[
+					"Stakeholder demos:",
+					"a working PoC is far easier to fund forward than a Figma. The next round of investment depends on what the team sees, not what they imagine.",
+				],
+			]}
+			fullOutcome="The PoC trained a RAG model on internal documentation and shipped the full happy-path flow — log selection, AI explanation, suggested actions, source citations, follow-up chat. The next step is in-depth user testing. One known gap: the assistant doesn’t yet suggest remediation flows (“here’s how to fix this”) — that’s the next-release ask."
+		/>
+		<TextAndImageBlock
+			browline="Real answers, not scripted ones."
+			image={HPEProofOfConcept}
+			imageAlt="AI model explaining data import logs to the user in a more easily understood format."
+		>
+			<p>
+				Token limits, model switching, and chat history reversion were all
+				scoped into the build — not because they were glamorous, but because a
+				coded PoC that couldn’t handle them wouldn’t have told the team anything
+				real about whether users could trust the assistant’s answers.
+			</p>
+		</TextAndImageBlock>
+	</CaseStudySection>
+	<CaseStudySection paddingBottom>
+		<SectionHeading title="Lessons learned for the next time." number={5} />
+		<CaseStudyIntroText margin="var(--space-4) var(--space-0) var(--space-0)">
+			This project didn’t get the ending most case studies aim for. The PoC
+			shipped on a Friday; within the week, the entire AI Solutions department —
+			including this team — was laid off. The user testing that would have
+			validated or challenged the behavior-change hypothesis never happened.
+			<br /><br />
+			What I’d carry forward: the reframe and the behavioral design insight — that
+			guilt isn’t solved with features, it’s solved by lowering the social cost of
+			asking for help — were the most valuable outputs of this project, more valuable
+			than the prototype itself. If I’d known how little runway was left, I’d have
+			spent less of the week polishing the coded PoC and more time documenting the
+			research insight in a form that could travel independent of the team that produced
+			it. Good research outlives bad timing. The artifact didn’t get the chance to
+			prove itself, but the thinking behind it should have been built to survive the
+			team that built it.
+		</CaseStudyIntroText>
+	</CaseStudySection>
 </CaseStudyLayout>
