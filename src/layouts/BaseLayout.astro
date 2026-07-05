@@ -1,6 +1,7 @@
 ---
 import { AstroFont } from "astro-font";
 import { ClientRouter } from "astro:transitions";
+import { SEO } from "astro-seo";
 import "@styles/global.css";
 import NavBar from "@components/NavBar.astro";
 
@@ -21,8 +22,10 @@ const { title, description } = Astro.props;
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		{description && <meta name="description" content={description} />}
-		<title>{title}</title>
+		<SEO
+      title={`${title} | Nahi Kennedy-Nuñez | UX Designer with expertise in MLOPs & complex workflows`}
+      description={description}
+    />
 		{!isDev && <ClientRouter />}
 		<AstroFont
 			config={[
