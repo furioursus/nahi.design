@@ -3,8 +3,14 @@ import Caption from "./Caption.astro";
 import Description from "./Description.astro";
 const videos = [
 	{ src: "/video/woodworking.mp4", label: "Shaping a piece of wood by hand" },
-	{ src: "/video/pea-puffer.mp4", label: "A pea puffer fish drifting through its tank" },
-	{ src: "/video/mercer-lab.mp4", label: "One of Nahi's two cats" },
+	{
+		src: "/video/pea-puffer.mp4",
+		label: "A pea puffer fish drifting through its tank",
+	},
+	{
+		src: "/video/mercer-lab.mp4",
+		label: "Nahi's spouse, Christopher spins around on a swing at Mercer Labs while bathed in light",
+	},
 	{ src: "/video/dante.mp4", label: "Nahi's cat Dante" },
 ];
 ---
@@ -15,17 +21,25 @@ const videos = [
 			<Caption>Grounded • Craftsman</Caption>
 			<h2 class="h1">Nahi Kennedy&#8209;Nuñez</h2>
 			<Description>
-				I'm a UX designer with a steady, disciplined approach to my craft —
-				equally at home shaping wood by hand, watching my fish drift through
-				their little world, getting outvoted by my two cats, or losing an
-				afternoon to a good museum.
+				I'm a UX designer with a steady, disciplined approach to my
+				craft — equally at home shaping wood by hand, watching my fish
+				drift through their little world, getting outvoted by my two
+				cats, or losing an afternoon to a good museum.
 			</Description>
 			<div class="video-grid">
-				{videos.map(({ src, label }) => (
-					<video autoplay muted playsinline loop aria-label={label}>
-						<source src={src} type="video/mp4" />
-					</video>
-				))}
+				{
+					videos.map(({ src, label }) => (
+						<video
+							autoplay
+							muted
+							playsinline
+							loop
+							aria-label={label}
+						>
+							<source src={src} type="video/mp4" />
+						</video>
+					))
+				}
 			</div>
 		</div>
 	</div>
