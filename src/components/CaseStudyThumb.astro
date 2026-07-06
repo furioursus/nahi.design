@@ -10,7 +10,6 @@ interface Props {
 	summary: string;
 	gridThumbImage: ImageMetadata;
 	href: string;
-	transitionName?: string;
 }
 
 const {
@@ -21,7 +20,6 @@ const {
 	summary,
 	gridThumbImage,
 	href,
-	transitionName,
 } = Astro.props;
 ---
 
@@ -47,7 +45,7 @@ const {
 		<p class="summary">{summary}</p>
 	</div>
 	<div class="image-wrapper">
-		<Image src={gridThumbImage} alt={title} transition:name={transitionName} />
+		<Image src={gridThumbImage} alt={title} />
 	</div>
 </a>
 

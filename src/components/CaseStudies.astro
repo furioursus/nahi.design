@@ -4,7 +4,7 @@ import SectionHeading from "./SectionHeading.astro";
 import CaseStudyThumb from "./CaseStudyThumb.astro";
 ---
 
-<div class="container" id="case-studies">
+<div class="container named-hash" id="case-studies">
 	<main>
 		<SectionHeading
 			title="Case Studies"
@@ -23,7 +23,6 @@ import CaseStudyThumb from "./CaseStudyThumb.astro";
 						summary={study.thumbSummary}
 						gridThumbImage={study.gridThumbImage}
 						href={`/case-studies/${study.id}`}
-						transitionName={`hero-image-${study.id}`}
 					/>
 				))
 			}

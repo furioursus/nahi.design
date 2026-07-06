@@ -15,7 +15,7 @@ const videos = [
 ];
 ---
 
-<div class="about-nahi" id="about-nahi">
+<div class="about-nahi named-hash" id="about-nahi">
 	<div class="container">
 		<div class="section-inner">
 			<Caption>Grounded • Craftsman</Caption>
@@ -29,6 +29,7 @@ const videos = [
 			<div class="video-grid">
 				{
 					videos.map(({ src, label }) => (
+					<div class="video-pixel">
 						<video
 							autoplay
 							muted
@@ -38,7 +39,8 @@ const videos = [
 						>
 							<source src={src} type="video/mp4" />
 						</video>
-					))
+					</div>
+				))
 				}
 			</div>
 		</div>

@@ -63,18 +63,5 @@ const DefaultOGImage = "https://www.nahi.design/img/og-image.png";
 	<body>
 		<NavBar />
 		<slot />
-		<script>
-			document.addEventListener("astro:page-load", () => {
-				const { hash } = location;
-				if (!hash) return;
-				const target = document.querySelector(hash);
-				if (!target) return;
-				const navbarHeight =
-					document.querySelector(".navbar")?.clientHeight ?? 0;
-				const top =
-					target.getBoundingClientRect().top + window.scrollY - navbarHeight;
-				window.scrollTo({ top, behavior: "instant" });
-			});
-		</script>
 	</body>
 </html>

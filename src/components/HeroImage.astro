@@ -5,10 +5,9 @@ import { Image } from "astro:assets";
 interface Props {
 	image: ImageMetadata | string;
 	alt: string;
-	transitionName?: string;
 }
 
-const { image, alt, transitionName } = Astro.props;
+const { image, alt } = Astro.props;
 const isVideo = typeof image === "string";
 ---
 
@@ -23,10 +22,9 @@ const isVideo = typeof image === "string";
 					muted
 					loop
 					playsinline
-					transition:name={transitionName}
 				/>
 			) : (
-				<Image src={image} alt={alt} transition:name={transitionName} />
+				<Image src={image} alt={alt} />
 			)
 		}
 	</div>
