@@ -20,6 +20,9 @@ const {
 	externalSignals,
 	fullOutcome,
 } = Astro.props;
+
+// Unique id so each disclosure button can point at its own reasoning panel.
+const reasoningId = `reasoning-${crypto.randomUUID()}`;
 ---
 
 <div class="decision-card-wrapper inner-padding">
@@ -38,7 +41,11 @@ const {
 				</div>
 			</dl>
 		</div>
-		<button class="reasoning-button" aria-expanded="false">
+		<button
+			class="reasoning-button"
+			aria-expanded="false"
+			aria-controls={reasoningId}
+		>
 			<img
 				class="caret-icon"
 				src="/img/icon-caret.svg"
@@ -47,7 +54,7 @@ const {
 			/>
 			<span class="button-label">Show the Reasoning</span>
 		</button>
-		<div class="reasoning-content is-collapsed">
+		<div id={reasoningId} class="reasoning-content is-collapsed">
 			<div class="reasoning-inner">
 				<div class="reasoning-text">
 					<div class="signals internal-signals">
@@ -220,11 +227,16 @@ const {
 		opacity: 1;
 		transition:
 			padding 0.35s ease,
-			opacity 0.35s ease;
+			opacity 0.35s ease,
+			visibility 0.35s ease;
 
 		.is-collapsed & {
 			padding: 0 var(--space-8);
 			opacity: 0;
+			/* Remove collapsed reasoning from the accessibility tree so screen
+			   readers don't announce hidden content. visibility flips at the end
+			   of the collapse transition and immediately on expand. */
+			visibility: hidden;
 		}
 	}
 

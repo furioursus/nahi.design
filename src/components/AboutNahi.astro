@@ -1,7 +1,12 @@
 ---
 import Caption from "./Caption.astro";
 import Description from "./Description.astro";
-const VideoUrls = ["/video/woodworking.mp4", "/video/pea-puffer.mp4", "/video/mercer-lab.mp4", "/video/dante.mp4"];
+const videos = [
+	{ src: "/video/woodworking.mp4", label: "Shaping a piece of wood by hand" },
+	{ src: "/video/pea-puffer.mp4", label: "A pea puffer fish drifting through its tank" },
+	{ src: "/video/mercer-lab.mp4", label: "One of Nahi's two cats" },
+	{ src: "/video/dante.mp4", label: "Nahi's cat Dante" },
+];
 ---
 
 <div class="about-nahi" id="about-nahi">
@@ -16,9 +21,9 @@ const VideoUrls = ["/video/woodworking.mp4", "/video/pea-puffer.mp4", "/video/me
 				afternoon to a good museum.
 			</Description>
 			<div class="video-grid">
-				{VideoUrls.map((video) => (
-					<video autoplay muted playsinline loop>
-						<source src={video} type="video/mp4" />
+				{videos.map(({ src, label }) => (
+					<video autoplay muted playsinline loop aria-label={label}>
+						<source src={src} type="video/mp4" />
 					</video>
 				))}
 			</div>

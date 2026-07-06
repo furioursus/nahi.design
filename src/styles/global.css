@@ -5,6 +5,26 @@ html {
 	scroll-behavior: smooth;
 }
 
+/*
+ * Visible keyboard focus indicator for every interactive element.
+ * The reset strips native outlines, so this restores a clearly visible ring.
+ * A dark outline plus a light halo keeps it legible on both the light page
+ * background and the dark navbar/footer. :focus-visible means it only shows
+ * for keyboard/AT users, not on mouse click.
+ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+	outline: 2px solid var(--color-deep-nurse);
+	outline-offset: 2px;
+	box-shadow: 0 0 0 4px var(--color-crystal-cut);
+	border-radius: var(--rounded-edge);
+}
+
 body {
 	background-color: var(--color-crystal-cut);
 	font-family: var(--text-font-body);
