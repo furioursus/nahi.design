@@ -15,6 +15,8 @@ import IBMCompetitorLineage from "@img/ibm-competitor-lineage.png";
 import IBMSecondaryResearchCurrentPatents from "@img/ibm-secondary-research-current-patents.png";
 import IBMAnalagousInspiration from "@img/ibm-analagous-inspiration-another-team.png";
 import IBMConsolidatedPersonaExample from "@img/ibm-consolidated-persona-example-1.png";
+import IBMTheBefore from "@img/ibm-the-before.png";
+import IBMTheAfter from "@img/ibm-the-after.png";
 import IBMWatsonX from "@img/ibm-watsonx.png";
 import IBMWorkshop from "@img/ibm-workshop.jpg";
 import TestimonialLaurenPhoto from "@img/ibm-lauren-chen.jpg";
@@ -110,6 +112,80 @@ import TestimonialLaurenPhoto from "@img/ibm-lauren-chen.jpg";
 				],
 			]}
 			fullOutcome="The Summary View lands users on the simplest level and provides tools to expand, filter, and search for specific metadata — bad data quality scores, ownership tags, the contact info needed to file a fix. It tested well in both desirability and usability rounds, and it became the foundation for the lineage tab that shipped."
+		/>
+		<TextAndImageBlock
+			browline="The before."
+			image={IBMTheBefore}
+			imageAlt=""
+		>
+			<p>
+				This is a trivial data lineage from IBM Infosphere. Purely technical
+				metadata (revealed through a hover tooltip!), no business metadata, and
+				difficult to read.
+			</p>
+		</TextAndImageBlock>
+		<TextAndImageBlock
+			browline="The after."
+			image={IBMTheAfter}
+			imageAlt=""
+		>
+			<p>
+				Put <strong>control of size and scope</strong> in the users’ hands. This
+				was achieved by surfacing the original sources of the data, and the end
+				consumers of it. Users can then choose how broadly to reveal the upstream
+				or downstream flow of data, and how granular they want their lineage to
+				be. They can even choose to filter down to the lineage of a specific
+				column in a dataset.
+			</p>
+		</TextAndImageBlock>
+	</CaseStudySection>
+	<CaseStudySection>
+		<SectionHeading title="Where did the idea come from?" number={3} />
+		<CaseStudyIntroText>
+			No single source gave us the Summary View. A competitor’s pattern, a freshly
+			filed patent, and an internal team’s diagram all three pointed at the same
+			problem and each one failed differently. The idea came from naming why all
+			three fell short.
+		</CaseStudyIntroText>
+		<CaseStudyDecisionCard
+			title="Synthesize three weak signals into one concept, rather than picking the closest match."
+			description="Collibra’s pattern, the pending patent, and the DevOps team’s diagram each solved one part of the problem — performance, clarity, or invitation to explore — and broke on the rest, so none of them was safe to adopt wholesale."
+			nonDecision="Adapt the closest existing pattern"
+			theDecision="A concept none of the three sources had shipped"
+			outcome="Won concept testing on both desirability and usability; became the pattern the rest of the product was built around."
+			internalSignals={[
+				[
+					"Team capacity and timeline",
+					"meant we couldn’t prototype three competing directions in parallel — we needed one synthesized hypothesis to test, not a bake-off.",
+				],
+				[
+					"IBM’s existing design system",
+					"already leaned toward progressive disclosure, so any concept that didn’t reduce visible complexity by default would have fought the system rather than used ",
+				],
+				[
+					"Patent exposure",
+					"was a live constraint: a concept too close to the filed patent’s “hide unless flagged” approach risked legal review eating into a tight build window.",
+				],
+			]}
+			externalSignals={[
+				[
+					"Collibra’s one-step-at-a-time expansion",
+					"managed performance but was tedious at our scale — 300+ steps meant users would click dozens of times to reach a source. That ruled out copying it directly.",
+				],
+				[
+					"The pending patent’s",
+					"“hide unless flagged” model reduced bloat but required a manual or automated flagging step — out of scope for an MVP and a dependency we didn’t control.",
+				],
+				[
+					"The DevOps team’s",
+					"grouped-diagram pattern invited exploration well but still required the same expensive backend queries to populate hidden counts — solving the UI problem without solving the performance problem.",
+				],
+				[
+					"Each of the three",
+					"solved one part of the problem (performance, clarity, or invitation to explore) and broke on another. Summary View’s two-tier structure — land on source/consumer only, drill in on demand — was the one combination that didn’t inherit any of the three failure modes.",
+				]
+			]}
+			fullOutcome="None of the three reference points could be adopted wholesale, but together they defined the shape of a solution that could: limit what’s rendered without manual flagging (unlike the patent), reach distant nodes without a tedious step-by-step click path (unlike Collibra), and avoid expensive backend queries on load (unlike the DevOps pattern). The Summary View was built to satisfy all three constraints at once, which is part of why it tested well immediately rather than going through several rounds of revision."
 		/>
 		<TextAndImageBlock
 			browline="From our competitor."
