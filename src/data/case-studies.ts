@@ -61,7 +61,7 @@ export const caseStudies: CaseStudyMeta[] = [
     thumbSummary:
       "Built a coded proof of concept AI agent that diagnosed and suggested fixes to data pipeline errors, helping data scientists and ML engineers reduce the cost of compute spend by $10k+ per day.",
     summary:
-      "Data Scientists felt guilty they couldn't help ML Engineers debug infrastructure problems in their data pipeline used to run an AI model. User research and a design workshop opened up new ways of thinking about product direction, starting with a RAG-powered AI assistant that reads logs and docs, then hands both roles a shared starting point. Built as a coded proof-of-concept, scoped for in-depth user testing.",
+      "Data Scientists felt guilty they couldn’t help ML Engineers debug infrastructure problems in their data pipeline used to run an AI model. User research and a design workshop opened up new ways of thinking about product direction, starting with a RAG-powered AI assistant that reads logs and docs, then hands both roles a shared starting point. Built as a coded proof-of-concept, scoped for in-depth user testing.",
     gridThumbImage: hpeThumb,
     summaryDetail:
       "Learning that our data scientist users <strong>felt guilty</strong> when not being able to support ML engineers with infrastructure issues (especially on small data science teams) might seem like a foot note to others. But to me, it reads as crucial opportunity being missed. The timing was right. Roadmap planning for the next quarter was coming up, and there was space for riskier projects.",
@@ -87,12 +87,12 @@ export const caseStudies: CaseStudyMeta[] = [
     ],
     tags: ["QuantaLyric", "BI Dashboard"],
     thumbSummary:
-      "A full-stack engagement designing the MVP, brand, and design system for QuantaLyric's DecisionSigma, an AI energy forecasting tool launching to Australian traders.",
+      "A full-stack engagement designing the MVP, brand, and design system for QuantaLyric’s DecisionSigma, an AI energy forecasting tool launching to Australian traders.",
     summary:
-      "QuantaLyric's energy traders were comparing their AI forecasts against government projections in a tool that didn't exist yet. I had 90 hours, one part-time developer, and a founder whose vision was three products wide. The job was to find the one thing that would get them funded and build only that.",
+      "QuantaLyric’s energy traders were comparing their AI forecasts against government projections in a tool that didn’t exist yet. I had 90 hours, one part-time developer, and a founder whose vision was three products wide. The job was to find the one thing that would get them funded and build only that.",
     gridThumbImage: qlThumb,
     summaryDetail:
-      "My client's grand vision was a unified surface for ML engineers, data scientists, and energy traders.",
+      "My client’s grand vision was a unified surface for ML engineers, data scientists, and energy traders.",
     theAsk:
       "Ship an MVP energy forecasting product, MLOps features to support the energy trader experience, and an investor-ready marketing site, in parallel.",
     theApproach:
