@@ -1,0 +1,17 @@
+{
+	"languages": {
+		"Astro": {
+			"language_servers": ["astro-language-server", "..."],
+			"formatter": "prettier",
+			"format_on_save": "on"
+		},
+		"TypeScript": {
+			"formatter": "prettier",
+			"format_on_save": "on"
+		},
+		"CSS": {
+			"formatter": "prettier",
+			"format_on_save": "on"
+		}
+	}
+}
