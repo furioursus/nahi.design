@@ -1,43 +1,74 @@
-# Astro Starter Kit: Minimal
+# nahi.design
 
-```sh
-npm create astro@latest -- --template minimal
+Nahi Kennedy-Nuñez's UX design portfolio — built with [Astro](https://astro.build), styled by hand, and put together with their developer spouse (hi, that's me 👋).
+
+Live at [nahi.design](https://www.nahi.design).
+
+## What's on the site
+
+**Home page** (`src/pages/index.astro`) stacks five sections top to bottom:
+
+1. **Hero** (`HomeHero`) — intro/landing section.
+2. **Case Studies** (`CaseStudies`) — a grid linking out to the three case study pages below.
+3. **How It's Built** (`HowItsBuilt`) — a fun behind-the-scenes card grid explaining the tools used to make the site (Claude, Notion, Figma, Windsurf... and "Spousal Privileges").
+4. **About Nahi** (`AboutNahi`) — bio blurb plus a grid of looping videos (woodworking, the pea puffer fish, Mercer Labs, their cat Dante).
+5. **Contact** (`Contact`) — short pitch, resume download button, and an email link.
+
+**Case study pages** (`src/pages/case-studies/*.astro`) — three in-depth write-ups, each using a shared `CaseStudyLayout`:
+
+- **IBM — Data Lineage** (`ibm-data-lineage`): redesigning IBM's data lineage tooling for watsonx. Red Dot Award winner.
+- **HPE — AI Troubleshooting Agent** (`hpe-ai-troubleshooting-agent`): a RAG-powered assistant proof-of-concept for debugging ML data pipelines.
+- **QuantaLyric — MVP** (`quantalyric-mvp`): scoping and shipping an MVP, brand, and design system for an AI energy-forecasting startup.
+
+Each case study page pulls its title/summary/status/tags from one shared source of truth — `src/data/case-studies.ts` — and composes it with per-page sections built from reusable blocks: `CaseStudySection`, `CaseStudyIntroText`, `CaseStudyStatCards`, `CaseStudyDecisionCard`, `TextAndImageBlock`, `Testimonial`, and friends.
+
+**Nav bar** (`NavBar`) — sticky header with a logo and a mobile menu toggle; on the home page it scroll-links to the sections above, on case study pages it links back home.
+
+## Project structure
+
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
-├── public/
+├── public/              → static files served as-is (favicon, resume PDF, videos, nav logo)
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── components/      → all the reusable Astro components listed above
+│   ├── data/
+│   │   └── case-studies.ts   → the case study content (titles, summaries, stats, copy)
+│   ├── img/              → images used inside case studies (optimized by Astro at build time)
+│   ├── video/             → the IBM case study hero video
+│   ├── layouts/
+│   │   ├── BaseLayout.astro       → shared <head>, fonts, SEO tags, nav
+│   │   └── CaseStudyLayout.astro  → shared case-study header/footer wrapper
+│   ├── pages/
+│   │   ├── index.astro                    → the home page
+│   │   └── case-studies/*.astro           → the three case study pages
+│   └── styles/            → global.css, reset.css, tokens.css (design tokens: color, spacing, type)
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Notable pieces under the hood
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- **Fonts**: Source Sans 3 (body) and Space Mono (headings/labels), loaded via `astro-font` from Google Fonts.
+- **SEO**: page titles, descriptions, and Open Graph tags are handled per-page via `astro-seo`.
+- **Icons**: `@twodft/astro-icon`.
+- **Email obfuscation**: `astro-mail-obfuscation` scrambles the `mailto:` links against scraper bots.
+- **Images**: everything in `src/img/` is processed by `sharp` at build time (Astro's built-in image optimization).
+- **View transitions**: Astro's `ClientRouter` gives page navigation a smooth transition (disabled in dev mode).
+- **Design tokens**: colors, spacing, and type scale live in `src/styles/tokens.css` — that's the single place to tweak the visual system.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Commands
 
-## 🧞 Commands
+Run from the project root:
 
-All commands are run from the root of the project, from a terminal:
+| Command           | Action                                       |
+| :----------------- | :-------------------------------------------- |
+| `npm install`       | Install dependencies                           |
+| `npm run dev`       | Start local dev server at `localhost:4321`     |
+| `npm run build`     | Build the production site to `./dist/`         |
+| `npm run preview`   | Preview the production build locally           |
+| `npm run astro ...` | Run any Astro CLI command (e.g. `astro check`) |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Requires Node.js ≥ 22.12.0.
 
-## 👀 Want to learn more?
+## Deployment
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Hosted on Netlify, deploying straight from this repo.
