@@ -71,4 +71,4 @@ Requires Node.js ≥ 22.12.0.
 
 ## Deployment
 
-Hosted on Netlify, deploying straight from this repo.
+Hosted on Netlify, deploying straight from this repo. A local Netlify Build Plugin (`plugins/telegram-notify/`, registered in `netlify.toml`) posts a Telegram message on every deploy success or failure — see [`docs/deploy-notifications.md`](docs/deploy-notifications.md) for how it's built and how to set up the bot on a new Netlify site.
