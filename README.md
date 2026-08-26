@@ -20,7 +20,7 @@ Live at [nahi.design](https://www.nahi.design).
 - **HPE — AI Troubleshooting Agent** (`hpe-ai-troubleshooting-agent`): a RAG-powered assistant proof-of-concept for debugging ML data pipelines.
 - **QuantaLyric — MVP** (`quantalyric-mvp`): scoping and shipping an MVP, brand, and design system for an AI energy-forecasting startup.
 
-Each case study page pulls its title/summary/status/tags from one shared source of truth — `src/data/case-studies.ts` — and composes it with per-page sections built from reusable blocks: `CaseStudySection`, `Description` (with `variant="case-study"`), `CaseStudyStatCards`, `CaseStudyDecisionCard`, `TextAndImageBlock`, `Testimonial`, and friends.
+Each case study page pulls its title/summary/status/tags from one shared source of truth — `src/data/case-studies.ts` — and composes it with per-page sections built from reusable blocks: `CaseStudySection`, `Description` (with `variant="case-study"`), `CaseStudyStatCards`, `CaseStudyDecisionCard`, `TextAndImageBlock`, `Testimonial`, and friends. Every screenshot rendered through `TextAndImageBlock` is click-to-zoom via a `LightboxImage`/`Lightbox` pair — see [`docs/lightbox.md`](docs/lightbox.md) for how it's built.
 
 **Nav bar** (`NavBar`) — sticky header with a logo and a mobile menu toggle; on the home page it scroll-links to the sections above, on case study pages it links back home. The active nav item on the home page tracks actual scroll position via `IntersectionObserver`, so it's correct whether you scroll there by hand or land on a section directly from a `#hash` link elsewhere on the site.
 

@@ -3,6 +3,7 @@ import { AstroFont } from "astro-font";
 import { SEO } from "astro-seo";
 import "@styles/global.css";
 import NavBar from "@components/NavBar.astro";
+import Lightbox from "@components/Lightbox.astro";
 
 interface Props {
 	title: string;
@@ -58,6 +59,7 @@ const DefaultOGImage = "https://www.nahi.design/img/og-image.png";
 	</head>
 	<body>
 		<NavBar />
+		<Lightbox />
 		<slot />
 		<script>
 			// See the comment on `html { scroll-behavior }` in global.css — this has to wait for the
