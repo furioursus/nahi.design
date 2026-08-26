@@ -65,6 +65,18 @@ const DefaultOGImage = "https://www.nahi.design/img/og-image.png";
 			window.addEventListener("load", () => {
 				document.documentElement.style.scrollBehavior = "smooth";
 			});
+
+			// [data-ambient] marks decorative autoplay/loop/muted videos (the About section's video
+			// grid, a case study hero) — none carry information a static frame can't. The site is
+			// static, so there's no server-side way to know a visitor's motion preference ahead of
+			// time; this is the client-side equivalent of just never setting `autoplay`. There's no
+			// `autoplay` attribute in the markup at all, so reduced-motion visitors never see so much
+			// as a flash of motion before it stops — the video simply never starts.
+			if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+				document
+					.querySelectorAll<HTMLVideoElement>("video[data-ambient]")
+					.forEach((video) => video.play().catch(() => {}));
+			}
 		</script>
 	</body>
 </html>
