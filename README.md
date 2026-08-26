@@ -22,7 +22,7 @@ Live at [nahi.design](https://www.nahi.design).
 
 Each case study page pulls its title/summary/status/tags from one shared source of truth — `src/data/case-studies.ts` — and composes it with per-page sections built from reusable blocks: `CaseStudySection`, `CaseStudyIntroText`, `CaseStudyStatCards`, `CaseStudyDecisionCard`, `TextAndImageBlock`, `Testimonial`, and friends.
 
-**Nav bar** (`NavBar`) — sticky header with a logo and a mobile menu toggle; on the home page it scroll-links to the sections above, on case study pages it links back home.
+**Nav bar** (`NavBar`) — sticky header with a logo and a mobile menu toggle; on the home page it scroll-links to the sections above, on case study pages it links back home. The active nav item on the home page tracks actual scroll position via `IntersectionObserver`, so it's correct whether you scroll there by hand or land on a section directly from a `#hash` link elsewhere on the site.
 
 ## Project structure
 
@@ -52,7 +52,6 @@ Each case study page pulls its title/summary/status/tags from one shared source 
 - **Icons**: `@twodft/astro-icon`.
 - **Email obfuscation**: `astro-mail-obfuscation` scrambles the `mailto:` links against scraper bots.
 - **Images**: everything in `src/img/` is processed by `sharp` at build time (Astro's built-in image optimization).
-- **View transitions**: Astro's `ClientRouter` gives page navigation a smooth transition (disabled in dev mode).
 - **Design tokens**: colors, spacing, and type scale live in `src/styles/tokens.css` — that's the single place to tweak the visual system.
 
 ## Commands

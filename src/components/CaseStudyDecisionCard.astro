@@ -287,11 +287,8 @@ const reasoningId = `reasoning-${crypto.randomUUID()}`;
 <script>
 	function setupReasoningButtons() {
 		document
-			.querySelectorAll<HTMLButtonElement>(
-				".reasoning-button:not([data-ready])",
-			)
+			.querySelectorAll<HTMLButtonElement>(".reasoning-button")
 			.forEach((button) => {
-				button.dataset.ready = "true";
 				button.addEventListener("click", () => {
 					const card = button.closest(".decision-card");
 					const content = card?.querySelector(".reasoning-content");
@@ -308,8 +305,5 @@ const reasoningId = `reasoning-${crypto.randomUUID()}`;
 			});
 	}
 
-	// Runs on client-side navigations (ClientRouter active in production)
-	document.addEventListener("astro:page-load", setupReasoningButtons);
-	// Runs on initial load and in dev mode (ClientRouter disabled)
 	setupReasoningButtons();
 </script>

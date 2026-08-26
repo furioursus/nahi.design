@@ -2,7 +2,15 @@
 @import "./tokens.css";
 
 html {
-  scroll-behavior: smooth;
+  /*
+   * Stays "auto" until BaseLayout's script flips it to "smooth" after the window's load event.
+   * Chrome (and others) silently skip the native scroll-to-#hash-on-load when scroll-behavior is
+   * already "smooth" at load time — landing on a URL like /#about-nahi just doesn't scroll there
+   * at all. Turning smooth on only after that native jump has had its chance keeps in-page nav
+   * clicks animated without breaking the very case they're meant to help (arriving at a section
+   * via a link from elsewhere).
+   */
+  scroll-behavior: auto;
 }
 
 /*
