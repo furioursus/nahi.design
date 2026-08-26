@@ -14,12 +14,7 @@ const { summaryDetail, theAsk, theApproach, theOutcome } = Astro.props;
 
 <div class="case-study-summary">
 	<SectionHeading title="Summary." number={1} />
-	<Description
-		fontFamily="var(--text-font-body)"
-		size="var(--text-base)"
-		color="var(--color-black-umber)"
-		margin="var(--space-4) var(--space-0) var(--space-16)"
-	>
+	<Description variant="case-study">
 		<span set:html={summaryDetail} />
 	</Description>
 	<ul class="ask-approach-outcome-grid inner-padding">

@@ -1,13 +1,12 @@
 ---
 interface Props {
-	marginAbove?: boolean;
 	classes?: string;
 }
 
-const { marginAbove, classes } = Astro.props;
+const { classes } = Astro.props;
 ---
 
-<div class:list={["caption", { "margin-above": marginAbove }, classes]}>
+<div class:list={["caption", classes]}>
 	<slot />
 </div>
 

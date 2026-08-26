@@ -4,7 +4,7 @@ import { caseStudies } from "@data/case-studies";
 const meta = caseStudies.find((s) => s.id === "quantalyric-mvp")!;
 import CaseStudySection from "@components/CaseStudySection.astro";
 import SectionHeading from "@components/SectionHeading.astro";
-import CaseStudyIntroText from "@components/CaseStudyIntroText.astro";
+import Description from "@components/Description.astro";
 import CaseStudyStatCards from "@components/CaseStudyStatCards.astro";
 import CaseStudyStatCard from "@components/CaseStudyStatCard.astro";
 import CaseStudyDecisionCard from "@components/CaseStudyDecisionCard.astro";
@@ -23,13 +23,13 @@ import TestimonialJosephPhoto from "@img/testimonial-joseph-nunez.jpg";
 <CaseStudyLayout nextUrl="/" nextUrlText="Return Home" {...meta}>
 	<CaseStudySection>
 		<SectionHeading title="Constraints, but not barriers." number={2} />
-		<CaseStudyIntroText>
+		<Description variant="case-study">
 			I had to translate this grand vision into a realistic and achievable goal.
 			They are a pre-seed startup with limited people, time, and
 			resources.Together we honed in on the one big idea that gets them funded:
 			state of the art AI/ML methodologies that produce more accurate
 			forecasting models.
-		</CaseStudyIntroText>
+		</Description>
 		<CaseStudyStatCards>
 			<CaseStudyStatCard value="90" label="Hours" />
 			<CaseStudyStatCard value="5" label="Projects" />
@@ -111,13 +111,13 @@ import TestimonialJosephPhoto from "@img/testimonial-joseph-nunez.jpg";
 	</CaseStudySection>
 	<CaseStudySection>
 		<SectionHeading title="Pushing on the value proposition." number={3} />
-		<CaseStudyIntroText>
+		<Description variant="case-study">
 			My client offers a more accurate prediction of energy demand and pricing
 			over the government issued projections. Visual clarity became a design
 			pillar because users would be comparing the two. This chart and the data
 			visualization work that followed (see next section) were the most
 			important hours spent from the 90-hour pool of my contract.
-		</CaseStudyIntroText>
+		</Description>
 		<CaseStudyDecisionCard
 			title="Redesign the reading experience for two competing forecasts, rather than display them side by side."
 			description="The government forecast wasn’t a simple line — it was 30–40 individual model runs, three summary lines, and a half-hour period x-axis that required mental math to read. Adding QuantaLyric’s forecast on top didn’t just create a visual problem; it created a literacy problem: users would need to understand both charts before they could trust the comparison."
@@ -194,11 +194,11 @@ import TestimonialJosephPhoto from "@img/testimonial-joseph-nunez.jpg";
 	</CaseStudySection>
 	<CaseStudySection>
 		<SectionHeading title="The tactical, and practical." number={4} />
-		<CaseStudyIntroText>
+		<Description variant="case-study">
 			Returning to the constraints of the project, with the limited resource we
 			had as a team. I had to make choices about where I would invest my
 			efforts.
-		</CaseStudyIntroText>
+		</Description>
 		<CaseStudyDecisionCard
 			title="Radix UI as the foundation, not a custom design system."
 			description="A bespoke system would have looked more distinctive on day one. I chose Radix as the foundation and kept custom work for the moments that actually carry the product."
@@ -300,7 +300,7 @@ import TestimonialJosephPhoto from "@img/testimonial-joseph-nunez.jpg";
 	</CaseStudySection>
 	<CaseStudySection paddingBottom>
 		<SectionHeading title="Lessons learned for the next time." number={5} />
-		<CaseStudyIntroText margin="var(--space-4) var(--space-0) var(--space-0)">
+		<Description variant="case-study" margin="var(--space-4) var(--space-0) var(--space-0)">
 			Putting together that limited color palette took far more time than I was
 			comfortable with. The commitment to using Radix’s color primitives was
 			likely a sunk cost fallacy on my part. If I were to do it again, I’d use a
@@ -309,6 +309,6 @@ import TestimonialJosephPhoto from "@img/testimonial-joseph-nunez.jpg";
 			rather than extending Radix’s primitives. The same instinct that cut the
 			MVP to one audience should have cut the color system to one source of
 			truth from the start.
-		</CaseStudyIntroText>
+		</Description>
 	</CaseStudySection>
 </CaseStudyLayout>

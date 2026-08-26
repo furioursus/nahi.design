@@ -5,7 +5,7 @@ const meta = caseStudies.find((s) => s.id === "hpe-ai-troubleshooting-agent")!;
 
 import CaseStudySection from "@components/CaseStudySection.astro";
 import SectionHeading from "@components/SectionHeading.astro";
-import CaseStudyIntroText from "@components/CaseStudyIntroText.astro";
+import Description from "@components/Description.astro";
 import CaseStudyStatCards from "@components/CaseStudyStatCards.astro";
 import CaseStudyStatCard from "@components/CaseStudyStatCard.astro";
 import CaseStudyDecisionCard from "@components/CaseStudyDecisionCard.astro";
@@ -33,7 +33,7 @@ import HPEUserWorkshopFeedback from "@img/hpe-user-workshop-feedback.png";
 	</div>
 	<CaseStudySection>
 		<SectionHeading title="Refrmaing our shared perspective" number={2} />
-		<CaseStudyIntroText>
+		<Description variant="case-study">
 			For years, there was a mad dash to create parity in technical capability
 			between our web app and our command line. This focus on CLI parity had the
 			unintended consequence of creating a preference towards ML engineers
@@ -41,7 +41,7 @@ import HPEUserWorkshopFeedback from "@img/hpe-user-workshop-feedback.png";
 			alienated a whole group of users, and blocked our land and expand business
 			strategy. If our ML engineer persona can’t convince their closest
 			partners, they wouldn’t convince other teams to adopt our product.
-		</CaseStudyIntroText>
+		</Description>
 		<CaseStudyStatCards heading="The business case" columnNumber={2}>
 			<CaseStudyStatCard
 				value="$10,000s/day"
@@ -116,13 +116,13 @@ import HPEUserWorkshopFeedback from "@img/hpe-user-workshop-feedback.png";
 	</CaseStudySection>
 	<CaseStudySection>
 		<SectionHeading title="Grooming a BHAG" number={3} />
-		<CaseStudyIntroText>
+		<Description variant="case-study">
 			I got started with behavioral design with my very first design job in 2017
 			which was in the healthcare sector. The decision to rework the docs was
 			correct, but has an unintended message of “this is how you get better at
 			using the product.” What we need for our data scientist persona is
 			experiences that say, “this is how we can support you in this moment.”
-		</CaseStudyIntroText>
+		</Description>
 		<CaseStudyDecisionCard
 			title="Run our workshop through a behavioral design lens, not a purely ideation one."
 			description="I used IBM’s Big Ideas exercise to weigh concepts — but I enriched it with the <strong>Behavioral Design Toolkit</strong> from the Illinois Institute of Technology. The pain we were solving was emotional (guilt, frustration), and a feature-cost-benefit lens alone would have missed that."
@@ -189,14 +189,14 @@ import HPEUserWorkshopFeedback from "@img/hpe-user-workshop-feedback.png";
 	</CaseStudySection>
 	<CaseStudySection>
 		<SectionHeading title="Proving it for real" number={4} />
-		<CaseStudyIntroText>
+		<Description variant="case-study">
 			With one week on the clock and a single developer as the only engineering
 			partner, the team faced a choice that would shape what the eventual user
 			test could actually measure: build something that looked real, or build
 			something that behaved like the real thing. Design is mostly judgment, not
 			pixels — and this was the highest-leverage judgment call left in the
 			project.
-		</CaseStudyIntroText>
+		</Description>
 		<CaseStudyDecisionCard
 			title="Ship a coded proof-of-concept, not a Figma prototype."
 			description="A clickable Figma would have tested layout and copy. I argued for a <strong>fully-coded PoC with a RAG model trained on real internal docs</strong> — because the user behaviors we needed to study only show up when the AI’s answers feel real, not scripted."
@@ -248,7 +248,7 @@ import HPEUserWorkshopFeedback from "@img/hpe-user-workshop-feedback.png";
 	</CaseStudySection>
 	<CaseStudySection paddingBottom>
 		<SectionHeading title="Lessons learned for the next time." number={5} />
-		<CaseStudyIntroText margin="var(--space-4) var(--space-0) var(--space-0)">
+		<Description variant="case-study" margin="var(--space-4) var(--space-0) var(--space-0)">
 			This project didn’t get the ending most case studies aim for. The PoC
 			shipped on a Friday; within the week, the entire AI Solutions department —
 			including this team — was laid off. The user testing that would have
@@ -263,6 +263,6 @@ import HPEUserWorkshopFeedback from "@img/hpe-user-workshop-feedback.png";
 			it. Good research outlives bad timing. The artifact didn’t get the chance to
 			prove itself, but the thinking behind it should have been built to survive the
 			team that built it.
-		</CaseStudyIntroText>
+		</Description>
 	</CaseStudySection>
 </CaseStudyLayout>

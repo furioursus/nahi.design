@@ -4,7 +4,7 @@ import { caseStudies } from "@data/case-studies";
 const meta = caseStudies.find((s) => s.id === "ibm-data-lineage")!;
 import CaseStudySection from "@components/CaseStudySection.astro";
 import SectionHeading from "@components/SectionHeading.astro";
-import CaseStudyIntroText from "@components/CaseStudyIntroText.astro";
+import Description from "@components/Description.astro";
 import CaseStudyStatCards from "@components/CaseStudyStatCards.astro";
 import CaseStudyStatCard from "@components/CaseStudyStatCard.astro";
 import CaseStudyDecisionCard from "@components/CaseStudyDecisionCard.astro";
@@ -57,11 +57,11 @@ import TestimonialLaurenPhoto from "@img/ibm-lauren-chen.jpg";
 	</div>
 	<CaseStudySection>
 		<SectionHeading title="Defining “Modern.”" number={2} />
-		<CaseStudyIntroText>
+		<Description variant="case-study">
 			Modern data structures are massive, and always changing. To be modern
 			meant addressing the volatility of changing data landscapes that slow down
 			a user’s ability to get answers to their most pressing questions.
-		</CaseStudyIntroText>
+		</Description>
 		<CaseStudyStatCards heading="The business case" columnNumber={2}>
 			<CaseStudyStatCard
 				value="Up to $23M"
@@ -141,12 +141,12 @@ import TestimonialLaurenPhoto from "@img/ibm-lauren-chen.jpg";
 	</CaseStudySection>
 	<CaseStudySection>
 		<SectionHeading title="Where did the idea come from?" number={3} />
-		<CaseStudyIntroText>
+		<Description variant="case-study">
 			No single source gave us the Summary View. A competitor’s pattern, a freshly
 			filed patent, and an internal team’s diagram all three pointed at the same
 			problem and each one failed differently. The idea came from naming why all
 			three fell short.
-		</CaseStudyIntroText>
+		</Description>
 		<CaseStudyDecisionCard
 			title="Synthesize three weak signals into one concept, rather than picking the closest match."
 			description="Collibra’s pattern, the pending patent, and the DevOps team’s diagram each solved one part of the problem — performance, clarity, or invitation to explore — and broke on the rest, so none of them was safe to adopt wholesale."
@@ -272,10 +272,10 @@ import TestimonialLaurenPhoto from "@img/ibm-lauren-chen.jpg";
 			title="A unified experience targeting deep pain points."
 			number={4}
 		/>
-		<CaseStudyIntroText>
+		<Description variant="case-study">
 			Three products — data catalog, data quality, and lineage — got folded into
 			one experience inside watsonx.
-		</CaseStudyIntroText>
+		</Description>
 		<CaseStudyDecisionCard
 			title="Generalize the lineage model beyond the mandate, rather than let four other teams rebuild it separately."
 			description="Leadership had mandated folding lineage into watsonx alongside Catalog and Quality. What wasn’t mandated was that ETL, the AI model team, and others would come asking for the same logic, for data that looked nothing like ING’s banking transactions."
@@ -352,11 +352,11 @@ import TestimonialLaurenPhoto from "@img/ibm-lauren-chen.jpg";
 	</CaseStudySection>
 	<CaseStudySection>
 		<SectionHeading title="Filling out the other requirements." number={5} />
-		<CaseStudyIntroText>
+		<Description variant="case-study">
 			Novel as the Summary View was, it didn’t satisfy every requirement of a
 			full product experience. To round out the product, I facilitated regular
 			design workshops with our business partners to flesh out all the details.
-		</CaseStudyIntroText>
+		</Description>
 		<CaseStudyDecisionCard
 			title="Bi-weekly co-creation with ING, State Street, and Rabobank."
 			description="Standard research would have meant interviews up front, then designing in a vacuum, then testing at the end. I proposed <strong>recurring co-creation</strong> with three named enterprise clients instead — generating and testing solutions in the same loop."
@@ -420,7 +420,7 @@ import TestimonialLaurenPhoto from "@img/ibm-lauren-chen.jpg";
 	</CaseStudySection>
 	<CaseStudySection paddingBottom>
 		<SectionHeading title="Lessons learned for the next time." number={6} />
-		<CaseStudyIntroText margin="var(--space-4) var(--space-0) var(--space-0)">
+		<Description variant="case-study" margin="var(--space-4) var(--space-0) var(--space-0)">
 			The most difficult part of this project was ensuring that there was
 			alignment on every decision. Meetings were frequently derailed by
 			retreading old decisions. While it was necessary sometimes, I often found
@@ -431,7 +431,7 @@ import TestimonialLaurenPhoto from "@img/ibm-lauren-chen.jpg";
 			that mattered more than usual on a project where I was designing for
 			durability under deadline pressure, knowing the backlog would outlive my
 			own time at IBM.
-		</CaseStudyIntroText>
+		</Description>
 	</CaseStudySection>
 </CaseStudyLayout>
 

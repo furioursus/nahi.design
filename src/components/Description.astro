@@ -1,21 +1,42 @@
 ---
+// Two preset looks, picked by `variant`, each overridable per-prop. "hero" (the default) is the
+// smaller, heading-font body copy used for hero/about blurbs; "case-study" is the larger,
+// body-font paragraph style used for case study intro text — this component used to be forked
+// into a separate CaseStudyIntroText.astro for that variant, differing only in these defaults.
+const VARIANT_DEFAULTS = {
+	hero: {
+		font: "var(--text-font-heading)",
+		size: "var(--text-sm)",
+		color: "var(--color-rampart)",
+		margin: "var(--space-0)",
+	},
+	"case-study": {
+		font: "var(--text-font-body)",
+		size: "var(--text-base)",
+		color: "var(--color-black-umber)",
+		margin: "var(--space-4) var(--space-0) var(--space-16)",
+	},
+};
+
 interface Props {
+	variant?: keyof typeof VARIANT_DEFAULTS;
 	fontFamily?: string;
 	color?: string;
 	margin?: string;
 	size?: string;
 }
 
-const { fontFamily, color, margin, size } = Astro.props;
+const { variant = "hero", fontFamily, color, margin, size } = Astro.props;
+const defaults = VARIANT_DEFAULTS[variant];
 ---
 
 <p
 	class="description"
 	style={{
-		"--desc-font": fontFamily,
-		"--desc-color": color,
-		"--desc-margin": margin,
-		"--desc-size": size,
+		"--desc-font": fontFamily ?? defaults.font,
+		"--desc-color": color ?? defaults.color,
+		"--desc-margin": margin ?? defaults.margin,
+		"--desc-size": size ?? defaults.size,
 	}}
 >
 	<slot />
@@ -23,11 +44,11 @@ const { fontFamily, color, margin, size } = Astro.props;
 
 <style>
 	.description {
-		font-family: var(--desc-font, var(--text-font-heading));
-		font-size: var(--desc-size, var(--text-sm));
-		color: var(--desc-color, var(--color-rampart));
+		font-family: var(--desc-font);
+		font-size: var(--desc-size);
+		color: var(--desc-color);
 		line-height: var(--line-height-normal);
-		margin: var(--desc-margin, var(--space-0));
+		margin: var(--desc-margin);
 		max-width: 35rem;
 	}
 </style>
