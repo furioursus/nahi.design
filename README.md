@@ -11,7 +11,7 @@ Live at [nahi.design](https://www.nahi.design).
 1. **Hero** (`HomeHero`) — intro/landing section.
 2. **Case Studies** (`CaseStudies`) — a grid linking out to the three case study pages below.
 3. **How It's Built** (`HowItsBuilt`) — a fun behind-the-scenes card grid explaining the tools used to make the site (Claude, Notion, Figma, Windsurf... and "Spousal Privileges").
-4. **About Nahi** (`AboutNahi`) — bio blurb plus a grid of looping videos (woodworking, the pea puffer fish, Mercer Labs, their cat Dante).
+4. **About Nahi** (`AboutNahi`) — bio blurb plus a grid of looping, click-to-zoom videos (woodworking, the pea puffer fish, Mercer Labs, their cat Dante).
 5. **Contact** (`Contact`) — short pitch, resume download button, and an email link.
 
 **Case study pages** (`src/pages/case-studies/*.astro`) — three in-depth write-ups, each using a shared `CaseStudyLayout`:
@@ -20,7 +20,7 @@ Live at [nahi.design](https://www.nahi.design).
 - **HPE — AI Troubleshooting Agent** (`hpe-ai-troubleshooting-agent`): a RAG-powered assistant proof-of-concept for debugging ML data pipelines.
 - **QuantaLyric — MVP** (`quantalyric-mvp`): scoping and shipping an MVP, brand, and design system for an AI energy-forecasting startup.
 
-Each case study page pulls its title/summary/status/tags from one shared source of truth — `src/data/case-studies.ts` — and composes it with per-page sections built from reusable blocks: `CaseStudySection`, `Description` (with `variant="case-study"`), `CaseStudyStatCards`, `CaseStudyDecisionCard`, `TextAndImageBlock`, `Testimonial`, and friends. Every screenshot rendered through `TextAndImageBlock` is click-to-zoom via a `LightboxImage`/`Lightbox` pair — see [`docs/lightbox.md`](docs/lightbox.md) for how it's built.
+Each case study page pulls its title/summary/status/tags from one shared source of truth — `src/data/case-studies.ts` — and composes it with per-page sections built from reusable blocks: `CaseStudySection`, `Description` (with `variant="case-study"`), `CaseStudyStatCards`, `CaseStudyDecisionCard`, `TextAndImageBlock`, `Testimonial`, and friends. Every screenshot rendered through `TextAndImageBlock` is click-to-zoom via `LightboxImage`, and the About section's videos get the same treatment via `LightboxVideo` — both driven by one shared `Lightbox` custom element; see [`docs/lightbox.md`](docs/lightbox.md) for how it's built.
 
 **Nav bar** (`NavBar`) — sticky header with a logo and a mobile menu toggle; on the home page it scroll-links to the sections above, on case study pages it links back home. The active nav item on the home page tracks actual scroll position via `IntersectionObserver`, so it's correct whether you scroll there by hand or land on a section directly from a `#hash` link elsewhere on the site.
 
@@ -53,7 +53,7 @@ Each case study page pulls its title/summary/status/tags from one shared source 
 - **Email obfuscation**: `astro-mail-obfuscation` scrambles the `mailto:` links against scraper bots.
 - **Images**: everything in `src/img/` is processed by `sharp` at build time (Astro's built-in image optimization).
 - **Design tokens**: colors, spacing, and type scale live in `src/styles/tokens.css` — that's the single place to tweak the visual system.
-- **Reduced motion**: the looping "About" videos and the IBM case study's hero video (marked `data-ambient`) only autoplay when the visitor hasn't set `prefers-reduced-motion` — handled client-side in `BaseLayout`, since a static site has no server-side way to know that preference ahead of time.
+- **Reduced motion**: the looping "About" videos and the IBM case study's hero video (marked `data-ambient`) only autoplay when the visitor hasn't set `prefers-reduced-motion` — handled client-side in `BaseLayout`, since a static site has no server-side way to know that preference ahead of time. Opening one of the About videos in the lightbox plays it regardless (a deliberate click, not forced motion), then hands the preference back once closed.
 
 ## Commands
 

@@ -1,48 +1,59 @@
 ---
 // Ported from furioursus/furioursus.dev's Lightbox.astro — this repo has no markdown/blog
-// pipeline, so only the explicit-usage half made the trip (see LightboxImage.astro). Behavior is
-// otherwise unchanged: registers the <lightbox-image> custom element and moves (not clones) the
-// image into the dialog on open, so it's the same already-loaded element, no extra request.
-// Included once, globally, in BaseLayout.astro.
+// pipeline, so only the explicit-usage half made the trip (see LightboxImage.astro and
+// LightboxVideo.astro). Behavior is otherwise unchanged: registers the <lightbox-media> custom
+// element and moves (not clones) the image/video into the dialog on open, so it's the same
+// already-loaded element, no extra request. Included once, globally, in BaseLayout.astro.
 ---
 
 <script>
-	class LightboxImage extends HTMLElement {
+	class LightboxMedia extends HTMLElement {
 		connectedCallback() {
 			const trigger = this.querySelector<HTMLButtonElement>(":scope > .lightbox-trigger");
 			const dialog = this.querySelector<HTMLDialogElement>(":scope > dialog.lightbox-dialog");
 			const closeButton = dialog?.querySelector<HTMLButtonElement>(".lightbox-close");
-			const triggerImg = trigger?.querySelector("img");
+			const triggerMedia = trigger?.querySelector<HTMLImageElement | HTMLVideoElement>(
+				"img, video",
+			);
 			// Usually the dialog starts with no <img> of its own — the trigger's gets moved in on
 			// open (see below). But when LightboxImage.astro was given explicit width/height, the
 			// dialog is pre-rendered with its own separate, full-resolution <img> instead: astro:assets
 			// generates a real resized (and possibly cropped) file for the thumbnail, so there's no way
 			// to "un-shrink" it by moving it. In that case leave it alone; there's nothing to move.
+			// (Video never hits this — LightboxVideo.astro has no equivalent separate-dialog-video.)
 			const dialogOwnImg = dialog?.querySelector("img");
 
-			if (!trigger || !dialog || !triggerImg) {
-				console.warn("Lightbox: missing trigger, dialog, or image element");
+			if (!trigger || !dialog || !triggerMedia) {
+				console.warn("Lightbox: missing trigger, dialog, or media element");
 				return;
 			}
 
 			trigger.addEventListener("click", () => {
 				if (!dialogOwnImg) {
-					// Move (not clone) the image into the dialog — same element, same already-loaded
-					// src, no extra request. Inserted before the dialog's own caption (if any) so the
-					// image renders above it, not below.
+					// Move (not clone) the media into the dialog — same element, same already-loaded
+					// src (and, for video, playback position/decode state), no extra request. Inserted
+					// before the dialog's own caption (if any) so it renders above it, not below.
 					const dialogCaption = dialog.querySelector(".lightbox-caption");
 					if (dialogCaption) {
-						dialog.insertBefore(triggerImg, dialogCaption);
+						dialog.insertBefore(triggerMedia, dialogCaption);
 					} else {
-						dialog.appendChild(triggerImg);
+						dialog.appendChild(triggerMedia);
 					}
 				}
 				dialog.showModal();
+				// An ambient video (BaseLayout's prefers-reduced-motion handling) may already be
+				// paused, frozen on its first frame, in the grid. Opening the lightbox is a
+				// deliberate action, so it plays here regardless of that preference — the
+				// reduced-motion visitor still gets to choose to see the motion, just not have it
+				// forced on them in the grid.
+				if (triggerMedia instanceof HTMLVideoElement && triggerMedia.hasAttribute("data-ambient")) {
+					triggerMedia.play().catch(() => {});
+				}
 			});
 
 			closeButton?.addEventListener("click", () => dialog.close());
 
-			// Click on the backdrop (outside the image) closes the dialog.
+			// Click on the backdrop (outside the media) closes the dialog.
 			dialog.addEventListener("click", (e) => {
 				if (e.target === dialog) dialog.close();
 			});
@@ -50,12 +61,21 @@
 			// Fires uniformly for Escape, the close button, and backdrop clicks.
 			dialog.addEventListener("close", () => {
 				if (!dialogOwnImg) {
-					trigger.appendChild(triggerImg);
+					trigger.appendChild(triggerMedia);
+				}
+				// Restore the grid's reduced-motion-respecting paused state now that it's back —
+				// the preference should hold everywhere except the deliberate, just-closed view.
+				if (
+					triggerMedia instanceof HTMLVideoElement &&
+					triggerMedia.hasAttribute("data-ambient") &&
+					window.matchMedia("(prefers-reduced-motion: reduce)").matches
+				) {
+					triggerMedia.pause();
 				}
 				trigger.focus();
 			});
 		}
 	}
 
-	customElements.define("lightbox-image", LightboxImage);
+	customElements.define("lightbox-media", LightboxMedia);
 </script>

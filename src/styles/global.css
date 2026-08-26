@@ -200,5 +200,9 @@ em {
     opacity: 0.5;
     background-size: cover;
     z-index: 2;
+    /* Purely decorative — never mattered before since nothing beneath it was clickable, but it
+       sits above the video in paint order, so without this it would swallow clicks meant for the
+       lightbox trigger button underneath. */
+    pointer-events: none;
   }
 }

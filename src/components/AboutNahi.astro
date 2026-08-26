@@ -1,6 +1,7 @@
 ---
 import Caption from "./Caption.astro";
 import Description from "./Description.astro";
+import LightboxVideo from "./LightboxVideo.astro";
 const videos = [
 	{ src: "/video/woodworking.mp4", label: "Shaping a piece of wood by hand" },
 	{
@@ -30,15 +31,7 @@ const videos = [
 				{
 					videos.map(({ src, label }) => (
 					<div class="video-pixel">
-						<video
-							data-ambient
-							muted
-							playsinline
-							loop
-							aria-label={label}
-						>
-							<source src={src} type="video/mp4" />
-						</video>
+						<LightboxVideo src={src} label={label} />
 					</div>
 				))
 				}
@@ -76,7 +69,20 @@ const videos = [
 			margin-top: var(--space-40);
 		}
 	}
-	video {
+	/*
+	 * LightboxVideo renders its own <lightbox-media>/<video> inside a child component's own style
+	 * scope, not this one — see docs/lightbox.md's note on the same issue in TextAndImageBlock.
+	 * :global() reaches past that scope boundary deliberately.
+	 */
+	.video-pixel :global(lightbox-media) {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+	.video-pixel :global(.lightbox-trigger) {
+		height: 100%;
+	}
+	.video-pixel :global(.lightbox-trigger video) {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;

@@ -1,0 +1,172 @@
+---
+// Video counterpart to LightboxImage.astro — same click/Enter/Space-to-enlarge behavior, driven
+// by the same globally-registered <lightbox-media> custom element in Lightbox.astro. Muted,
+// autoplay, loop, no controls in both the thumbnail and the enlarged view (matching this site's
+// other ambient video treatment) — see docs/lightbox.md.
+interface Props {
+	src: string;
+	/** aria-label — these are ambient/decorative clips, not narrative content. */
+	label: string;
+	/** `true` shows `label` as a caption below the video; a string shows that instead;
+	 * omitted/false shows no caption. Shown under both the thumbnail and the enlarged view. */
+	caption?: string | boolean;
+	class?: string;
+}
+
+const { src, label, caption, class: className } = Astro.props;
+const captionText = caption === true ? label : caption || undefined;
+---
+
+<lightbox-media class:list={["lightbox", className]}>
+	<button type="button" class="lightbox-trigger" aria-haspopup="dialog">
+		<video data-ambient muted playsinline loop aria-label={label}>
+			<source src={src} type="video/mp4" />
+		</video>
+	</button>
+	{captionText && <p class="lightbox-caption">{captionText}</p>}
+	<dialog class="lightbox-dialog">
+		<button type="button" class="lightbox-close" aria-label="Close video"></button>
+		{captionText && <p class="lightbox-caption">{captionText}</p>}
+	</dialog>
+</lightbox-media>
+
+<style>
+	lightbox-media {
+		display: inline-block;
+	}
+
+	.lightbox-trigger {
+		display: block;
+		width: 100%;
+		cursor: zoom-in;
+
+		video {
+			display: block;
+			margin: 0;
+			border-radius: var(--rounded-edge-heavy);
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	.lightbox-dialog {
+		margin: auto;
+		max-height: 90vh;
+		max-width: 90vw;
+		border: none;
+		background: transparent;
+		padding: 0;
+		/* See LightboxImage.astro's comment on the same rule — shrink-wraps to the video's own
+		   rendered size rather than a fixed 90vh/90vw box, so the close button and click-outside
+		   both land where the visible video actually is. */
+		width: fit-content;
+		height: fit-content;
+
+		/* Open/close bounce — identical to LightboxImage.astro's; see its comments for the
+		   allow-discrete/@starting-style reasoning. */
+		opacity: 0;
+		transform: scale(0.92);
+		transition:
+			opacity 0.15s ease-in,
+			transform 0.15s ease-in,
+			overlay 0.15s allow-discrete,
+			display 0.15s allow-discrete;
+
+		&[open] {
+			opacity: 1;
+			transform: scale(1);
+			transition:
+				opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+				transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+				overlay 0.3s allow-discrete,
+				display 0.3s allow-discrete;
+		}
+
+		@starting-style {
+			&[open] {
+				opacity: 0;
+				transform: scale(0.92);
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+			&[open] {
+				transition: none;
+			}
+		}
+
+		&::backdrop {
+			background-color: color-mix(in srgb, var(--color-black-umber) 80%, transparent);
+			backdrop-filter: blur(4px);
+			opacity: 0;
+			transition:
+				opacity 0.15s ease-in,
+				overlay 0.15s allow-discrete,
+				display 0.15s allow-discrete;
+		}
+
+		&[open]::backdrop {
+			opacity: 1;
+			transition: opacity 0.3s ease-out;
+		}
+
+		@starting-style {
+			&[open]::backdrop {
+				opacity: 0;
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			&::backdrop,
+			&[open]::backdrop {
+				transition: none;
+			}
+		}
+
+		video {
+			display: block;
+			margin: 0;
+			cursor: zoom-out;
+			border-radius: var(--rounded-edge-heavy);
+			max-width: 90vw;
+			max-height: calc(90vh - 3rem);
+			width: auto;
+			height: auto;
+		}
+	}
+
+	.lightbox-caption {
+		margin-top: var(--space-2);
+		text-align: center;
+		font-family: var(--text-font-body);
+		font-size: var(--text-sm);
+		color: var(--color-dovetail);
+		/* See LightboxImage.astro's comment on the same rule. */
+		width: 0;
+		min-width: 100%;
+	}
+
+	.lightbox-close {
+		position: absolute;
+		top: var(--space-2);
+		right: var(--space-2);
+		z-index: 10;
+		height: var(--space-8);
+		width: var(--space-8);
+		padding: var(--space-2);
+		cursor: pointer;
+		border-radius: 50%;
+		background-color: color-mix(in srgb, var(--color-black-umber) 80%, transparent);
+
+		&::before {
+			content: "";
+			display: block;
+			height: 100%;
+			width: 100%;
+			background-color: var(--color-crystal-cut);
+			mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z'/%3E%3C/svg%3E")
+				center / 60% no-repeat;
+		}
+	}
+</style>

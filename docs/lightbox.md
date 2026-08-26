@@ -1,20 +1,24 @@
 # Lightbox
 
-Click, Enter, or Space on an image to see it enlarged in a modal. Ported from [furioursus/furioursus.dev's lightbox](https://github.com/furioursus/furioursus.dev/tree/main/docs/lightbox.md) — this site has no markdown/blog content pipeline, so only the explicit-usage half made the trip; the reasoning behind the trickier CSS decisions is unchanged from the original, reproduced below.
+Click, Enter, or Space on an image or video to see it enlarged in a modal. Ported from [furioursus/furioursus.dev's lightbox](https://github.com/furioursus/furioursus.dev/tree/main/docs/lightbox.md) — this site has no markdown/blog content pipeline, so only the explicit-usage half made the trip; the reasoning behind the trickier CSS decisions is unchanged from the original, reproduced below. Video support (`LightboxVideo.astro`) doesn't exist in the source repo — it was added here for the About section's video grid.
 
 ## How it's built
 
-Two pieces, plus one usage site:
+Three pieces, plus two usage sites:
 
-- **`src/components/Lightbox.astro`** — script-only, no markup of its own. Defines and registers the `<lightbox-image>` custom element. Included once, globally, in `BaseLayout.astro`, so it's live on every page.
+- **`src/components/Lightbox.astro`** — script-only, no markup of its own. Defines and registers the `<lightbox-media>` custom element. Included once, globally, in `BaseLayout.astro`, so it's live on every page.
 
-  Behavior on `connectedCallback`: find the trigger button, dialog, and close button inside `this`; clicking the trigger **moves** (not clones) the `<img>` node into the `<dialog>` and calls `showModal()` — same element, same already-loaded `src`/`srcset`, zero extra network request. Closing (Escape, the close button, or a backdrop click) all funnel through the dialog's native `close` event, which moves the image back to the trigger and restores focus.
+  Behavior on `connectedCallback`: find the trigger button, dialog, and close button inside `this`; clicking the trigger **moves** (not clones) the `<img>`/`<video>` node into the `<dialog>` and calls `showModal()` — same element, same already-loaded `src`/`srcset` (and, for video, playback position/decode state), zero extra network request. Closing (Escape, the close button, or a backdrop click) all funnel through the dialog's native `close` event, which moves the media back to the trigger and restores focus.
 
-- **`src/components/LightboxImage.astro`** — the explicit, customizable component: import it directly in a `.astro` file wherever an image needs a crop/size beyond the default. Renders the trigger/dialog markup `Lightbox.astro`'s custom element expects, plus its own scoped `<style>` (the thumbnail's crop/size is driven by CSS custom properties with defaults, so a bare `<LightboxImage src={x} alt="y" />` renders identically to what passing no props at all would give you).
+  For a video carrying `data-ambient` (this site's marker for the `prefers-reduced-motion`-respecting videos — see the README's Reduced Motion note): opening the lightbox calls `.play()` regardless of that preference, since a deliberate click is different from the grid's forced autoplay; closing re-`.pause()`s it if the preference is still active, so the grid goes back to how the visitor left it rather than picking up motion it never asked to see there.
+
+- **`src/components/LightboxImage.astro`** — the explicit, customizable image component: import it directly in a `.astro` file wherever an image needs a crop/size beyond the default. Renders the trigger/dialog markup `Lightbox.astro`'s custom element expects, plus its own scoped `<style>` (the thumbnail's crop/size is driven by CSS custom properties with defaults, so a bare `<LightboxImage src={x} alt="y" />` renders identically to what passing no props at all would give you).
 
   See the props table and JSDoc comments in the file itself for the full API (`fit`, `thumbWidth`/`thumbHeight`, `aspectRatio`, `caption`, `width`/`height` for a separate full-resolution dialog image, `priority`).
 
-- **`src/components/TextAndImageBlock.astro`** — the current real usage site. Every case study screenshot/diagram passed through this component is click-to-zoom for free.
+- **`src/components/LightboxVideo.astro`** — the video counterpart, for local `.mp4` sources. Deliberately smaller prop surface than `LightboxImage` (`src`, `label`, `caption`, `class`) — there's no `astro:assets`-style resizing pipeline for video on this site, so none of `LightboxImage`'s crop/dimension props have an equivalent here. Always muted/autoplay/loop/no-controls in both the thumbnail and the enlarged view, matching this site's other ambient video treatment.
+
+- **`src/components/TextAndImageBlock.astro`** and **`src/components/AboutNahi.astro`** — the current real usage sites. Every case study screenshot/diagram passed through `TextAndImageBlock`, and every video in the About section's grid, is click-to-zoom for free.
 
 ## Three CSS rules that are load-bearing, all found the hard way
 
@@ -32,10 +36,14 @@ If the enlarged image is ever visibly distorted, or the close button drifts away
 - **`@starting-style { &[open] { ... } }`** supplies the "from" state for the _opening_ animation. Without it there's no starting point to transition from, so the dialog would just appear at its final opacity/scale — same instant-snap symptom, but on open instead of close.
 - Unsupported browsers (`@starting-style`/`allow-discrete` need a roughly 2024-or-later engine) fall back to the old instant show/hide — this is pure progressive enhancement, nothing to guard in JS.
 
-## The scoping gotcha in TextAndImageBlock.astro
+## The scoping gotcha in TextAndImageBlock.astro and AboutNahi.astro
 
-`TextAndImageBlock.astro` used to style the case study image directly with a plain `img` selector inside its own `<style>` block, back when it rendered a bare `astro:assets Image`. Swapping that for `<LightboxImage>` broke those rules silently — Astro's scoped CSS stamps a `data-astro-cid-*` attribute onto elements as they're rendered by whichever component's own template produced them, and `LightboxImage.astro`'s `<img>` is produced by _its_ template, not `TextAndImageBlock.astro`'s — confirmed by inspecting the built HTML directly (the trigger `<img>` carries `LightboxImage`'s cid, never `TextAndImageBlock`'s). A same-named `img` selector in `TextAndImageBlock.astro`'s own scoped styles compiles with `TextAndImageBlock`'s cid attached and just never matches that element.
+Both components used to style their media directly with a plain `img`/`video` selector inside their own `<style>` block, back when they rendered a bare `astro:assets Image` / `<video>`. Swapping those for `<LightboxImage>`/`<LightboxVideo>` broke those rules silently — Astro's scoped CSS stamps a `data-astro-cid-*` attribute onto elements as they're rendered by whichever component's own template produced them, and the `<img>`/`<video>` is produced by the Lightbox component's own template, not the parent's — confirmed by inspecting the built HTML directly (the trigger's media carries the Lightbox component's cid, never the parent's). A same-named `img`/`video` selector in the parent's own scoped styles compiles with the parent's cid attached and just never matches that element.
 
-The fix is `:global()`, wrapping only the part of the selector that needs to reach past the child component's scope boundary — `.image.has-ratio :global(.lightbox-trigger img) { ... }` stays scoped on `.image`/`.has-ratio` (`TextAndImageBlock`'s own wrapper divs) while matching the trigger/image regardless of which component rendered them. Verified by inspecting the compiled CSS output directly rather than assuming: the `:global()`'d selectors carry more classes than `LightboxImage`'s own rules for the same properties, so they reliably win the cascade without needing `!important`.
+The fix is `:global()`, wrapping only the part of the selector that needs to reach past the child component's scope boundary — e.g. `.image.has-ratio :global(.lightbox-trigger img) { ... }` stays scoped on `.image`/`.has-ratio` (the parent's own wrapper divs) while matching the trigger/media regardless of which component rendered them. Verified by inspecting the compiled CSS output directly rather than assuming: the `:global()`'d selectors carry more classes than the Lightbox component's own rules for the same properties, so they reliably win the cascade without needing `!important`.
 
 This is the general shape of the problem any future "style a child component's internals from the parent" situation on this site will run into — worth remembering the pattern rather than rediscovering it.
+
+## The pointer-events gotcha in AboutNahi's video grid
+
+`.video-pixel`'s decorative pixel-pattern texture (`global.css`, an unscoped `::after` overlay, `position: absolute; z-index: 2`, covering the full tile) predates the lightbox and never needed `pointer-events: none` — nothing beneath it was ever clickable. Wrapping the grid's videos in a `<LightboxVideo>` trigger button introduced something worth clicking underneath that overlay for the first time, and the overlay's higher z-index means it paints (and hit-tests) above the button regardless of the button itself being non-positioned. Added `pointer-events: none` to the overlay rule pre-emptively and verified the click actually reaches the trigger afterward with `document.elementFromPoint()` on the tile's center (returns the `<video>` element, confirming it's not intercepted). Worth checking for the same issue on any future decorative overlay that ends up sitting above new interactive content.
