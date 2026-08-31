@@ -93,7 +93,7 @@ const reasoningId = `reasoning-${crypto.randomUUID()}`;
 
 <style>
 	.decision-card-wrapper {
-		@media screen and (min-width: 48rem) {
+		@media screen and (--bp-md) {
 			grid-column: span 2;
 		}
 	}
@@ -105,7 +105,7 @@ const reasoningId = `reasoning-${crypto.randomUUID()}`;
 
 	.decision-content {
 		padding: var(--space-8);
-		@media screen and (min-width: 48rem) {
+		@media screen and (--bp-md) {
 			padding-left: var(--space-24);
 		}
 	}
@@ -115,7 +115,7 @@ const reasoningId = `reasoning-${crypto.randomUUID()}`;
 		letter-spacing: var(--letter-spacing-tight);
 	}
 
-	@media screen and (min-width: 48rem) {
+	@media screen and (--bp-md) {
 		.lead-item {
 			position: relative;
 			&::before {
@@ -124,7 +124,7 @@ const reasoningId = `reasoning-${crypto.randomUUID()}`;
 				width: var(--space-3);
 				height: var(--space-3);
 				background-color: var(--color-bowstring);
-				border-radius: 100%;
+				border-radius: 50%;
 				position: absolute;
 				left: -50px;
 				top: calc(50% - var(--space-3) / 2);
@@ -169,7 +169,7 @@ const reasoningId = `reasoning-${crypto.randomUUID()}`;
 			width: 100%;
 			height: var(--space-px-rem);
 			background-color: var(--color-dovetail);
-			border-radius: 100%;
+			border-radius: 50%;
 			position: absolute;
 			left: 0;
 			top: calc(50% - var(--space-px-rem) / 2);
@@ -241,7 +241,7 @@ const reasoningId = `reasoning-${crypto.randomUUID()}`;
 	}
 
 	.reasoning-text {
-		@media screen and (min-width: 48rem) {
+		@media screen and (--bp-md) {
 			padding-left: var(--space-16);
 		}
 	}

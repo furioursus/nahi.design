@@ -13,12 +13,12 @@ const { paddingBottom } = Astro.props;
 <style>
 	section {
 		padding: var(--space-10) 0;
-		@media screen and (min-width: 64rem) {
+		@media screen and (--bp-xl) {
 			padding: var(--space-20) 0;
 		}
 		&.padding-bottom-huge {
 			padding-bottom: var(--space-40);
-			@media screen and (min-width: 64rem) {
+			@media screen and (--bp-xl) {
 				padding-bottom: var(--space-80);
 			}
 		}

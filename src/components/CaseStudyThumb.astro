@@ -25,7 +25,7 @@ const {
 
 <a class="case-study-thumb" href={href}>
 	<div class="content">
-		<div class="meta">
+		<div class="meta eyebrow">
 			<div class="info-list">
 				{
 					info.map((item, idx) => (
@@ -59,7 +59,7 @@ const {
 		color: inherit;
 		border: 1px solid var(--color-bowstring);
 		padding: var(--space-6);
-		@media screen and (min-width: 48rem) {
+		@media screen and (--bp-md) {
 			border-color: transparent;
 			box-shadow: none;
 			border-radius: var(--rounded-edge);
@@ -69,7 +69,7 @@ const {
 
 			&:hover {
 				border: 1px solid var(--color-bowstring);
-				box-shadow: 0px 2px 6px 6px #1c191608;
+				box-shadow: var(--shadow-hover);
 			}
 		}
 	}
@@ -100,13 +100,10 @@ const {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		font-family: var(--text-font-heading);
-		font-size: var(--text-2xs);
 		font-weight: var(--weight-medium);
-		letter-spacing: var(--letter-spacing-loose);
 		color: var(--color-oubliette);
 		margin-bottom: var(--space-4);
-		@media screen and (min-width: 80rem) {
+		@media screen and (--bp-2xl) {
 			align-items: center;
 			flex-direction: row;
 		}
@@ -118,7 +115,7 @@ const {
 		align-items: flex-start;
 		align-items: center;
 		gap: var(--space-2);
-		@media screen and (min-width: 80rem) {
+		@media screen and (--bp-2xl) {
 			order: 0;
 		}
 	}
@@ -132,12 +129,12 @@ const {
 	.dot {
 		content: "";
 		display: inline-flex;
-		border-radius: 100%;
+		border-radius: 50%;
 		width: var(--space-1);
 		height: var(--space-1);
 		justify-content: center;
 		background-color: var(--color-dovetail);
-		@media screen and (min-width: 80rem) {
+		@media screen and (--bp-2xl) {
 		}
 	}
 
@@ -148,7 +145,7 @@ const {
 		display: inline-flex;
 		background-color: var(--color-rampart);
 		margin: 0 var(--space-4);
-		@media screen and (min-width: 80rem) {
+		@media screen and (--bp-2xl) {
 			order: 1;
 		}
 	}
@@ -156,7 +153,7 @@ const {
 	.ship-date {
 		color: var(--color-dovetail);
 		order: 0;
-		@media screen and (min-width: 80rem) {
+		@media screen and (--bp-2xl) {
 			order: 1;
 		}
 	}

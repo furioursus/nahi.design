@@ -101,7 +101,7 @@ const {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-		@media (min-width: 48rem) {
+		@media (--bp-md) {
 			flex-direction: row;
 			align-items: stretch;
 		}
@@ -125,7 +125,7 @@ const {
 		padding-top: var(--space-4);
 		margin-top: var(--space-4);
 		width: 100%;
-		@media (min-width: 48rem) {
+		@media (--bp-md) {
 			max-width: var(--space-24);
 			border-top: none;
 			border-left: solid 1px var(--color-dovetail);
@@ -141,7 +141,7 @@ const {
 		display: grid;
 		grid-template-columns: repeat(1, 1fr);
 		gap: var(--space-2);
-		@media screen and (min-width: 48rem) {
+		@media screen and (--bp-md) {
 			grid-template-columns: 1fr;
 		}
 		&.service-list {
@@ -174,7 +174,7 @@ const {
 			flex: 1;
 			text-align: right;
 			flex-direction: column;
-			@media screen and (min-width: 48rem) {
+			@media screen and (--bp-md) {
 				flex-direction: row;
 				justify-content: end;
 			}

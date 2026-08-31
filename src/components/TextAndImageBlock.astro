@@ -24,7 +24,7 @@ const {
 <div class="text-and-image-block inner-padding">
 	<div class="text-wrapper">
 		<div class="text">
-			<p class="text-title">{browline}</p>
+			<p class="text-title eyebrow">{browline}</p>
 			<div class="image-block-description">
 				<slot />
 			</div>
@@ -49,12 +49,12 @@ const {
 		display: grid;
 		gap: var(--space-3);
 		grid-template-areas: "image" "text";
-		@media screen and (min-width: 48rem) {
+		@media screen and (--bp-md) {
 			gap: var(--space-6);
 			grid-template-columns: repeat(2, 1fr);
 			grid-template-areas: "text image image";
 		}
-		@media screen and (min-width: 60rem) {
+		@media screen and (--bp-lg) {
 			grid-template-columns: repeat(3, 1fr);
 			grid-template-areas: "text image image";
 		}
@@ -64,7 +64,7 @@ const {
 		padding: var(--space-2) var(--space-0);
 	}
 	.text {
-		@media screen and (min-width: 48rem) {
+		@media screen and (--bp-md) {
 			padding-right: var(--space-6);
 			border-right: 1px solid var(--color-rampart);
 		}
@@ -73,11 +73,7 @@ const {
 		grid-area: image;
 	}
 	.text-title {
-		font-family: var(--text-font-heading);
-		font-size: var(--text-2xs);
 		line-height: var(--line-height-none);
-		letter-spacing: var(--letter-spacing-loose);
-		color: var(--color-dovetail);
 		margin-bottom: var(--space-1);
 	}
 	.image-block-description {

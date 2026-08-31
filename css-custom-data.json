@@ -1,0 +1,15 @@
+{
+	"version": 1.1,
+	"atDirectives": [
+		{
+			"name": "@custom-media",
+			"description": "Defines a named custom media query (Custom Media Queries spec), resolved at build time by postcss-custom-media — see postcss.config.cjs. Breakpoints for this project are defined in src/styles/tokens.css and used elsewhere as @media (--bp-name) { ... }.",
+			"references": [
+				{
+					"name": "Custom Media Queries spec",
+					"url": "https://www.w3.org/TR/mediaqueries-5/#at-ruledef-custom-media"
+				}
+			]
+		}
+	]
+}

@@ -188,7 +188,7 @@ const isHome = Astro.url.pathname === "/";
 			"nav  nav";
 		align-items: center;
 
-		@media (min-width: 40rem) {
+		@media (--bp-sm) {
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
@@ -218,7 +218,7 @@ const isHome = Astro.url.pathname === "/";
 			color: var(--color-crystal-cut);
 		}
 
-		@media (min-width: 40rem) {
+		@media (--bp-sm) {
 			display: none;
 		}
 	}
@@ -244,7 +244,7 @@ const isHome = Astro.url.pathname === "/";
 			grid-template-rows: 1fr;
 		}
 
-		@media (min-width: 40rem) {
+		@media (--bp-sm) {
 			display: flex;
 			overflow: visible;
 		}
@@ -257,7 +257,7 @@ const isHome = Astro.url.pathname === "/";
 		gap: var(--space-5);
 		padding: var(--space-6) 0;
 
-		@media (min-width: 40rem) {
+		@media (--bp-sm) {
 			overflow: visible;
 			flex-direction: row;
 			gap: var(--space-7);

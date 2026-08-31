@@ -42,6 +42,7 @@ Each case study page pulls its title/summary/status/tags from one shared source 
 │   │   ├── index.astro                    → the home page
 │   │   └── case-studies/*.astro           → the three case study pages
 │   └── styles/            → global.css, reset.css, tokens.css (design tokens: color, spacing, type)
+├── postcss.config.cjs    → wires up postcss-custom-media (breakpoint tokens, see below)
 └── package.json
 ```
 
@@ -53,6 +54,9 @@ Each case study page pulls its title/summary/status/tags from one shared source 
 - **Email obfuscation**: `astro-mail-obfuscation` scrambles the `mailto:` links against scraper bots.
 - **Images**: everything in `src/img/` is processed by `sharp` at build time (Astro's built-in image optimization).
 - **Design tokens**: colors, spacing, and type scale live in `src/styles/tokens.css` — that's the single place to tweak the visual system.
+- **Breakpoints**: defined once in `tokens.css` as `@custom-media` (`--bp-xs` 30rem, `--bp-sm` 40rem, `--bp-md` 48rem, `--bp-lg` 60rem, `--bp-xl` 64rem, `--bp-2xl` 80rem) and used in any component's `<style>` block as `@media (--bp-md) { ... }` (or `@media screen and (--bp-md) { ... }`). Plain CSS can't reference a custom property inside a media condition, so this is resolved at build time by the `postcss-custom-media` plugin, configured in `postcss.config.cjs` — that file also loads `@csstools/postcss-global-data` to make the `tokens.css` breakpoint definitions visible to every component's `<style>` block, since Astro/Vite processes each one as its own separate stylesheet. Nothing to run by hand: `npm install` pulls both packages in, and `npm run dev`/`build` pick up `postcss.config.cjs` automatically. Add a new breakpoint by adding one more `@custom-media --bp-name (min-width: ...)` line in `tokens.css`. The underlying CSS language service (used by both VS Code and Zed) doesn't know this at-rule and would otherwise flag it as "Unknown at rule" — handled per editor since the fix isn't portable:
+  - **VS Code**: `css-custom-data.json` at the repo root describes `@custom-media` to the language service (with a hover description), wired in via `.vscode/settings.json`'s `css.customData`.
+  - **Zed**: the same fix doesn't work — its bundled CSS server only accepts custom-data file paths through a notification VS Code's own client extension sends, which Zed doesn't implement, so `css.customData` is a no-op there regardless of how it's wired up. `.zed/settings.json` instead sets `css.lint.unknownAtRules` to `"ignore"` for the language server, which silences the whole "unknown at-rule" category (not just `@custom-media` — Zed has no way to scope this narrower).
 - **Reduced motion**: the looping "About" videos and the IBM case study's hero video (marked `data-ambient`) only autoplay when the visitor hasn't set `prefers-reduced-motion` — handled client-side in `BaseLayout`, since a static site has no server-side way to know that preference ahead of time. Opening one of the About videos in the lightbox plays it regardless (a deliberate click, not forced motion), then hands the preference back once closed.
 
 ## Commands

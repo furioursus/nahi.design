@@ -42,7 +42,7 @@ const { compact = false } = Astro.props;
 			padding: var(--space-10) 0;
 		}
 	}
-	@media screen and (min-width: 48rem) {
+	@media screen and (--bp-md) {
 		.contact {
 			padding: var(--space-80) 0;
 			&.compact {
@@ -54,7 +54,7 @@ const { compact = false } = Astro.props;
 		display: inline-flex;
 		flex-direction: column;
 		gap: var(--space-7);
-		@media screen and (min-width: 48rem) {
+		@media screen and (--bp-md) {
 			flex-direction: row;
 		}
 	}

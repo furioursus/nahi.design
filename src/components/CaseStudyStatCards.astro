@@ -35,10 +35,10 @@ const { heading, columnNumber = 5, marginTop = "var(--space-0)" } = Astro.props;
 		grid-template-columns: 1fr;
 		gap: var(--space-2);
 		justify-content: space-between;
-		@media screen and (min-width: 30rem) {
+		@media screen and (--bp-xs) {
 			grid-template-columns: repeat(2, 1fr);
 		}
-		@media screen and (min-width: 48rem) {
+		@media screen and (--bp-md) {
 			grid-template-columns: repeat(var(--column-number), 1fr);
 		}
 	}

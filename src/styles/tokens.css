@@ -1,3 +1,16 @@
+/*
+ * Breakpoints, as custom media queries (resolved at build time by postcss-custom-media —
+ * see postcss.config.cjs). Plain CSS custom properties can't be used inside @media conditions,
+ * so these live here instead of in the :root token block below. Usage: @media (--bp-md) { ... }
+ * or @media screen and (--bp-md) { ... }.
+ */
+@custom-media --bp-xs (min-width: 30rem);
+@custom-media --bp-sm (min-width: 40rem);
+@custom-media --bp-md (min-width: 48rem);
+@custom-media --bp-lg (min-width: 60rem);
+@custom-media --bp-xl (min-width: 64rem);
+@custom-media --bp-2xl (min-width: 80rem);
+
 :root {
   --desc-font: initial;
   --desc-color: initial;
@@ -64,6 +77,8 @@
 
   --rounded-edge: 2px;
   --rounded-edge-heavy: 10px;
+
+  --shadow-hover: 0px 2px 6px 6px #1c191608;
 
   --space-0: 0;
   --space-px: 1px;

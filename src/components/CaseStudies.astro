@@ -34,7 +34,7 @@ import CaseStudyThumb from "./CaseStudyThumb.astro";
 	main {
 		padding-top: var(--space-4);
 		padding-bottom: var(--space-10);
-		@media (min-width: 48rem) {
+		@media (--bp-md) {
 			margin-top: var(--space-10);
 			padding-top: var(--space-10);
 			padding-bottom: var(--space-20);
@@ -48,7 +48,7 @@ import CaseStudyThumb from "./CaseStudyThumb.astro";
 		gap: var(--space-10);
 		margin-top: var(--space-12);
 
-		@media (min-width: 48rem) {
+		@media (--bp-md) {
 			grid-template-columns: repeat(2, 1fr);
 			> *:first-child {
 				grid-column: span 2;

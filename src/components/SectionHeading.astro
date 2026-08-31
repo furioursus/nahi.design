@@ -35,10 +35,10 @@ const { title, number, caption, numberLeadSmall } = Astro.props;
 		letter-spacing: var(--letter-spacing-tighter);
 		display: flex;
 		flex-direction: column;
-		@media screen and (min-width: 30rem) {
+		@media screen and (--bp-xs) {
 			font-size: var(--text-3xl);
 		}
-		@media screen and (min-width: 64rem) {
+		@media screen and (--bp-xl) {
 			align-items: center;
 			flex-direction: row;
 		}
@@ -53,7 +53,7 @@ const { title, number, caption, numberLeadSmall } = Astro.props;
 		line-height: var(--line-height-tight);
 		letter-spacing: var(--letter-spacing-tight);
 		width: var(--space-10);
-		@media screen and (min-width: 64rem) {
+		@media screen and (--bp-xl) {
 			align-self: flex-start;
 			padding-top: calc(var(--text-4xl) / 2 + 2px);
 		}
@@ -70,7 +70,7 @@ const { title, number, caption, numberLeadSmall } = Astro.props;
 <style is:global>
 	.grid-caption {
 		grid-column: 2;
-		@media screen and (min-width: 48rem) {
+		@media screen and (--bp-md) {
 			text-align: right;
 			grid-column: initial;
 		}
