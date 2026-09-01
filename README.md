@@ -22,6 +22,8 @@ Live at [nahi.design](https://www.nahi.design).
 
 Each case study page pulls its title/summary/status/tags from one shared source of truth — `src/data/case-studies.ts` — and composes it with per-page sections built from reusable blocks: `CaseStudySection`, `Description` (with `variant="case-study"`), `CaseStudyStatCards`, `CaseStudyDecisionCard`, `TextAndImageBlock`, `Testimonial`, and friends. Every screenshot rendered through `TextAndImageBlock` is click-to-zoom via `LightboxImage`, and the About section's videos get the same treatment via `LightboxVideo` — both driven by one shared `Lightbox` custom element; see [`docs/lightbox.md`](docs/lightbox.md) for how it's built.
 
+The IBM case study also has a "Present" button (`Presentation`) that turns a hand-curated slide list into a fullscreen, interview-ready deck — built for presenting live, not for exporting a file. See [`docs/presentation-mode.md`](docs/presentation-mode.md) for how it's built; it's a v1 on one case study for now.
+
 **Nav bar** (`NavBar`) — sticky header with a logo and a mobile menu toggle; on the home page it scroll-links to the sections above, on case study pages it links back home. The active nav item on the home page tracks actual scroll position via `IntersectionObserver`, so it's correct whether you scroll there by hand or land on a section directly from a `#hash` link elsewhere on the site.
 
 ## Project structure

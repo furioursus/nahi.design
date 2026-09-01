@@ -10,6 +10,8 @@ import CaseStudyStatCard from "@components/CaseStudyStatCard.astro";
 import CaseStudyDecisionCard from "@components/CaseStudyDecisionCard.astro";
 import TextAndImageBlock from "@components/TextAndImageBlock.astro";
 import Testimonial from "@components/Testimonial.astro";
+import Presentation from "@components/Presentation.astro";
+import { slides as presentationSlides } from "@data/presentations/ibm-data-lineage";
 
 import IBMCompetitorLineage from "@img/ibm-competitor-lineage.png";
 import IBMSecondaryResearchCurrentPatents from "@img/ibm-secondary-research-current-patents.png";
@@ -28,6 +30,7 @@ import TestimonialLaurenPhoto from "@img/ibm-lauren-chen.jpg";
 	{...meta}
 >
 	<div slot="after-summary">
+		<Presentation slides={presentationSlides} label="Present this case study" />
 		<CaseStudyStatCards heading="Project Resources" columnNumber={2}>
 			<CaseStudyStatCard value="Design Lead" label="My role" />
 			<CaseStudyStatCard value="9" label="Months" />

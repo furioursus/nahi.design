@@ -1,0 +1,432 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+export type Slide =
+	| { type: "title"; eyebrow?: string; title: string; subtitle?: string }
+	| { type: "text"; heading?: string; body: string[] }
+	| { type: "image"; image: ImageMetadata; alt: string; caption?: string }
+	| {
+			type: "text-image";
+			heading?: string;
+			body: string[];
+			image: ImageMetadata;
+			alt: string;
+	  }
+	| { type: "stat"; heading?: string; stats: { value: string; label: string }[] }
+	| { type: "quote"; quote: string; subtitle?: string };
+
+interface Props {
+	slides: Slide[];
+	label?: string;
+}
+
+const { slides, label = "Present" } = Astro.props;
+---
+
+<slide-deck>
+	<button class="present-trigger" type="button">{label}</button>
+	<dialog class="deck-dialog" aria-label="Presentation">
+		<div class="deck-toolbar">
+			<span class="deck-counter">1 / {slides.length}</span>
+			<button class="deck-close" type="button" aria-label="Close presentation"
+				>&times;</button
+			>
+		</div>
+		<div class="deck-slides">
+			{
+				slides.map((slide, index) => (
+					<section class="deck-slide" data-index={index}>
+						{slide.type === "title" && (
+							<div class="slide-title">
+								{slide.eyebrow && <p class="eyebrow">{slide.eyebrow}</p>}
+								<h2>{slide.title}</h2>
+								{slide.subtitle && <p class="subtitle">{slide.subtitle}</p>}
+							</div>
+						)}
+						{slide.type === "text" && (
+							<div class="slide-text">
+								{slide.heading && <h2>{slide.heading}</h2>}
+								{slide.body.map((paragraph) => (
+									<p>{paragraph}</p>
+								))}
+							</div>
+						)}
+						{slide.type === "image" && (
+							<figure class="slide-image">
+								<Image src={slide.image} alt={slide.alt} loading="eager" />
+								{slide.caption && <figcaption>{slide.caption}</figcaption>}
+							</figure>
+						)}
+						{slide.type === "text-image" && (
+							<div class="slide-text-image">
+								<div class="slide-text">
+									{slide.heading && <h2>{slide.heading}</h2>}
+									{slide.body.map((paragraph) => (
+										<p>{paragraph}</p>
+									))}
+								</div>
+								<Image src={slide.image} alt={slide.alt} loading="eager" />
+							</div>
+						)}
+						{slide.type === "stat" && (
+							<div class="slide-stat">
+								{slide.heading && <h2>{slide.heading}</h2>}
+								<dl>
+									{slide.stats.map((stat) => (
+										<div class="stat">
+											<dt>{stat.value}</dt>
+											<dd>{stat.label}</dd>
+										</div>
+									))}
+								</dl>
+							</div>
+						)}
+						{slide.type === "quote" && (
+							<blockquote class="slide-quote">
+								<p>{slide.quote}</p>
+								{slide.subtitle && <cite>{slide.subtitle}</cite>}
+							</blockquote>
+						)}
+					</section>
+				))
+			}
+		</div>
+		<button class="deck-prev" type="button" aria-label="Previous slide">&lsaquo;</button>
+		<button class="deck-next" type="button" aria-label="Next slide">&rsaquo;</button>
+	</dialog>
+</slide-deck>
+
+<style>
+	.present-trigger {
+		font-family: var(--text-font-heading);
+		font-size: var(--text-sm);
+		font-weight: var(--weight-medium);
+		background-color: var(--color-black-umber);
+		color: var(--color-crystal-cut);
+		border: none;
+		border-radius: var(--rounded-edge);
+		padding: var(--space-3) var(--space-6);
+		cursor: pointer;
+		&:hover {
+			background-color: var(--color-oubliette);
+		}
+	}
+
+	.deck-dialog {
+		width: 100vw;
+		height: 100vh;
+		max-width: none;
+		max-height: none;
+		margin: 0;
+		padding: 0;
+		border: none;
+		background-color: var(--color-black-umber);
+		color: var(--color-crystal-cut);
+		opacity: 0;
+		transform: scale(0.98);
+		transition:
+			opacity 0.25s ease,
+			transform 0.25s ease,
+			overlay 0.25s allow-discrete,
+			display 0.25s allow-discrete;
+		&[open] {
+			opacity: 1;
+			transform: scale(1);
+			@starting-style {
+				opacity: 0;
+				transform: scale(0.98);
+			}
+		}
+		&::backdrop {
+			background-color: var(--color-black-umber);
+		}
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
+	}
+
+	.deck-toolbar {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: var(--space-6) var(--space-8);
+		font-family: var(--text-font-heading);
+		font-size: var(--text-sm);
+		color: var(--color-rampart);
+	}
+	.deck-close {
+		background: none;
+		border: none;
+		color: var(--color-crystal-cut);
+		font-size: var(--text-2xl);
+		line-height: var(--line-height-none);
+		cursor: pointer;
+		padding: var(--space-2);
+	}
+
+	.deck-slides {
+		display: grid;
+		grid-template-columns: 100%;
+		grid-template-rows: 100%;
+		width: 100%;
+		height: 100%;
+	}
+
+	.deck-slide {
+		grid-area: 1 / 1;
+		width: 100%;
+		height: 100%;
+		min-height: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: var(--space-24) var(--space-16);
+		overflow-y: auto;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.25s ease;
+		&.is-active {
+			opacity: 1;
+			visibility: visible;
+		}
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
+	}
+
+	.slide-title,
+	.slide-text,
+	.slide-stat {
+		text-align: center;
+		max-width: 50rem;
+		width: 100%;
+		min-width: 0;
+	}
+	.slide-title .eyebrow {
+		font-family: var(--text-font-heading);
+		font-size: var(--text-md);
+		color: var(--color-rampart);
+		text-transform: uppercase;
+		letter-spacing: var(--letter-spacing-looser);
+		margin-bottom: var(--space-6);
+	}
+	.slide-title h2,
+	.slide-text h2,
+	.slide-stat h2 {
+		font-family: var(--text-font-heading);
+		font-size: var(--text-5xl);
+		line-height: var(--line-height-tight);
+		margin-bottom: var(--space-6);
+		overflow-wrap: break-word;
+	}
+	.slide-title .subtitle {
+		font-size: var(--text-xl);
+		color: var(--color-bowstring);
+		line-height: var(--line-height-relaxed);
+	}
+	.slide-text p {
+		font-size: var(--text-2xl);
+		line-height: var(--line-height-relaxed);
+		margin-top: var(--space-6);
+		&:first-of-type {
+			margin-top: 0;
+		}
+	}
+
+	.slide-image {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: 100%;
+		max-height: 100%;
+		min-width: 0;
+		img {
+			max-width: 100%;
+			max-height: 75vh;
+			width: auto;
+			height: auto;
+			object-fit: contain;
+			border-radius: var(--rounded-edge-heavy);
+		}
+		figcaption {
+			margin-top: var(--space-6);
+			font-family: var(--text-font-heading);
+			font-size: var(--text-lg);
+			color: var(--color-bowstring);
+			text-align: center;
+		}
+	}
+
+	.slide-text-image {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-16);
+		align-items: center;
+		max-width: 75rem;
+		width: 100%;
+		min-width: 0;
+		.slide-text {
+			text-align: left;
+			max-width: none;
+			min-width: 0;
+		}
+		img {
+			max-width: 100%;
+			max-height: 60vh;
+			width: auto;
+			height: auto;
+			object-fit: contain;
+			border-radius: var(--rounded-edge-heavy);
+		}
+	}
+
+	.slide-stat dl {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--space-10) var(--space-12);
+		margin-top: var(--space-10);
+	}
+	.slide-stat dt {
+		font-size: var(--text-4xl);
+		font-family: var(--text-font-heading);
+		font-weight: var(--weight-bold);
+	}
+	.slide-stat dd {
+		font-size: var(--text-md);
+		color: var(--color-bowstring);
+		margin-top: var(--space-2);
+	}
+
+	.slide-quote {
+		max-width: 45rem;
+		width: 100%;
+		min-width: 0;
+		text-align: center;
+		p {
+			font-size: var(--text-3xl);
+			line-height: var(--line-height-relaxed);
+		}
+		cite {
+			display: block;
+			margin-top: var(--space-8);
+			font-family: var(--text-font-heading);
+			font-size: var(--text-md);
+			font-style: normal;
+			color: var(--color-bowstring);
+		}
+	}
+
+	.deck-prev,
+	.deck-next {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		background: none;
+		border: 1px solid var(--color-oubliette);
+		border-radius: 50%;
+		color: var(--color-crystal-cut);
+		width: var(--space-14);
+		height: var(--space-14);
+		font-size: var(--text-2xl);
+		line-height: var(--line-height-none);
+		cursor: pointer;
+		&:hover:not(:disabled) {
+			background-color: var(--color-oubliette);
+		}
+		&:disabled {
+			opacity: 0.3;
+			cursor: default;
+		}
+	}
+	.deck-prev {
+		left: var(--space-8);
+	}
+	.deck-next {
+		right: var(--space-8);
+	}
+</style>
+
+<script>
+	class SlideDeck extends HTMLElement {
+		connectedCallback() {
+			const trigger = this.querySelector<HTMLButtonElement>(".present-trigger");
+			const dialog = this.querySelector<HTMLDialogElement>(".deck-dialog");
+			const closeButton = this.querySelector<HTMLButtonElement>(".deck-close");
+			const prevButton = this.querySelector<HTMLButtonElement>(".deck-prev");
+			const nextButton = this.querySelector<HTMLButtonElement>(".deck-next");
+			const counter = this.querySelector<HTMLSpanElement>(".deck-counter");
+			const slides = Array.from(this.querySelectorAll<HTMLElement>(".deck-slide"));
+
+			if (!trigger || !dialog || !slides.length) {
+				console.warn("SlideDeck: missing trigger, dialog, or slides");
+				return;
+			}
+
+			let currentIndex = 0;
+
+			const render = () => {
+				slides.forEach((slide, index) => {
+					const isActive = index === currentIndex;
+					slide.classList.toggle("is-active", isActive);
+					slide.inert = !isActive;
+				});
+				if (counter) counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+				if (prevButton) prevButton.disabled = currentIndex === 0;
+				if (nextButton) nextButton.disabled = currentIndex === slides.length - 1;
+			};
+
+			const goTo = (index: number) => {
+				currentIndex = Math.min(Math.max(index, 0), slides.length - 1);
+				render();
+			};
+
+			trigger.addEventListener("click", () => {
+				currentIndex = 0;
+				render();
+				dialog.showModal();
+			});
+
+			closeButton?.addEventListener("click", () => {
+				dialog.close();
+				trigger.focus();
+			});
+			prevButton?.addEventListener("click", () => goTo(currentIndex - 1));
+			nextButton?.addEventListener("click", () => goTo(currentIndex + 1));
+
+			dialog.addEventListener("keydown", (e) => {
+				switch (e.key) {
+					case "ArrowRight":
+					case "PageDown":
+					case " ":
+						e.preventDefault();
+						goTo(currentIndex + 1);
+						break;
+					case "ArrowLeft":
+					case "PageUp":
+						e.preventDefault();
+						goTo(currentIndex - 1);
+						break;
+					case "Home":
+						e.preventDefault();
+						goTo(0);
+						break;
+					case "End":
+						e.preventDefault();
+						goTo(slides.length - 1);
+						break;
+				}
+			});
+
+			dialog.addEventListener("close", () => trigger.focus());
+
+			render();
+		}
+	}
+
+	customElements.define("slide-deck", SlideDeck);
+</script>
