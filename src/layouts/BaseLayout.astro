@@ -3,14 +3,14 @@ import { AstroFont } from "astro-font";
 import { SEO } from "astro-seo";
 import "@styles/global.css";
 import NavBar from "@components/NavBar.astro";
-import Lightbox from "@components/Lightbox.astro";
 
 interface Props {
 	title: string;
 	description?: string;
+	showNav?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, showNav = true } = Astro.props;
 const DefaultOGImage = "https://www.nahi.design/img/og-image.png";
 ---
 
@@ -36,30 +36,39 @@ const DefaultOGImage = "https://www.nahi.design/img/og-image.png";
 			config={[
 				{
 					src: [],
-					name: "Source Sans 3",
+					name: "Fraunces",
 					googleFontsURL:
-						"https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap",
+						"https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap",
+					preload: true,
+					display: "swap",
+					selector: ".font-display, h1, .pivot-h, .metric-n, .next-link, .card-title, .ds-h, .ds-cn",
+					fallback: "serif",
+				},
+				{
+					src: [],
+					name: "Source Serif 4",
+					googleFontsURL:
+						"https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap",
 					preload: true,
 					display: "swap",
 					selector: "body",
-					fallback: "sans-serif",
+					fallback: "serif",
 				},
 				{
 					src: [],
 					name: "Space Mono",
 					googleFontsURL:
-						"https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap",
+						"https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap",
 					preload: true,
 					display: "swap",
-					selector: ".browline, .code, h2, h3, h4, h5, h6",
+					selector: ".font-mono, .eyebrow, .browline, .code",
 					fallback: "monospace",
 				},
 			]}
 		/>
 	</head>
 	<body>
-		<NavBar />
-		<Lightbox />
+		{showNav && <NavBar />}
 		<slot />
 		<script>
 			// See the comment on `html { scroll-behavior }` in global.css — this has to wait for the
