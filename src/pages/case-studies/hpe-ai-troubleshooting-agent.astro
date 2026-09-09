@@ -1,268 +1,310 @@
 ---
 import CaseStudyLayout from "@layouts/CaseStudyLayout.astro";
-import { caseStudies } from "@data/case-studies";
-const meta = caseStudies.find((s) => s.id === "hpe-ai-troubleshooting-agent")!;
+import CaseStudyHero from "@components/CaseStudyHero.astro";
+import CaseStudyMeta from "@components/CaseStudyMeta.astro";
+import Figure from "@components/Figure.astro";
+import Pull from "@components/Pull.astro";
+import ProcessColumns from "@components/ProcessColumns.astro";
+import Pivot from "@components/Pivot.astro";
+import Strip from "@components/Strip.astro";
+import ImagePair from "@components/ImagePair.astro";
+import Metrics from "@components/Metrics.astro";
+import NextCaseStudy from "@components/NextCaseStudy.astro";
 
-import CaseStudySection from "@components/CaseStudySection.astro";
-import SectionHeading from "@components/SectionHeading.astro";
-import Description from "@components/Description.astro";
-import CaseStudyStatCards from "@components/CaseStudyStatCards.astro";
-import CaseStudyStatCard from "@components/CaseStudyStatCard.astro";
-import CaseStudyDecisionCard from "@components/CaseStudyDecisionCard.astro";
-import TextAndImageBlock from "@components/TextAndImageBlock.astro";
+import hpe01 from "@img/hpe-01.webp";
+import hpe02 from "@img/hpe-02.webp";
+import hpe03 from "@img/hpe-03.webp";
+import hpe04 from "@img/hpe-04.webp";
+import hpe05 from "@img/hpe-05.webp";
+import hpe06 from "@img/hpe-06.webp";
+import hpe07 from "@img/hpe-07.webp";
+import hpe09 from "@img/hpe-09.webp";
+import hpe10 from "@img/hpe-10.webp";
+import hpe11 from "@img/hpe-11.webp";
+import hpe12 from "@img/hpe-12.webp";
+import hpe13 from "@img/hpe-13.webp";
 
-import HPEFirstUseFlow from "@img/hpe-first-use-flow.png";
-import HPEProofOfConcept from "@img/hpe-proof-of-concept.png";
-import HPESummaryUserJourney from "@img/hpe-summary-user-journey.png";
-import HPEUserWorkshopFeedback from "@img/hpe-user-workshop-feedback.png";
+const title = "An AI troubleshooting agent for HPE";
+const description =
+	"Ten out of ten interviews wanted something leadership hadn't asked for: a way to know whether a pipeline failure was theirs before they had to ask an engineer.";
 ---
 
-<CaseStudyLayout
-	nextUrl="/case-studies/quantalyric-mvp"
-	nextUrlText="Next Case Study: From grand vision to shippable MVP"
-	{...meta}
->
-	<div slot="after-summary">
-		<CaseStudyStatCards heading="Project Resources" columnNumber={3}>
-			<CaseStudyStatCard value="1" label="Week" />
-			<CaseStudyStatCard value="1" label="Designer" />
-			<CaseStudyStatCard value="1" label="Workshop" />
-			<CaseStudyStatCard value="1" label="Dev intern" />
-			<CaseStudyStatCard value="1" label="ChatGPT model trained on our docs" />
-		</CaseStudyStatCards>
-	</div>
-	<CaseStudySection>
-		<SectionHeading title="Refrmaing our shared perspective" number={2} />
-		<Description variant="case-study">
-			For years, there was a mad dash to create parity in technical capability
-			between our web app and our command line. This focus on CLI parity had the
-			unintended consequence of creating a preference towards ML engineers
-			instead of creating a UX that supported an ecosystem of personas. That
-			alienated a whole group of users, and blocked our land and expand business
-			strategy. If our ML engineer persona can’t convince their closest
-			partners, they wouldn’t convince other teams to adopt our product.
-		</Description>
-		<CaseStudyStatCards heading="The business case" columnNumber={2}>
-			<CaseStudyStatCard
-				value="$10,000s/day"
-				label="Cost of running a pipeline"
-			/>
-			<CaseStudyStatCard value="4-7 days" label="Typical pipeline runtime" />
-		</CaseStudyStatCards>
-		<CaseStudyStatCards
-			heading="Important usage stats"
-			columnNumber={2}
-			marginTop={"var(--space-16)"}
-		>
-			<CaseStudyStatCard
-				value="100s sessions per week"
-				label="During pipeline creation or debugging"
-			/>
-			<CaseStudyStatCard
-				value="1-10 sessions per week"
-				label="During stable pipeline performance"
-			/>
-		</CaseStudyStatCards>
-		<CaseStudyDecisionCard
-			title="Create a UX that resolves events, rather than a technology showcase."
-			description="The leadership team came in wanting an AI feature. Research said <strong>10 out of 10 participants</strong> named miscommunication between Data Scientists and ML Engineers as a major issue — and the strongest emotional signal was Data Scientists feeling guilty, not stuck."
-			nonDecision="A clean “ship an AI feature” brief"
-			theDecision="The right user problem to solve with AI"
-			outcome="AI stayed the response — but the problem statement became “reduce the cost of a missed handoff,” not “add AI to the product.”"
-			internalSignals={[
-				[
-					"Cross-functional team",
-					"(Product + Dev + me) needed a problem statement that wasn’t “AI assistant” — otherwise scope creep would be infinite and success would be undefined.",
-				],
-				[
-					"One-week timeframe",
-					"meant the problem statement had to be sharp enough to design and prototype in days. “Miscommunication between two specific roles” was that sharp.",
-				],
-				[
-					"Big-Ideas exercise",
-					"later weighed AI against alternatives. That weighing only worked because the problem was framed as a communication gap, not a missing feature.",
-				],
+<CaseStudyLayout title={title} description={description}>
+	<CaseStudyHero eyebrow={["Product design", "HPE", "Agentic AI for ML pipelines"]} title="Debugging's hardest step was asking for help">
+		Leadership wanted an AI feature. Ten out of ten interviews wanted something else: data scientists on
+		small teams felt guilty, not stuck, when a pipeline burning tens of thousands of dollars a day failed and
+		they couldn't help the engineer fix it. So the AI we built in one week reads the logs and answers the one
+		question a data scientist usually had to ask an engineer to find out: whether the failure was theirs, in
+		how the pipeline was set up, or the infrastructure's, in the systems running it underneath. The proof of
+		concept shipped on a Friday. The following week, the whole department was laid off, and the test that
+		would have proved it never ran.
+	</CaseStudyHero>
+
+	<CaseStudyMeta
+		items={[
+			{ label: "Role", value: "Product designer, solo" },
+			{ label: "Team", value: "One developer intern, one language model wired to live pipeline logs" },
+			{ label: "Timeline", value: "1 week" },
+			{ label: "Research base", value: "10 user interviews, 1 cross-functional workshop" },
+		]}
+	/>
+
+	<Figure
+		src={hpe01}
+		alt="The Pachyderm job log viewer: a failed job's timestamped logs in the center, and an Explain Logs panel open on the right showing a GPT-3.5 chat that identifies a schema mismatch between the GlotusDB source and the KryptonProcessor pipeline, and recommends checking the data contracts."
+		figNum="Fig. 01"
+		lead="A shared starting point."
+		wide
+		fit="contain"
+		deck
+		deckLabel="Shipped"
+	>
+		The assistant sits where debugging already happens. It tells a data scientist whether the failure is
+		theirs to fix or the engineer's, so they arrive at the engineer's desk with an answer instead of a
+		question.
+	</Figure>
+
+	<section id="problem">
+		<div class="sec-head"><span class="sec-num">01</span><h2>The problem</h2><span class="sec-rule"></span></div>
+		<p>
+			For years the product team had chased one goal: make the web app do everything the command line
+			could. Parity felt like progress, but it quietly favored the people who lived in the terminal, the ML
+			engineers, and left their closest partners, the data scientists, with an interface built for someone
+			else. That mattered commercially as much as it did for the people using it. HPE's strategy was to
+			land with one team and expand to the next, and an engineer who can't win over the data scientist
+			beside them isn't going to win over the team down the hall.
+		</p>
+		<p>
+			The cost of a bad handoff was concrete. Running a pipeline could cost tens of thousands of dollars a
+			day, a typical run lasted four to seven days, and usage told the story of when people actually needed
+			the product: hundreds of sessions a week while creating or debugging a pipeline, and one to ten a week
+			once it was stable. <strong class="deck-stat" data-deck-foot="Product usage, week over week|HPE ML pipelines"
+				>People showed up when something broke, and the interface was least ready for them right
+				then.</strong
+			> Into that, leadership arrived with a clean, reasonable ask: ship an AI feature. Roadmap planning for
+			the next quarter was open, and there was room for something riskier.
+		</p>
+		<ImagePair
+			mid
+			deckLabel="The handoff"
+			items={[
+				{
+					fn: "Fig. 02",
+					imgSrc: hpe02,
+					imgAlt: "The old right panel during the same failure: pipeline name, job ID, and roles at the top, then a Subjob Summary reporting the job Failed — 106 total datums, 45 processed, 32 skipped, 19 failed, 10 recovered — with no explanation of what went wrong or what to do next.",
+					fit: "contain",
+					caption:
+						'<strong class="fig-lead">Built for the terminal, viewed in a browser.</strong>The panel reported 19 of 106 datums failed. It never said why, or what to do next. For a data scientist, that gap was the wall.',
+				},
+				{
+					fn: "Fig. 03",
+					imgSrc: hpe03,
+					imgAlt: "A simplified diagram of the two roles around the AI model: the data scientist supplies business context, datasets, tuning, and training; the ML engineer builds and maintains the infrastructure, feature engineering, and scaling underneath a model running at roughly $10k a day.",
+					fit: "contain",
+					caption:
+						'<strong class="fig-lead">Two roles, one expensive model.</strong>The data scientist supplies business context and data. The engineer builds and keeps the infrastructure running underneath it. Between them sits a model burning about $10k a day, and each side only sees half of it.',
+				},
 			]}
-			externalSignals={[
-				[
-					"10 / 10 interviews",
-					"independently surfaced miscommunication. That kind of unanimity changes the brief — it means you’re looking at the disease, not a symptom.",
-				],
-				[
-					"Emotional language",
-					"(“guilt”) came from Data Scientists unprompted. The pain wasn’t “I lack tools,” it was “I’m letting my teammate down.” That’s a relationship problem.",
-				],
-				[
-					"$10k/day & 4–7-day runs",
-					"meant every missed handoff carried real dollars and real time. The business case for the reframe wrote itself.",
-				],
-			]}
-			fullOutcome="The reframe shifted what the AI had to do. Instead of “generate clever explanations,” it had to “give both roles the same shared starting point so the conversation can begin.” That spec is much more testable than “be helpful,” and it shaped every downstream design decision — including the log-row selection pattern and the suggested-action chips."
 		/>
-		<TextAndImageBlock
-			browline="It’s inefficient process, not technical capacity."
-			image={HPESummaryUserJourney}
-			imageAlt="Summary of HPE’s customer user journey gathered in card form on a UX journey maap"
-		>
-			<p>
-				The team had just spent considerable resources deeply expanding our
-				documentation, and implementing ChatGPT to parse the docs for our users.
-				Our leadership team wanted to use our docs as a training manual for the
-				product. The hope was that ML engineers and data scientists would create
-				pipelines with fewer errors by becoming more educated about the product
-				and how it works with its supporting ecosystem.
-			</p>
-		</TextAndImageBlock>
-	</CaseStudySection>
-	<CaseStudySection>
-		<SectionHeading title="Grooming a BHAG" number={3} />
-		<Description variant="case-study">
-			I got started with behavioral design with my very first design job in 2017
-			which was in the healthcare sector. The decision to rework the docs was
-			correct, but has an unintended message of “this is how you get better at
-			using the product.” What we need for our data scientist persona is
-			experiences that say, “this is how we can support you in this moment.”
-		</Description>
-		<CaseStudyDecisionCard
-			title="Run our workshop through a behavioral design lens, not a purely ideation one."
-			description="I used IBM’s Big Ideas exercise to weigh concepts — but I enriched it with the <strong>Behavioral Design Toolkit</strong> from the Illinois Institute of Technology. The pain we were solving was emotional (guilt, frustration), and a feature-cost-benefit lens alone would have missed that."
-			nonDecision="A faster, lighter ideation cadence"
-			theDecision="Concepts pressure-tested for behavior change"
-			outcome="AI assistant won as the “Big Idea” — not because it scored highest on features, but because it removed the cost of asking for help."
-			internalSignals={[
-				[
-					"Big Ideas alone",
-					"tends to reward novelty and ambition. With one week to ship a PoC, ambition needed to be checked by “will users actually change behavior?”",
-				],
-				[
-					"Behavioral Design Toolkit",
-					"gave us shared vocabulary for friction, motivation, and ability — concepts the engineering side of the team understood faster than UX jargon.",
-				],
-				[
-					"I’d run this combination before.",
-					"Bringing a known method into a one-week project reduced facilitation risk.",
-				],
-			]}
-			externalSignals={[
-				[
-					"Guilt as the pain point:",
-					"people don’t fix guilt with features, they fix it by lowering the social cost of asking. That insight maps directly to behavioral-design’s “reduce friction” lever.",
-				],
-				[
-					"Interview language",
-					"kept landing on relationship verbs — “ping,” “interrupt,” “bother.” Those are behavioral signals, not feature requests.",
-				],
-				[
-					"Cross-domain analogues:",
-					"developer tools that succeeded in similar spaces (Sentry, Datadog AI summaries) won on lowering the cost of asking the next question, not on raw analytical power.",
-				],
-			]}
-			fullOutcome="The AI assistant scored highest because it changes who has to ask. A Data Scientist who reads the AI explanation arrives at the ML Engineer’s desk with informed questions, not apologies. That’s the behavior change the toolkit pointed us at — and it’s the success criterion the user test will measure."
+	</section>
+
+	<section id="research">
+		<div class="sec-head"><span class="sec-num">02</span><h2>What we found</h2><span class="sec-rule"></span></div>
+		<p>
+			Ten interviews, ten people naming the same thing without being asked. Miscommunication between data
+			scientists and ML engineers came up in every conversation, and unanimity like that changes a brief:
+			you're no longer looking at a symptom, you're looking at the disease. What surprised me more was the
+			emotional register. Data scientists didn't say they lacked tools. They said they felt guilty, that
+			they were letting a teammate down, and their verbs were relationship verbs: ping, interrupt, bother.
+		</p>
+		<Pull
+			quote="It's like having blood work done, and having a doctor with good bedside manner explain your test results in a way that you can easily understand."
+			attribution="Workshop participant, describing what they wanted debugging to feel like"
 		/>
-		<TextAndImageBlock
-			browline="The big hairy audacious goal."
-			image={HPEUserWorkshopFeedback}
-			imageAlt="Highlight from user research asking “What is the experience like? which is answered with “It’s like having blood work done, and having a a doctor with good bedside manner explain your test results in a way that you can easily understand."
+		<Figure
+			src={hpe04}
+			alt="A two-lane journey map from the research wall. Initial Setup: requirements gathering, data dictionary, development, QA. Debugging: identify the component, root cause analysis, defect management — each step paired with the friction point the workshop surfaced for it."
+			figNum="Fig. 04"
+			lead="The failure moment, mapped."
+			wide
+			fit="contain"
+			deck
+			deckLabel="Journey"
 		>
-			<p>
-				When our users are in a state of stress — hemorrhaging tens of thousands
-				of dollars a day, the last thing they need to hear is “get better at the
-				product.” The workshop led to this idea of an AI assistant that parses
-				the logs, the pipeline specifications, and historical performance data
-				to identify why the pipeline isn’t working.
-			</p>
-		</TextAndImageBlock>
-		<TextAndImageBlock
-			browline="Trimmed, scoped, and achievable."
-			image={HPEFirstUseFlow}
-			imageAlt="The first user flow of the HPE AI troubleshooting agent"
+			Every card in the debugging lane pointed the same way: the pain peaked not when the pipeline broke,
+			but when someone had to admit they couldn't read why.
+		</Figure>
+		<p>
+			The team had just spent real money expanding the documentation and wiring ChatGPT to it, and
+			leadership hoped the docs could work as a training manual, teaching people to build pipelines that
+			failed less. The investment was sound, but its message to a stressed data scientist was "this is how
+			you get better at the product." <strong
+				class="deck-stat"
+				data-deck-label="Guilt, not tools"
+				data-deck-foot="What ten out of ten interviews surfaced|HPE">The pain wasn't "I lack tools." It was "I'm
+				letting my teammate down."</strong
+			> That is a relationship problem, and relationship problems don't get fixed by adding features. They get
+			fixed by lowering the social cost of asking for help.
+		</p>
+		<Figure
+			src={hpe05}
+			alt="A workshop synthesis card in three parts: the pain point of needing a translator between data scientists and the line of business, the emotional core comparing the ideal to blood work explained with a doctor's good bedside manner and naming the guilt data scientists felt debugging a $10k-a-day AI model, and the resulting need statement about communicating pipeline failures with confidence instead of guilt."
+			figNum="Fig. 05"
+			lead="Bedside manner as a spec."
+			wide
+			fit="contain"
+			deck
+			deckLabel="Research highlight"
 		>
-			<p>
-				6 screens and a user flow on rails, that was the result. An “explain
-				logs” button where users would already be during debugging invited them
-				in to quickly get a summary of issues, and provided them the docs and
-				actions that they could take to remedy the situation. This would shift
-				the conversation between personas from “I don’t know how to fix this.”
-				to “here’s what I know how to fix, and this is where I need your help.”
-			</p>
-		</TextAndImageBlock>
-	</CaseStudySection>
-	<CaseStudySection>
-		<SectionHeading title="Proving it for real" number={4} />
-		<Description variant="case-study">
-			With one week on the clock and a single developer as the only engineering
-			partner, the team faced a choice that would shape what the eventual user
-			test could actually measure: build something that looked real, or build
-			something that behaved like the real thing. Design is mostly judgment, not
-			pixels — and this was the highest-leverage judgment call left in the
-			project.
-		</Description>
-		<CaseStudyDecisionCard
-			title="Ship a coded proof-of-concept, not a Figma prototype."
-			description="A clickable Figma would have tested layout and copy. I argued for a <strong>fully-coded PoC with a RAG model trained on real internal docs</strong> — because the user behaviors we needed to study only show up when the AI’s answers feel real, not scripted."
-			nonDecision="A polished, fast Figma walkthrough"
-			theDecision="A test that surfaces actual AI behaviors"
-			outcome="Built end-to-end in a week. Now ready for in-depth user testing against the behavior-change spec, not just usability."
-			internalSignals={[
-				[
-					"Development partner",
-					"was already capable of standing up a RAG model on the team’s docs. The marginal cost of “real” over “scripted” was small.",
-				],
-				[
-					"Edge-case planning",
-					"token limits, model switching, chat history reversion — only matters if you’re testing a real assistant. A Figma can’t simulate any of it.",
-				],
-				[
-					"Trust-in-AI",
-					"was the riskiest unknown. The team needed signal on whether participants would accept the AI’s answers, not whether they could tap a button.",
-				],
+			One participant wanted "a translator to go between us." Another compared it to blood work, wanting a
+			doctor's bedside manner in how results get explained. That language, not a feature list, became the
+			spec.
+		</Figure>
+	</section>
+
+	<section id="approach">
+		<div class="sec-head"><span class="sec-num">03</span><h2>Three decisions in one week</h2><span class="sec-rule"></span></div>
+		<p>A week leaves no room for a bake-off. Three decisions had to be made early and held, and each one pushed against the easy version of the brief.</p>
+		<ProcessColumns
+			deckLabel="Three decisions"
+			deckCaption="Reframe the problem, run the workshop through a behavioral lens, and build something real enough to test trust."
+			items={[
+				{
+					stepLabel: "Decision 01",
+					frameN: "01",
+					title: "The reframe",
+					imgSrc: hpe06,
+					imgAlt: "A research synthesis board: Pain Points quotes about HPE's steep learning curve on the left, a bank of open-ended AI Implementation Value ideas on the right, and a Reframe panel below crossing out 'Build an AI tool.' and replacing it with 'Build a tool that helps users gain clarity into opaque AI systems and infrastructure.'",
+					body: '"Build an AI tool" could mean anything and measure nothing. I crossed it out and wrote the real target next to it: build a tool that helps users gain clarity into opaque AI systems and infrastructure. AI stayed the answer; the question changed, from what feature to ship to what a person actually can\'t see, and every decision after this one got sharper for it.',
+				},
+				{
+					stepLabel: "Decision 02",
+					frameN: "02",
+					title: "The lens",
+					imgSrc: hpe07,
+					imgAlt: "A Big Ideas workshop board: a mocked-up 'Welcome back' events screen listing failed pipelines on the left, and on the right an idea note reading 'It's like concierge for my work: take the pressure off of having to find where this has gone wrong, and provide me ways to fix the problem,' scored Feasibility: Low and Desirability: High.",
+					body: "Big Ideas alone rewards novelty. Scoring each concept for feasibility and desirability kept the wide-open ones honest, and this one scored low on feasibility and high on desirability, exactly the kind of idea a novelty-only round would have buried. I took it forward anyway, then ran it through the Behavioral Design Toolkit from the Illinois Institute of Technology on my own, to pressure-test whether it would actually change how someone worked, not just whether they liked the sound of it.",
+				},
+				{
+					stepLabel: "Decision 03",
+					frameN: "03",
+					title: "The build",
+					imgAlt: "The same job log viewer and Explain Logs panel from the hero, cropped tighter: a GPT-3.5 chat identifying a schema mismatch between GlotusDB and the KryptonProcessor pipeline, answering live against the real pipeline logs shown at left.",
+					placeholderLabel: "Code it, don't mock it",
+					body: "A clickable Figma would have tested layout and copy. The riskiest unknown was whether people would trust the AI's answers, and trust only shows up when the answers are real. I argued for a coded proof of concept, wired to a live model reading HPE's actual pipeline logs, so what testers saw would be a real answer, not a scripted one.",
+				},
 			]}
-			externalSignals={[
-				[
-					"AI quality is non-linear:",
-					"Figma can’t show that a hallucinated answer breaks trust for the next 10 real ones. A coded PoC reveals that immediately.",
-				],
-				[
-					"RAG-specific quirks",
-					"citations, refusal language, suggested follow-ups — only render fidelity in a working system. Users react to them differently than to mocked UI strings.",
-				],
-				[
-					"Stakeholder demos:",
-					"a working PoC is far easier to fund forward than a Figma. The next round of investment depends on what the team sees, not what they imagine.",
-				],
-			]}
-			fullOutcome="The PoC trained a RAG model on internal documentation and shipped the full happy-path flow — log selection, AI explanation, suggested actions, source citations, follow-up chat. The next step is in-depth user testing. One known gap: the assistant doesn’t yet suggest remediation flows (“here’s how to fix this”) — that’s the next-release ask."
 		/>
-		<TextAndImageBlock
-			browline="Real answers, not scripted ones."
-			image={HPEProofOfConcept}
-			imageAlt="AI model explaining data import logs to the user in a more easily understood format."
+
+		<Pivot heading="Guilt isn't fixed with features. It's fixed by making it cheaper to ask.">
+			The result was a flow on rails. An "explain logs" button sits exactly where a person already is when
+			a pipeline fails, and one tap returns a plain-language summary of what went wrong, including the one
+			thing that used to take a conversation to figure out: whether the fault was in the pipeline itself or
+			in the infrastructure underneath it. What it changes is the conversation between the two roles, from
+			"I don't know how to fix this" to "here's what I know, and this is where I need your help." The
+			assistant doesn't replace the engineer. It makes the walk to the engineer's desk shorter, and a lot
+			less costly to take.
+		</Pivot>
+
+		<Strip
+			land
+			deckLabel="The flow"
+			figNum="Fig. 06"
+			lead="Where the fault lives, first."
+			items={[
+				{
+					frameN: "01",
+					dataLabel: "See where the fault lives",
+					imgSrc: hpe09,
+					imgAlt: "The pipeline dashboard for TRAIN_DATA_queries, showing a healthy pipeline next to a failed subjob, with View Logs and Pipeline Actions in the panel beside it.",
+				},
+				{
+					frameN: "02",
+					dataLabel: "Open Explain Logs",
+					imgSrc: hpe10,
+					imgAlt: "The job's log screen, listing the failed extraction steps, with the cursor clicking the Explain Logs button in the panel on the right.",
+				},
+				{
+					frameN: "03",
+					dataLabel: "Point it at your own model",
+					imgSrc: hpe11,
+					imgAlt: "The Explain Logs setup panel, asking for an OpenAI API token, or for teams with their own LLM, a model URL and token instead.",
+				},
+			]}
 		>
-			<p>
-				Token limits, model switching, and chat history reversion were all
-				scoped into the build — not because they were glamorous, but because a
-				coded PoC that couldn’t handle them wouldn’t have told the team anything
-				real about whether users could trust the assistant’s answers.
-			</p>
-		</TextAndImageBlock>
-	</CaseStudySection>
-	<CaseStudySection paddingBottom>
-		<SectionHeading title="Lessons learned for the next time." number={5} />
-		<Description variant="case-study" margin="var(--space-4) var(--space-0) var(--space-0)">
-			This project didn’t get the ending most case studies aim for. The PoC
-			shipped on a Friday; within the week, the entire AI Solutions department —
-			including this team — was laid off. The user testing that would have
-			validated or challenged the behavior-change hypothesis never happened.
-			<br /><br />
-			What I’d carry forward: the reframe and the behavioral design insight — that
-			guilt isn’t solved with features, it’s solved by lowering the social cost of
-			asking for help — were the most valuable outputs of this project, more valuable
-			than the prototype itself. If I’d known how little runway was left, I’d have
-			spent less of the week polishing the coded PoC and more time documenting the
-			research insight in a form that could travel independent of the team that produced
-			it. Good research outlives bad timing. The artifact didn’t get the chance to
-			prove itself, but the thinking behind it should have been built to survive the
-			team that built it.
-		</Description>
-	</CaseStudySection>
+			The dashboard already separates a healthy pipeline from a failed subjob, so a person knows before
+			opening a single log whether the break is in HPE's app or the infrastructure underneath it. From
+			there, one click opens the explainer in the same screen, and it can run on the company's own model
+			instead of sending anything out.
+		</Strip>
+
+		<ImagePair
+			deckLabel="Before / after"
+			items={[
+				{
+					fn: "Before",
+					imgSrc: hpe12,
+					imgAlt: "A dense table of raw, timestamped Pachyderm job logs, unformatted and uninterpreted.",
+					fit: "contain",
+					caption: "Readable if you already knew what you were looking for. A wall if you didn't.",
+				},
+				{
+					fn: "After",
+					imgSrc: hpe13,
+					imgAlt: "The same job's Explain Logs panel: a GPT-3.5 answer identifying the schema mismatch behind the failure, in plain language.",
+					fit: "contain",
+					caption: "The same failure, translated. Bedside manner, in software.",
+				},
+			]}
+		/>
+	</section>
+
+	<section id="outcome">
+		<div class="sec-head"><span class="sec-num">04</span><h2>Outcome</h2><span class="sec-rule"></span></div>
+		<p>What shipped, in the week we had:</p>
+		<Metrics
+			three
+			items={[
+				{ n: "10 / 10", label: "Interviews that named miscommunication between the two roles as a major issue, unprompted" },
+				{ n: "1 week", label: "From research readout to a coded proof of concept, live and answering against real pipeline logs" },
+				{ n: "1 Live AI Agent", label: "Coded from day one, so what testers saw was a real answer, not a scripted one" },
+			]}
+		/>
+		<p>
+			The proof of concept was real enough to test the thing that mattered, whether people would trust the
+			assistant's answers, and it was ready for in-depth user testing against a behavior-change spec, not
+			just a usability checklist. One gap was known and scoped for the next release: the assistant explained
+			failures but didn't yet walk a person through fixing them.
+		</p>
+		<p>
+			Then the ending most case studies don't have. <strong
+				class="deck-stat"
+				data-deck-label="What happened"
+				data-deck-foot="The week after the PoC shipped|HPE AI Solutions"
+				>The PoC shipped on a Friday. Within the week, the entire AI Solutions department, this team
+				included, was laid off.</strong
+			> The user test that would have validated or challenged the hypothesis never happened. What did happen,
+			and what I'd argue was the larger outcome anyway, was that a product team stopped thinking of AI as a showcase
+			and started thinking of it as a way to support someone through a bad moment.
+		</p>
+	</section>
+
+	<section id="reflection">
+		<div class="sec-head"><span class="sec-num">05</span><h2>Reflection</h2><span class="sec-rule"></span></div>
+		<p>
+			The most valuable things this project produced were not the prototype. They were the reframe and the
+			insight behind it, that guilt isn't solved with features but by lowering the social cost of asking for
+			help. If I'd known how little runway was left, I would have spent less of the week polishing the
+			coded build and more of it writing that research down in a form that could travel on its own,
+			independent of the team that produced it.
+		</p>
+		<p>
+			Good research outlives bad timing, but only if someone builds it to. The artifact never got the
+			chance to prove itself. The thinking behind it should have been packaged to survive the people who
+			built it, and on every project since, the research readout has been written as if the team might not
+			be there to present it.
+		</p>
+	</section>
+
+	<NextCaseStudy href="/case-studies/quantalyric-mvp" label="Ninety hours, one chart worth funding" />
 </CaseStudyLayout>

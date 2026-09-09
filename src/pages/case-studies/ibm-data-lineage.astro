@@ -1,464 +1,331 @@
 ---
 import CaseStudyLayout from "@layouts/CaseStudyLayout.astro";
-import { caseStudies } from "@data/case-studies";
-const meta = caseStudies.find((s) => s.id === "ibm-data-lineage")!;
-import CaseStudySection from "@components/CaseStudySection.astro";
-import SectionHeading from "@components/SectionHeading.astro";
-import Description from "@components/Description.astro";
-import CaseStudyStatCards from "@components/CaseStudyStatCards.astro";
-import CaseStudyStatCard from "@components/CaseStudyStatCard.astro";
-import CaseStudyDecisionCard from "@components/CaseStudyDecisionCard.astro";
-import TextAndImageBlock from "@components/TextAndImageBlock.astro";
-import Testimonial from "@components/Testimonial.astro";
-import Presentation from "@components/Presentation.astro";
-import { slides as presentationSlides } from "@data/presentations/ibm-data-lineage";
+import CaseStudyHero from "@components/CaseStudyHero.astro";
+import CaseStudyMeta from "@components/CaseStudyMeta.astro";
+import Figure from "@components/Figure.astro";
+import Pull from "@components/Pull.astro";
+import ProcessColumns from "@components/ProcessColumns.astro";
+import Pivot from "@components/Pivot.astro";
+import Strip from "@components/Strip.astro";
+import ImagePair from "@components/ImagePair.astro";
+import Metrics from "@components/Metrics.astro";
+import NextCaseStudy from "@components/NextCaseStudy.astro";
 
-import IBMCompetitorLineage from "@img/ibm-competitor-lineage.png";
-import IBMSecondaryResearchCurrentPatents from "@img/ibm-secondary-research-current-patents.png";
-import IBMAnalagousInspiration from "@img/ibm-analagous-inspiration-another-team.png";
-import IBMConsolidatedPersonaExample from "@img/ibm-consolidated-persona-example-1.png";
-import IBMTheBefore from "@img/ibm-the-before.png";
-import IBMTheAfter from "@img/ibm-the-after.png";
-import IBMWatsonX from "@img/ibm-watsonx.png";
-import IBMWorkshop from "@img/ibm-workshop.jpg";
-import TestimonialLaurenPhoto from "@img/ibm-lauren-chen.jpg";
+import ibm01 from "@img/ibm-01.webp";
+import ibm02 from "@img/ibm-02.webp";
+import ibm03 from "@img/ibm-03.webp";
+import ibm04 from "@img/ibm-04.webp";
+import ibm08 from "@img/ibm-08.webp";
+import ibm09 from "@img/ibm-09.webp";
+import ibm10 from "@img/ibm-10.webp";
+import ibm11 from "@img/ibm-11.webp";
+import ibm12 from "@img/ibm-12.webp";
+
+const title = "Data lineage at IBM";
+const description =
+	"IBM's decade-old lineage tool took hours to draw a map an auditor needed instantly. Showing almost nothing, then letting people ask for more, cut load times by up to 90% and won a Red Dot Award.";
 ---
 
-<CaseStudyLayout
-	nextUrl="/case-studies/hpe-ai-troubleshooting-agent"
-	nextUrlText="Next Case Study: An AI Troubleshooting Agent for HPE"
-	{...meta}
->
-	<div slot="after-summary">
-		<Presentation slides={presentationSlides} label="Present this case study" />
-		<CaseStudyStatCards heading="Project Resources" columnNumber={2}>
-			<CaseStudyStatCard value="Design Lead" label="My role" />
-			<CaseStudyStatCard value="9" label="Months" />
-			<CaseStudyStatCard value="2" label="Other design team members" />
-			<CaseStudyStatCard
-				value="3"
-				label="Partner Companies: ING, State Street, Rabobank"
-			/>
-		</CaseStudyStatCards>
-		<CaseStudyStatCards
-			heading="Outcomes"
-			columnNumber={2}
-			marginTop="var(--space-10)"
-		>
-			<CaseStudyStatCard value="Red Dot Award" label="Received" />
-			<CaseStudyStatCard value="Up to 90%" label="Increase in performance" />
-			<CaseStudyStatCard value="$100K+" label="In new contracts" />
-			<CaseStudyStatCard value="2" label="Products at different pay tiers" />
-			<div class="outcome-summary">
-				<h4>6 years later and still relevant</h4>
-				<p>
-					My work has persisted, and is being actively used. You can see and try
-					the current state of data lineage at IBM.
-				</p>
-			</div>
-		</CaseStudyStatCards>
-	</div>
-	<CaseStudySection>
-		<SectionHeading title="Defining “Modern.”" number={2} />
-		<Description variant="case-study">
-			Modern data structures are massive, and always changing. To be modern
-			meant addressing the volatility of changing data landscapes that slow down
-			a user’s ability to get answers to their most pressing questions.
-		</Description>
-		<CaseStudyStatCards heading="The business case" columnNumber={2}>
-			<CaseStudyStatCard
-				value="Up to $23M"
-				label="In fines for regulatory compliance"
-			/>
-			<CaseStudyStatCard
-				value="300+"
-				label="Possible points of failure in a data pipeline"
-			/>
-			<CaseStudyStatCard value="Hours" label="To identify points of failure" />
-			<CaseStudyStatCard
-				value="100+"
-				label="Of UI gestures to identify points of failure"
-			/>
-		</CaseStudyStatCards>
-		<CaseStudyDecisionCard
-			title="Ship the “Summary View” — start focused, stay focused"
-			description="Competitors rendered the full diagram (slow) or forced manual queries (painful). The Summary View lands users on the simplest level — first source, end consumer — and lets them <strong>pull more detail when they need it.</strong>"
-			nonDecision="Show every node by default"
-			theDecision="Seconds to first useful answer"
-			outcome="Won concept testing on both desirability and usability. Time-to-value moved from hours to seconds."
-			internalSignals={[
-				[
-					"Technical constraint:",
-					"rendering a full lineage required millions of backend queries. No amount of UI polish would fix the load time.",
-				],
-				[
-					"Time-to-value KPI",
-					"demanded seconds, not hours — the metric existed because emergencies were the highest-value use case.",
-				],
-				[
-					"IBM design patterns",
-					"already favored progressive disclosure; the Summary View fit the design system, not against it.",
-				],
-			]}
-			externalSignals={[
-				[
-					"Desirability testing:",
-					"users responded strongest to “show me the headline, let me drill in,” not “show me everything.”",
-				],
-				[
-					"Competitor failure modes:",
-					"waiting for full renders or hand-querying the backend were both pain points users named without prompting.",
-				],
-				[
-					"Emergency context:",
-					"the use case isn’t browsing — it’s “garbage data is in prod, where did it come from, fix it in the next 20 minutes. The compliance auditor is here!”",
-				],
-			]}
-			fullOutcome="The Summary View lands users on the simplest level and provides tools to expand, filter, and search for specific metadata — bad data quality scores, ownership tags, the contact info needed to file a fix. It tested well in both desirability and usability rounds, and it became the foundation for the lineage tab that shipped."
-		/>
-		<TextAndImageBlock
-			browline="The before."
-			image={IBMTheBefore}
-			imageAlt="The original IBM Infosphere data lineage: a cramped technical diagram with no business metadata and details hidden behind hover tooltips."
-		>
-			<p>
-				This is a trivial data lineage from IBM Infosphere. Purely technical
-				metadata (revealed through a hover tooltip!), no business metadata, and
-				difficult to read.
-			</p>
-		</TextAndImageBlock>
-		<TextAndImageBlock
-			browline="The after."
-			image={IBMTheAfter}
-			imageAlt="The redesigned data lineage: a clean Summary View showing original sources and end consumers, with controls to expand the upstream and downstream flow on demand."
-		>
-			<p>
-				Put <strong>control of size and scope</strong> in the users’ hands. This
-				was achieved by surfacing the original sources of the data, and the end
-				consumers of it. Users can then choose how broadly to reveal the upstream
-				or downstream flow of data, and how granular they want their lineage to
-				be. They can even choose to filter down to the lineage of a specific
-				column in a dataset.
-			</p>
-		</TextAndImageBlock>
-	</CaseStudySection>
-	<CaseStudySection>
-		<SectionHeading title="Where did the idea come from?" number={3} />
-		<Description variant="case-study">
-			No single source gave us the Summary View. A competitor’s pattern, a freshly
-			filed patent, and an internal team’s diagram all three pointed at the same
-			problem and each one failed differently. The idea came from naming why all
-			three fell short.
-		</Description>
-		<CaseStudyDecisionCard
-			title="Synthesize three weak signals into one concept, rather than picking the closest match."
-			description="Collibra’s pattern, the pending patent, and the DevOps team’s diagram each solved one part of the problem — performance, clarity, or invitation to explore — and broke on the rest, so none of them was safe to adopt wholesale."
-			nonDecision="Adapt the closest existing pattern"
-			theDecision="A concept none of the three sources had shipped"
-			outcome="Won concept testing on both desirability and usability; became the pattern the rest of the product was built around."
-			internalSignals={[
-				[
-					"Team capacity and timeline",
-					"meant we couldn’t prototype three competing directions in parallel — we needed one synthesized hypothesis to test, not a bake-off.",
-				],
-				[
-					"IBM’s existing design system",
-					"already leaned toward progressive disclosure, so any concept that didn’t reduce visible complexity by default would have fought the system rather than used ",
-				],
-				[
-					"Patent exposure",
-					"was a live constraint: a concept too close to the filed patent’s “hide unless flagged” approach risked legal review eating into a tight build window.",
-				],
-			]}
-			externalSignals={[
-				[
-					"Collibra’s one-step-at-a-time expansion",
-					"managed performance but was tedious at our scale — 300+ steps meant users would click dozens of times to reach a source. That ruled out copying it directly.",
-				],
-				[
-					"The pending patent’s",
-					"“hide unless flagged” model reduced bloat but required a manual or automated flagging step — out of scope for an MVP and a dependency we didn’t control.",
-				],
-				[
-					"The DevOps team’s",
-					"grouped-diagram pattern invited exploration well but still required the same expensive backend queries to populate hidden counts — solving the UI problem without solving the performance problem.",
-				],
-				[
-					"Each of the three",
-					"solved one part of the problem (performance, clarity, or invitation to explore) and broke on another. Summary View’s two-tier structure — land on source/consumer only, drill in on demand — was the one combination that didn’t inherit any of the three failure modes.",
-				]
-			]}
-			fullOutcome="None of the three reference points could be adopted wholesale, but together they defined the shape of a solution that could: limit what’s rendered without manual flagging (unlike the patent), reach distant nodes without a tedious step-by-step click path (unlike Collibra), and avoid expensive backend queries on load (unlike the DevOps pattern). The Summary View was built to satisfy all three constraints at once, which is part of why it tested well immediately rather than going through several rounds of revision."
-		/>
-		<TextAndImageBlock
-			browline="From our competitor."
-			image={IBMCompetitorLineage}
-			imageAlt="Our competitor Collibra’s data lineage"
-			imagesIsTransparent
-		>
-			<p>
-				Our competitor Collibra had an expanding interaction in their data
-				lineage; however, it only allowed users to expand one step at a time.
-			</p>
-			<p>Pros:</p>
-			<ul>
-				<li>
-					Managed performance by limiting the amount of the data lineage
-					revealed at a time.
-				</li>
-			</ul>
-			<p>Cons:</p>
-			<ul>
-				<li>
-					Tedious process to get to original sources of data, and the design
-					pattern would not scale to our scope (~300 steps in our data
-					lineages).
-				</li>
-			</ul>
-		</TextAndImageBlock>
-		<TextAndImageBlock
-			browline="From secondary research on current patents."
-			image={IBMSecondaryResearchCurrentPatents}
-			imageAlt="Chart showing the data lineage with intermediary steps hidden"
-			imagesIsTransparent
-		>
-			<p>
-				A new patent had been filed during the time of the project that
-				described a data lineage where intermediary steps were hidden unless
-				flagged to always be shown.
-			</p>
-			<p>Pros:</p>
-			<ul>
-				<li>
-					Reduces bloat on the data lineage, leading to more relevant
-					information being surfaced first.
-				</li>
-			</ul>
-			<p>Cons:</p>
-			<ul>
-				<li>
-					Flagging requires metadata to be applied by the user or automatically,
-					either way it requires an additional user flow that would be out of
-					scope for our MVP.
-				</li>
-			</ul>
-		</TextAndImageBlock>
-		<TextAndImageBlock
-			browline="Analogous inspiration from another team."
-			image={IBMAnalagousInspiration}
-			imageAlt="Analogous inspiration from another team."
-			imagesIsTransparent
-		>
-			<p>
-				The DevOps team was designing a network diagram that mapped automations.
-				It used a pattern that grouped similar content, and showed how much
-				content was in the grouping.
-			</p>
-			<p>Pros:</p>
-			<ul>
-				<li>
-					Again, reduces bloat, but also invites the user to expand the diagram
-					to reveal more information.
-				</li>
-			</ul>
-			<p>Cons:</p>
-			<ul>
-				<li>
-					Would require the same expensive queries to fetch the count in the
-					hidden sections of the diagram.
-				</li>
-			</ul>
-		</TextAndImageBlock>
-	</CaseStudySection>
-	<CaseStudySection>
-		<SectionHeading
-			title="A unified experience targeting deep pain points."
-			number={4}
-		/>
-		<Description variant="case-study">
-			Three products — data catalog, data quality, and lineage — got folded into
-			one experience inside watsonx.
-		</Description>
-		<CaseStudyDecisionCard
-			title="Generalize the lineage model beyond the mandate, rather than let four other teams rebuild it separately."
-			description="Leadership had mandated folding lineage into watsonx alongside Catalog and Quality. What wasn’t mandated was that ETL, the AI model team, and others would come asking for the same logic, for data that looked nothing like ING’s banking transactions."
-			nonDecision="Ship lineage to the three-team spec"
-			theDecision="One pattern ETL and AI models could reuse."
-			outcome="Six years on, the same patterns still ship in IBM’s lineage product, and the platform-wide backlog it surfaced has since been built out by other designers."
-			internalSignals={[
-				[
-					"No formal authority",
-					"over Catalog’s, Quality’s, ETL’s, or the AI model team’s roadmaps — every team that wanted in had to be negotiated with, not instructed.",
-				],
-				[
-					"Leadership’s mandate",
-					"covered folding lineage into watsonx; it didn’t specify how seven teams, not three, would end up sharing one underlying model.",
-				],
-				[
-					"Generalizing for ETL and AI-model data",
-					"risked missing the original ship date; staying narrow risked several teams quietly rebuilding the same logic on their own.",
-				],
-			]}
-			externalSignals={[
-				[
-					"ING, State Street, and Rabobank set the bar",
-					"before the other teams ever showed up: from the work I did with them I built a mental model diagram which showed the extreme vigilance users have as they try to hunt down errors and fix them before the consequences hit.",
-				],
-				[
-					"ETL and the AI model team",
-					"weren’t assigned to this project; their designers came looking for the pattern on their own, which meant the model needed to abstract past banking transaction data to pipeline runs and model training data.",
-				],
-				[
-					"The persona and journey work",
-					"I  ran surfaced pain points beyond lineage’s own scope — paired with Data Quality’s mapping of the broader product ecosystem, it became the shared evidence both teams used to argue for where the experience needed to change.",
-				],
-			]}
-			fullOutcome="The model generalized enough that ETL’s and the AI model team’s designers could adapt the same lineage pattern instead of building their own version of “trace where this came from” for pipeline runs and training data. Six years after I left IBM, those same patterns are still part of the shipped lineage product, and the platform-wide opportunities the user journey surfaced have since been built out by other designers — the clearest evidence the abstraction landed at the right altitude: general enough to reuse, narrow enough to actually ship — and the original timeline held."
-		/>
-		<Testimonial
-			title="ING’s Point of View"
-			quote="“[Data lineage] should be like seeing out onto the assembly line of a factory. You can see where everything is and where things are going wrong.”"
-			subtitle="ING’s Chief Data Officer"
-		/>
-		<TextAndImageBlock
-			browline="Understanding how pain points move users."
-			image={IBMConsolidatedPersonaExample}
-			imageAlt="A large, in-depth journey map of a persona’s journey across data lineage"
-			imagesIsTransparent
-		>
-			<p>
-				I contributed an in-depth persona, user journey, and mental model
-				diagram. My work combined with the massive site map created by the data
-				quality team allowed our teams to have a unified strategy on how we move
-				the users from the paralyzing frustration of trying to find an error
-				that’s like a needle in a haystack to getting it fixed.
-			</p>
-		</TextAndImageBlock>
-		<TextAndImageBlock
-			browline="One info page, three products, a seamless way to fix problems."
-			image={IBMWatsonX}
-			imageAlt="IBM Watson X view of the Knowledge Catalog"
-		>
-			<p>
-				The largest behavioral pain point affecting our users is the belief in
-				the need for hyper-vigilance. Data structures can be brittle. Combining
-				our three products together lets users find where data has degraded
-				through lineage that tells users the quality of the data at each node in
-				the pipeline. And it allows them to go to the source of the degradation
-				and remediate that data, all in a few clicks.
-			</p><p>
-				The entire process takes a few minutes, which is a marked improvement
-				from the hours it used to take just to identify where degraded data sat
-				in the pipeline.
-			</p>
-		</TextAndImageBlock>
-	</CaseStudySection>
-	<CaseStudySection>
-		<SectionHeading title="Filling out the other requirements." number={5} />
-		<Description variant="case-study">
-			Novel as the Summary View was, it didn’t satisfy every requirement of a
-			full product experience. To round out the product, I facilitated regular
-			design workshops with our business partners to flesh out all the details.
-		</Description>
-		<CaseStudyDecisionCard
-			title="Bi-weekly co-creation with ING, State Street, and Rabobank."
-			description="Standard research would have meant interviews up front, then designing in a vacuum, then testing at the end. I proposed <strong>recurring co-creation</strong> with three named enterprise clients instead — generating and testing solutions in the same loop."
-			nonDecision="Faster, lighter research cadence"
-			theDecision="Desirability + feasibility in one loop"
-			outcome="Concepts arrived pre-validated by the exact buyers we needed to convert. The three workshop banks shaped the eventual renewals."
-			internalSignals={[
-				[
-					"Stakeholder breadth:",
-					"we needed to satisfy product management, engineering feasibility, UX research, and design leadership simultaneously. One feedback loop was cheaper than four.",
-				],
-				[
-					"Patent prior-art constraints",
-					"meant we needed external validation early — finding out late that a concept overlapped a competitor’s patent would have been catastrophic.",
-				],
-				[
-					"Workshop facilitation",
-					"was a skill I already brought to the team; co-creation amortized that capability.",
-				],
-			]}
-			externalSignals={[
-				[
-					"Enterprise sales cycle:",
-					"regulated-industry buyers commit slowly. Earning their input during design earned their advocacy during procurement.",
-				],
-				[
-					"Domain complexity:",
-					"data lineage means different things at a retail bank vs. an asset manager. Three workshop clients gave us range without diluting depth.",
-				],
-				[
-					"20+ interviews",
-					"had surfaced the questions, but answering them required iterative co-design — workshops let us test ideas in week 2, not month 6.",
-				],
-			]}
-			fullOutcome="Bi-weekly workshops with ING, State Street, and Rabobank generated desirability-tested concepts in the same session. By the time mid-fidelity prototypes hit formal usability testing, the riskiest ideas had already been triaged. The three workshop banks shaped the eventual contract renewals — they had skin in the design before they had skin in the deal."
-		/>
-		<TextAndImageBlock
-			browline="In person and online."
-			image={IBMWorkshop}
-			imageAlt="IBM workshop attendees gather around me as I facilitate co-creation sessions."
-			imageRatio="16/9"
-		>
-			<p>
-				These workshops really revealed the frustration our users had with the
-				lack of clear signal that something was wrong and where the errors
-				originated from. It led to the combination of surfacing the data quality
-				scores and the navigation patterns for the lineage diagram.
-			</p>
-			<p>
-				(This picture is from a workshop with ING’s CDO team, hosted at the IBM
-				offices in Poland, an 18-hour flight!)
-			</p>
-		</TextAndImageBlock>
-		<Testimonial
-			title="Lauren Chen"
-			quote="Nahi is a talented designer with an impressive range of skills and experiences. I’ve never met such a well-rounded designer who is skilled in everything: UX design, producing pixel-perfect hi-fidelity designs, leading workshops, conducting user research independently, defining product requirements, and stakeholder management."
-			subtitle="Co-worker"
-			image={TestimonialLaurenPhoto}
-			imageAlt="Professional headshot of Lauren Chen"
-		/>
-	</CaseStudySection>
-	<CaseStudySection paddingBottom>
-		<SectionHeading title="Lessons learned for the next time." number={6} />
-		<Description variant="case-study" margin="var(--space-4) var(--space-0) var(--space-0)">
-			The most difficult part of this project was ensuring that there was
-			alignment on every decision. Meetings were frequently derailed by
-			retreading old decisions. While it was necessary sometimes, I often found
-			myself spending hours rehashing decisions with stakeholders. Because of
-			this project, I started keeping a decision diary for my stakeholders where
-			we could refer to each decision made and why. Doing this from the start
-			would have freed up the hours we spent re-litigating old decisions — time
-			that mattered more than usual on a project where I was designing for
-			durability under deadline pressure, knowing the backlog would outlive my
-			own time at IBM.
-		</Description>
-	</CaseStudySection>
-</CaseStudyLayout>
+<CaseStudyLayout title={title} description={description}>
+	<CaseStudyHero eyebrow={["Product design", "IBM", "Data lineage in watsonx"]} title="Data lineage that answers in seconds, not hours">
+		When bad data reaches production at a bank, someone has to trace it back through three hundred steps
+		before the auditor arrives, and IBM's decade-old tool took hours to draw the map. Every competitor's
+		answer was a better way to show everything. Ours was to show almost nothing, then let people ask for
+		more. The result cut load times by up to 90%, won a Red Dot Award, and is still what IBM ships six years
+		later.
+	</CaseStudyHero>
 
-<style>
-	.outcome-summary {
-		padding: var(--space-5);
-		border-radius: var(--rounded-edge);
-		background-color: var(--color-romance);
-		border: 1px solid var(--color-rampart);
-		border-left: 3px solid var(--color-deep-nurse);
-		@media screen and (--bp-md) {
-			grid-column: span 2;
-		}
-		h4 {
-			font-size: var(--text-base);
-			line-height: var(--line-height-none);
-			margin-bottom: var(--space-4);
-		}
-		p {
-			font-family: var(--text-font-heading);
-			font-size: var(--text-2xs);
-			color: var(--color-oubliette);
-			line-height: var(--line-height-normal);
-			max-width: 20rem;
-		}
-	}
-</style>
+	<CaseStudyMeta
+		items={[
+			{ label: "Role", value: "Design lead, three-person UX team" },
+			{ label: "Partners", value: "ING, State Street, Rabobank" },
+			{ label: "Timeline", value: "9 months" },
+			{ label: "Research base", value: "20+ interviews, bi-weekly co-creation workshops with three client banks" },
+		]}
+	/>
+
+	<Figure
+		src={ibm01}
+		alt="IBM Watson Knowledge Catalog, Lineage tab for SAVINGS_ACCOUNTS. The starting asset sits in the centre with its business terms and 2 masked columns; three original-source CSV files sit on the left grouped as Client 360 and Customer 360 with counts like 2 of 24 assets; two reports and a model marked Final target sit on the right, each showing business terms and column counts."
+		figNum="Fig. 01"
+		lead="Start focused, stay focused."
+		wide
+		fit="contain"
+		deck
+		deckLabel="Shipped"
+	>
+		The lineage opens on the asset in question, its original sources on the left, its final targets on the
+		right, and everything in between folded into a count like "2 of 24 assets" until someone asks. Business
+		terms, masked columns, and ownership sit on the cards themselves, not behind a hover.
+	</Figure>
+
+	<section id="problem">
+		<div class="sec-head"><span class="sec-num">01</span><h2>The problem</h2><span class="sec-rule"></span></div>
+		<p>
+			Data lineage is how a bank proves where a number came from. Regulators expect it, and getting it
+			wrong can cost up to $23 million in fines, so the tool that draws the map matters more than its
+			modest name suggests. IBM Infosphere had been drawing that map for a decade, and it was about to be
+			folded into the new watsonx platform. The brief asked for three things at once: modernize the lineage
+			experience, make it fast, and put it where enterprise users already spend their day.
+		</p>
+		<p>
+			The real problem sat underneath the brief. A modern data pipeline has more than three hundred
+			possible points of failure, and Infosphere's answer was to render all of them, which meant millions
+			of backend queries before a single node appeared on screen. Finding one broken step took hours and
+			more than a hundred clicks. <strong class="deck-stat" data-deck-foot="IBM Infosphere, before the redesign|Up to $23M in compliance fines at stake"
+				>No amount of interface polish was going to fix a diagram that took hours to load.</strong
+			> The use case wasn't browsing, either. It was an emergency: bad data is in production, the compliance
+			auditor is in the building, and someone has twenty minutes to find where it came from.
+		</p>
+		<Figure
+			src={ibm02}
+			alt="IBM Infosphere Information Governance Catalog, Data Lineage for EFF_DURATION: an inventory panel listing 281 assets on the left and, on the right, a dense diagram of hundreds of tiny nodes joined by grey lines, too small to read"
+			figNum="Fig. 02"
+			lead="Everything, all at once."
+			fit="contain"
+			deck
+			deckLabel="Infosphere"
+		>
+			This was a trivial lineage by Infosphere's standards, and it still meant 281 assets in the inventory
+			and every node drawn by default, each one a thumbnail too small to read. What little metadata there
+			was appeared on hover, all of it technical, none of it business context.
+		</Figure>
+	</section>
+
+	<section id="research">
+		<div class="sec-head"><span class="sec-num">02</span><h2>What we found</h2><span class="sec-rule"></span></div>
+		<p>
+			Standard research would have meant interviews up front, design in a vacuum, and a usability test at
+			the end. Instead I proposed recurring co-creation with three named clients, ING, State Street, and
+			Rabobank, so that generating ideas and testing them happened in the same room every two weeks,
+			sometimes in person at IBM's offices in Poland and more often online across three time zones. More
+			than twenty interviews surfaced the questions; the workshops were where those questions got answered.
+		</p>
+		<p>
+			What the sessions kept revealing was vigilance. Users didn't describe browsing a lineage; they
+			described hunting through it, with the consequences of a miss already in motion. I turned that into a
+			persona, a journey map, and a mental model diagram, and the pattern held across a retail bank and an
+			asset manager alike: the frustration wasn't the size of the data, it was the absence of any clear
+			signal about what was wrong and where it had started.
+		</p>
+		<Pull
+			quote="Data lineage should be like seeing out onto the assembly line of a factory. You can see where everything is and where things are going wrong."
+			attribution="ING's Chief Data Officer, during a co-creation workshop"
+		/>
+		<Figure
+			src={ibm03}
+			alt="Persona and experience map for Betty, a business analyst who consumes data. The top block lists her asks, need statements, negative emotions, pain points, and requested metadata. Below, an emotional curve runs through five phases, naive use of data, guided use, development of autonomy, continuing collaboration, and mastery, with the lowest points where she cannot answer why her data is trustworthy and realizes she depends on data producers."
+			figNum="Fig. 03"
+			lead="The pain was dependence, not distance."
+			wide
+			fit="contain"
+			deck
+			deckLabel="Journey map"
+		>
+			Betty, the business analyst who consumes the data, hits her lowest points when she can't answer why
+			her data is trustworthy and realizes she has to ask the data producers. The map runs from naive use to
+			mastery, and mastery, at the far right, is being able to stand between the technical and business
+			sides herself.
+		</Figure>
+		<p>
+			Desirability testing pointed the same way. Asked to choose, users responded most strongly to "show me
+			the headline, then let me drill in," and least to "show me everything." <strong
+				class="deck-stat"
+				data-deck-label="The headline"
+				data-deck-foot="What desirability testing showed|ING, State Street, Rabobank"
+				>People didn't want a bigger map. They wanted the first useful answer, then the option to keep
+				going.</strong
+			> That preference lined up with IBM's own design system, which already leaned toward progressive disclosure,
+			and with a time-to-value KPI that demanded seconds rather than hours because emergencies were the highest-value
+			moment the product had.
+		</p>
+		<Figure
+			src={ibm04}
+			alt="A workshop room at IBM's offices in Poland: eight attendees stand with their backs to the camera, gathered around a wall covered in orange and blue sticky notes, while the facilitator at the wall works through them"
+			figNum="Fig. 04"
+			lead="Skin in the design before skin in the deal."
+			tall
+			fit="center"
+			deck
+			deckLabel="Workshop"
+		>
+			Concepts arrived at formal usability testing already shaped by the exact buyers IBM needed to convert.
+			The same three banks went on to shape the contract renewals.
+		</Figure>
+	</section>
+
+	<section id="approach">
+		<div class="sec-head"><span class="sec-num">03</span><h2>Three sources, one view</h2><span class="sec-rule"></span></div>
+		<p>
+			No single reference gave us the answer. A competitor's pattern, a freshly filed patent, and a diagram
+			from another IBM team each solved one part of the problem and broke on another, so none was safe to
+			adopt wholesale. The idea came from naming exactly why each one fell short.
+		</p>
+		<ProcessColumns
+			land
+			deckLabel="Three sources"
+			deckCaption="Each reference solved one part of the problem, performance, clarity, or an invitation to explore, and broke on the rest."
+			items={[
+				{
+					stepLabel: "Source 01",
+					frameN: "01",
+					title: "The competitor",
+					imgAlt: "Diagram labelled Competitor: one pink data lineage node joined by a dashed line to a grey hidden node with a single button, Show next node",
+					placeholderLabel: "Collibra's one-step expansion",
+					body: "Collibra let users expand a lineage one step at a time, which kept performance in check. At our scale it was tedious to the point of failure: reaching an original source through three hundred steps meant dozens of clicks, so copying it directly was ruled out.",
+				},
+				{
+					stepLabel: "Source 02",
+					frameN: "02",
+					title: "The patent",
+					imgAlt: "Diagram labelled Patent: four nodes in a row, the second greyed out as a hidden node, with an arrow skipping over it from the first node to the third",
+					placeholderLabel: "The pending patent",
+					body: "A patent filed during the project hid intermediary steps unless they'd been flagged to always show. It cut the bloat, but flagging needs metadata applied by a person or a process, an extra flow that was out of scope for an MVP and a dependency we didn't control.",
+				},
+				{
+					stepLabel: "Source 03",
+					frameN: "03",
+					title: "The neighbor",
+					imgAlt: "Diagram labelled Internal: two pink nodes with two grey hidden nodes between them, covered by one dark button reading Show 2 hidden nodes",
+					placeholderLabel: "The DevOps team's grouped diagram",
+					body: "Another IBM team was mapping automations with a diagram that grouped similar content and showed how much was inside each group. It invited exploration well, but populating those counts required the same expensive backend queries we were trying to avoid.",
+				},
+			]}
+		/>
+
+		<Pivot heading="Show the source and the consumer. Draw nothing else until someone asks.">
+			The Summary View lands on the simplest possible level of a lineage, the first source and the end
+			consumer, and puts the size and scope of everything else in the user's hands. From there a person can
+			expand upstream or downstream, filter to bad quality scores or ownership tags, search for the contact
+			who can file a fix, or narrow the whole diagram to a single column in a dataset. It rendered without
+			manual flagging, unlike the patent; reached distant nodes without a click-by-click march, unlike
+			Collibra; and avoided expensive queries on load, unlike the DevOps pattern. It won concept testing on
+			both desirability and usability the first time out, and time-to-value moved from hours to seconds.
+		</Pivot>
+
+		<Strip
+			full
+			solo
+			deckLabel="Summary View"
+			figNum="Fig. 05"
+			lead="Control of size and scope, handed to the user."
+			items={[
+				{
+					frameN: "01",
+					dataLabel: "Land on source and consumer",
+					imgSrc: ibm08,
+					imgAlt: "IBM Watson Knowledge Catalog Lineage view for SAVINGS_ACCOUNTS, with an annotation reading: assets at either end of a lineage do not change often so it's safe to cache them, assets in the middle can change by the hour which means frequent calls to the back end for updates",
+				},
+				{
+					frameN: "02",
+					dataLabel: "Expand upstream on demand",
+					imgSrc: ibm09,
+					imgAlt: "Annotated screen titled Lineage Navigation, subtitled you should be able to explore lineage like you were using Google Maps: hovering an asset reveals a directional arrow, clicking it opens a menu with Show next asset, Show assets to, and Show all",
+				},
+				{
+					frameN: "03",
+					dataLabel: "Filter to what matters",
+					imgSrc: ibm10,
+					imgAlt: "Annotated screen of the COLLECTIONS_DW node showing 2 of 14 columns filtered into view, each with its own business terms, and a note that deeper technical, operational and governance metadata sits in a toggleable info panel",
+				},
+			]}
+		>
+			Each step reveals only what was asked for. The diagram never gets bigger than the question.
+		</Strip>
+
+		<p>
+			The Summary View was novel, but it didn't satisfy every requirement of a full product on its own, and
+			the mandate was bigger than lineage anyway: leadership wanted lineage, the data catalog, and data
+			quality folded into one experience inside watsonx. Combining them let a user see the quality of the
+			data at every node in a pipeline, walk to the source of the degradation, and fix it, all in a few
+			clicks and a few minutes rather than the hours it used to take just to find where the degraded data
+			sat. What nobody mandated was that the ETL team and the AI model team would come asking for the same
+			logic, for pipeline runs and training data that looked nothing like ING's banking transactions. I had
+			no authority over any of their roadmaps. <strong
+				class="deck-stat"
+				data-deck-label="One model"
+				data-deck-foot="Seven teams, one lineage model|IBM watsonx"
+				>Generalizing the model past banking data risked the ship date; staying narrow risked several teams
+				quietly rebuilding the same thing.</strong
+			> We generalized, and the original timeline held.
+		</p>
+
+		<ImagePair
+			deckLabel="Before / after"
+			items={[
+				{
+					fn: "Before",
+					imgSrc: ibm11,
+					imgAlt: "IBM Infosphere Information Governance Catalog, Data Lineage: an inventory panel listing 281 assets on the left and a dense diagram of hundreds of tiny nodes joined by grey lines, too small to read",
+					fit: "contain",
+					caption: "Hours to load, a hundred clicks to find the break, and nothing on screen to say which node was the problem.",
+				},
+				{
+					fn: "After",
+					imgSrc: ibm12,
+					imgAlt: "IBM Watson Knowledge Catalog, Lineage tab for SAVINGS_ACCOUNTS: the starting asset sits in the centre with its business terms, three original-source files sit on the left folded to 2 of 24 assets, and two reports and a model marked Final target sit on the right",
+					fit: "contain",
+					caption: "Seconds to the first useful answer, and a path from finding the break to fixing it without leaving the screen.",
+				},
+			]}
+		/>
+	</section>
+
+	<section id="outcome">
+		<div class="sec-head"><span class="sec-num">04</span><h2>Outcome</h2><span class="sec-rule"></span></div>
+		<p>Measured after launch, and in the years since:</p>
+		<Metrics
+			three
+			items={[
+				{ n: "−90%", label: "Loading time, at the high end. Time-to-value moved from hours to seconds" },
+				{ n: "$100K+", label: "In new contracts, shaped by the three banks who'd co-designed the product" },
+				{ n: "Red Dot", label: "Award for the redesign, with two products shipped at different pay tiers" },
+			]}
+		/>
+		<p>
+			The clearer measure is time. Six years after I left IBM, the same patterns are still part of the
+			shipped lineage product, the ETL and AI model teams' designers adapted the model rather than building
+			their own version of "trace where this came from," and the platform-wide backlog the journey work
+			surfaced has since been built out by other designers. That's the evidence the abstraction landed at
+			the right altitude: general enough to reuse, narrow enough to ship on time.
+		</p>
+		<Pull
+			quote="I've never met such a well-rounded designer who is skilled in everything: UX design, producing pixel-perfect hi-fidelity designs, leading workshops, conducting user research independently, defining product requirements, and stakeholder management."
+			attribution="Lauren Chen, co-worker at IBM"
+			deckLabel="Testimonial"
+		/>
+		<Figure
+			alt="IBM Cloud Pak for Data, Lineage tab for the gdpr-analysis-workbook report: opens on two original-source assets feeding a starting asset, then opens the Show query items panel to pick which columns appear in the lineage graph"
+			figNum="Fig. 06"
+			lead="Still the front door, six years later."
+			tall
+			fit="contain"
+			deck
+			deckLabel="Six years on"
+			placeholderLabel="Figure 06"
+		>
+			The work outlived the team that built it. Open IBM's lineage today and it still opens folded to
+			source and consumer, still expands a step at a time, and still asks which columns are worth showing
+			before it draws them.
+		</Figure>
+	</section>
+
+	<section id="reflection">
+		<div class="sec-head"><span class="sec-num">05</span><h2>Reflection</h2><span class="sec-rule"></span></div>
+		<p>
+			The hardest part of this project wasn't the diagram. It was keeping seven teams aligned on decisions
+			that had already been made. Meetings kept circling back to settled questions, and while some of that
+			revisiting was healthy, I spent hours I didn't have re-litigating choices with stakeholders who'd
+			agreed to them a month earlier. Alignment, it turned out, has a half-life.
+		</p>
+		<p>
+			Because of this project I started keeping a decision diary: a running record, shared with
+			stakeholders, of each decision, when it was made, and why. Starting it on day one would have given
+			back most of those hours, and on a project where I was designing for durability under deadline
+			pressure, knowing the backlog would outlive my own time at IBM, those hours mattered more than usual.
+			Every project since has had one from the first week.
+		</p>
+	</section>
+
+	<NextCaseStudy href="/case-studies/hpe-ai-troubleshooting-agent" label="Debugging's hardest step was asking for help" />
+</CaseStudyLayout>
