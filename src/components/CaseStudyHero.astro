@@ -1,0 +1,17 @@
+---
+interface Props {
+	eyebrow: string[];
+	title: string;
+}
+
+const { eyebrow, title } = Astro.props;
+---
+
+<div class="hero">
+	<div class="eyebrow">
+		<span class="dot"></span>
+		{eyebrow.map((item, i) => <Fragment>{i > 0 && <span>·</span>}<span>{item}</span></Fragment>)}
+	</div>
+	<h1>{title}</h1>
+	<p class="lede measure"><slot /></p>
+</div>

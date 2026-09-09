@@ -1,0 +1,226 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Contact from "@components/Contact.astro";
+
+const hobbies = [
+	{
+		title: "Woodworking",
+		blurb: "Slow, hands-on work with wood. No screens, no undo button, just the shape you're actually left with.",
+		alt: "Shaping a piece of wood by hand",
+		src: "/video/woodworking.mp4",
+	},
+	{
+		title: "Fish keeping",
+		blurb: "A small tank, including a pea puffer, that mostly just needs to be watched.",
+		alt: "A pea puffer fish drifting through its tank",
+		src: "/video/pea-puffer.mp4",
+	},
+	{
+		title: "Museums",
+		blurb: "Given a free afternoon, most of it goes to a museum, like this swing at the Mercer.",
+		alt: "A visit to the Mercer Museum, caught mid-motion on a swing bathed in light",
+		src: "/video/mercer-lab.mp4",
+	},
+	{
+		title: "Cats",
+		blurb: "Two of them, including Dante here. They outvote me on most household decisions.",
+		alt: "Nahi's cat Dante",
+		src: "/video/dante.mp4",
+	},
+];
+---
+
+<BaseLayout title="About" description="A few other things about Nahi Kennedy-Nuñez.">
+	<main id="main">
+		<div class="wrap">
+			<div class="hero">
+				<div class="eyebrow"><span class="dot"></span><span>Grounded · Craftsman · Open to full-time roles</span></div>
+				<h1>A few other things <span class="hl">about me</span></h1>
+				<p class="lede measure">
+					I'm a Senior UX designer based in New York, currently looking for a full-time seat on a mission-driven team. That's the work. Here's most of the rest.
+				</p>
+			</div>
+
+			<div class="about">
+				<div class="about-photo" role="img" aria-label="Nahi Kennedy-Nuñez"></div>
+				<p class="about-text">
+					I've got a steady, disciplined approach to my craft, equally at home shaping wood by hand, watching my
+					fish drift through their little world, getting outvoted by my two cats, or losing an afternoon to a
+					good museum.
+				</p>
+			</div>
+
+			<div class="facts">
+				<div class="fact"><div class="fact-k">Cats</div><div class="fact-v">2 stinkers</div></div>
+				<div class="fact"><div class="fact-k">Hobbies</div><div class="fact-v">Too many</div></div>
+				<div class="fact"><div class="fact-k">Jokes</div><div class="fact-v">Awful</div></div>
+			</div>
+
+			<section id="outside-of-design">
+				<div class="sec-head"><h2>Outside of design</h2><span class="sec-rule"></span></div>
+				<div class="hobbies">
+					{
+						hobbies.map((hobby) => (
+							<div class="hobby">
+								<div class="hobby-video">
+									<video autoplay muted loop playsinline data-ambient aria-label={hobby.alt}>
+										<source src={hobby.src} type="video/mp4" />
+									</video>
+								</div>
+								<div class="hobby-body">
+									<div class="hobby-title">{hobby.title}</div>
+									<div class="hobby-blurb">{hobby.blurb}</div>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<Contact />
+
+			<div class="closing"><a href="/#work">← Back to the case studies</a></div>
+		</div>
+	</main>
+</BaseLayout>
+
+<style>
+	.hero {
+		padding: 64px 0 0;
+	}
+	h1 {
+		font-size: clamp(36px, 6vw, 60px);
+		font-weight: 600;
+		line-height: 1.08;
+		letter-spacing: -0.02em;
+		margin: 0 0 24px;
+		text-wrap: balance;
+		max-width: 15ch;
+	}
+	.lede {
+		font-size: 19px;
+		line-height: 1.75;
+		color: var(--ink-mid);
+		text-wrap: pretty;
+		max-width: var(--measure);
+	}
+	.about {
+		display: flex;
+		align-items: flex-start;
+		gap: 30px;
+		padding: 52px 0 32px;
+		margin-bottom: 8px;
+	}
+	.about-photo {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		flex-shrink: 0;
+		border: 1px solid var(--rule);
+		background:
+			repeating-linear-gradient(135deg, color-mix(in srgb, var(--ink) 5%, transparent) 0 1px, transparent 1px 13px),
+			var(--surface);
+	}
+	.about-text {
+		font-size: 16px;
+		line-height: 1.85;
+		color: var(--ink-mid);
+		max-width: 560px;
+	}
+	.facts {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1px;
+		background: var(--rule);
+		border: 1px solid var(--rule);
+		border-radius: 2px;
+		overflow: hidden;
+		margin-bottom: 64px;
+	}
+	.fact {
+		background: var(--surface);
+		padding: 18px 20px;
+	}
+	.fact-k {
+		font-family: var(--font-mono);
+		font-size: 10px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--ink-soft);
+		margin-bottom: 6px;
+	}
+	.fact-v {
+		font-family: var(--font-display);
+		font-size: 20px;
+		font-weight: 600;
+		color: var(--mark);
+	}
+	.hobbies {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 26px;
+	}
+	.hobby {
+		display: block;
+		background: var(--surface);
+		border: 1px solid var(--rule);
+		border-radius: 3px;
+		overflow: hidden;
+		color: inherit;
+	}
+	.hobby-video {
+		aspect-ratio: 5 / 6;
+		overflow: hidden;
+		background:
+			repeating-linear-gradient(135deg, color-mix(in srgb, var(--ink) 5%, transparent) 0 1px, transparent 1px 13px),
+			var(--surface);
+		border-bottom: 1px solid var(--rule);
+	}
+	.hobby-video video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+	.hobby-body {
+		padding: 22px 24px 24px;
+	}
+	.hobby-title {
+		font-family: var(--font-display);
+		font-size: 18px;
+		font-weight: 500;
+		color: var(--ink);
+		margin-bottom: 9px;
+		letter-spacing: -0.01em;
+	}
+	.hobby-blurb {
+		font-size: 14.5px;
+		line-height: 1.75;
+		color: var(--ink-mid);
+	}
+	@media (max-width: 820px) {
+		.hobbies {
+			grid-template-columns: 1fr;
+		}
+	}
+	@media (max-width: 600px) {
+		h1 {
+			font-size: 32px;
+		}
+		.lede {
+			font-size: 16.5px;
+		}
+		.hero {
+			padding: 32px 0 0;
+		}
+		.about {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 18px;
+			padding: 36px 0 32px;
+		}
+		.facts {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

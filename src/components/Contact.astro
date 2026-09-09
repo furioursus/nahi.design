@@ -1,61 +1,23 @@
 ---
-import SectionHeading from "./SectionHeading.astro";
-import Description from "./Description.astro";
-import Button from "./Button.astro";
-
-interface Props {
-	compact?: boolean;
-}
-
-const { compact = false } = Astro.props;
 ---
 
-<div class:list={["contact named-hash", { compact }]} id="contact">
-	<div class="container">
-		<div class="section-inner">
-			<SectionHeading
-				title="Contact Info"
-				number={3}
-				caption="Why did 213 show up on your caller ID?"
-			/>
-			<Description
-				color="var(--color-oubliette)"
-				margin="var(--space-4) 0 var(--space-5)"
-			>
-				I’m a Senior UX Designer based in NYC, currently exploring full-time
-				opportunities with mission-driven organizations where thoughtful design
-				can make a real difference. If you’re working on something meaningful,
-				I’d love to hear from you.
-			</Description>
-			<div class="button-container">
-				<Button href="/nahi-kennedy-nunez-resume.pdf">Download Resume</Button>
-				<Button href="mailto:hello@nahi.design" obfuscate>Email Me</Button>
-			</div>
+<section id="contact">
+	<div class="sec-head"><h2>Get in touch</h2><span class="sec-rule"></span></div>
+	<div class="contact">
+		<h3>Let's talk</h3>
+		<p>I'm actively looking for a full-time seat on a mission-driven team. The best way to reach me is email, and I'm also on LinkedIn.</p>
+		<div class="contact-links">
+			<a class="contact-link btn-primary" href="mailto:hello@nahi.design" data-obfuscation>
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+					><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7 L12 13 L21 7"></path></svg
+				>hello@nahi.design
+			</a>
+			<a class="contact-link btn-line" href="https://www.linkedin.com/in/nahidesign/" target="_blank" rel="noopener">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+					><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M7.5 10.5 L7.5 17"></path><circle cx="7.5" cy="7.3" r=".4" fill="currentColor" stroke="none"
+					></circle><path d="M11.5 17 L11.5 13 a2 2 0 0 1 4 0 L15.5 17"></path></svg
+				>linkedin.com/in/nahidesign
+			</a>
 		</div>
 	</div>
-</div>
-
-<style>
-	.contact {
-		padding: var(--space-20) 0;
-		&.compact {
-			padding: var(--space-10) 0;
-		}
-	}
-	@media screen and (--bp-md) {
-		.contact {
-			padding: var(--space-80) 0;
-			&.compact {
-				padding: var(--space-20) 0;
-			}
-		}
-	}
-	.button-container {
-		display: inline-flex;
-		flex-direction: column;
-		gap: var(--space-7);
-		@media screen and (--bp-md) {
-			flex-direction: row;
-		}
-	}
-</style>
+</section>

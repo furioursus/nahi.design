@@ -1,87 +1,144 @@
 ---
-import Browline from "./Browline.astro";
-import Description from "./Description.astro";
+import homepage01 from "@img/homepage-01.png";
+import homepage02 from "@img/homepage-02.png";
 ---
 
-<div class="hero-wrapper">
-	<div class="hero container">
-		<div class="hero-intro">
-			<Browline marginBottom>UX Designer • Facilitator</Browline>
-			<h1>Nahi Kennedy&#8209;Nuñez</h1>
-			<Description color="var(--color-oubliette)">
-				I’m a UX/UI designer who transforms complex systems, from AI platforms
-				and data infrastructure to public health, into experiences that are
-				intuitive, accessible, and built to last.
-			</Description>
-		</div>
-		<div class="sidebar">
-			<ul>
-				<li>
-					<Browline>Cats</Browline>
-					<p>2 stinkers</p>
-				</li>
-				<li>
-					<Browline>Hobbies</Browline>
-					<p>Too Many</p>
-				</li>
-				<li>
-					<Browline>Jokes</Browline>
-					<p>Awful</p>
-				</li>
-			</ul>
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+	<filter id="watermarkFuzz" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+		<feGaussianBlur stdDeviation="14" in="SourceGraphic" edgeMode="none"></feGaussianBlur>
+	</filter>
+</svg>
+
+<div class="hero-full">
+	<div class="hero-watermark" style={`--mask-1:url('${homepage01.src}');--mask-2:url('${homepage02.src}')`}></div>
+	<div class="hero-inner">
+		<div class="hero-name-row">
+			<div class="eyebrow hero-anim d1"><span class="dot"></span>Product &amp; UX Designer</div>
+			<h1 class="hero-name hero-anim d2">Nahi<br /><span class="hl">Kennedy-Nuñez</span></h1>
 		</div>
 	</div>
 </div>
 
 <style>
-	.hero-wrapper {
-		max-width: 100%;
-		padding: var(--space-10) 0;
-		@media (--bp-md) {
-			padding: var(--space-20) 0;
-		}
-	}
-	.hero {
+	.hero-full {
+		position: relative;
+		overflow: hidden;
+		min-height: 76vh;
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
-		@media (--bp-md) {
-			flex-direction: row;
-			align-items: stretch;
+		justify-content: center;
+		padding: 64px 0 56px;
+	}
+	.hero-inner {
+		padding-left: max(32px, calc((100vw - 920px) / 2 + 32px));
+		padding-right: 4vw;
+	}
+	.hero-watermark {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 132vw;
+		max-width: none;
+		aspect-ratio: 1152 / 588;
+		transform: translate(-50%, -50%);
+		background-image: radial-gradient(circle at 50% 50% in oklch, #f6c445 0%, #ce9a2e 22%, #b33a55 48%, #5c0b22 72%, #5c0b22 100%);
+		background-size: 220% 220%;
+		animation: watermarkPan 16s ease-in-out infinite;
+		opacity: 0.7;
+		-webkit-filter: url(#watermarkFuzz);
+		filter: url(#watermarkFuzz);
+		-webkit-mask: var(--mask-1) center / contain no-repeat;
+		mask: var(--mask-2) center / contain no-repeat;
+		pointer-events: none;
+	}
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-theme="light"]) .hero-watermark {
+			opacity: 0.4;
 		}
 	}
-	.hero-intro {
-		flex: 1;
+	:root[data-theme="dark"] .hero-watermark {
+		opacity: 0.4;
 	}
-	h1 {
-		margin-bottom: var(--space-4);
-	}
-	.sidebar {
-		font-family: var(--text-font-heading);
-		font-size: var(--text-xs);
-		border-color: var(--color-sunbleached);
-		border-width: 1px;
-		border-left: none;
-		border-top-style: solid;
-		padding-top: var(--space-3);
-		margin-top: var(--space-3);
-		@media (--bp-md) {
-			border-top: none;
-			border-left: solid 1px var(--color-dovetail);
-			padding-top: var(--space-0);
-			margin-top: var(--space-0);
-			padding-left: var(--space-6);
-			margin-left: var(--space-6);
+	@keyframes watermarkPan {
+		0% {
+			background-position: 22% 32%;
 		}
-		display: flex;
-		align-items: center;
+		25% {
+			background-position: 78% 24%;
+		}
+		50% {
+			background-position: 70% 78%;
+		}
+		75% {
+			background-position: 24% 72%;
+		}
+		100% {
+			background-position: 22% 32%;
+		}
 	}
-	ul {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: var(--space-8);
-		@media screen and (--bp-md) {
-			grid-template-columns: 1fr;
+	.hero-name-row {
+		position: relative;
+		z-index: 1;
+	}
+	.hero-name {
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: clamp(56px, 10.5vw, 168px);
+		line-height: 0.94;
+		letter-spacing: -0.02em;
+		margin: 0;
+		max-width: none;
+		text-wrap: balance;
+	}
+	.hero-name .hl {
+		color: var(--mark);
+	}
+	@keyframes heroUp {
+		from {
+			opacity: 0;
+			transform: translateY(16px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	.hero-anim {
+		animation: heroUp 0.8s var(--ease) both;
+	}
+	.hero-anim.d1 {
+		animation-delay: 0.05s;
+	}
+	.hero-anim.d2 {
+		animation-delay: 0.16s;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.hero-anim {
+			animation: none;
+			opacity: 1;
+			transform: none;
+		}
+	}
+	@media (max-width: 600px) {
+		.hero-full {
+			min-height: 0;
+			padding: 44px 0 40px;
+		}
+		.hero-inner {
+			padding: 0 20px;
+		}
+		.hero-watermark {
+			width: 180vw;
+			opacity: 0.574;
+		}
+		.eyebrow {
+			margin-bottom: 16px;
+		}
+		.hero-name {
+			font-size: clamp(40px, 16vw, 68px);
+		}
+		.hero-name-row {
+			padding-right: 0;
 		}
 	}
 </style>

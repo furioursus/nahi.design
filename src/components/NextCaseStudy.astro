@@ -1,0 +1,13 @@
+---
+interface Props {
+	href: string;
+	label: string;
+}
+
+const { href, label } = Astro.props;
+---
+
+<div class="next">
+	<div class="next-k">Next case study</div>
+	<a class="next-link" href={href}>{label} <span class="arw">→</span></a>
+</div>

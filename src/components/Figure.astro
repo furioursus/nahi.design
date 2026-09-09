@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+	src?: ImageMetadata;
+	alt: string;
+	figNum: string;
+	lead: string;
+	wide?: boolean;
+	tall?: boolean;
+	bare?: boolean;
+	fit?: "contain" | "center";
+	deck?: boolean;
+	deckLabel?: string;
+	placeholderLabel?: string;
+}
+
+const { src, alt, figNum, lead, wide, tall, bare, fit, deck, deckLabel, placeholderLabel } =
+	Astro.props;
+---
+
+<figure
+	class:list={["rev", { wide }]}
+	data-deck={deck ? "image" : undefined}
+	data-deck-label={deckLabel}
+	data-fit={fit}
+>
+	<div class:list={["frame", { tall, "has-img": src, bare: bare && src }]}>
+		{
+			src ? (
+				<Image src={src} alt={alt} />
+			) : (
+				<div class="frame-tag">
+					<b>{placeholderLabel}</b>
+					{alt}
+				</div>
+			)
+		}
+	</div>
+	<figcaption>
+		<span class="fn">{figNum}</span>
+		<span><strong class="fig-lead">{lead}</strong><slot /></span>
+	</figcaption>
+</figure>

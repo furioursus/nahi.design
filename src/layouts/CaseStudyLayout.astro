@@ -1,187 +1,144 @@
 ---
-import type { CaseStudyMeta } from "@data/case-studies";
 import BaseLayout from "./BaseLayout.astro";
-import HeroImage from "@components/HeroImage.astro";
-import Browline from "@components/Browline.astro";
-import Description from "@components/Description.astro";
-import CaseStudySummary from "@components/CaseStudySummary.astro";
+import CaseStudyTopbar from "@components/CaseStudyTopbar.astro";
+import DeckLightbox from "@components/DeckLightbox.astro";
 
-interface Props extends CaseStudyMeta {
-	nextUrl?: string;
-	nextUrlText?: string;
+interface Props {
+	title: string;
+	description: string;
 }
 
-const { nextUrl, nextUrlText, ...meta } = Astro.props;
-const {
-	title,
-	status,
-	services,
-	tags,
-	summary,
-	thumbSummary,
-	heroImage,
-	heroImageAlt,
-	summaryDetail,
-	theAsk,
-	theApproach,
-	theOutcome,
-} = meta;
+const { title, description } = Astro.props;
 ---
 
-<BaseLayout title={`Case Study: ${title}`} description={thumbSummary}>
-	<div class="container">
-		<header class="case-study-hero">
-			<div class="case-study-intro">
-				<Browline marginBottom>
-					{
-						tags.map((item, idx) => (
-							<span class="info-item">
-								{item}
-								{idx < tags.length - 1 && " • "}
-							</span>
-						))
-					}
-				</Browline>
-				<h1 class="title">{title}</h1>
-				<Description variant="case-study" margin="var(--space-0)">
-					{summary}
-				</Description>
-			</div>
-			<div class="sidebar">
-				<ul>
-					<li class="status">
-						<Browline>Status</Browline>
-						<p>{status}</p>
-					</li>
-					<li class="services">
-						<Browline>Services</Browline>
-						<ul class="service-list">
-							{services.map((item) => <li class="service-item">{item}</li>)}
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</header>
-
-		<HeroImage
-			image={heroImage}
-			alt={heroImageAlt}
-		/>
-
-		<article class="case-study-body">
-			<CaseStudySummary
-				summaryDetail={summaryDetail}
-				theAsk={theAsk}
-				theApproach={theApproach}
-				theOutcome={theOutcome}
-			/>
-			<slot name="after-summary" />
+<BaseLayout title={title} description={description} showNav={false}>
+	<a class="sr-only" href="#main">Skip to case study</a>
+	<CaseStudyTopbar title={title} />
+	<main id="main">
+		<div class="wrap">
 			<slot />
-		</article>
-		<footer class="full-width-breakout">
-			<div class="container">
-				<div class="footer-links">
-					<div class="go-to-next">
-						{nextUrl && nextUrlText && <a href={nextUrl}>{nextUrlText} →</a>}
-					</div>
-					<div class="contact-links">
-						<a href="mailto:hello@nahi.design" data-obfuscation>hello@nahi.design</a>
-						<a href="https://www.linkedin.com/in/nahidesign/">LinkedIn</a>
-					</div>
-				</div>
-			</div>
-		</footer>
-	</div>
+		</div>
+	</main>
+	<DeckLightbox title={title} />
 </BaseLayout>
 
-<style>
-	.case-study-hero {
-		padding-top: var(--space-20);
-		padding-bottom: var(--space-20);
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		@media (--bp-md) {
-			flex-direction: row;
-			align-items: stretch;
-		}
-	}
-	.case-study-intro {
-		flex: 1;
-	}
+<script>
+	document.documentElement.classList.add("js-reveal");
 
-	.title {
-		font-size: var(--text-3xl);
-		margin-bottom: var(--space-4);
-	}
+	/* Scroll reveal — figures, quotes, and process columns only. Fails open:
+	   content is visible unless the browser confirms it can observe and animate it. */
+	(function () {
+		const html = document.documentElement;
+		const items = Array.from(document.querySelectorAll(".rev"));
+		function showAll() {
+			html.classList.remove("js-reveal");
+		}
+		if (!items.length) {
+			showAll();
+		} else if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+			showAll();
+		} else {
+			let fired = false;
+			const io = new IntersectionObserver(
+				(es) => {
+					fired = true;
+					es.forEach((e) => {
+						if (!e.isIntersecting) return;
+						const sibs = Array.from(e.target.parentNode!.children).filter((n) => n.classList.contains("rev"));
+						const k = sibs.indexOf(e.target);
+						(e.target as HTMLElement).style.transitionDelay = (k > 0 ? Math.min(k, 3) * 55 : 0) + "ms";
+						e.target.classList.add("in");
+						io.unobserve(e.target);
+					});
+				},
+				{ threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+			);
+			items.forEach((n) => io.observe(n));
+			const net = () => {
+				if (!fired) {
+					showAll();
+					return;
+				}
+				items.forEach((n) => {
+					if (n.classList.contains("in")) return;
+					const r = n.getBoundingClientRect();
+					if (r.top < window.innerHeight && r.bottom > 0) n.classList.add("in");
+				});
+			};
+			window.addEventListener("load", () => setTimeout(net, 400));
+			setTimeout(net, 2500);
+		}
+	})();
 
-	.sidebar {
-		font-family: var(--text-font-heading);
-		font-size: var(--text-xs);
-		border-color: var(--color-sunbleached);
-		border-width: 1px;
-		border-left: none;
-		border-top-style: solid;
-		padding-top: var(--space-4);
-		margin-top: var(--space-4);
-		width: 100%;
-		@media (--bp-md) {
-			max-width: var(--space-24);
-			border-top: none;
-			border-left: solid 1px var(--color-dovetail);
-			padding-top: var(--space-0);
-			margin-top: var(--space-0);
-			padding-left: var(--space-6);
-			margin-left: var(--space-6);
+	/* Reading progress + section wayfinding label in the topbar. */
+	(function () {
+		const bar = document.querySelector(".topbar") as HTMLElement | null,
+			prog = document.getElementById("progBar"),
+			secEl = document.getElementById("topSec"),
+			secT = document.getElementById("topSecT"),
+			main = document.getElementById("main"),
+			nextBlock = document.querySelector(".next");
+		if (!bar || !prog || !secEl || !secT || !main) return;
+		const RM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		const marks: { el: Element; label: string }[] = [{ el: main, label: "Overview" }];
+		Array.from(document.querySelectorAll("main section[id]")).forEach((s) => {
+			const n = s.querySelector(".sec-num"),
+				h = s.querySelector("h2");
+			marks.push({ el: s, label: (n ? n.textContent!.trim() + " · " : "") + (h ? h.textContent!.trim() : s.id) });
+		});
+		let shown = "Overview",
+			raf = 0;
+		function topOf(el: Element) {
+			return el.getBoundingClientRect().top + window.scrollY;
 		}
-		display: flex;
-		align-items: center;
-	}
-	ul {
-		display: grid;
-		grid-template-columns: repeat(1, 1fr);
-		gap: var(--space-2);
-		@media screen and (--bp-md) {
-			grid-template-columns: 1fr;
-		}
-		&.service-list {
-			gap: 0;
-			display: flex;
-			flex-direction: row;
-			gap: var(--space-0) var(--space-4);
-			flex-wrap: wrap;
-		}
-	}
-	footer {
-		background-color: var(--color-black-umber);
-		color: var(--color-crystal-cut);
-		font-family: var(--text-font-heading);
-	}
-	.footer-links {
-		padding: var(--space-20) var(--space-0);
-		display: flex;
-		gap: var(--space-8);
-		a {
-			color: var(--color-crystal-cut);
-			text-decoration: none;
-		}
-		.contact-links {
-			font-size: var(--text-xs);
-			display: flex;
-			gap: 0 var(--space-4);
-			align-items: end;
-			justify-content: center;
-			flex: 1;
-			text-align: right;
-			flex-direction: column;
-			@media screen and (--bp-md) {
-				flex-direction: row;
-				justify-content: end;
+		function paint() {
+			const start = topOf(main!),
+				bar2 = bar!;
+			let end = nextBlock ? topOf(nextBlock) : document.body.scrollHeight;
+			/* The bar must be able to fill. A short final section can put the end
+			   marker below the furthest point the page can scroll to, so cap the
+			   end at what's actually reachable: when the reader hits the bottom,
+			   the bar is full. */
+			const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+			end = Math.min(end, maxScroll + bar2.offsetHeight);
+			if (end <= start) end = start + 1;
+			const p = (window.scrollY + bar2.offsetHeight - start) / (end - start);
+			(prog as HTMLElement).style.transform = "scaleX(" + Math.min(1, Math.max(0, p)) + ")";
+			const edge = bar2.offsetHeight + 28;
+			let cur = marks[0];
+			const laid = topOf(marks[marks.length - 1].el) > 0;
+			if (laid && window.scrollY > 0) {
+				marks.forEach((m) => {
+					if (topOf(m.el) <= window.scrollY + edge) cur = m;
+				});
+				/* Same fix for the label: at the bottom of the page, the last section
+				   is the current one even if its heading never crossed the topbar. */
+				if (window.scrollY >= maxScroll - 2) cur = marks[marks.length - 1];
+			} else if (!laid) return;
+			if (cur.label !== shown) {
+				shown = cur.label;
+				if (RM) {
+					secT!.textContent = shown;
+					return;
+				}
+				secEl!.classList.add("swap");
+				setTimeout(() => {
+					secT!.textContent = shown;
+					secEl!.classList.remove("swap");
+				}, 150);
 			}
-
-			a {
-				color: var(--color-rampart);
-			}
 		}
-	}
-</style>
+		function onScroll() {
+			if (raf) cancelAnimationFrame(raf);
+			raf = requestAnimationFrame(() => {
+				raf = 0;
+				paint();
+			});
+		}
+		window.addEventListener("scroll", onScroll, { passive: true });
+		window.addEventListener("resize", onScroll);
+		window.addEventListener("load", paint);
+		if (document.fonts && document.fonts.ready) document.fonts.ready.then(paint);
+		paint();
+	})();
+</script>

@@ -129,4 +129,66 @@
   --space-76: 19rem;
   --space-78: 19.5rem;
   --space-80: 20rem;
+
+  /*
+   * "Techo" redesign tokens (Sept 2026) — the paper/ink palette and Fraunces + Source Serif 4 +
+   * Space Mono type system used by the homepage, About, CV, and all case study pages. Kept
+   * alongside the tokens above rather than replacing them outright, since removing the old
+   * --color- and --text-font- tokens is only safe once every component that reads them has
+   * been migrated or retired.
+   */
+  --paper: #f7f4ec;
+  --surface: #ffffff;
+  --rule: #dbd5c5;
+  --ink: #1e1b17;
+  --ink-mid: #4e483e;
+  --ink-soft: #8b8474;
+  --accent: #33456c;
+  --accent-ink: #ffffff;
+  --accent-tint: #e7ebf3;
+  --mark: #a6392f;
+  --mark-tint: #f4e6e1;
+  --focus-ring: #33456c;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body-serif: "Source Serif 4", Georgia, serif;
+  --font-label: "Space Mono", ui-monospace, monospace;
+
+  --measure: 640px;
+  --ease: cubic-bezier(0.2, 0, 0.2, 1);
+  --dur-s: 150ms;
+  --dur-m: 260ms;
+  --dur-l: 420ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #18160f;
+    --surface: #211e16;
+    --rule: #3a3427;
+    --ink: #eee8d9;
+    --ink-mid: #c4bca8;
+    --ink-soft: #8c8468;
+    --accent: #9bb0e0;
+    --accent-ink: #161b27;
+    --accent-tint: #232a3c;
+    --mark: #e19b8f;
+    --mark-tint: #332420;
+    --focus-ring: #9bb0e0;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #18160f;
+  --surface: #211e16;
+  --rule: #3a3427;
+  --ink: #eee8d9;
+  --ink-mid: #c4bca8;
+  --ink-soft: #8c8468;
+  --accent: #9bb0e0;
+  --accent-ink: #161b27;
+  --accent-tint: #232a3c;
+  --mark: #e19b8f;
+  --mark-tint: #332420;
+  --focus-ring: #9bb0e0;
 }

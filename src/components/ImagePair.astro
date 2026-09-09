@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface PairItem {
+	fn: string;
+	imgSrc?: ImageMetadata;
+	imgAlt: string;
+	placeholderLabel?: string;
+	fit?: "contain" | "center";
+	caption: string;
+}
+
+interface Props {
+	items: PairItem[];
+	deckLabel: string;
+	mid?: boolean;
+}
+
+const { items, deckLabel, mid } = Astro.props;
+---
+
+<div class:list={["img-2", { mid }]} data-deck="pair" data-deck-label={deckLabel}>
+	{
+		items.map((item) => (
+			<figure class="rev" style="margin-bottom:0" data-fit={item.fit}>
+				<div class:list={["frame", "tall", { "has-img": item.imgSrc }]}>
+					{item.imgSrc ? (
+						<Image src={item.imgSrc} alt={item.imgAlt} />
+					) : (
+						<div class="frame-tag">
+							<b>{item.placeholderLabel}</b>
+							{item.imgAlt}
+						</div>
+					)}
+				</div>
+				<figcaption>
+					<span class="fn">{item.fn}</span>
+					<span set:html={item.caption} />
+				</figcaption>
+			</figure>
+		))
+	}
+</div>

@@ -1,0 +1,23 @@
+---
+interface Props {
+	title: string;
+	backHref?: string;
+}
+
+const { title, backHref = "/#work" } = Astro.props;
+---
+
+<header class="topbar">
+	<a class="back" href={backHref}>← All work</a>
+	<span class="topbar-title">{title}</span>
+	<span class="topbar-sec" id="topSec" aria-live="polite">
+		<span class="dot"></span><span id="topSecT">Overview</span>
+	</span>
+	<button class="deck-trigger" type="button" aria-haspopup="dialog">
+		<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+			><rect x="2" y="3" width="20" height="14" rx="1"></rect><path d="M8 21h8M12 17v4"></path></svg
+		>
+		View as deck
+	</button>
+	<div class="topbar-progress"><i id="progBar"></i></div>
+</header>
