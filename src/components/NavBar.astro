@@ -1,288 +1,56 @@
 ---
-const isHome = Astro.url.pathname === "/";
+const path = Astro.url.pathname;
+const isHome = path === "/";
+const isAbout = path === "/about" || path === "/about/";
+const isCV = path === "/cv" || path === "/cv/";
 ---
 
-<nav class="navbar" aria-label="Main Menu">
-	<div class="nav container">
-		<a class="logo" href="/">
-			<img
-				src="/img/nav-logo.png"
-				srcset="/img/nav-logo.png 1x, /img/nav-logo@2x.png 2x, /img/nav-logo@3x.png 3x, /img/nav-logo@4x.png 4x"
-				alt=""
-				width="112"
-				height="24"
-			/>
-			<span class="visually-hidden">Home</span>
-		</a>
-		<button
-			class="menu-button"
-			aria-expanded="false"
-			aria-controls="primary-nav"
-		>
-			<svg
-				class="menu-icon"
-				viewBox="0 0 20 20"
-				width="20"
-				height="20"
-				fill="currentColor"
-				aria-hidden="true"
-			>
-				<g class="icon-open">
-					<rect x="2" y="4" width="16" height="2" rx="1"></rect>
-					<rect x="2" y="9" width="16" height="2" rx="1"></rect>
-					<rect x="2" y="14" width="16" height="2" rx="1"></rect>
-				</g>
-				<g class="icon-close">
-					<rect
-						x="2"
-						y="9"
-						width="16"
-						height="2"
-						rx="1"
-						transform="rotate(45 10 10)"></rect>
-					<rect
-						x="2"
-						y="9"
-						width="16"
-						height="2"
-						rx="1"
-						transform="rotate(-45 10 10)"></rect>
-				</g>
-			</svg>
-			<span class="visually-hidden">Menu</span>
-		</button>
-		<div class="nav-items" id="primary-nav">
-			<div class="nav-items-inner">
-				{
-					isHome ? (
-						<>
-							<a
-								class="nav-item"
-								href="#case-studies"
-								data-section="case-studies"
-							>
-								Case Studies
-							</a>
-							<a class="nav-item" href="#about-nahi" data-section="about-nahi">
-								About
-							</a>
-							<a class="nav-item" href="#contact" data-section="contact">
-								Contact
-							</a>
-						</>
-					) : (
-						<>
-							<a class="nav-item active" href="/#case-studies">
-								Case Studies
-							</a>
-							<a class="nav-item" href="/#about-nahi">
-								About
-							</a>
-							<a class="nav-item" href="/#contact">
-								Contact
-							</a>
-						</>
-					)
-				}
-			</div>
-		</div>
-	</div>
-</nav>
+<header class="topbar">
+	<a class="wordmark" href="/">Nahi Kennedy-Nuñez</a>
+	<nav class="topbar-nav">
+		<a href={isHome ? "#work" : "/#work"} aria-current={isHome ? "page" : undefined}>Case studies</a>
+		{isAbout ? <span class="current" aria-current="page">About</span> : <a href="/about">About</a>}
+		{isCV ? <span class="current" aria-current="page">CV</span> : <a href="/cv">CV</a>}
+	</nav>
+	<button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Menu">
+		<span class="nav-toggle-bars"></span>
+	</button>
+	<nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+		<a href={isHome ? "#work" : "/#work"}>Case studies</a>
+		{isAbout ? <span class="current" aria-current="page">About</span> : <a href="/about">About</a>}
+		{isCV ? <span class="current" aria-current="page">CV</span> : <a href="/cv">CV</a>}
+	</nav>
+</header>
 
 <script>
-	function initMobileMenu() {
-		const navbar = document.querySelector<HTMLElement>(".navbar");
-		const menuButton = document.querySelector<HTMLButtonElement>(".menu-button");
-		if (!navbar || !menuButton) return;
-
-		menuButton.addEventListener("click", () => {
-			const isOpen = navbar.classList.toggle("is-open");
-			menuButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
+	(function () {
+		const btn = document.getElementById("navToggle");
+		const panel = document.getElementById("mobileNav");
+		if (!btn || !panel) return;
+		function closeMenu(returnFocus: boolean) {
+			btn!.setAttribute("aria-expanded", "false");
+			panel!.classList.remove("open");
+			if (returnFocus) btn!.focus();
+		}
+		function openMenu() {
+			btn!.setAttribute("aria-expanded", "true");
+			panel!.classList.add("open");
+		}
+		btn.addEventListener("click", (e) => {
+			e.stopPropagation();
+			const isOpen = btn.getAttribute("aria-expanded") === "true";
+			isOpen ? closeMenu(false) : openMenu();
 		});
-
-		// Close the menu when any nav item is clicked
-		document.querySelectorAll<HTMLAnchorElement>(".nav-item").forEach((link) => {
-			link.addEventListener("click", () => {
-				navbar.classList.remove("is-open");
-				menuButton.setAttribute("aria-expanded", "false");
-			});
+		panel.addEventListener("click", (e) => {
+			if ((e.target as HTMLElement).closest("a")) closeMenu(false);
 		});
-	}
-
-	initMobileMenu();
+		document.addEventListener("click", (e) => {
+			if (btn.getAttribute("aria-expanded") === "true" && !panel.contains(e.target as Node) && e.target !== btn) {
+				closeMenu(false);
+			}
+		});
+		document.addEventListener("keydown", (e) => {
+			if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") closeMenu(true);
+		});
+	})();
 </script>
-
-{
-	isHome && (
-		<script>
-			function initNav() {
-				const navItems = document.querySelectorAll<HTMLAnchorElement>(
-					".nav-item[data-section]",
-				);
-
-				const linksById = new Map<string, HTMLAnchorElement>();
-				const sectionsById = new Map<Element, string>();
-				for (const link of navItems) {
-					const id = link.dataset.section;
-					const section = id ? document.getElementById(id) : null;
-					if (!id || !section) continue;
-					linksById.set(id, link);
-					sectionsById.set(section, id);
-				}
-
-				function setActive(id: string | null) {
-					for (const [linkId, link] of linksById) {
-						link.classList.toggle("active", linkId === id);
-					}
-				}
-
-				// Tracks actual scroll position rather than clicks, so the nav highlights the right
-				// section whether you scroll there by hand or land on it via a #hash link from
-				// another page (e.g. a case study's "back home" links). The trigger band sits just
-				// above vertical center — a section is "current" once it's crossed that line.
-				const observer = new IntersectionObserver(
-					(entries) => {
-						for (const entry of entries) {
-							if (!entry.isIntersecting) continue;
-							const id = sectionsById.get(entry.target);
-							if (id) setActive(id);
-						}
-					},
-					{ rootMargin: "-45% 0px -50% 0px" },
-				);
-
-				for (const section of sectionsById.keys()) {
-					observer.observe(section);
-				}
-
-				document.querySelector(".logo")?.addEventListener("click", (e) => {
-					if (location.pathname !== "/") return;
-					e.preventDefault();
-					window.scrollTo({ top: 0, behavior: "smooth" });
-					history.pushState("", "", "/");
-					setActive(null);
-				});
-			}
-
-			initNav();
-		</script>
-	)
-}
-
-<style>
-	.navbar {
-		background-color: var(--color-black-umber);
-		font-family: var(--text-font-heading);
-		font-size: var(--text-xs);
-		padding: var(--space-8) 0;
-		position: sticky;
-		top: 0;
-		z-index: 100;
-	}
-
-	.nav {
-		display: grid;
-		grid-template-columns: 1fr auto;
-		grid-template-areas:
-			"logo btn"
-			"nav  nav";
-		align-items: center;
-
-		@media (--bp-sm) {
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-		}
-	}
-
-	.logo {
-		grid-area: logo;
-		display: flex;
-		align-items: center;
-		gap: var(--space-2);
-	}
-
-	.menu-button {
-		grid-area: btn;
-		background: none;
-		border: none;
-		padding: var(--space-2);
-		cursor: pointer;
-		color: var(--color-rampart);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
-		&:hover {
-			color: var(--color-crystal-cut);
-		}
-
-		@media (--bp-sm) {
-			display: none;
-		}
-	}
-
-	.icon-close {
-		display: none;
-	}
-	.menu-button[aria-expanded="true"] .icon-open {
-		display: none;
-	}
-	.menu-button[aria-expanded="true"] .icon-close {
-		display: block;
-	}
-
-	.nav-items {
-		grid-area: nav;
-		display: grid;
-		grid-template-rows: 0fr;
-		overflow: hidden;
-		transition: grid-template-rows 0.3s ease;
-
-		.navbar.is-open & {
-			grid-template-rows: 1fr;
-		}
-
-		@media (--bp-sm) {
-			display: flex;
-			overflow: visible;
-		}
-	}
-
-	.nav-items-inner {
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-5);
-		padding: var(--space-6) 0;
-
-		@media (--bp-sm) {
-			overflow: visible;
-			flex-direction: row;
-			gap: var(--space-7);
-			padding: 0;
-		}
-	}
-
-	.nav-item {
-		color: var(--color-rampart);
-		text-decoration: none;
-		position: relative;
-		&:hover,
-		&.active {
-			color: var(--color-crystal-cut);
-		}
-		&.active {
-			&::after {
-				content: "";
-				position: absolute;
-				bottom: -2px;
-				left: 0;
-				width: 100%;
-				height: 1px;
-				background-color: var(--color-crystal-cut);
-			}
-		}
-	}
-</style>

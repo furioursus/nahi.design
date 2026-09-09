@@ -1,16 +1,18 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import HomeHero from "@components/HomeHero.astro";
+import HomeAbout from "@components/HomeAbout.astro";
 import CaseStudies from "@components/CaseStudies.astro";
-import HowItsBuilt from "@components/HowItsBuilt.astro";
-import AboutNahi from "@components/AboutNahi.astro";
 import Contact from "@components/Contact.astro";
 ---
 
 <BaseLayout title="Home">
-	<HomeHero />
-	<CaseStudies />
-	<HowItsBuilt />
-	<AboutNahi />
-	<Contact />
+	<main id="main">
+		<HomeHero />
+		<div class="wrap">
+			<HomeAbout />
+			<CaseStudies />
+			<Contact />
+		</div>
+	</main>
 </BaseLayout>
