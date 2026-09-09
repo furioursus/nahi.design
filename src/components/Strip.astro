@@ -1,0 +1,55 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface StripItem {
+	frameN: string;
+	dataLabel: string;
+	imgSrc?: ImageMetadata;
+	imgAlt: string;
+	placeholderLabel?: string;
+}
+
+interface Props {
+	items: StripItem[];
+	figNum: string;
+	lead: string;
+	deckLabel: string;
+	land?: boolean;
+	full?: boolean;
+	solo?: boolean;
+	spaced?: boolean;
+}
+
+const { items, figNum, lead, deckLabel, land, full, solo, spaced = true } = Astro.props;
+---
+
+<div
+	class:list={["strip", "rev", { land, full }]}
+	data-deck="strip"
+	data-deck-solo={solo ? true : undefined}
+	data-deck-label={deckLabel}
+	style={spaced ? "margin-top:40px" : undefined}
+>
+	<div class="strip-row">
+		{
+			items.map((item) => (
+				<div class="frame has-img" data-label={item.dataLabel} data-fit="contain">
+					<span class="frame-n">{item.frameN}</span>
+					{item.imgSrc ? (
+						<Image src={item.imgSrc} alt={item.imgAlt} />
+					) : (
+						<div class="frame-tag">
+							<b>{item.placeholderLabel}</b>
+							{item.imgAlt}
+						</div>
+					)}
+				</div>
+			))
+		}
+	</div>
+	<div class="strip-cap">
+		<span class="fn">{figNum}</span>
+		<span><strong class="fig-lead">{lead}</strong><slot /></span>
+	</div>
+</div>

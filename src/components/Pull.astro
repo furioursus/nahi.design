@@ -1,0 +1,14 @@
+---
+interface Props {
+	quote: string;
+	attribution: string;
+	deckLabel?: string;
+}
+
+const { quote, attribution, deckLabel } = Astro.props;
+---
+
+<div class="pull rev" data-deck-label={deckLabel}>
+	<div class="pull-q">"{quote}"</div>
+	<div class="pull-a">{attribution}</div>
+</div>

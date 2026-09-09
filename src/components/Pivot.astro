@@ -1,0 +1,13 @@
+---
+interface Props {
+	heading: string;
+}
+
+const { heading } = Astro.props;
+---
+
+<div class="pivot">
+	<div class="pivot-k"><span class="dot"></span>What changed</div>
+	<div class="pivot-h deck-stat" data-deck-eyebrow="What changed">{heading}</div>
+	<div class="pivot-b"><slot /></div>
+</div>

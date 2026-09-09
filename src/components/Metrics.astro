@@ -1,0 +1,19 @@
+---
+interface Props {
+	items: { n: string; label: string }[];
+	three?: boolean;
+}
+
+const { items, three } = Astro.props;
+---
+
+<div class:list={["metrics", { three }]}>
+	{
+		items.map((item) => (
+			<div class="metric rev">
+				<div class="metric-n">{item.n}</div>
+				<div class="metric-l">{item.label}</div>
+			</div>
+		))
+	}
+</div>

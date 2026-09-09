@@ -1,0 +1,52 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface ColumnItem {
+	stepLabel: string;
+	frameN: string;
+	title: string;
+	imgSrc?: ImageMetadata;
+	imgAlt: string;
+	body: string;
+	placeholderLabel?: string;
+}
+
+interface Props {
+	items: ColumnItem[];
+	land?: boolean;
+	deckLabel: string;
+	deckCaption: string;
+}
+
+const { items, land, deckLabel, deckCaption } = Astro.props;
+---
+
+<div
+	class:list={["process", { land }]}
+	data-deck="strip"
+	data-deck-stack={land ? true : undefined}
+	data-deck-label={deckLabel}
+	data-deck-caption={deckCaption}
+>
+	{
+		items.map((item) => (
+			<div class="pcol rev">
+				<div class="pcol-n">{item.stepLabel}</div>
+				<div class="frame has-img" data-label={item.title} data-fit="contain">
+					<span class="frame-n">{item.frameN}</span>
+					{item.imgSrc ? (
+						<Image src={item.imgSrc} alt={item.imgAlt} />
+					) : (
+						<div class="frame-tag">
+							<b>{item.placeholderLabel}</b>
+							{item.imgAlt}
+						</div>
+					)}
+				</div>
+				<div class="pcol-t">{item.title}</div>
+				<div class="pcol-b">{item.body}</div>
+			</div>
+		))
+	}
+</div>
