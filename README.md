@@ -6,60 +6,59 @@ Live at [nahi.design](https://www.nahi.design).
 
 ## What's on the site
 
-**Home page** (`src/pages/index.astro`) stacks five sections top to bottom:
+**Home page** (`src/pages/index.astro`) is a full-bleed name-treatment hero (`HomeHero`), followed by a compact about blurb (`HomeAbout`), a stacked list of case study cards (`CaseStudies` + `CaseStudyCard`) linking out to the four case studies below, and a closing contact slab (`Contact`).
 
-1. **Hero** (`HomeHero`) — intro/landing section.
-2. **Case Studies** (`CaseStudies`) — a grid linking out to the three case study pages below.
-3. **How It's Built** (`HowItsBuilt`) — a fun behind-the-scenes card grid explaining the tools used to make the site (Claude, Notion, Figma, Windsurf... and "Spousal Privileges").
-4. **About Nahi** (`AboutNahi`) — bio blurb plus a grid of looping, click-to-zoom videos (woodworking, the pea puffer fish, Mercer Labs, their cat Dante).
-5. **Contact** (`Contact`) — short pitch, resume download button, and an email link.
+**About** (`src/pages/about.astro`) and **CV** (`src/pages/cv.astro`) are their own pages rather than homepage sections — About covers the non-work side (photo, a few facts, four hobby videos), CV is the full work history plus an "Open as PDF" link to the CV in `public/`, with its content in `src/data/cv.ts`.
 
-**Case study pages** (`src/pages/case-studies/*.astro`) — three in-depth write-ups, each using a shared `CaseStudyLayout`:
+**Case study pages** (`src/pages/case-studies/*.astro`) — four in-depth write-ups, each composed directly from a shared component kit and wrapped in `CaseStudyLayout`:
 
+- **HIVAZ.org — HIV care in Arizona** (`hivaz-hiv-care-arizona`): redesigning the front door to HIV care for Aunt Rita's Foundation and Arizona's Department of Health and Human Services.
 - **IBM — Data Lineage** (`ibm-data-lineage`): redesigning IBM's data lineage tooling for watsonx. Red Dot Award winner.
-- **HPE — AI Troubleshooting Agent** (`hpe-ai-troubleshooting-agent`): a RAG-powered assistant proof-of-concept for debugging ML data pipelines.
-- **QuantaLyric — MVP** (`quantalyric-mvp`): scoping and shipping an MVP, brand, and design system for an AI energy-forecasting startup.
+- **HPE — AI Troubleshooting Agent** (`hpe-ai-troubleshooting-agent`): a coded proof-of-concept AI assistant for debugging ML data pipelines, built and shipped the week before the team was laid off.
+- **QuantaLyric — MVP** (`quantalyric-mvp`): scoping and shipping an MVP, brand, and design system for an AI energy-forecasting startup in forty hours.
 
-Each case study page pulls its title/summary/status/tags from one shared source of truth — `src/data/case-studies.ts` — and composes it with per-page sections built from reusable blocks: `CaseStudySection`, `Description` (with `variant="case-study"`), `CaseStudyStatCards`, `CaseStudyDecisionCard`, `TextAndImageBlock`, `Testimonial`, and friends. Every screenshot rendered through `TextAndImageBlock` is click-to-zoom via `LightboxImage`, and the About section's videos get the same treatment via `LightboxVideo` — both driven by one shared `Lightbox` custom element; see [`docs/lightbox.md`](docs/lightbox.md) for how it's built.
+Each page composes the same shared kit: `CaseStudyHero`, `CaseStudyMeta`, `Figure` (numbered, captioned images with a labeled-placeholder fallback when no screenshot exists), `Pull` (quotes), `ProcessColumns` (the "Try 01/02/03" grid), `Pivot` (the thesis slab where the argument turns), `Strip` (a numbered sequence of frames), `ImagePair` (before/after), `Metrics`, and `NextCaseStudy`. `CaseStudyLayout` wraps all of it with a sticky topbar (back link, live reading-progress bar and section wayfinding label, a "View as deck" trigger) and the deck lightbox itself — see [`docs/deck-lightbox.md`](docs/deck-lightbox.md) for how a case study's own markup turns into a fullscreen slide deck with no separate slide list to maintain.
 
-The IBM case study also has a "Present" button (`Presentation`) that turns a hand-curated slide list into a fullscreen, interview-ready deck — built for presenting live, not for exporting a file. See [`docs/presentation-mode.md`](docs/presentation-mode.md) for how it's built; it's a v1 on one case study for now.
-
-**Nav bar** (`NavBar`) — sticky header with a logo and a mobile menu toggle; on the home page it scroll-links to the sections above, on case study pages it links back home. The active nav item on the home page tracks actual scroll position via `IntersectionObserver`, so it's correct whether you scroll there by hand or land on a section directly from a `#hash` link elsewhere on the site.
+**Nav bar** (`NavBar`) — sticky header with a wordmark and a mobile menu toggle, shared by the homepage, About, and CV. Case study pages use their own topbar instead (`BaseLayout`'s `showNav={false}`).
 
 ## Project structure
 
 ```
 /
-├── public/              → static files served as-is (favicon, resume PDF, videos, nav logo)
+├── public/              → static files served as-is (favicon, CV PDF, hobby videos, OG image)
 ├── src/
-│   ├── components/      → all the reusable Astro components listed above
+│   ├── components/       → the shared case-study kit, marketing nav, and page-specific pieces
 │   ├── data/
-│   │   └── case-studies.ts   → the case study content (titles, summaries, stats, copy)
-│   ├── img/              → images used inside case studies (optimized by Astro at build time)
-│   ├── video/             → the IBM case study hero video
+│   │   ├── case-studies.ts   → homepage card metadata (title, blurb, meta line, thumb) — full case
+│   │   │                       study copy lives in each page file
+│   │   └── cv.ts              → CV experience, education, and certifications content
+│   ├── img/               → case study and homepage images (optimized by Astro at build time)
 │   ├── layouts/
-│   │   ├── BaseLayout.astro       → shared <head>, fonts, SEO tags, nav
-│   │   └── CaseStudyLayout.astro  → shared case-study header/footer wrapper
+│   │   ├── BaseLayout.astro       → shared <head>, fonts, SEO tags, marketing nav (`showNav` prop)
+│   │   └── CaseStudyLayout.astro  → case-study topbar, deck lightbox, scroll-reveal/wayfinding scripts
 │   ├── pages/
 │   │   ├── index.astro                    → the home page
-│   │   └── case-studies/*.astro           → the three case study pages
-│   └── styles/            → global.css, reset.css, tokens.css (design tokens: color, spacing, type)
+│   │   ├── about.astro                    → the About page
+│   │   ├── cv.astro                       → the CV page
+│   │   └── case-studies/*.astro           → the four case study pages
+│   └── styles/            → global.css, reset.css, tokens.css, site-kit.css, marketing.css
 ├── postcss.config.cjs    → wires up postcss-custom-media (breakpoint tokens, see below)
 └── package.json
 ```
 
 ## Notable pieces under the hood
 
-- **Fonts**: Source Sans 3 (body) and Space Mono (headings/labels), loaded via `astro-font` from Google Fonts.
+- **Fonts**: Fraunces (display headings), Source Serif 4 (body prose), and Space Mono (labels, metadata, mono UI), loaded via `astro-font` from Google Fonts.
+- **Design tokens & the "Techo" palette**: `src/styles/tokens.css` defines a warm paper/ink color system (`--paper`, `--ink`, `--ink-mid`, `--ink-soft`, `--accent`, `--mark`, `--rule`, `--surface`) with a real dark-mode block — both a `@media (prefers-color-scheme: dark)` block and an explicit `:root[data-theme="dark"]` override, so a future theme toggle just needs to set that attribute. `src/styles/site-kit.css` holds the shared case-study component kit (topbar, numbered frames, pull quotes, the pivot slab, metrics grid, the deck lightbox) and `src/styles/marketing.css` holds the nav/contact chrome shared by the homepage, About, and CV — both are pulled in once via `global.css` so no page has to import them individually.
+- **View as deck**: see [`docs/deck-lightbox.md`](docs/deck-lightbox.md).
 - **SEO**: page titles, descriptions, and Open Graph tags are handled per-page via `astro-seo`.
 - **Icons**: `@twodft/astro-icon`.
 - **Email obfuscation**: `astro-mail-obfuscation` scrambles the `mailto:` links against scraper bots.
 - **Images**: everything in `src/img/` is processed by `sharp` at build time (Astro's built-in image optimization).
-- **Design tokens**: colors, spacing, and type scale live in `src/styles/tokens.css` — that's the single place to tweak the visual system.
 - **Breakpoints**: defined once in `tokens.css` as `@custom-media` (`--bp-xs` 30rem, `--bp-sm` 40rem, `--bp-md` 48rem, `--bp-lg` 60rem, `--bp-xl` 64rem, `--bp-2xl` 80rem) and used in any component's `<style>` block as `@media (--bp-md) { ... }` (or `@media screen and (--bp-md) { ... }`). Plain CSS can't reference a custom property inside a media condition, so this is resolved at build time by the `postcss-custom-media` plugin, configured in `postcss.config.cjs` — that file also loads `@csstools/postcss-global-data` to make the `tokens.css` breakpoint definitions visible to every component's `<style>` block, since Astro/Vite processes each one as its own separate stylesheet. Nothing to run by hand: `npm install` pulls both packages in, and `npm run dev`/`build` pick up `postcss.config.cjs` automatically. Add a new breakpoint by adding one more `@custom-media --bp-name (min-width: ...)` line in `tokens.css`. The underlying CSS language service (used by both VS Code and Zed) doesn't know this at-rule and would otherwise flag it as "Unknown at rule" — handled per editor since the fix isn't portable:
   - **VS Code**: `css-custom-data.json` at the repo root describes `@custom-media` to the language service (with a hover description), wired in via `.vscode/settings.json`'s `css.customData`.
   - **Zed**: the same fix doesn't work — its bundled CSS server only accepts custom-data file paths through a notification VS Code's own client extension sends, which Zed doesn't implement, so `css.customData` is a no-op there regardless of how it's wired up. `.zed/settings.json` instead sets `css.lint.unknownAtRules` to `"ignore"` for the language server, which silences the whole "unknown at-rule" category (not just `@custom-media` — Zed has no way to scope this narrower).
-- **Reduced motion**: the looping "About" videos and the IBM case study's hero video (marked `data-ambient`) only autoplay when the visitor hasn't set `prefers-reduced-motion` — handled client-side in `BaseLayout`, since a static site has no server-side way to know that preference ahead of time. Opening one of the About videos in the lightbox plays it regardless (a deliberate click, not forced motion), then hands the preference back once closed.
+- **Reduced motion**: the About page's looping hobby videos (marked `data-ambient`) only autoplay when the visitor hasn't set `prefers-reduced-motion` — handled client-side in `BaseLayout`, since a static site has no server-side way to know that preference ahead of time. The case study pages' scroll-reveal and deck-open animations, and the homepage hero's entrance animation, all collapse under the same media query.
 
 ## Commands
 
