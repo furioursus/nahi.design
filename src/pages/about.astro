@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Contact from "@components/Contact.astro";
+import about01 from "@img/about-01.webp";
 
 const hobbies = [
 	{
@@ -42,7 +44,7 @@ const hobbies = [
 			</div>
 
 			<div class="about">
-				<div class="about-photo" role="img" aria-label="Nahi Kennedy-Nuñez"></div>
+				<Image class="about-photo" src={about01} alt="Nahi Kennedy-Nuñez" />
 				<p class="about-text">
 					I've got a steady, disciplined approach to my craft, equally at home shaping wood by hand, watching my
 					fish drift through their little world, getting outvoted by my two cats, or losing an afternoon to a
@@ -115,11 +117,9 @@ const hobbies = [
 		width: 100px;
 		height: 100px;
 		border-radius: 50%;
+		object-fit: cover;
 		flex-shrink: 0;
 		border: 1px solid var(--rule);
-		background:
-			repeating-linear-gradient(135deg, color-mix(in srgb, var(--ink) 5%, transparent) 0 1px, transparent 1px 13px),
-			var(--surface);
 	}
 	.about-text {
 		font-size: 16px;

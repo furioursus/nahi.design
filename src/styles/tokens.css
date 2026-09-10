@@ -151,8 +151,8 @@
   --focus-ring: #33456c;
 
   --font-display: "Fraunces", Georgia, serif;
-  --font-body-serif: "Source Serif 4", Georgia, serif;
-  --font-label: "Space Mono", ui-monospace, monospace;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
 
   --measure: 640px;
   --ease: cubic-bezier(0.2, 0, 0.2, 1);
