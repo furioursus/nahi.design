@@ -5,9 +5,10 @@
    Modes are read from <html data-scroll="paged|flow">.
 
      paged   Every .panel pins as you scroll past it and the next
-             one covers it, with a page-wide snap that settles on
-             the nearest panel. A wayfinding rail is built from the
-             panels' own data-label values.
+             one covers it. A wayfinding rail is built from the
+             panels' own data-label values. (No scroll-snap — it
+             fought wheel/trackpad momentum and made the transition
+             between panels stutter.)
 
      flow    Only .page-open and .page-close pin. The document
              between them scrolls normally.
@@ -142,21 +143,6 @@ if (mode) {
 					}),
 				);
 			});
-
-			// One page-wide trigger that settles the scroll position on the
-			// nearest panel boundary once the gesture stops. Paged only:
-			// snapping a long-form case study would fight the reader.
-			if (mode === "paged") {
-				triggers.push(
-					ScrollTrigger.create({
-						snap: {
-							snapTo: 1 / (panels.length - 1),
-							duration: { min: 0.2, max: 0.5 },
-							ease: "power1.inOut",
-						},
-					}),
-				);
-			}
 
 			locked = true;
 			ScrollTrigger.refresh();
