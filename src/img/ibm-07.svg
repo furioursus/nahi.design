@@ -1,0 +1,24 @@
+<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+	<rect x="0" y="0" width="900" height="300" fill="#ffffff" />
+	<g>
+		<rect x="804" y="16" width="72" height="28" rx="5" fill="#ffffff" stroke="#dcdcdc" />
+		<text x="840" y="34" font-size="13" fill="#1c1c1e" text-anchor="middle">Internal</text>
+	</g>
+	<rect x="40" y="66" width="168" height="196" rx="3" fill="#ffa8db" />
+	<text x="58" y="94" font-size="16" fill="#1c1c1e">Node</text>
+	<rect x="244" y="66" width="168" height="196" rx="3" fill="#e7e7e7" />
+	<text x="262" y="94" font-size="16" fill="#1c1c1e">Hidden node</text>
+	<rect x="448" y="66" width="168" height="196" rx="3" fill="#e7e7e7" />
+	<text x="466" y="94" font-size="16" fill="#1c1c1e">Hidden node</text>
+	<rect x="652" y="66" width="168" height="196" rx="3" fill="#ffa8db" />
+	<text x="670" y="94" font-size="16" fill="#1c1c1e">Node</text>
+	<defs>
+		<marker id="arrow07" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+			<path d="M0,0 L10,5 L0,10 z" fill="#8f8f8f" />
+		</marker>
+	</defs>
+	<path d="M208,164 L236,164" stroke="#8f8f8f" stroke-width="2" fill="none" marker-end="url(#arrow07)" />
+	<path d="M616,164 L644,164" stroke="#8f8f8f" stroke-width="2" fill="none" marker-end="url(#arrow07)" />
+	<rect x="290" y="139" width="240" height="50" rx="25" fill="#1c1c1e" />
+	<text x="410" y="169" font-size="15" fill="#ffffff" text-anchor="middle">Show 2 hidden nodes</text>
+</svg>
