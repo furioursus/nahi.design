@@ -8,7 +8,7 @@
 
 .wordmark {
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--ink);
   text-decoration: none;
@@ -19,8 +19,8 @@
   margin-left: auto;
   display: flex;
   gap: 22px;
-  font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
   letter-spacing: 0.05em;
   color: var(--ink-mid);
 }
@@ -103,7 +103,7 @@
   align-items: center;
   gap: 9px;
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 13.5px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -126,8 +126,8 @@ h1 .hl {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-family: var(--font-ui);
+  font-size: 13.5px;
   letter-spacing: 0.04em;
   padding: 14px 24px;
   border-radius: 3px;
@@ -177,14 +177,14 @@ section {
 }
 .contact h3 {
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 500;
   color: var(--paper);
   margin: 0 0 12px;
   letter-spacing: -0.01em;
 }
 .contact p {
-  font-size: 15.5px;
+  font-size: 16.5px;
   line-height: 1.8;
   color: color-mix(in srgb, var(--paper) 75%, transparent);
   max-width: 520px;
@@ -200,8 +200,8 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  font-family: var(--font-mono);
-  font-size: 13px;
+  font-family: var(--font-ui);
+  font-size: 14px;
   letter-spacing: 0.03em;
   text-decoration: none;
 }
@@ -232,8 +232,8 @@ section {
 .closing {
   border-top: 1px solid var(--rule);
   padding: 40px 0 76px;
-  font-family: var(--font-mono);
-  font-size: 11.5px;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
   letter-spacing: 0.05em;
   color: var(--ink-soft);
 }
@@ -244,7 +244,7 @@ section {
 /* mobile nav panel, shared by every marketing page */
 @media (max-width: 600px) {
   .wordmark {
-    font-size: 13px;
+    font-size: 14px;
   }
   .topbar-nav {
     display: none;
@@ -282,8 +282,8 @@ section {
     align-items: center;
     gap: 8px;
     padding: 15px 2px;
-    font-family: var(--font-mono);
-    font-size: 13px;
+    font-family: var(--font-ui);
+    font-size: 14px;
     letter-spacing: 0.04em;
     color: var(--ink-mid);
     text-decoration: none;
@@ -312,7 +312,7 @@ section {
   }
   .btn {
     padding: 13px 20px;
-    font-size: 12px;
+    font-size: 13px;
   }
   .contact {
     padding: 30px 24px;

@@ -1,18 +1,18 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import HomeHero from "@components/HomeHero.astro";
-import HomeAbout from "@components/HomeAbout.astro";
 import CaseStudies from "@components/CaseStudies.astro";
 import Contact from "@components/Contact.astro";
 ---
 
-<BaseLayout title="Home">
+<BaseLayout title="Home" scrollMode="paged">
 	<main id="main">
 		<HomeHero />
-		<div class="wrap">
-			<HomeAbout />
-			<CaseStudies />
-			<Contact />
-		</div>
+		<CaseStudies />
+		<section class="panel" id="contact" data-label="Get in touch" data-surface="ink">
+			<div class="panel-inner wrap">
+				<Contact />
+			</div>
+		</section>
 	</main>
 </BaseLayout>

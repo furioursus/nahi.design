@@ -2,6 +2,8 @@
 @import "./tokens.css";
 @import "./site-kit.css";
 @import "./marketing.css";
+@import "./scroll-sections.css";
+@import "./homepage-panels.css";
 
 html {
   /*
@@ -26,7 +28,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 17.5px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }

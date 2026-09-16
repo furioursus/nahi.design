@@ -1,0 +1,34 @@
+---
+/*
+ * The "flow" scroll mode's shared shell: an opening panel that pins in
+ * place (hero content), a normal scrolling document in between, and a
+ * closing panel that pins in place (hand-off/contact). Used by every
+ * page except the homepage, which pins every section instead (see
+ * index.astro) — see scroll-sections.css for the mechanic itself.
+ */
+interface Props {
+	closeSurface?: "raised" | "soft" | "ink";
+}
+
+const { closeSurface = "raised" } = Astro.props;
+---
+
+<section class="panel page-open">
+	<div class="panel-inner wrap">
+		<slot name="hero" />
+	</div>
+</section>
+
+<div class="page-body-shadow">
+	<div class="page-body">
+		<div class="wrap">
+			<slot />
+		</div>
+	</div>
+</div>
+
+<section class="panel page-close" data-surface={closeSurface}>
+	<div class="panel-inner wrap">
+		<slot name="close" />
+	</div>
+</section>

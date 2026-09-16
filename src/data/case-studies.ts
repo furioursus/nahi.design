@@ -7,6 +7,7 @@ import quantalyricThumb from "@img/homepage-08.webp";
 
 export interface CaseStudyCard {
 	slug: string;
+	label: string;
 	eyebrow: string;
 	title: string;
 	blurb: string;
@@ -18,6 +19,7 @@ export interface CaseStudyCard {
 export const caseStudies: CaseStudyCard[] = [
 	{
 		slug: "hivaz-hiv-care-arizona",
+		label: "HIVAZ.org",
 		eyebrow: "UX design · Aunt Rita's Foundation",
 		title: "Redesigning the front door to HIV care in Arizona",
 		blurb:
@@ -28,6 +30,7 @@ export const caseStudies: CaseStudyCard[] = [
 	},
 	{
 		slug: "ibm-data-lineage",
+		label: "IBM",
 		eyebrow: "Product design · IBM",
 		title: "Data lineage that answers in seconds, not hours",
 		blurb:
@@ -38,6 +41,7 @@ export const caseStudies: CaseStudyCard[] = [
 	},
 	{
 		slug: "hpe-ai-troubleshooting-agent",
+		label: "HPE",
 		eyebrow: "Product design · HPE",
 		title: "Debugging's hardest step was asking for help",
 		blurb:
@@ -48,6 +52,7 @@ export const caseStudies: CaseStudyCard[] = [
 	},
 	{
 		slug: "quantalyric-mvp",
+		label: "QuantaLyric",
 		eyebrow: "Product design · QuantaLyric",
 		title: "Forty hours, one chart worth funding",
 		blurb:

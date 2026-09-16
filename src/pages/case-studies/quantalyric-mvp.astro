@@ -29,6 +29,7 @@ const description =
 ---
 
 <CaseStudyLayout title={title} description={description}>
+	<Fragment slot="hero">
 	<CaseStudyHero eyebrow={["Product design", "QuantaLyric", "Energy forecasting, pre-seed"]} title="Forty hours, one chart worth funding">
 		QuantaLyric's energy traders were comparing AI forecasts against the government's projections in a tool
 		that didn't exist yet. I had forty hours of contract, one part-time developer, and a founder whose vision
@@ -44,6 +45,7 @@ const description =
 			{ label: "Team", value: "1 part-time developer, growing to 2 for the final project" },
 		]}
 	/>
+	</Fragment>
 
 	<Figure
 		src={ql01}
@@ -294,5 +296,5 @@ const description =
 		</p>
 	</section>
 
-	<NextCaseStudy href="/case-studies/hivaz-hiv-care-arizona" label="Redesigning the front door to HIV care in Arizona" />
+	<NextCaseStudy slot="close" href="/case-studies/hivaz-hiv-care-arizona" label="Redesigning the front door to HIV care in Arizona" />
 </CaseStudyLayout>

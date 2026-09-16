@@ -1,24 +1,9 @@
 ---
 import CaseStudyCard from "@components/CaseStudyCard.astro";
 import { caseStudies } from "@data/case-studies";
+
+const wireframes = ["a", "b", "c", "d"] as const;
+const tears = ["b", "c", undefined, "b"] as const;
 ---
 
-<section id="work">
-	<div class="sec-head"><h2>Case studies</h2><span class="sec-rule"></span></div>
-	<div class="cards">
-		{caseStudies.map((card) => <CaseStudyCard card={card} />)}
-	</div>
-</section>
-
-<style>
-	.cards {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 26px;
-	}
-	@media (max-width: 820px) {
-		.cards {
-			gap: 20px;
-		}
-	}
-</style>
+{caseStudies.map((card, i) => <CaseStudyCard card={card} wireframe={wireframes[i]} tear={tears[i]} id={i === 0 ? "work" : undefined} />)}
