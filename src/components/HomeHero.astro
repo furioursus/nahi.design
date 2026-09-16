@@ -161,13 +161,27 @@ import logoMark from "@img/logo-mark.svg";
 			padding: 44px 0 40px;
 		}
 		.hero-inner.panel-inner {
-			padding: 0 20px;
+			/* Without an explicit width here, this flex child (centered on
+			   the cross axis of .hero-full's column flex) sizes to its
+			   content's shrink-to-fit width instead of the viewport's —
+			   wide enough to spill past both edges on narrow screens,
+			   which made the padding below look like it wasn't applying
+			   at all. */
+			width: 100%;
+			padding: 0 24px;
 		}
 		.eyebrow {
 			margin-bottom: 16px;
 		}
 		.hero-name {
 			font-size: clamp(43px, 17.3vw, 73.5px);
+		}
+		/* .nowrap keeps "People First;" from breaking mid-phrase at wide
+		   desktop widths where the clamp() hits its max size — at mobile
+		   widths the phrase is wider than the viewport, so forcing nowrap
+		   there just clips it instead. */
+		.hero-name .nowrap {
+			white-space: normal;
 		}
 		.hero-desc {
 			font-size: 15.5px;
