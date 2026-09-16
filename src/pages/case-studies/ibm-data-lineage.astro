@@ -47,9 +47,30 @@ const description =
 	</Fragment>
 
 	<Figure
+		video={{
+			poster: "/video/data-lineage-tour-poster.webp",
+			sources: [
+				{ src: "/video/data-lineage-tour-720.mp4", media: "(max-width: 700px)" },
+				{ src: "/video/data-lineage-tour-1440.mp4" },
+			],
+		}}
+		alt="The Welcome to Data Lineage tour in IBM watsonx, stepping through three panels: trust your data, investigate your data pipeline, and analyze and share valuable insights, each with a diagram of the lineage view behind it"
+		figNum="Fig. 01"
+		lead="What shipped, in three steps."
+		wide
+		fit="contain"
+		deck
+		deckLabel="What shipped"
+	>
+		IBM's lineage product still opens by saying what it's for: trust your data, investigate the pipeline,
+		analyze what you find. Behind those three lines sit nine months, three client banks, and a model the ETL
+		and AI teams went on to adapt for their own data.
+	</Figure>
+
+	<Figure
 		src={ibm01}
 		alt="IBM Watson Knowledge Catalog, Lineage tab for SAVINGS_ACCOUNTS. The starting asset sits in the centre with its business terms and 2 masked columns; three original-source CSV files sit on the left grouped as Client 360 and Customer 360 with counts like 2 of 24 assets; two reports and a model marked Final target sit on the right, each showing business terms and column counts."
-		figNum="Fig. 01"
+		figNum="Fig. 02"
 		lead="Start focused, stay focused."
 		wide
 		fit="contain"
@@ -82,7 +103,7 @@ const description =
 		<Figure
 			src={ibm02}
 			alt="IBM Infosphere Information Governance Catalog, Data Lineage for EFF_DURATION: an inventory panel listing 281 assets on the left and, on the right, a dense diagram of hundreds of tiny nodes joined by grey lines, too small to read"
-			figNum="Fig. 02"
+			figNum="Fig. 03"
 			lead="Everything, all at once."
 			fit="contain"
 			deck
@@ -117,7 +138,7 @@ const description =
 		<Figure
 			src={ibm03}
 			alt="Persona and experience map for Betty, a business analyst who consumes data. The top block lists her asks, need statements, negative emotions, pain points, and requested metadata. Below, an emotional curve runs through five phases, naive use of data, guided use, development of autonomy, continuing collaboration, and mastery, with the lowest points where she cannot answer why her data is trustworthy and realizes she depends on data producers."
-			figNum="Fig. 03"
+			figNum="Fig. 04"
 			lead="The pain was dependence, not distance."
 			wide
 			fit="contain"
@@ -144,7 +165,7 @@ const description =
 		<Figure
 			src={ibm04}
 			alt="A workshop room at IBM's offices in Poland: eight attendees stand with their backs to the camera, gathered around a wall covered in orange and blue sticky notes, while the facilitator at the wall works through them"
-			figNum="Fig. 04"
+			figNum="Fig. 05"
 			lead="Skin in the design before skin in the deal."
 			tall
 			fit="center"
@@ -209,7 +230,7 @@ const description =
 			full
 			solo
 			deckLabel="Summary View"
-			figNum="Fig. 05"
+			figNum="Fig. 06"
 			lead="Control of size and scope, handed to the user."
 			items={[
 				{
@@ -297,14 +318,20 @@ const description =
 			deckLabel="Testimonial"
 		/>
 		<Figure
+			video={{
+				poster: "/video/lineage-six-years-on-poster.webp",
+				sources: [
+					{ src: "/video/lineage-six-years-on-720.mp4", media: "(max-width: 700px)" },
+					{ src: "/video/lineage-six-years-on-1440.mp4" },
+				],
+			}}
 			alt="IBM Cloud Pak for Data, Lineage tab for the gdpr-analysis-workbook report: opens on two original-source assets feeding a starting asset, then opens the Show query items panel to pick which columns appear in the lineage graph"
-			figNum="Fig. 06"
+			figNum="Fig. 07"
 			lead="Still the front door, six years later."
 			tall
 			fit="contain"
 			deck
 			deckLabel="Six years on"
-			placeholderLabel="Figure 06"
 		>
 			The work outlived the team that built it. Open IBM's lineage today and it still opens folded to
 			source and consumer, still expands a step at a time, and still asks which columns are worth showing
