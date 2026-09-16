@@ -107,6 +107,14 @@ if (mode) {
 
 		gsap.registerPlugin(ScrollTrigger);
 
+		// Mobile browsers resize the viewport (and fire a `resize` event)
+		// just from the address bar/toolbar showing or hiding as you
+		// scroll — not an actual layout change. Without this, ScrollTrigger
+		// treats every one of those as cause to recalculate, which on a
+		// pinned page shows up as the scroll position jumping back toward
+		// the top mid-scroll.
+		ScrollTrigger.config({ ignoreMobileResize: true });
+
 		const panels: Element[] = mode === "paged" ? gsap.utils.toArray(".panel") : gsap.utils.toArray(".page-open, .page-close");
 
 		if (panels.length < 2) return;
@@ -190,8 +198,18 @@ if (mode) {
 		if (document.fonts && document.fonts.ready) document.fonts.ready.then(evaluate);
 		window.addEventListener("load", evaluate);
 
+		// Same mobile-address-bar problem as ScrollTrigger's own config
+		// above, one level up: a resize event here re-runs evaluate(),
+		// which can lock()/unlock() and rebuild every pin trigger from
+		// scratch — on a page that's mid-scroll, that reset the scroll
+		// position back toward the top. Width is what an actual layout
+		// change (rotation, resizing a real window) always changes;
+		// address bar show/hide on scroll only ever changes height.
+		let lastWidth = window.innerWidth;
 		let t: ReturnType<typeof setTimeout>;
 		window.addEventListener("resize", () => {
+			if (window.innerWidth === lastWidth) return;
+			lastWidth = window.innerWidth;
 			clearTimeout(t);
 			t = setTimeout(evaluate, 180);
 		});
