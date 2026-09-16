@@ -4,8 +4,7 @@
    modes, read from <html data-scroll="paged|flow">.
 
      paged   Homepage only. Every .panel pins as you scroll past
-             it and the next one covers it, with a snap that
-             settles on the nearest one and a wayfinding rail.
+             it and the next one covers it, with a wayfinding rail.
 
      flow    Every other page. Only .page-open and .page-close
              pin. The document between them scrolls normally,
