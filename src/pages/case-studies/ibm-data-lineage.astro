@@ -83,7 +83,7 @@ const description =
 	</Figure>
 
 	<section id="problem">
-		<div class="sec-head"><span class="sec-num">01</span><h2>The problem</h2><span class="sec-rule"></span></div>
+		<div class="sec-head"><span class="sec-num">01</span><h2>Three hundred steps and twenty minutes</h2><span class="sec-rule"></span></div>
 		<p>
 			Data lineage is how a bank proves where a number came from. Regulators expect it, and getting it
 			wrong can cost up to $23 million in fines, so the tool that draws the map matters more than its
@@ -116,7 +116,7 @@ const description =
 	</section>
 
 	<section id="research">
-		<div class="sec-head"><span class="sec-num">02</span><h2>What we found</h2><span class="sec-rule"></span></div>
+		<div class="sec-head"><span class="sec-num">02</span><h2>They weren't browsing, they were hunting</h2><span class="sec-rule"></span></div>
 		<p>
 			Standard research would have meant interviews up front, design in a vacuum, and a usability test at
 			the end. Instead I proposed recurring co-creation with three named clients, ING, State Street, and
@@ -195,7 +195,7 @@ const description =
 					title: "The competitor",
 					imgAlt: "Diagram labelled Competitor: one pink data lineage node joined by a dashed line to a grey hidden node with a single button, Show next node",
 					placeholderLabel: "Collibra's one-step expansion",
-					body: "Collibra let users expand a lineage one step at a time, which kept performance in check. At our scale it was tedious to the point of failure: reaching an original source through three hundred steps meant dozens of clicks, so copying it directly was ruled out.",
+					body: "Collibra expanded a lineage one step at a time, which kept performance in check. At three hundred steps, that's dozens of clicks to reach a source.",
 				},
 				{
 					stepLabel: "Source 02",
@@ -203,7 +203,7 @@ const description =
 					title: "The patent",
 					imgAlt: "Diagram labelled Patent: four nodes in a row, the second greyed out as a hidden node, with an arrow skipping over it from the first node to the third",
 					placeholderLabel: "The pending patent",
-					body: "A patent filed during the project hid intermediary steps unless they'd been flagged to always show. It cut the bloat, but flagging needs metadata applied by a person or a process, an extra flow that was out of scope for an MVP and a dependency we didn't control.",
+					body: "A patent filed mid-project hid intermediary steps unless they'd been flagged to always show. Flagging needs metadata someone has to apply, which was a dependency we didn't control.",
 				},
 				{
 					stepLabel: "Source 03",
@@ -211,7 +211,7 @@ const description =
 					title: "The neighbor",
 					imgAlt: "Diagram labelled Internal: two pink nodes with two grey hidden nodes between them, covered by one dark button reading Show 2 hidden nodes",
 					placeholderLabel: "The DevOps team's grouped diagram",
-					body: "Another IBM team was mapping automations with a diagram that grouped similar content and showed how much was inside each group. It invited exploration well, but populating those counts required the same expensive backend queries we were trying to avoid.",
+					body: "Another IBM team grouped similar nodes and showed how many sat inside each group. Good invitation to explore, but populating those counts meant the expensive queries we were trying to avoid.",
 				},
 			]}
 		/>
@@ -257,20 +257,20 @@ const description =
 		</Strip>
 
 		<p>
-			The Summary View was novel, but it didn't satisfy every requirement of a full product on its own, and
+			<strong
+				class="deck-stat"
+				data-deck-label="One model"
+				data-deck-foot="Seven teams, one lineage model|IBM watsonx"
+				>Generalizing the model past banking data risked the ship date; staying narrow risked several teams
+				quietly rebuilding the same thing.</strong
+			> The Summary View was novel, but it didn't satisfy every requirement of a full product on its own, and
 			the mandate was bigger than lineage anyway: leadership wanted lineage, the data catalog, and data
 			quality folded into one experience inside watsonx. Combining them let a user see the quality of the
 			data at every node in a pipeline, walk to the source of the degradation, and fix it, all in a few
 			clicks and a few minutes rather than the hours it used to take just to find where the degraded data
 			sat. What nobody mandated was that the ETL team and the AI model team would come asking for the same
 			logic, for pipeline runs and training data that looked nothing like ING's banking transactions. I had
-			no authority over any of their roadmaps. <strong
-				class="deck-stat"
-				data-deck-label="One model"
-				data-deck-foot="Seven teams, one lineage model|IBM watsonx"
-				>Generalizing the model past banking data risked the ship date; staying narrow risked several teams
-				quietly rebuilding the same thing.</strong
-			> We generalized, and the original timeline held.
+			no authority over any of their roadmaps. We generalized, and the original timeline held.
 		</p>
 
 		<ImagePair
@@ -295,16 +295,7 @@ const description =
 	</section>
 
 	<section id="outcome">
-		<div class="sec-head"><span class="sec-num">04</span><h2>Outcome</h2><span class="sec-rule"></span></div>
-		<p>Measured after launch, and in the years since:</p>
-		<Metrics
-			three
-			items={[
-				{ n: "−90%", label: "Loading time, at the high end. Time-to-value moved from hours to seconds" },
-				{ n: "$100K+", label: "In new contracts, shaped by the three banks who'd co-designed the product" },
-				{ n: "Red Dot", label: "Award for the redesign, with two products shipped at different pay tiers" },
-			]}
-		/>
+		<div class="sec-head"><span class="sec-num">04</span><h2>Six years later, still shipping</h2><span class="sec-rule"></span></div>
 		<p>
 			The clearer measure is time. Six years after I left IBM, the same patterns are still part of the
 			shipped lineage product, the ETL and AI model teams' designers adapted the model rather than building
@@ -312,10 +303,14 @@ const description =
 			surfaced has since been built out by other designers. That's the evidence the abstraction landed at
 			the right altitude: general enough to reuse, narrow enough to ship on time.
 		</p>
-		<Pull
-			quote="I've never met such a well-rounded designer who is skilled in everything: UX design, producing pixel-perfect hi-fidelity designs, leading workshops, conducting user research independently, defining product requirements, and stakeholder management."
-			attribution="Lauren Chen, co-worker at IBM"
-			deckLabel="Testimonial"
+		<p>Measured after launch, and in the years since:</p>
+		<Metrics
+			three
+			items={[
+				{ n: "Red Dot", label: "Award for the redesign, with two products shipped at different pay tiers" },
+				{ n: "−90%", label: "Loading time, at the high end. Time-to-value moved from hours to seconds" },
+				{ n: "$100K+", label: "In new contracts, shaped by the three banks who'd co-designed the product" },
+			]}
 		/>
 		<Figure
 			video={{
@@ -340,7 +335,7 @@ const description =
 	</section>
 
 	<section id="reflection">
-		<div class="sec-head"><span class="sec-num">05</span><h2>Reflection</h2><span class="sec-rule"></span></div>
+		<div class="sec-head"><span class="sec-num">05</span><h2>Alignment has a half-life</h2><span class="sec-rule"></span></div>
 		<p>
 			The hardest part of this project wasn't the diagram. It was keeping seven teams aligned on decisions
 			that had already been made. Meetings kept circling back to settled questions, and while some of that

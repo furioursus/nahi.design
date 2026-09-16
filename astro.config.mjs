@@ -6,5 +6,6 @@ import mailObfuscation from "astro-mail-obfuscation";
 
 // https://astro.build/config
 export default defineConfig({
+	site: "https://www.nahi.design",
 	integrations: [icon(), mailObfuscation()],
 });
