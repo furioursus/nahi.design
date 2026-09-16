@@ -134,9 +134,24 @@ const { title } = Astro.props;
 			};
 		}
 
+		/* A figure holding motion instead of a still: same slide shape as an
+		   image, carrying poster + sources so the deck can rebuild <video>
+		   with the autoplay/reduced-motion handling BaseLayout gives the
+		   page's own copy (which this cloned markup doesn't get for free). */
+		function videoInfo(video: Element) {
+			return {
+				poster: video.getAttribute("poster") || "",
+				sources: Array.from(video.querySelectorAll("source")).map((s) => ({
+					src: s.getAttribute("src") || "",
+					media: s.getAttribute("media"),
+				})),
+			};
+		}
+
 		function buildImage(fig: Element) {
 			const info = sectionInfo(fig);
 			const img = fig.querySelector("img");
+			const video = !img ? fig.querySelector("video") : null;
 			const tag = fig.querySelector(".frame-tag");
 			const cap = captionOf(fig);
 			return {
@@ -145,7 +160,8 @@ const { title } = Astro.props;
 				label: lbl(fig, info.label || "Image"),
 				source: info.label || "Hero",
 				img: img ? img.getAttribute("src") : null,
-				alt: img ? img.getAttribute("alt") || "" : tagText(tag),
+				video: video ? videoInfo(video) : null,
+				alt: img ? img.getAttribute("alt") || "" : video ? video.getAttribute("aria-label") || "" : tagText(tag),
 				fn: cap.fn,
 				cap: cap.html,
 			};
@@ -255,6 +271,29 @@ const { title } = Astro.props;
 			return (s || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 		}
 
+		function videoHtml(v: { poster: string; sources: { src: string; media: string | null }[] }, alt: string) {
+			const sources = v.sources
+				.map((s) => '<source src="' + s.src + '"' + (s.media ? ' media="' + esc(s.media) + '"' : "") + ' type="video/mp4">')
+				.join("");
+			return (
+				'<video autoplay muted loop playsinline data-ambient poster="' +
+				esc(v.poster) +
+				'" aria-label="' +
+				esc(alt) +
+				'">' +
+				sources +
+				"</video>"
+			);
+		}
+
+		/* Slides are rebuilt from innerHTML after the page's own load event, so
+		   BaseLayout's one-time data-ambient play pass never sees them — give
+		   each freshly rendered slide the same reduced-motion-respecting start. */
+		function playAmbient(root: Element) {
+			if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+			root.querySelectorAll<HTMLVideoElement>("video[data-ambient]").forEach((v) => v.play().catch(() => {}));
+		}
+
 		function cellHtml(c: any) {
 			const media = c.img ? '<img src="' + c.img + '" alt="' + esc(c.alt) + '">' : esc(c.alt);
 			return (
@@ -291,7 +330,11 @@ const { title } = Astro.props;
 						: "") +
 					"</div>";
 			} else if (s.type === "image") {
-				const media = s.img ? '<img src="' + s.img + '" alt="' + esc(s.alt) + '">' : esc(s.alt || "Image");
+				const media = s.img
+					? '<img src="' + s.img + '" alt="' + esc(s.alt) + '">'
+					: s.video
+						? videoHtml(s.video, s.alt)
+						: esc(s.alt || "Image");
 				canvas.innerHTML =
 					'<div class="deck-slide" style="padding-bottom:5.5%"><div class="ds-media' +
 					(s.fit ? " " + s.fit : "") +
@@ -302,6 +345,7 @@ const { title } = Astro.props;
 					"</b><span>" +
 					s.cap +
 					"</span></div></div>";
+				playAmbient(canvas);
 			} else if (s.type === "strip") {
 				canvas.innerHTML =
 					'<div class="deck-slide"><div class="ds-eye"><span class="spine"></span>' +
