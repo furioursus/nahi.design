@@ -33,7 +33,7 @@ const { items, land, deckLabel, deckCaption } = Astro.props;
 		items.map((item) => (
 			<div class="pcol rev">
 				<div class="pcol-n">{item.stepLabel}</div>
-				<div class="frame has-img" data-label={item.title} data-fit="contain">
+				<div class:list={["frame", { "has-img": item.imgSrc }]} data-label={item.title} data-fit="contain">
 					<span class="frame-n">{item.frameN}</span>
 					{item.imgSrc ? (
 						<Image src={item.imgSrc} alt={item.imgAlt} />

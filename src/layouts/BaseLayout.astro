@@ -9,9 +9,10 @@ interface Props {
 	description?: string;
 	showNav?: boolean;
 	scrollMode?: "flow" | "paged";
+	ogType?: "website" | "article";
 }
 
-const { title, description, showNav = true, scrollMode = "flow" } = Astro.props;
+const { title, description, showNav = true, scrollMode = "flow", ogType = "website" } = Astro.props;
 const DefaultOGImage = "https://www.nahi.design/img/og-image.png";
 ---
 
@@ -24,13 +25,16 @@ const DefaultOGImage = "https://www.nahi.design/img/og-image.png";
 		<meta name="generator" content={Astro.generator} />
 		<SEO
       title={`${title} | Nahi Kennedy-Nuñez | UX Designer`}
-      description={`${description ?? "Nahi Kennedy-Nuñez is a UX Designer with expertise in MLOPs & complex workflows."}`}
+      description={`${description ?? "Nahi Kennedy-Nuñez designs AI and data-heavy products for people working under pressure."}`}
       openGraph={{
         basic: {
           title: `${title} | Nahi Kennedy-Nuñez | UX Designer`,
-          type: "image/png",
+          type: ogType,
           image: DefaultOGImage,
-        }
+        },
+        image: {
+          type: "image/png",
+        },
       }}
     />
 		<AstroFont
