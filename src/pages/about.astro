@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import PageFlow from "@components/PageFlow.astro";
 import Contact from "@components/Contact.astro";
 import about01 from "@img/about-01.webp";
 
@@ -34,14 +35,16 @@ const hobbies = [
 
 <BaseLayout title="About" description="A few other things about Nahi Kennedy-Nuñez.">
 	<main id="main">
-		<div class="wrap">
-			<div class="hero">
-				<div class="eyebrow"><span class="dot"></span><span>Grounded · Craftsman · Open to full-time roles</span></div>
-				<h1>A few other things <span class="hl">about me</span></h1>
-				<p class="lede measure">
-					I'm a Senior UX designer based in New York, currently looking for a full-time seat on a mission-driven team. That's the work. Here's most of the rest.
-				</p>
-			</div>
+		<PageFlow>
+			<Fragment slot="hero">
+				<div class="hero">
+					<div class="eyebrow"><span class="dot"></span><span>Grounded · Craftsman · Open to full-time roles</span></div>
+					<h1>A few other things <span class="hl">about me</span></h1>
+					<p class="lede measure">
+						I'm a Senior UX designer based in New York, currently looking for a full-time seat on a mission-driven team. That's the work. Here's most of the rest.
+					</p>
+				</div>
+			</Fragment>
 
 			<div class="about">
 				<Image class="about-photo" src={about01} alt="Nahi Kennedy-Nuñez" />
@@ -79,10 +82,11 @@ const hobbies = [
 				</div>
 			</section>
 
-			<Contact />
-
-			<div class="closing"><a href="/#work">← Back to the case studies</a></div>
-		</div>
+			<Fragment slot="close">
+				<Contact />
+				<div class="closing"><a href="/#work">← Back to the case studies</a></div>
+			</Fragment>
+		</PageFlow>
 	</main>
 </BaseLayout>
 
@@ -91,7 +95,7 @@ const hobbies = [
 		padding: 64px 0 0;
 	}
 	h1 {
-		font-size: clamp(36px, 6vw, 60px);
+		font-size: clamp(39px, 6vw, 65px);
 		font-weight: 600;
 		line-height: 1.08;
 		letter-spacing: -0.02em;
@@ -100,7 +104,7 @@ const hobbies = [
 		max-width: 15ch;
 	}
 	.lede {
-		font-size: 19px;
+		font-size: 20.5px;
 		line-height: 1.75;
 		color: var(--ink-mid);
 		text-wrap: pretty;
@@ -122,7 +126,7 @@ const hobbies = [
 		border: 1px solid var(--rule);
 	}
 	.about-text {
-		font-size: 16px;
+		font-size: 17.5px;
 		line-height: 1.85;
 		color: var(--ink-mid);
 		max-width: 560px;
@@ -143,7 +147,7 @@ const hobbies = [
 	}
 	.fact-k {
 		font-family: var(--font-mono);
-		font-size: 10px;
+		font-size: 11px;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		color: var(--ink-soft);
@@ -151,7 +155,7 @@ const hobbies = [
 	}
 	.fact-v {
 		font-family: var(--font-display);
-		font-size: 20px;
+		font-size: 21.5px;
 		font-weight: 600;
 		color: var(--mark);
 	}
@@ -187,14 +191,14 @@ const hobbies = [
 	}
 	.hobby-title {
 		font-family: var(--font-display);
-		font-size: 18px;
+		font-size: 19.5px;
 		font-weight: 500;
 		color: var(--ink);
 		margin-bottom: 9px;
 		letter-spacing: -0.01em;
 	}
 	.hobby-blurb {
-		font-size: 14.5px;
+		font-size: 15.5px;
 		line-height: 1.75;
 		color: var(--ink-mid);
 	}
@@ -205,10 +209,10 @@ const hobbies = [
 	}
 	@media (max-width: 600px) {
 		h1 {
-			font-size: 32px;
+			font-size: 34.5px;
 		}
 		.lede {
-			font-size: 16.5px;
+			font-size: 18px;
 		}
 		.hero {
 			padding: 32px 0 0;

@@ -1,97 +1,124 @@
 ---
-import homepage01 from "@img/homepage-01.png";
-import homepage02 from "@img/homepage-02.png";
+import homepage03 from "@img/homepage-03.png";
+import homepage04 from "@img/homepage-04.png";
+import logoMark from "@img/logo-mark.svg";
 ---
 
-<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
-	<filter id="watermarkFuzz" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-		<feGaussianBlur stdDeviation="14" in="SourceGraphic" edgeMode="none"></feGaussianBlur>
-	</filter>
-</svg>
-
-<div class="hero-full">
-	<div class="hero-watermark" style={`--mask-1:url('${homepage01.src}');--mask-2:url('${homepage02.src}')`}></div>
-	<div class="hero-inner">
-		<div class="hero-name-row">
-			<div class="eyebrow hero-anim d1"><span class="dot"></span>Product &amp; UX Designer</div>
-			<h1 class="hero-name hero-anim d2">Nahi<br /><span class="hl">Kennedy-Nuñez</span></h1>
+<section class="panel" id="hero" data-label="Home">
+	<div class="hero-full">
+		<div class="hero-inner panel-inner">
+			<div class="eyebrow hero-anim d1"><span class="dot"></span>Nahi Kennedy-Nuñez: Product and UX Designer</div>
+			<h1 class="hero-name hero-anim d2"><span class="nowrap">People First;</span><br /><span class="hl">Always</span></h1>
+			<p class="hero-desc hero-anim d3">
+				Hi! I'm Nahi, a product and UX designer working mostly in and around AI and data-heavy tools, where the
+				hard part is rarely the interface. It's understanding people, behaviors, and motivations. I promise
+				you: the result is always better when you put people first.
+			</p>
+			<div class="hero-marks hero-anim d4">
+				<div
+					class="hero-mark hero-mark-photo"
+					role="img"
+					aria-label="Woodblock print portrait of Nahi Kennedy-Nuñez"
+					style={`-webkit-mask-image:url('${homepage03.src}');mask-image:url('${homepage04.src}')`}
+				>
+				</div>
+				<div
+					class="hero-mark hero-mark-baybayin"
+					role="img"
+					aria-label="Nahi, in a hand-drawn Baybayin mark"
+					style={`-webkit-mask-image:url('${logoMark.src}');mask-image:url('${logoMark.src}')`}
+				>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
+</section>
 
 <style>
 	.hero-full {
 		position: relative;
 		overflow: hidden;
+		width: 100%;
 		min-height: 76vh;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		align-items: center;
 		padding: 64px 0 56px;
 	}
-	.hero-inner {
-		padding-left: max(32px, calc((100vw - 920px) / 2 + 32px));
-		padding-right: 4vw;
+	.hero-inner.panel-inner {
+		width: auto;
+		max-width: 1040px;
+		padding: 0 32px;
+		text-align: left;
 	}
-	.hero-watermark {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 132vw;
-		max-width: none;
-		aspect-ratio: 1152 / 588;
-		transform: translate(-50%, -50%);
-		background-image: radial-gradient(circle at 50% 50% in oklch, #f6c445 0%, #ce9a2e 22%, #b33a55 48%, #5c0b22 72%, #5c0b22 100%);
-		background-size: 220% 220%;
-		animation: watermarkPan 16s ease-in-out infinite;
-		opacity: 0.7;
-		-webkit-filter: url(#watermarkFuzz);
-		filter: url(#watermarkFuzz);
-		-webkit-mask: var(--mask-1) center / contain no-repeat;
-		mask: var(--mask-2) center / contain no-repeat;
-		pointer-events: none;
-	}
-	@media (prefers-color-scheme: dark) {
-		:root:not([data-theme="light"]) .hero-watermark {
-			opacity: 0.4;
-		}
-	}
-	:root[data-theme="dark"] .hero-watermark {
-		opacity: 0.4;
-	}
-	@keyframes watermarkPan {
-		0% {
-			background-position: 22% 32%;
-		}
-		25% {
-			background-position: 78% 24%;
-		}
-		50% {
-			background-position: 70% 78%;
-		}
-		75% {
-			background-position: 24% 72%;
-		}
-		100% {
-			background-position: 22% 32%;
-		}
-	}
-	.hero-name-row {
+	.eyebrow {
 		position: relative;
 		z-index: 1;
+		display: flex;
+		align-items: center;
+		gap: 9px;
+		font-family: var(--font-mono);
+		font-size: 13.5px;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--mark);
+		margin-bottom: 26px;
+	}
+	.eyebrow .dot {
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--mark);
+		flex-shrink: 0;
 	}
 	.hero-name {
 		font-family: var(--font-display);
 		font-weight: 700;
-		font-size: clamp(56px, 10.5vw, 168px);
+		font-size: clamp(60.5px, 11.3vw, 181.5px);
 		line-height: 0.94;
 		letter-spacing: -0.02em;
-		margin: 0;
+		margin: 0 0 28px;
 		max-width: none;
 		text-wrap: balance;
 	}
 	.hero-name .hl {
 		color: var(--mark);
+	}
+	.hero-name .nowrap {
+		white-space: nowrap;
+	}
+	.hero-desc {
+		position: relative;
+		z-index: 1;
+		font-family: var(--font-body);
+		font-size: 17px;
+		line-height: 1.75;
+		color: var(--ink-mid);
+		max-width: 560px;
+		margin: 0 0 32px;
+	}
+	.hero-marks {
+		display: flex;
+		align-items: flex-start;
+		gap: 20px;
+	}
+	.hero-mark {
+		width: 150px;
+		height: 158px;
+		flex-shrink: 0;
+		border-radius: 3px;
+		background-image: radial-gradient(circle at 50% 50% in oklch, #f6c445 0%, #ce9a2e 22%, #b33a55 48%, #5c0b22 72%, #5c0b22 100%);
+		background-size: 220% 220%;
+		background-position: 45% 40%;
+		-webkit-mask-position: center;
+		mask-position: center;
+		-webkit-mask-size: contain;
+		mask-size: contain;
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+		transition: background-position 0.3s ease-out;
 	}
 	@keyframes heroUp {
 		from {
@@ -112,11 +139,20 @@ import homepage02 from "@img/homepage-02.png";
 	.hero-anim.d2 {
 		animation-delay: 0.16s;
 	}
+	.hero-anim.d3 {
+		animation-delay: 0.36s;
+	}
+	.hero-anim.d4 {
+		animation-delay: 0.48s;
+	}
 	@media (prefers-reduced-motion: reduce) {
 		.hero-anim {
 			animation: none;
 			opacity: 1;
 			transform: none;
+		}
+		.hero-mark {
+			transition: none;
 		}
 	}
 	@media (max-width: 600px) {
@@ -124,21 +160,21 @@ import homepage02 from "@img/homepage-02.png";
 			min-height: 0;
 			padding: 44px 0 40px;
 		}
-		.hero-inner {
+		.hero-inner.panel-inner {
 			padding: 0 20px;
-		}
-		.hero-watermark {
-			width: 180vw;
-			opacity: 0.574;
 		}
 		.eyebrow {
 			margin-bottom: 16px;
 		}
 		.hero-name {
-			font-size: clamp(40px, 16vw, 68px);
+			font-size: clamp(43px, 17.3vw, 73.5px);
 		}
-		.hero-name-row {
-			padding-right: 0;
+		.hero-desc {
+			font-size: 15.5px;
+		}
+		.hero-mark {
+			width: 120px;
+			height: 128px;
 		}
 	}
 </style>

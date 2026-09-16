@@ -6,9 +6,9 @@ Live at [nahi.design](https://www.nahi.design).
 
 ## What's on the site
 
-**Home page** (`src/pages/index.astro`) is a full-bleed name-treatment hero (`HomeHero`), followed by a compact about blurb (`HomeAbout`), a stacked list of case study cards (`CaseStudies` + `CaseStudyCard`) linking out to the four case studies below, and a closing contact slab (`Contact`).
+**Home page** (`src/pages/index.astro`) is a pinned, one-screen-at-a-time sequence rather than a single scrolling page: a merged hero/about panel (`HomeHero`, name treatment plus a short bio, a woodblock portrait and a hand-drawn Baybayin mark whose gradient fill tracks the mouse), one full-panel card per case study (`CaseStudies` + `CaseStudyCard`, each on its own dot-grid-and-hand-drawn-sketch background), and a closing dark contact panel (`Contact`). See "Scroll-flow panels" below for the mechanic behind the pinning.
 
-**About** (`src/pages/about.astro`) and **CV** (`src/pages/cv.astro`) are their own pages rather than homepage sections — About covers the non-work side (photo, a few facts, four hobby videos), CV is the full work history plus an "Open as PDF" link to the CV in `public/`, with its content in `src/data/cv.ts`.
+**About** (`src/pages/about.astro`) and **CV** (`src/pages/cv.astro`) are their own pages rather than homepage sections — About covers the non-work side (photo, a few facts, four hobby videos), CV is the full work history plus an "Open as PDF" link to the CV in `public/`, with its content in `src/data/cv.ts`. Both open and close on a pinned panel too (via `PageFlow`), with the body between scrolling normally.
 
 **Case study pages** (`src/pages/case-studies/*.astro`) — four in-depth write-ups, each composed directly from a shared component kit and wrapped in `CaseStudyLayout`:
 
@@ -34,22 +34,25 @@ Each page composes the same shared kit: `CaseStudyHero`, `CaseStudyMeta`, `Figur
 │   │   └── cv.ts              → CV experience, education, and certifications content
 │   ├── img/               → case study and homepage images (optimized by Astro at build time)
 │   ├── layouts/
-│   │   ├── BaseLayout.astro       → shared <head>, fonts, SEO tags, marketing nav (`showNav` prop)
-│   │   └── CaseStudyLayout.astro  → case-study topbar, deck lightbox, scroll-reveal/wayfinding scripts
+│   │   ├── BaseLayout.astro       → shared <head>, fonts, SEO tags, marketing nav (`showNav`, `scrollMode` props)
+│   │   └── CaseStudyLayout.astro  → case-study topbar, deck lightbox, scroll-reveal/wayfinding scripts, wraps content in `PageFlow`
 │   ├── pages/
 │   │   ├── index.astro                    → the home page
 │   │   ├── about.astro                    → the About page
 │   │   ├── cv.astro                       → the CV page
 │   │   └── case-studies/*.astro           → the four case study pages
-│   └── styles/            → global.css, reset.css, tokens.css, site-kit.css, marketing.css
+│   ├── scripts/
+│   │   └── scroll-sections.ts     → the pin-and-cover scroll mechanic (see "Scroll-flow panels")
+│   └── styles/            → global.css, reset.css, tokens.css, site-kit.css, marketing.css, scroll-sections.css, homepage-panels.css
 ├── postcss.config.cjs    → wires up postcss-custom-media (breakpoint tokens, see below)
 └── package.json
 ```
 
 ## Notable pieces under the hood
 
-- **Fonts**: Fraunces (display headings), Source Serif 4 (body prose), and Space Mono (labels, metadata, mono UI), loaded via `astro-font` from Google Fonts.
-- **Design tokens & the "Techo" palette**: `src/styles/tokens.css` defines a warm paper/ink color system (`--paper`, `--ink`, `--ink-mid`, `--ink-soft`, `--accent`, `--mark`, `--rule`, `--surface`) with a real dark-mode block — both a `@media (prefers-color-scheme: dark)` block and an explicit `:root[data-theme="dark"]` override, so a future theme toggle just needs to set that attribute. `src/styles/site-kit.css` holds the shared case-study component kit (topbar, numbered frames, pull quotes, the pivot slab, metrics grid, the deck lightbox) and `src/styles/marketing.css` holds the nav/contact chrome shared by the homepage, About, and CV — both are pulled in once via `global.css` so no page has to import them individually.
+- **Fonts**: Shippori Mincho (display headings), Noto Serif JP (body prose), M PLUS 1 (interactive chrome — buttons, nav, the topbar's back link and section label, the deck lightbox's controls, the homepage's wayfinding rail), and Space Mono (metadata only — eyebrows, dates, figure/frame numbers, the deck's slide counter), loaded via `astro-font` from Google Fonts. `--font-ui` is the token for the M PLUS 1 role.
+- **Scroll-flow panels**: every page pins its opening hero in place while the next section slides up and covers it (a torn-paper edge and a matching drop shadow at the seam), then reads as a normal document until a closing panel — the homepage's "Get in touch," or the case-study/About/CV `page-close` — pins the same way. The homepage instead pins *every* panel in sequence (hero/about, one panel per case study, contact), with a snap that settles on the nearest one and a wayfinding rail built from each panel's `data-label`. Built with GSAP + ScrollTrigger (`src/scripts/scroll-sections.ts`, styles in `src/styles/scroll-sections.css`), driven by `data-scroll="flow"` (default) or `"paged"` (homepage only, set via `BaseLayout`'s `scrollMode` prop) on `<html>`. `PageFlow.astro` is the shared shell (`hero`/default/`close` named slots) that every non-homepage page wraps its content in to get the open/close panels; `CaseStudyLayout` does this for case studies automatically. Three things fall back to plain scrolling, any one of them enough: reduced motion, a missing GSAP, or a panel whose content measures taller than the viewport (checked on load, on font-load, and on resize) — a pinned panel clips its overflow, so locking a page that doesn't fit would hide content with no way to reach it. The homepage's four case-study panels also carry a dot-grid texture plus hand-drawn UI-mockup sketches and (on three of them) a dimmed employer logo, composed as layered background-images in `src/styles/homepage-panels.css`.
+- **Design tokens & the "Techo" palette**: `src/styles/tokens.css` defines a warm paper/ink color system (`--paper`, `--ink`, `--ink-mid`, `--ink-soft`, `--accent`, `--mark`, `--rule`, `--surface`) with a real dark-mode block — both a `@media (prefers-color-scheme: dark)` block and an explicit `:root[data-theme="dark"]` override. `BaseLayout` currently sets `data-theme="light"` on every page, which the dark-mode media query already treats as an explicit override (`:root:not([data-theme="light"])` is the exact condition it checks for) — so the site reads light regardless of the visitor's OS preference; drop that attribute to let the dark-mode block take over automatically again. `src/styles/site-kit.css` holds the shared case-study component kit (topbar, numbered frames, pull quotes, the pivot slab, metrics grid, the deck lightbox) and `src/styles/marketing.css` holds the nav/contact chrome shared by the homepage, About, and CV — both are pulled in once via `global.css` so no page has to import them individually.
 - **View as deck**: see [`docs/deck-lightbox.md`](docs/deck-lightbox.md).
 - **SEO**: page titles, descriptions, and Open Graph tags are handled per-page via `astro-seo`.
 - **Icons**: `@twodft/astro-icon`.
@@ -58,7 +61,7 @@ Each page composes the same shared kit: `CaseStudyHero`, `CaseStudyMeta`, `Figur
 - **Breakpoints**: defined once in `tokens.css` as `@custom-media` (`--bp-xs` 30rem, `--bp-sm` 40rem, `--bp-md` 48rem, `--bp-lg` 60rem, `--bp-xl` 64rem, `--bp-2xl` 80rem) and used in any component's `<style>` block as `@media (--bp-md) { ... }` (or `@media screen and (--bp-md) { ... }`). Plain CSS can't reference a custom property inside a media condition, so this is resolved at build time by the `postcss-custom-media` plugin, configured in `postcss.config.cjs` — that file also loads `@csstools/postcss-global-data` to make the `tokens.css` breakpoint definitions visible to every component's `<style>` block, since Astro/Vite processes each one as its own separate stylesheet. Nothing to run by hand: `npm install` pulls both packages in, and `npm run dev`/`build` pick up `postcss.config.cjs` automatically. Add a new breakpoint by adding one more `@custom-media --bp-name (min-width: ...)` line in `tokens.css`. The underlying CSS language service (used by both VS Code and Zed) doesn't know this at-rule and would otherwise flag it as "Unknown at rule" — handled per editor since the fix isn't portable:
   - **VS Code**: `css-custom-data.json` at the repo root describes `@custom-media` to the language service (with a hover description), wired in via `.vscode/settings.json`'s `css.customData`.
   - **Zed**: the same fix doesn't work — its bundled CSS server only accepts custom-data file paths through a notification VS Code's own client extension sends, which Zed doesn't implement, so `css.customData` is a no-op there regardless of how it's wired up. `.zed/settings.json` instead sets `css.lint.unknownAtRules` to `"ignore"` for the language server, which silences the whole "unknown at-rule" category (not just `@custom-media` — Zed has no way to scope this narrower).
-- **Reduced motion**: the About page's looping hobby videos (marked `data-ambient`) only autoplay when the visitor hasn't set `prefers-reduced-motion` — handled client-side in `BaseLayout`, since a static site has no server-side way to know that preference ahead of time. The case study pages' scroll-reveal and deck-open animations, and the homepage hero's entrance animation, all collapse under the same media query.
+- **Reduced motion**: the About page's looping hobby videos (marked `data-ambient`) only autoplay when the visitor hasn't set `prefers-reduced-motion` — handled client-side in `BaseLayout`, since a static site has no server-side way to know that preference ahead of time. The case study pages' scroll-reveal and deck-open animations, the homepage hero's entrance animation, the scroll-flow pin-and-cover mechanic, and the hero marks' mouse-tracking gradient (which sits at a fixed resting position instead) all collapse under the same media query.
 
 ## Commands
 

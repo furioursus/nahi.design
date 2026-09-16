@@ -27,6 +27,7 @@ const description =
 ---
 
 <CaseStudyLayout title={title} description={description}>
+	<Fragment slot="hero">
 	<CaseStudyHero eyebrow={["Product design", "IBM", "Data lineage in watsonx"]} title="Data lineage that answers in seconds, not hours">
 		When bad data reaches production at a bank, someone has to trace it back through three hundred steps
 		before the auditor arrives, and IBM's decade-old tool took hours to draw the map. Every competitor's
@@ -43,6 +44,7 @@ const description =
 			{ label: "Research base", value: "20+ interviews, bi-weekly co-creation workshops with three client banks" },
 		]}
 	/>
+	</Fragment>
 
 	<Figure
 		src={ibm01}
@@ -327,5 +329,5 @@ const description =
 		</p>
 	</section>
 
-	<NextCaseStudy href="/case-studies/hpe-ai-troubleshooting-agent" label="Debugging's hardest step was asking for help" />
+	<NextCaseStudy slot="close" href="/case-studies/hpe-ai-troubleshooting-agent" label="Debugging's hardest step was asking for help" />
 </CaseStudyLayout>

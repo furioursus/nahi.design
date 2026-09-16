@@ -31,6 +31,7 @@ const description =
 ---
 
 <CaseStudyLayout title={title} description={description}>
+	<Fragment slot="hero">
 	<CaseStudyHero eyebrow={["UX design", "Capacity 4 Health", "Aunt Rita's Foundation"]} title="Redesigning the front door to HIV care in Arizona">
 		HIVAZ.org was supposed to connect people with HIV in Arizona to care, but broken links and a maze of
 		unsorted providers buried them instead, with no way to tell who was even safe to call. Three concepts
@@ -46,6 +47,7 @@ const description =
 			{ label: "Research base", value: "20+ counselor interviews, 5 lived-experience interviews, 1 co-design workshop" },
 		]}
 	/>
+	</Fragment>
 
 	<Figure
 		src={hivaz01}
@@ -303,5 +305,5 @@ const description =
 		</p>
 	</section>
 
-	<NextCaseStudy href="/case-studies/ibm-data-lineage" label="Data lineage that answers in seconds, not hours" />
+	<NextCaseStudy slot="close" href="/case-studies/ibm-data-lineage" label="Data lineage that answers in seconds, not hours" />
 </CaseStudyLayout>

@@ -150,8 +150,9 @@
   --mark-tint: #f4e6e1;
   --focus-ring: #33456c;
 
-  --font-display: "Fraunces", Georgia, serif;
-  --font-body: "Source Serif 4", Georgia, serif;
+  --font-display: "Shippori Mincho", Georgia, serif;
+  --font-body: "Noto Serif JP", Georgia, serif;
+  --font-ui: "M PLUS 1", -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Space Mono", ui-monospace, monospace;
 
   --measure: 640px;
