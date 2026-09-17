@@ -57,7 +57,7 @@ import logoMark from "@img/logo-mark.svg";
 		position: relative;
 		z-index: 1;
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		gap: 9px;
 		font-family: var(--font-mono);
 		font-size: 13.5px;
@@ -73,6 +73,10 @@ import logoMark from "@img/logo-mark.svg";
 		border-radius: 50%;
 		background: var(--mark);
 		flex-shrink: 0;
+		/* Centers the dot on the first line's cap-height instead of the
+		   whole block's, so it doesn't drift to the seam when the eyebrow
+		   text wraps to two lines on narrow screens. */
+		margin-top: calc((1.7em - 7px) / 2);
 	}
 	.hero-name {
 		font-family: var(--font-display);
