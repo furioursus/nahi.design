@@ -100,7 +100,7 @@
 
 .eyebrow {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 9px;
   font-family: var(--font-mono);
   font-size: 13.5px;
@@ -116,6 +116,10 @@
   border-radius: 50%;
   background: var(--mark);
   flex-shrink: 0;
+  /* Centers the dot on the first line's cap-height instead of the whole
+     block's, so it doesn't drift to the seam when the eyebrow text wraps
+     to two lines on narrow screens. */
+  margin-top: calc((1.7em - 6px) / 2);
 }
 
 h1 .hl {
