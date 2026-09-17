@@ -8,25 +8,25 @@ import about01 from "@img/about-01.webp";
 const hobbies = [
 	{
 		title: "Woodworking",
-		blurb: "Slow, hands-on work with wood. No screens, no undo button, just the shape you're actually left with.",
+		blurb: "There is no undo button. A cut you rush is a cut you live with, which is a good argument for slowing down right before the step you can't take back.",
 		alt: "Shaping a piece of wood by hand",
 		src: "/video/woodworking.mp4",
 	},
 	{
 		title: "Fish keeping",
-		blurb: "A small tank, including a pea puffer, that mostly just needs to be watched.",
+		blurb: "A tank punishes overcorrection. Most days the right move is to check one number, then leave it alone and let the system settle.",
 		alt: "A pea puffer fish drifting through its tank",
 		src: "/video/pea-puffer.mp4",
 	},
 	{
 		title: "Museums",
-		blurb: "Given a free afternoon, most of it goes to a museum, like this swing at the Mercer.",
+		blurb: "A good exhibit takes a room full of objects and tells you where to look first. That is most of my job, done well by someone else.",
 		alt: "A visit to the Mercer Museum, caught mid-motion on a swing bathed in light",
 		src: "/video/mercer-lab.mp4",
 	},
 	{
 		title: "Cats",
-		blurb: "Two of them, including Dante here. They outvote me on most household decisions.",
+		blurb: "Two of them, Dante here included. Neither has ever cared about a deadline, which keeps mine in proportion.",
 		alt: "Nahi's cat Dante",
 		src: "/video/dante.mp4",
 	},
@@ -38,31 +38,33 @@ const hobbies = [
 		<PageFlow>
 			<Fragment slot="hero">
 				<div class="hero">
-					<div class="eyebrow"><span class="dot"></span><span>Grounded · Craftsman · Open to full-time roles</span></div>
-					<h1>A few other things <span class="hl">about me</span></h1>
+					<div class="eyebrow"><span class="dot"></span><span>About · Open to full-time roles</span></div>
+					<h1>I design tools for people <span class="hl">working under pressure.</span></h1>
 					<p class="lede measure">
-						I'm a Senior UX designer based in New York, currently looking for a full-time seat on a mission-driven team. That's the work. Here's most of the rest.
+						The people I design for are usually having a hard day. An outage at two in the morning, a diagnosis they are trying to make sense of, a dataset they have ten minutes to explain to a room that has already made up its mind.
 					</p>
 				</div>
 			</Fragment>
 
 			<div class="about">
 				<Image class="about-photo" src={about01} alt="Nahi Kennedy-Nuñez" />
-				<p class="about-text">
-					I've got a steady, disciplined approach to my craft, equally at home shaping wood by hand, watching my
-					fish drift through their little world, getting outvoted by my two cats, or losing an afternoon to a
-					good museum.
-				</p>
+				<div class="about-text">
+					<p><strong>Pressure narrows what a person can hold in their head.</strong> So the hard part of my work is rarely the interface. It is deciding what the interface is allowed to leave out, and being able to defend that call to the people who have to live with it.</p>
+					<p>I'm a product and UX designer in New York, working mostly in AI and data-heavy tools. I've done that at IBM, at Pachyderm and then HPE after the acquisition, and for a public health nonprofit in Arizona where the users were people looking for HIV care. Right now I'm looking for a full-time seat on a mission-driven team.</p>
+				</div>
 			</div>
 
 			<div class="facts">
+				<div class="fact"><div class="fact-k">Based in</div><div class="fact-v">New York</div></div>
 				<div class="fact"><div class="fact-k">Cats</div><div class="fact-v">2 stinkers</div></div>
-				<div class="fact"><div class="fact-k">Hobbies</div><div class="fact-v">Too many</div></div>
 				<div class="fact"><div class="fact-k">Jokes</div><div class="fact-v">Awful</div></div>
 			</div>
 
 			<section id="outside-of-design">
-				<div class="sec-head"><h2>Outside of design</h2><span class="sec-rule"></span></div>
+				<div class="sec-head"><h2>Where the calm comes from</h2><span class="sec-rule"></span></div>
+				<p class="sec-intro measure">
+					Everything I do away from a screen is slow, and none of it can be rushed without consequences. That is not an accident. It is where I learned what it costs to hurry someone, and how much of a job can be quietly taken off their hands.
+				</p>
 				<div class="hobbies">
 					{
 						hobbies.map((hobby) => (
@@ -130,6 +132,23 @@ const hobbies = [
 		line-height: 1.85;
 		color: var(--ink-mid);
 		max-width: 560px;
+	}
+	.about-text p {
+		margin: 0 0 16px;
+	}
+	.about-text p:last-child {
+		margin-bottom: 0;
+	}
+	.about-text strong {
+		color: var(--ink);
+		font-weight: 600;
+	}
+	.sec-intro {
+		font-size: 17.5px;
+		line-height: 1.8;
+		color: var(--ink-mid);
+		margin: 0 0 30px;
+		text-wrap: pretty;
 	}
 	.facts {
 		display: grid;

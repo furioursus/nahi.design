@@ -12,10 +12,10 @@ import { competencies, experience, education, certifications } from "@data/cv";
 					<div class="eyebrow"><span class="dot"></span><span>Senior Product &amp; UX Designer · Open to full-time roles</span></div>
 					<h1>Nahi Kennedy-Nuñez</h1>
 					<p class="lede measure">
-						Senior UX designer with 8+ years leading end-to-end product design for enterprise B2B SaaS,
-						data-intensive platforms, and AI/ML products, across data governance, AIOps, and business
-						intelligence. Recipient of a Red Dot Award; work shipped at IBM remains in production six years
-						after delivery.
+						I design tools for people working under pressure: engineers mid-outage, analysts with ten
+						minutes to explain a dataset, patients looking for care. Eight years of end-to-end product
+						design in enterprise and data-heavy AI products, at IBM, Pachyderm, HPE, and a CDC-funded
+						health nonprofit. Red Dot Award winner. The IBM work is still in production six years on.
 					</p>
 
 					<div class="contact-row">
@@ -52,7 +52,7 @@ import { competencies, experience, education, certifications } from "@data/cv";
 							<div class="xp-item">
 								<div class="xp-head">
 									<div class="xp-role">
-										{item.role} <span class="org">· {item.org}</span>
+										{item.role} {item.org && <span class="org">· {item.org}</span>}
 									</div>
 									<div class="xp-date">{item.date}</div>
 								</div>
@@ -91,7 +91,20 @@ import { competencies, experience, education, certifications } from "@data/cv";
 			<Fragment slot="close">
 				<section>
 					<div class="sec-head"><h2>Skills</h2><span class="sec-rule"></span></div>
-					<p class="skills-row"><strong>Tools:</strong> Figma, FigJam &nbsp;&nbsp;·&nbsp;&nbsp; <strong>Languages:</strong> English (Native or Bilingual)</p>
+					<p class="skills-row"><strong>Tools:</strong> Figma, FigJam, Claude, Claude Code, Claude Design &nbsp;&nbsp;·&nbsp;&nbsp; <strong>Languages:</strong> English (Native or Bilingual)</p>
+				</section>
+
+				<section>
+					<div class="sec-head"><h2>Contact me</h2><span class="sec-rule"></span></div>
+					<div class="contact-row">
+						<a href="mailto:hello@nahi.design" data-obfuscation>hello@nahi.design</a>
+						<span class="sep">·</span>
+						<a href="https://www.linkedin.com/in/nahidesign/" target="_blank" rel="noopener">linkedin.com/in/nahidesign</a>
+						<span class="sep">·</span>
+						<a href="https://www.nahi.design/" target="_blank" rel="noopener">nahi.design</a>
+						<span class="sep">·</span>
+						<span>New York City Metro Area</span>
+					</div>
 				</section>
 
 				<div class="closing"><a href="/#work">← Back to the case studies</a></div>
