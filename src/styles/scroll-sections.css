@@ -63,11 +63,11 @@
 
 /* Tinted backing so lined-up tears read as a recess; box-shadow, not drop-shadow — see docs/scroll-flow.md. */
 [data-scroll-locked] .pin-spacer {
-  background-color: var(--shadow-tint);
+  background-color: color-mix(in srgb, var(--ink-paper-blend) 32%, var(--paper));
   box-shadow: 0 -10px 16px -4px var(--shadow-tint);
 }
 [data-scroll-locked] .pin-spacer:has(.panel[data-surface="ink"]) {
-  background-color: color-mix(in srgb, color-mix(in srgb, var(--ink) 65%, black 35%) 32%, transparent);
+  background-color: color-mix(in srgb, color-mix(in srgb, var(--ink) 65%, black 35%) 32%, var(--paper));
 }
 [data-scroll-locked] .pin-spacer:has(#hero, .page-open) {
   box-shadow: none;
@@ -91,6 +91,11 @@
 .panel[data-surface="ink"] {
   background-color: var(--ink);
   color: var(--paper);
+}
+/* Page background matches a dark closing panel, for Safari's toolbars — see docs/scroll-flow.md "Dark closing panel". */
+html:has(.panel[data-surface="ink"]:last-child),
+html:has(.panel[data-surface="ink"]:last-child) body {
+  background-color: var(--ink);
 }
 .panel[data-surface="ink"] h1,
 .panel[data-surface="ink"] h2 {

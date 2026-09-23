@@ -1160,7 +1160,7 @@ p .inline-q {
 /* deck at phone width: the trigger becomes a sticky bar, arrows give way to
    swipe. Must come after the deck rules above so it wins at equal specificity. */
 @media (max-width: 600px) {
-  body {
+  body:has(.deck-cta) {
     padding-bottom: 76px;
   }
   .deck-trigger {

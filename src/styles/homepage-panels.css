@@ -57,6 +57,7 @@
 .panel-art {
   position: absolute;
   inset: 0;
+  overflow: hidden; /* sketches positioned past a narrow panel's edge would otherwise widen the page */
 }
 .panel-art > span {
   position: absolute;
