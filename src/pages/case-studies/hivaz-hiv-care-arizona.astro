@@ -3,11 +3,9 @@ import CaseStudyLayout from "@layouts/CaseStudyLayout.astro";
 import CaseStudyHero from "@components/CaseStudyHero.astro";
 import CaseStudyMeta from "@components/CaseStudyMeta.astro";
 import Figure from "@components/Figure.astro";
-import Pull from "@components/Pull.astro";
 import ProcessColumns from "@components/ProcessColumns.astro";
 import Pivot from "@components/Pivot.astro";
 import Strip from "@components/Strip.astro";
-import ImagePair from "@components/ImagePair.astro";
 import Metrics from "@components/Metrics.astro";
 import NextCaseStudy from "@components/NextCaseStudy.astro";
 
@@ -21,22 +19,17 @@ import hivaz07 from "@img/hivaz-07.webp";
 import hivaz08 from "@img/hivaz-08.webp";
 import hivaz09 from "@img/hivaz-09.webp";
 import hivaz10 from "@img/hivaz-10.webp";
-import hivaz11 from "@img/hivaz-11.webp";
-import hivaz12 from "@img/hivaz-12.webp";
 import hivaz13 from "@img/hivaz-13.webp";
 
-const title = "Redesigning HIVAZ.org";
+const title = "Designing HIV care for the people outreach was missing";
 const description =
-	"HIVAZ.org was supposed to connect people with HIV in Arizona to care, but broken links and a maze of unsorted providers buried them instead.";
+	"Arizona's HIV portal was losing the people its programs most needed to reach. A redesign built for them first, around a single question.";
 ---
 
 <CaseStudyLayout title={title} description={description}>
 	<Fragment slot="hero">
-	<CaseStudyHero eyebrow={["UX design", "Capacity 4 Health", "Aunt Rita's Foundation"]} title="Redesigning the front door to HIV care in Arizona">
-		HIVAZ.org was supposed to connect people with HIV in Arizona to care, but broken links and a maze of
-		unsorted providers buried them instead, with no way to tell who was even safe to call. Three concepts
-		tried to fix that by adding more structure, and none of them worked. The one that did asked a single
-		question, then got out of the way.
+	<CaseStudyHero eyebrow={["UX design", "Capacity 4 Health", "Aunt Rita's Foundation"]} title="Designing HIV care for the people outreach was missing">
+		Arizona's HIV portal was losing the people its programs most needed to reach. I chose to design for them first, cut a quiz that tested well down to a single question, and shipped a site that starts a conversation instead of a search.
 	</CaseStudyHero>
 
 	<CaseStudyMeta
@@ -53,67 +46,35 @@ const description =
 		src={hivaz01}
 		alt="The shipped HIVAZ.org landing screen: 'OK. Let's start. Tap your status.' above three large buttons, a plus, a minus, and a question mark, on a purple background"
 		figNum="Fig. 01"
-		lead="Where the redesign lands."
+		lead="A conversation, not a search."
 		wide
 		fit="contain"
 		deck
 		deckLabel="Shipped"
 	>
-		Everything before this asked people to sort themselves into a system. This just asks where they are.
+		The shipped site asks one question before anything else, and the answer decides what comes next.
 	</Figure>
 
-	<section id="problem">
-		<div class="sec-head"><span class="sec-num">01</span><h2>The problem</h2><span class="sec-rule"></span></div>
-		<p>
-			Arizona's Department of Health and Human Services funds HIVAZ.org, a portal meant to be "all things
-			HIV in Arizona." Three people at Aunt Rita's Foundation run it day to day, community members,
-			fundraisers, and care navigators rather than developers, and they inherited broken links, an
-			information architecture that looped back on itself, and a visual language built almost entirely from
-			red and orange. <strong class="deck-stat" data-deck-foot="Visual language built almost entirely from red and orange|HIVAZ.org"
-				>It read as alarm, even on pages with nothing urgent to say.</strong
-			>
-		</p>
+	<section id="stakes">
+		<div class="sec-head"><span class="sec-num">01</span><h2>A site losing the people it was for</h2><span class="sec-rule"></span></div>
+		<p>HIVAZ.org is the state's front door to HIV care. Three people at Aunt Rita's Foundation run it, and none of them are developers. Most visitors arrived on a phone, and 80% of them left after one page. The design didn't help. "All the red and orange makes me think there's something urgent," one tester said. "I'm already stressed."</p>
 		<Figure
 			src={hivaz02}
 			alt="The HIVAZ.org homepage before the redesign: a red and orange logo, an orange search button over a photo of Phoenix, then two full-width bands of icons and buttons, one orange and one red, and a red About section"
 			figNum="Fig. 02"
-			lead="Alarm as the default."
+			lead="Every page read as an emergency."
 			tall
 			deck
 			deckLabel="Old site"
 		>
-			Red and orange on every page, including the ones with nothing urgent to say. Testers read the color
-			before they read a word.
+			Red and orange throughout, including the pages with nothing urgent to say, for visitors who were already frightened.
 		</Figure>
-		<p>
-			The goal, on paper, was higher utilization of the state's HIV services. In practice, that meant
-			helping someone too intimidated to search for care find the right person, without adding more work to
-			a team that already had none to spare. Heuristic review and the analytics explained the broken links
-			easily enough. What they couldn't explain was why so much of the traffic that reached a provider page
-			still left without acting. One tester put it plainly: "the red and orange makes me think there's
-			something urgent. I'm already stressed." The design meant to signal importance was reading as danger.
-		</p>
-		<Pull
-			quote="There's a lot of providers that I see, but I don't know if they're for me."
-			attribution="Usability testing participant, on the existing provider directory"
-		/>
+		<p>The state wanted more people using its HIV programs. But those programs don't measure success by traffic. <strong class="deck-stat" data-deck-foot="How HIV testing programs measure success|HIVAZ.org">A testing program succeeds when it reaches people who have HIV and don't know it yet, and they are the hardest people to reach.</strong></p>
 	</section>
 
-	<section id="research">
-		<div class="sec-head"><span class="sec-num">02</span><h2>What we found</h2><span class="sec-rule"></span></div>
-		<p>
-			Research ran on several tracks at once: interviews with more than twenty HIV counselors across the
-			state, five conversations with people who'd lived through the experience themselves, one co-design
-			workshop, and an open call for input on social media. Listening closely mattered more than usual here:
-			I've been through an HIV diagnosis myself, and I was careful not to let one story stand in for
-			everyone's.
-		</p>
-		<p>
-			Two barriers came up again and again. Stigma came first: participants raised it themselves, prejudice
-			they'd faced or watched someone else face, before almost anything else got mentioned. The second
-			barrier was quieter but just as real. Finding a provider who was genuinely culturally competent took
-			real, sustained effort, and getting it wrong meant feeling lesser for needing care in the first place.
-		</p>
+	<section id="audience">
+		<div class="sec-head"><span class="sec-num">02</span><h2>Designing for the people programs most needed</h2><span class="sec-rule"></span></div>
+		<p>Stigma came up in nearly every interview, usually before the website did. I've been through a diagnosis myself, and I worked to keep my story from standing in for anyone else's.</p>
 		<Figure
 			src={hivaz03}
 			alt="Journey map with three bands: guiding principles across the top, an emotional experience curve and user flow through Discover, Compare, Select, Verify, and Follow-Through, and a row of opportunities below. The curve dips at the start, peaks while selecting a provider, and drops again in person."
@@ -124,105 +85,80 @@ const description =
 			deck
 			deckLabel="Journey map"
 		>
-			Confidence craters at the start, "where do I even start with these search results?", climbs through
-			comparing and choosing a provider, then collapses in person when the listing turns out to be wrong:
-			"they told me they're not taking new clients." The site was failing people at both ends.
+			Confidence drops at the start, "where do I even start with these search results?", climbs while choosing a provider, then falls again in person: "they told me they're not taking new clients."
 		</Figure>
-		<p>
-			The interviews also split people two ways: how much they already knew about the resources available,
-			and how much agency they felt to act on that knowledge. People with more of both, already plugged into
-			a clinic and comfortable navigating a system, were being served fine by existing outreach. The people
-			the site was actually failing were unhoused, immigrant, BIPOC, and underage Arizonans, the same
-			populations most at risk of new HIV infection, and the ones with the least of either. <strong
-				class="deck-stat"
-				data-deck-foot="Who the redesign prioritized|HIVAZ.org">To design for <em>them first</em> was the only choice that
-				made sense: a site built for the person with the fewest resources tends to work for everyone above
-				them too.</strong
-			>
-		</p>
+		<p>People with money and steady access to care usually already have prevention, so they rarely test positive. They were also the easiest people to design for, and existing outreach already served them well. The people the programs most needed had the least access: unhoused, immigrant, BIPOC, and underage Arizonans. "I need someone to be my lifeline," one person told me.</p>
 		<Figure
 			src={hivaz04}
 			alt="A two-by-two: aware versus unaware of resources on the vertical axis, less versus more empowered to act on the horizontal. Four user archetypes with a quote and needs each: Meet me where I'm at, Self-sufficient, Needing a guide, and Activated."
 			figNum="Fig. 04"
-			lead="Who the site was failing."
+			lead="The people the programs most needed."
 			tall
 			fit="contain"
 			deck
-			deckLabel="Who we missed"
+			deckLabel="Who we chose"
 		>
-			The lower-left quadrant, the "needing a guide" user who is unaware of resources and least empowered to
-			act, held the people most at risk and least served by existing outreach. "I need someone to be my
-			lifeline." Their two needs, guidance and positive feedback, became the brief for everyone else too.
+			Unaware of the care available and least able to act on it, the "needing a guide" group was the least served by outreach. Their needs, guidance and positive feedback, became the brief.
 		</Figure>
+		<p><strong class="deck-stat" data-deck-foot="Who the redesign prioritized|HIVAZ.org">Health organizations know these are the people to reach. The difficulty is reaching them.</strong> So the question shifted from who the site was for to what someone frightened, with little support, could actually do on a phone. The answer cost the site its original promise. HIVAZ.org was built to be "all things HIV in Arizona," and designing for people with the least access meant moving most of that information into the background so the site could do one thing well.</p>
 	</section>
 
-	<section id="approach">
-		<div class="sec-head"><span class="sec-num">03</span><h2>Three tries, one fix</h2><span class="sec-rule"></span></div>
-		<p>Every early concept tried to help by adding structure, and each one made a different wrong assumption about what a person could actually do in that moment.</p>
+	<section id="quiz">
+		<div class="sec-head"><span class="sec-num">03</span><h2>Cutting a quiz that tested well</h2><span class="sec-rule"></span></div>
+		<p>My first two concepts, a checklist and a provider directory, both added structure, and both overwhelmed people who were already anxious. The third, a short quiz ending in recommended providers, did remarkably well in testing. The question was who it did well with. Each added question helped people with resources, who wanted specifics about providers and the convenience of matching care to their own needs.</p>
 		<ProcessColumns
-			deckLabel="Three tries"
-			deckCaption="Three concepts, three different wrong assumptions about what a person could do in that moment."
+			deckLabel="Three concepts"
+			deckCaption="Each concept added structure, and the one that tested best served the people who needed help least."
 			items={[
 				{
-					stepLabel: "Try 01",
-					frameN: "01",
-					title: "A guided action plan",
+					title: "An action plan",
 					imgSrc: hivaz05,
 					imgAlt:
 						"Wireframe of the action-plan concept: two phone screens titled 'Your HIV action plan', with Step 1 Find a provider expanded into a checklist, then Step 2 Taking an HIV test expanded on the second screen",
-					body: "Answer a few questions and get a personalized checklist of next steps. It kept people focused in testing, but it assumed they'd already made peace with the diagnosis. For someone freshly anxious, a full checklist read as more to carry, not less.",
+					body: "A checklist of next steps. It kept people focused, but for someone already anxious it was one more thing to carry.",
 				},
 				{
-					stepLabel: "Try 02",
-					frameN: "02",
-					title: "A filterable directory",
+					title: "A provider directory",
 					imgSrc: hivaz06,
 					imgAlt:
 						"Wireframe of the directory concept: a city or zip search, then a Refine Search panel with type of service, availability, open hours, distance, and rows of speciality and population filter chips",
-					body: "Google or Yelp for HIV care, with clinical filters layered on top. People genuinely wanted to filter by what mattered to them, but the tone they needed throughout, patient and warm, disappeared the moment the page turned into a spreadsheet of providers.",
+					body: "Yelp for HIV care. People wanted to choose a provider, but the gentle tone they needed disappeared into a grid of listings.",
 				},
 				{
-					stepLabel: "Try 03",
-					frameN: "03",
-					title: "A quiz to a shortlist",
+					title: "A quiz",
 					imgSrc: hivaz07,
 					imgAlt:
 						"Wireframe of the guided-search concept: 'Find the right HIV services', promising to identify the services you need, give you a short-list of providers, and provide a script for the phone call, with a Ready? button",
-					body: "A short quiz landing on three recommended providers, combining the strengths of the first two. The intro promised a script for the phone call, but the script never got built, and the concept still assumed that once someone had a name, they could take it from there. Actually calling a stranger to discuss your HIV status was the hardest step in the whole flow, and we'd left it entirely to them.",
+					body: "A few questions ending in recommended providers. It tested remarkably well, mostly with people who had resources and wanted specifics.",
 				},
 			]}
 		/>
+		<p style="margin-top:40px">That finding brought the tension with Aunt Rita's Foundation into the open. Giving those users the detail they wanted meant gathering more provider information than a team of three could handle, and the foundation pushed back right away. The turning point was returning to what we all already knew: people with the least access need the most help, and they have the highest rate of undiagnosed HIV. Once we were designing for them again, the answer got smaller, not bigger.</p>
+		<p>So I cut the quiz down to one question.</p>
 
-		<Pivot heading="The fix wasn't a smarter filter. It was one question.">
-			Every earlier concept still opened with a wall of choices. The version that shipped opens with exactly
-			one: what's your HIV status? The answer routes a person straight to a page written for where they
-			actually are: positive, negative, or not sure, which for many people means not yet tested. Each page
-			speaks to that one situation, with no directory to sort through and no quiz to finish first. Meet
-			people where they already are. Then get out of the way.
+		<Pivot label="The call" heading="The fix wasn't a smarter filter. It was one question.">
+			The shipped site opens with "Tap your status": positive, negative, or not sure. Answering asks a person to reflect on where they are right now. That's a small enough step to take, and taking it builds momentum toward the harder steps that follow. Each answer leads to one page written for that situation, and "not sure" leads to a test rather than a list of providers. The provider information the foundation had already collected is still there, in its own part of the site, for anyone who wants it.
 		</Pivot>
 
 		<Strip
 			land
 			deckLabel="Routed pages"
 			figNum="Fig. 05"
-			lead="One answer, three pages."
+			lead="Three answers, three pages, no red."
 			items={[
 				{
-					frameN: "01",
 					dataLabel: "Positive",
 					imgSrc: hivaz08,
 					imgAlt:
 						"The positive route on HIVAZ.org, teal with lime accents: 'You tested positive. Now what?' followed by 'But first, we've got to get you in care,' a category and search bar, and three links: Find care, Living with HIV, Financial assistance",
 				},
 				{
-					frameN: "02",
 					dataLabel: "Negative",
 					imgSrc: hivaz09,
 					imgAlt:
 						"The negative route, magenta with pink accents: 'You're HIV negative. Let's stay that way.' with prevention options PrEP, condoms, and PEP, and three links: Free condoms, PrEP daily prevention, PEP morning-after prevention",
 				},
 				{
-					frameN: "03",
 					dataLabel: "Not sure",
 					imgSrc: hivaz10,
 					imgAlt:
@@ -230,80 +166,38 @@ const description =
 				},
 			]}
 		>
-			Plus, minus, or a question mark, each with its own color and none of them red. Each route reads like
-			it was written for one person, because it was, and the third matters most: someone who doesn't know
-			their status gets pointed at a test, not a directory.
+			Each route has its own color and speaks to one situation. Someone who isn't sure is pointed to a test, including a free home kit, not a directory.
 		</Strip>
-
-		<ImagePair
-			deckLabel="Before / after"
-			items={[
-				{
-					fn: "Before",
-					imgSrc: hivaz11,
-					imgAlt:
-						"The rejected directory concept: a city or zip search above a Refine Search panel dense with filters for service type, availability, hours, distance, specialities, and populations",
-					fit: "contain",
-					caption: "A directory of providers, sorted by filters a stressed person had to already know how to use.",
-				},
-				{
-					fn: "After",
-					imgSrc: hivaz12,
-					imgAlt: "The shipped landing page: OK. Let's start. Tap your status, with plus, minus, and question mark buttons on purple",
-					fit: "contain",
-					caption: "One question, one honest answer, one page built for it.",
-				},
-			]}
-		/>
 	</section>
 
 	<section id="outcome">
-		<div class="sec-head"><span class="sec-num">04</span><h2>Outcome</h2><span class="sec-rule"></span></div>
+		<div class="sec-head"><span class="sec-num">04</span><h2>What changed</h2><span class="sec-rule"></span></div>
 		<p>Measured after launch, against the site it replaced:</p>
 		<Metrics
 			items={[
-				{ n: "−60%", label: "Bounce rate on the pages people actually needed to reach" },
-				{ n: "−90%", label: "Smaller information architecture. Fewer pages standing between a person and a provider" },
+				{ n: "−60%", label: "Bounce rate on the pages people needed to reach" },
+				{ n: "−90%", label: "Smaller site structure, with the rest moved into the background" },
 			]}
 		/>
-		<p>
-			Utilization of HIVAZ's programs rose too, the number ADHS cared about most. But the clearest sign the
-			redesign worked was quieter than any metric: people stopped leaving the page unsure whether it was
-			even meant for them.
-		</p>
+		<p>Program use rose too, the measure the state cared about most.</p>
 		<Figure
 			src={hivaz13}
 			alt="The shipped site on a tablet and a phone: the tablet shows the not-sure route, 'Don't know your status? Let's get you tested', and the phone shows its Next Steps page, both in the same violet and mint"
 			figNum="Fig. 06"
-			lead="The same design at any width."
+			lead="Built for the phone most people arrived on."
 			bare
 			fit="contain"
 			deck
 			deckLabel="Any screen"
 		>
-			The not-sure route on a tablet, and its next-steps page on a phone. Nothing had to be cut down to fit
-			the smaller screen; when a page is built around one question and one answer, every size gets the
-			whole thing.
+			The not-sure route on a tablet, and its next-steps page on a phone.
 		</Figure>
 	</section>
 
 	<section id="reflection">
-		<div class="sec-head"><span class="sec-num">05</span><h2>Reflection</h2><span class="sec-rule"></span></div>
-		<p>
-			The clearest lesson here wasn't about HIV care. It was about how long it can take to trust a simple
-			answer over a complicated one. Three more elaborate concepts had to fail before a single question felt
-			sufficient, and each of those failures came from the same instinct: assume a person needs more
-			structure, not less. Simplicity rarely looks like enough work until it's the only thing that tests
-			well.
-		</p>
-		<p>
-			If I did this again, I'd bring the one-question framing into testing earlier, alongside the more
-			complicated concepts, instead of treating it as a last resort once everything else had failed. Three
-			months also wasn't long enough to watch how real behavior changed after launch, beyond the numbers
-			gathered in the first few weeks. What stayed with me was simpler than any of that: design for the
-			person with the fewest resources first, and the rest of the interface tends to take care of itself.
-		</p>
+		<div class="sec-head"><span class="sec-num">05</span><h2>Looking back</h2><span class="sec-rule"></span></div>
+		<p>The audience call held up. The timing didn't. The answer was inside the quiz all along, and testing a single question from the start would have found it sooner.</p>
 	</section>
 
-	<NextCaseStudy slot="close" href="/case-studies/ibm-data-lineage" label="Data lineage that answers in seconds, not hours" />
+	<NextCaseStudy slot="close" href="/case-studies/ibm-data-lineage" label="Drawing less of the map for the questions banks ask every day" />
 </CaseStudyLayout>

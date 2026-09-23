@@ -3,11 +3,7 @@ import CaseStudyLayout from "@layouts/CaseStudyLayout.astro";
 import CaseStudyHero from "@components/CaseStudyHero.astro";
 import CaseStudyMeta from "@components/CaseStudyMeta.astro";
 import Figure from "@components/Figure.astro";
-import Pull from "@components/Pull.astro";
-import ProcessColumns from "@components/ProcessColumns.astro";
 import Pivot from "@components/Pivot.astro";
-import ImagePair from "@components/ImagePair.astro";
-import Metrics from "@components/Metrics.astro";
 import NextCaseStudy from "@components/NextCaseStudy.astro";
 
 import ql01 from "@img/quantalyric-01.webp";
@@ -15,34 +11,26 @@ import ql02 from "@img/quantalyric-02.webp";
 import ql03 from "@img/quantalyric-03.webp";
 import ql04 from "@img/quantalyric-04.webp";
 import ql05 from "@img/quantalyric-05.webp";
-import ql06 from "@img/quantalyric-06.webp";
-import ql07 from "@img/quantalyric-07.webp";
-import ql08 from "@img/quantalyric-08.webp";
 import ql09 from "@img/quantalyric-09.webp";
-import ql10 from "@img/quantalyric-10.webp";
-import ql11 from "@img/quantalyric-11.webp";
 import ql12 from "@img/quantalyric-12.webp";
 
-const title = "QuantaLyric: from grand vision to shippable MVP";
+const title = "Helping a founder find the one chart worth building";
 const description =
-	"Forty hours of contract time meant finding the one chart that would get an energy-forecasting startup funded, designing everything around it, and building only that.";
+	"A pre-seed founder wanted three products, and there were forty hours. Asking where the value lived and who it was for led to one chart for energy traders.";
 ---
 
 <CaseStudyLayout title={title} description={description}>
 	<Fragment slot="hero">
-	<CaseStudyHero eyebrow={["Product design", "QuantaLyric", "Energy forecasting, pre-seed"]} title="Forty hours, one chart worth funding">
-		QuantaLyric's energy traders were comparing AI forecasts against the government's projections in a tool
-		that didn't exist yet. I had forty hours of contract, one part-time developer, and a founder whose vision
-		was three products wide. The job was to find the one thing that would get the company funded, design
-		everything around it, and build only that.
+	<CaseStudyHero eyebrow={["Product design", "QuantaLyric", "Energy forecasting, pre-seed"]} title="Helping a founder find the one chart worth building">
+		QuantaLyric's founder wanted three products at once for a pre-seed startup: a forecasting tool, the tooling to run it, and an investor-ready site. I had forty hours. From our first meeting, I asked where the value lived and who it was for, until the answer was one chart for energy traders. Then I designed the whole vision and built only that.
 	</CaseStudyHero>
 
 	<CaseStudyMeta
 		items={[
 			{ label: "Role", value: "Product designer, solo; product, web, brand, and design system" },
-			{ label: "Client", value: "QuantaLyric, an Australian energy-forecasting startup" },
-			{ label: "Timeline", value: "40 hours across 2 projects" },
-			{ label: "Team", value: "1 part-time developer, growing to 2 for the final project" },
+			{ label: "Client", value: "QuantaLyric, an Australian energy-forecasting startup founded by my brother" },
+			{ label: "Timeline", value: "40 hours over two contracts: the whole product's structure and core flows, then the charts" },
+			{ label: "Team", value: "1 part-time developer, growing to 2 for the second contract" },
 		]}
 	/>
 	</Fragment>
@@ -57,209 +45,98 @@ const description =
 		deck
 		deckLabel="Shipped"
 	>
-		Where the bands overlap, the models agree. Where they part, QuantaLyric is making a different call, and
-		that gap is the entire pitch.
+		Where the bands overlap, the models agree. Where they part, QuantaLyric is making a different call, and that gap is the entire pitch.
 	</Figure>
 
-	<section id="problem">
-		<div class="sec-head"><span class="sec-num">01</span><h2>The problem</h2><span class="sec-rule"></span></div>
-		<p>
-			The founder's vision was a single surface for three very different people: ML engineers building
-			models, data scientists checking them, and energy traders acting on what they produced. The ask that
-			came with it was just as wide. Ship an MVP forecasting product, the MLOps tooling to support it, and
-			an investor-ready marketing site, all in parallel, for a pre-seed startup with limited people, time,
-			and money. <strong class="deck-stat" data-deck-foot="A pre-seed startup, one designer|QuantaLyric"
-				>The vision was three products wide. The runway was forty hours.</strong
-			>
-		</p>
-		<p>
-			Underneath the scope question sat a harder design problem. The government forecast traders already
-			relied on wasn't a single line. It was thirty to forty individual model runs, three summary lines,
-			and an x-axis in half-hour periods that started at one and counted by fours, so reading a timestamp
-			meant doing arithmetic first. Laying QuantaLyric's forecast on top of that wouldn't just crowd the
-			chart. It would ask a trader to become literate in two complicated pictures before they could trust
-			the comparison between them.
-		</p>
-		<ImagePair
-			mid
-			deckLabel="Starting point"
-			items={[
-				{
-					fn: "Fig. 02",
-					imgSrc: ql02,
-					imgAlt: "Screenshot of a government forecast chart (NSW1, day 1) with three annotated critique call-outs overlaid: a green note explaining the user task of comparing actual demand against model predictions, a black note flagging the half-hour-period x-axis as needing real dates and times, a black note calling the residual chart a duplicated view of the ensemble mean, and a green note asking for the aleatoric-versus-epistemic uncertainty chart to align with the main chart above it.",
-					fit: "contain",
-					caption:
-						'<strong class="fig-lead">The audit that started the redesign.</strong>Every note on this chart became a decision later: swap half-hour periods for real dates and times, cut the duplicated ensemble-mean chart, and tie the confidence breakdown back to the chart it explains.',
-				},
-				{
-					fn: "Fig. 03",
-					imgSrc: ql03,
-					imgAlt: "A diagram of the founder's original vision: a grid crossing four AI/ML lifecycle phases (Experimentation, Production, Reporting, CI/CD) against three personas (ML Engineers, Data Scientists, Energy Traders). ML Engineers are scoped across all four phases, Data Scientists across three (not CI/CD), and Energy Traders in Reporting only. Reporting, highlighted, is the one phase where all three personas meet, and the one a pre-seed team could actually fund.",
-					fit: "contain",
-					caption:
-						'<strong class="fig-lead">Everything, for everyone.</strong>Every phase and every persona was real. None of it could be built in forty hours, and only one part of it would raise money.',
-				},
-			]}
-		/>
+	<section id="vision">
+		<div class="sec-head"><span class="sec-num">01</span><h2>A vision three products wide</h2><span class="sec-rule"></span></div>
+		<p>The founder had been Director of Energy Infrastructure for the Australian government. His vision was a single surface for three very different people: ML engineers building forecasting models, data scientists checking them, and energy traders acting on what the models produced. The ask was just as wide. He wanted the forecasting product, the tooling behind it, and an investor-ready marketing site, all in parallel, with one part-time developer.</p>
+		<Figure
+			src={ql03}
+			alt="A diagram of the founder's original vision: a grid crossing four AI/ML lifecycle phases (Experimentation, Production, Reporting, CI/CD) against three personas (ML Engineers, Data Scientists, Energy Traders). ML Engineers are scoped across all four phases, Data Scientists across three (not CI/CD), and Energy Traders in Reporting only. Reporting, highlighted, is the one phase where all three personas meet, and the one a pre-seed team could actually fund."
+			figNum="Fig. 02"
+			lead="Everything, for everyone."
+			tall
+			fit="contain"
+			deck
+			deckLabel="The vision"
+		>
+			Every phase and every persona was real. None of it could be built in forty hours, and only one part of it would raise money.
+		</Figure>
+		<p><strong class="deck-stat" data-deck-foot="The starting scope|QuantaLyric, pre-seed">Anyone could see the scope was too large, and the founder knew it too.</strong> As a pre-seed company, he wanted to be careful with money, and he was looking for guidance on what to build first.</p>
 	</section>
 
-	<section id="research">
-		<div class="sec-head"><span class="sec-num">02</span><h2>What we found</h2><span class="sec-rule"></span></div>
-		<p>
-			The research had to earn its hours, so it went where the money was. Traders had dollar-attached
-			losses every week; ML engineers had workarounds. Competitors' MLOps tooling was mature, while their
-			forecasting accuracy claims were vague, and that gap was the wedge. Every pitch the founder had given
-			came back with the same question, "what's the moat," and an accuracy demo answered it where admin
-			tooling never would. In workshops, the founder's energy was highest when he talked about forecast
-			accuracy and flattest when MLOps came up as table stakes, and the forecasting model was the only part
-			of the product I could explain in one sentence, which is the part an investor remembers.
-		</p>
+	<section id="value">
+		<div class="sec-head"><span class="sec-num">02</span><h2>Finding where the value lived</h2><span class="sec-rule"></span></div>
+		<p>So from our first meeting, I kept returning to two questions: where does the value of this product live, and who is it for? The answers kept pointing the same way. Traders lost money every week to weak forecasts, while ML engineers had workarounds. Competitors' model tooling was mature, but their accuracy claims were vague. And every investor pitch came back with the same question, "what's the moat," which an accuracy demo could answer and admin tooling never would.</p>
 		<Figure
 			src={ql04}
 			alt="A diagram of the AI/ML lifecycle in four phases: Experimentation, Production, and CI/CD feed into Reporting, the one phase highlighted as where the value lands. Reporting is labeled as where a trader sees whether the forecast was right, and where the company gets paid."
-			figNum="Fig. 04"
+			figNum="Fig. 03"
 			lead="Value lives in one phase."
 			wide
 			fit="contain"
 			deck
-			deckLabel="Research"
+			deckLabel="Where the value lives"
 		>
-			Experimentation, production, and CI/CD are how a forecast gets made. Reporting is where a trader sees
-			whether it was right, and where the company gets paid.
+			Experimentation, production, and deployment are how a forecast gets made. Reporting is where a trader sees whether it was right, and where the company gets paid.
 		</Figure>
-		<p>
-			The founder had been Director of Energy Infrastructure for the Australian government, and his own
-			experience reading the official chart became the reference point for the redesign. What he wanted
-			most was clarity while reading, with the option to add detail when he was tracking one specific model. <strong
-				class="deck-stat"
-				data-deck-label="Clarity first"
-				data-deck-foot="The founder's reading experience, as a spec|QuantaLyric"
-				>Clarity by default, detail on demand became the organizing principle for everything the chart would
-				do.</strong
-			> And the stakes made that principle non-negotiable: higher forecast accuracy translates directly into
-			savings on generator dispatch and prevention of undersupply. If a trader couldn't see at a glance whether
-			QuantaLyric's forecast beat the government's, the value proposition failed at the exact moment it mattered.
-		</p>
+		<p>By the time I proposed shipping forecasting for traders first, the founder welcomed it. Scope fell by roughly half. I designed the rest of the vision without building it, so he still had a complete picture to pitch.</p>
+
+		<Pivot label="The call" heading="Design the whole vision. Build only the chart.">
+			The screens for ML engineers and data scientists were designed so the product held together as one idea, then handed off to the tools those users already preferred. Every build hour went to the one surface a trader would judge the company on.
+		</Pivot>
+
+		<div style="margin-top:40px">
 		<Figure
 			src={ql05}
 			alt="A run detail screen showing a Monte Carlo job named Big Buffalo 50: job status, run count (40 of 50 successful), scenario and model metadata, data input size, and a scrolling log of container and pod events from the run."
-			figNum="Fig. 05"
+			figNum="Fig. 04"
 			lead="Designed, not built."
 			tall
 			fit="contain"
 			deck
-			deckLabel="Secondary personas"
+			deckLabel="Designed, not built"
 		>
-			ML engineers and data scientists still needed screens that said whether a model was working. Those
-			screens were designed so the vision held together, then handed off to the tools those users already
-			preferred.
+			A model run screen for the engineers, complete enough to pitch and left for a later round.
 		</Figure>
+		</div>
 	</section>
 
-	<section id="approach">
-		<div class="sec-head"><span class="sec-num">03</span><h2>Three cuts</h2><span class="sec-rule"></span></div>
-		<p>Every decision that mattered was a cut, and each one traded something the product would have looked good with for something it couldn't be funded without.</p>
-		<ProcessColumns
-			deckLabel="Three cuts"
-			deckCaption="Two audiences to one, a bespoke system to Radix, and a wide palette to one that every investor could read."
-			items={[
-				{
-					stepLabel: "Cut 01",
-					frameN: "01",
-					title: "Two audiences to one",
-					imgSrc: ql06,
-					imgAlt: 'A full screens map of the DecisionSigma product, organized as a board. A blue-outlined section at the top holds the login screen and the trader-facing forecast dashboards with their chat annotations, marking the scope that shipped. Below it, a wider gray field maps the rest of the product: model report and file upload, project and navigation flows, search, run and scenario comparison, filters, and job views, several still marked "For Placement Only" as unbuilt.',
-					body: "The original MVP served traders and ML engineers with both business intelligence and operational tooling. I pushed to ship forecasting for traders first, and to design the rest without building it yet. Scope fell by roughly half, and the full vision still had a picture the founder could pitch.",
-				},
-				{
-					stepLabel: "Cut 02",
-					frameN: "02",
-					title: "Bespoke to Radix",
-					imgSrc: ql07,
-					imgAlt: "A dark-theme Radix UI component kit: a team management panel with invite field and member list, a sign-up form with email/password fields, a company card panel showing a masked corporate card with freeze and done actions, a notifications settings panel with push/email/Slack toggles for comments and favorites, and a confirmation toast reading invoice paid.",
-					body: "A custom design system would have looked more distinctive on day one and cost six to eight weeks of a one-developer team. Identity here lives in the charts and the confidence story, not in buttons, and traders trusted calm, familiar interfaces over flashy ones in a high-stakes purchase. Radix carried the rest.",
-				},
-				{
-					stepLabel: "Cut 03",
-					frameN: "03",
-					title: "Wide palette to a readable one",
-					imgSrc: ql08,
-					imgAlt: "A categorical chart color palette of four hues (Violet, Crimson, Mint, Bronze), each shown in four roles: the solid Color swatch, a low-opacity Range fill for areas, a mid-opacity Outline for accessible area borders, and a high-opacity Line color for line charts, with annotated notes explaining the role of each variant and that the four colors are designed to be read as a sequence.",
-					body: "Accessibility is usually a fast follow. Government buyers on the customer list require WCAG conformance, roughly one in twelve men see color differently and trading floors skew male, and known potential investors were color blind. A tighter palette from the first chart cost iteration up front and kept regulated deals open.",
-				},
-			]}
-		/>
-
-		<Pivot heading="Design the whole vision. Build only the chart.">
-			The chart itself got the most important hours in the contract. Both forecasts render as range charts
-			with transparent overlap, so the region where they agree is visible at a glance and the divergence,
-			where QuantaLyric's model makes a different prediction, reads as signal rather than noise. The x-axis
-			was redrawn with real dates and times, which erased the half-period arithmetic entirely. Hovering
-			activates a vertical slice through both forecasts at once and surfaces exact values at that moment, so
-			nobody estimates from the position of a line. And the thirty to forty individual model runs, instead
-			of being drawn as separate lines, inform the width of the confidence band: present as information,
-			invisible as clutter.
-		</Pivot>
-
+	<section id="chart">
+		<div class="sec-head"><span class="sec-num">03</span><h2>Making one chart readable</h2><span class="sec-rule"></span></div>
+		<p>The first contract mapped the whole product and its core flows. The second went entirely to the chart. The government forecast traders already relied on wasn't one line. It was thirty to forty model runs, three summary lines, and an axis in half-hour periods that meant doing arithmetic to read a time. Layering QuantaLyric's forecast on top would have doubled the reading.</p>
+		<Figure
+			src={ql02}
+			alt="Screenshot of a government forecast chart (NSW1, day 1) with three annotated critique call-outs overlaid: a green note explaining the user task of comparing actual demand against model predictions, a black note flagging the half-hour-period x-axis as needing real dates and times, a black note calling the residual chart a duplicated view of the ensemble mean, and a green note asking for the aleatoric-versus-epistemic uncertainty chart to align with the main chart above it."
+			figNum="Fig. 05"
+			lead="The audit that started the redesign."
+			tall
+			fit="contain"
+			deck
+			deckLabel="The audit"
+		>
+			Every note on this chart became a decision: real dates and times instead of half-hour periods, one chart instead of two, and the confidence breakdown tied back to the chart it explains.
+		</Figure>
+		<p>The founder's own experience reading the official chart set the principle: clarity by default, detail on demand. Both forecasts render as shaded ranges, so where they agree is visible at a glance and where they part reads as the signal. <strong class="deck-stat" data-deck-label="Clutter into information" data-deck-foot="The confidence band|QuantaLyric forecast chart">The individual model runs set the width of the confidence band instead of being drawn as lines.</strong> Real dates and times replaced the half-hour periods, and hovering shows exact values from both forecasts at once.</p>
 		<Figure
 			src={ql09}
 			alt="The full demand forecast chart for June 1-2: the DS Model and AMEO bands track closely together through the afternoon of June 1, an open hover tooltip mid-chart lists the exact timestamp, actual demand, and both models' mean, upper, and lower values, and through June 2 the AMEO band widens well above the DS Model band as the two forecasts diverge."
 			figNum="Fig. 06"
-			lead="No mental math, just the facts."
+			lead="No mental math."
 			wide
 			fit="contain"
 			deck
 			deckLabel="Reading the chart"
 		>
-			The chart answers the trader's only question, is this forecast better than the one I already have,
-			before it asks them to read anything else.
+			The chart answers a trader's only question, whether this forecast beats the one they already have, before it asks them to read anything else.
 		</Figure>
-
-		<ImagePair
-			deckLabel="Before / after"
-			items={[
-				{
-					fn: "Before",
-					imgSrc: ql10,
-					imgAlt: "The same annotated government forecast audit as Figure 02: dozens of model run lines, a duplicated residual chart, and an uncertainty breakdown that needed to line up with the chart above it.",
-					fit: "contain",
-					caption: "Forty lines, three summaries, and an axis that needed converting. Two of these side by side would have doubled the reading, not halved it.",
-				},
-				{
-					fn: "After",
-					imgSrc: ql11,
-					imgAlt: "Screenshot of the DecisionSigma dashboard showing a demand forecast chart with two overlapping range bands, the DS Model in purple and the government's AMEO model in pink, plotted over a day and a half. A hover tooltip at one timestamp shows the actual demand plus both models' mean, upper, and lower values side by side. Below, an Accuracy Metrics bar chart breaks out epistemic and aleatoric uncertainty over the same time range.",
-					fit: "contain",
-					caption: "One surface to read. Agreement is a shaded band, disagreement is the signal, and every timestamp is a real time.",
-				},
-			]}
-		/>
+		<p>Two smaller calls protected the hours. I used Radix instead of a custom design system, which would have cost six to eight weeks of a one-developer team, because the product's identity lives in its charts and traders trust calm, familiar interfaces. I also built accessibility in from the first chart rather than saving it for later. Government buyers require WCAG conformance, about one in twelve men see color differently, and some of the investors the founder was courting are color blind.</p>
 	</section>
 
 	<section id="outcome">
-		<div class="sec-head"><span class="sec-num">04</span><h2>Outcome</h2><span class="sec-rule"></span></div>
-		<p>Delivered inside the forty hours:</p>
-		<Metrics
-			items={[
-				{ n: "½", label: "The scope, roughly. The full product designed end to end, the trader-facing forecast surface built" },
-				{ n: "1 → 2", label: "Developers. Radix gave back enough cycles that mobile shipped in the proof of concept as a stretch goal" },
-			]}
-		/>
-		<p>
-			The proof of concept shipped, and QuantaLyric is actively pursuing seed funding with it. Because
-			Radix kept overhead low, the team hit a stretch goal that mattered more than it sounds: a mobile
-			experience, which is the first thing an investor sees when a founder hands over a phone in a pitch.
-			The chart palette is documented with semantic roles and passes simulation for the major types of
-			color-vision deficiency, so government and regulated deals stay open, and any further accessibility
-			work will cost a fraction of what a late rebuild would. The simplified-versus-detailed toggle for the
-			individual model lines didn't make the build, but it survived the scope cuts and sits on the roadmap.
-		</p>
-		<Pull
-			quote="Nahi was able to break down the core experience, expectations and requirements that helped reduce the mental load of an already complex process. Of note is the design of an analytics dashboard that catered for several forms of color blindness and other key accessibility features."
-			attribution="Joseph Nunez, founder, QuantaLyric"
-			deckLabel="Testimonial"
-		/>
+		<div class="sec-head"><span class="sec-num">04</span><h2>What changed</h2><span class="sec-rule"></span></div>
+		<p>The proof of concept shipped inside the forty hours, and QuantaLyric is pursuing seed funding with it. Radix saved enough time that the team shipped a mobile version as a stretch goal, which matters because a phone is the first thing an investor sees when a founder hands one over in a pitch. The chart palette passes simulation for the major types of color-vision deficiency, which keeps regulated deals open.</p>
 		<Figure
 			src={ql12}
 			alt="The sign-in screen of the live QuantaLyric prototype on a phone, dark themed, with the Decision Sigma wordmark, a Welcome Back heading, an email field for a one-time verification code, and a link to create an account"
@@ -269,32 +146,14 @@ const description =
 			deck
 			deckLabel="In the pitch"
 		>
-			This is the sign-in screen of the actual prototype, an earlier build that hasn't caught up to the
-			final visual design. What it proves matters more than how it looks: a trader can open <a
-				href="https://thetaflux.quantalyric.ai/sign-in/"
-				target="_blank"
-				rel="noopener">the live prototype</a
-			> on a phone and sign in today.
+			The sign-in screen of the working prototype, an earlier build that hasn't caught up to the final visual design. A trader can open <a href="https://thetaflux.quantalyric.ai/sign-in/" target="_blank" rel="noopener">the live prototype</a> on a phone and sign in today.
 		</Figure>
 	</section>
 
 	<section id="reflection">
-		<div class="sec-head"><span class="sec-num">05</span><h2>Reflection</h2><span class="sec-rule"></span></div>
-		<p>
-			The color palette took far more of the forty hours than I was comfortable spending. I had committed
-			to extending Radix's color primitives, and staying with that commitment as it kept resisting the
-			data-visualization needs was a sunk cost I should have recognized sooner. A palette for charts has
-			different jobs than a palette for buttons, and asking one set of primitives to do both cost iteration
-			that the forecast chart could have used.
-		</p>
-		<p>
-			If I did it again, I'd define the lowest and highest contrast up front with a WCAG 3 color calculator
-			and build a custom palette specifically for data visualization, then let Radix handle the interface
-			chrome it's good at. The same instinct that cut the MVP to one audience should have cut the color
-			system to one source of truth from the start. Cutting scope is a discipline, and it has to apply to
-			the designer's own decisions too.
-		</p>
+		<div class="sec-head"><span class="sec-num">05</span><h2>Looking back</h2><span class="sec-rule"></span></div>
+		<p>The call I'd make differently was my own. I committed to extending Radix's color primitives for the charts and kept at it as they resisted, and that sunk cost took hours the forecast chart could have used. A palette for charts has different jobs than a palette for buttons, and next time I'd build a separate one for data visualization from the start. Cutting scope is a discipline, and it has to apply to my own decisions too.</p>
 	</section>
 
-	<NextCaseStudy slot="close" href="/case-studies/hivaz-hiv-care-arizona" label="Redesigning the front door to HIV care in Arizona" />
+	<NextCaseStudy slot="close" href="/case-studies/hivaz-hiv-care-arizona" label="Designing HIV care for the people outreach was missing" />
 </CaseStudyLayout>

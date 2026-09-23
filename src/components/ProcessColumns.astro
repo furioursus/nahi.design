@@ -3,8 +3,8 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
 interface ColumnItem {
-	stepLabel: string;
-	frameN: string;
+	stepLabel?: string;
+	frameN?: string;
 	title: string;
 	imgSrc?: ImageMetadata;
 	imgAlt: string;
@@ -32,9 +32,9 @@ const { items, land, deckLabel, deckCaption } = Astro.props;
 	{
 		items.map((item) => (
 			<div class="pcol rev">
-				<div class="pcol-n">{item.stepLabel}</div>
+				{item.stepLabel && <div class="pcol-n">{item.stepLabel}</div>}
 				<div class:list={["frame", { "has-img": item.imgSrc }]} data-label={item.title} data-fit="contain">
-					<span class="frame-n">{item.frameN}</span>
+					{item.frameN && <span class="frame-n">{item.frameN}</span>}
 					{item.imgSrc ? (
 						<Image src={item.imgSrc} alt={item.imgAlt} />
 					) : (
