@@ -1,4 +1,4 @@
-/* Homepage case-study panel art — see README "Homepage panel art". */
+/* Homepage case-study panel art — see docs/homepage-panel-art.md. */
 
 [data-texture="dots-24"] {
   background-image: radial-gradient(circle, var(--dot) 1.1px, transparent 1.1px);
@@ -53,14 +53,26 @@
   --logo-apiahf:url("../img/panels/logo-apiahf.svg");
 }
 
-[data-texture="dots-32"][data-wireframe="a"]{background-image:radial-gradient(circle, var(--dot) 1.1px, transparent 1.1px), var(--wf-a0), var(--wf-a1), var(--wf-a2), var(--wf-new-ate), var(--wf-new-zine), var(--wf-a5), var(--wf-a6), var(--wf-a7), var(--logo-apiahf);background-size:32px 32px, 288px 206px, 312px 225px, 238px 175px, 70px 69px, 70px 72px, 100px 82px, 62px 58px, 112px 70px, 188px 185px;background-position:0 0, left 36px top 90px, right 40px top 90px, left 60px bottom 70px, right 70px bottom 60px, left 420px top 20px, center top 14px, right 420px top 24px, right 340px bottom 12px, left 32px top 330px;background-repeat:repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat}
-[data-texture="dots-32"][data-wireframe="b"]{background-image:radial-gradient(circle, var(--dot) 1.1px, transparent 1.1px), var(--wf-b0), var(--wf-b1), var(--wf-b2), var(--wf-new-cooking), var(--wf-new-doodle), var(--wf-b5), var(--wf-b6), var(--wf-b7), var(--logo-ibm);background-size:32px 32px, 288px 206px, 312px 225px, 238px 175px, 70px 108px, 212px 99px, 100px 82px, 62px 58px, 112px 70px, 188px 185px;background-position:0 0, left 36px top 90px, right 40px top 90px, left 60px bottom 70px, right 70px bottom 60px, left 420px top 20px, center top 14px, right 420px top 24px, right 340px bottom 12px, right 36px top 300px;background-repeat:repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat}
-[data-texture="dots-32"][data-wireframe="c"]{background-image:radial-gradient(circle, var(--dot) 1.1px, transparent 1.1px), var(--wf-c0), var(--wf-c1), var(--wf-c2), var(--wf-new-zine), var(--wf-new-cooking), var(--wf-c5), var(--wf-c6), var(--wf-c7), var(--logo-hpe);background-size:32px 32px, 288px 206px, 312px 225px, 238px 175px, 70px 72px, 70px 108px, 100px 82px, 62px 58px, 112px 70px, 150px 234px;background-position:0 0, left 36px top 90px, right 40px top 90px, left 60px bottom 70px, right 70px bottom 60px, left 420px top 20px, center top 14px, right 420px top 24px, right 340px bottom 12px, left 32px top 310px;background-repeat:repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat}
-[data-texture="dots-32"][data-wireframe="d"]{background-image:radial-gradient(circle, var(--dot) 1.1px, transparent 1.1px), var(--wf-d0), var(--wf-d1), var(--wf-d2), var(--wf-new-ate), var(--wf-new-doodle), var(--wf-d5), var(--wf-d6), var(--wf-d7);background-size:32px 32px, 288px 206px, 312px 225px, 238px 175px, 70px 69px, 212px 99px, 100px 82px, 62px 58px, 112px 70px;background-position:0 0, left 36px top 90px, right 40px top 90px, left 60px bottom 70px, right 70px bottom 60px, left 420px top 20px, center top 14px, right 420px top 24px, right 340px bottom 12px;background-repeat:repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat}
+/* Each sketch is its own element (not a background layer) so it can be hovered — see docs/homepage-panel-art.md. */
+.panel-art {
+  position: absolute;
+  inset: 0;
+}
+.panel-art > span {
+  position: absolute;
+  background: no-repeat center / 100% 100%;
+  transform-origin: 50% 80%;
+}
+.cs-panel .panel-inner {
+  position: relative;
+  pointer-events: none;
+}
+.cs-panel .cs-content {
+  pointer-events: auto;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  [data-texture="dots-32"][data-wireframe="a"]{background-image:radial-gradient(circle, var(--dot) 1.1px, transparent 1.1px)}
-  [data-texture="dots-32"][data-wireframe="b"]{background-image:radial-gradient(circle, var(--dot) 1.1px, transparent 1.1px)}
-  [data-texture="dots-32"][data-wireframe="c"]{background-image:radial-gradient(circle, var(--dot) 1.1px, transparent 1.1px)}
-  [data-texture="dots-32"][data-wireframe="d"]{background-image:radial-gradient(circle, var(--dot) 1.1px, transparent 1.1px)}
+  .panel-art {
+    display: none;
+  }
 }

@@ -9,6 +9,7 @@
 		"dev": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
+		"art:roughen": "node scripts/roughen-panel-art.mjs",
 		"astro": "astro"
 	},
 	"dependencies": {
