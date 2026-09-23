@@ -7,7 +7,7 @@ Every case study page has a "View as deck" button in its topbar (and a sticky mo
 `DeckLightbox.astro` renders the modal markup (`.deck-lb`, the canvas, the thumbnail rail, prev/next controls) plus one inline `<script>` that does the work. When a visitor clicks "View as deck", the script queries the page for:
 
 - `.pull` — quote blocks become quote slides
-- `figure[data-deck]` — figures marked `data-deck="image"` become image slides; a figure holding a `video` (an autoplaying, muted screen recording passed via `Figure`'s `video` prop instead of `src`) is rebuilt as a `<video>` on its slide too, since the deck's canvas is `innerHTML`'d in after the page's own load-time autoplay pass has already run
+- `figure[data-deck]` — figures marked `data-deck="image"` become image slides; a figure holding a `video` (a looping, muted screen recording passed via `Figure`'s `video` prop instead of `src`) is rebuilt as a `<video data-ambient>` on its slide too, and `playAmbient` starts it only when the visitor hasn't set `prefers-reduced-motion` — the deck's canvas is `innerHTML`'d in after `BaseLayout`'s load-time play pass has already run, so it has to do this itself
 - `[data-deck="strip"]` — a `Strip` or `ProcessColumns` marked this way becomes a side-by-side (or stacked, with `data-deck-stack`) slide of its frames; `data-deck-solo` instead gives each frame its own full-size slide
 - `[data-deck="pair"]` — an `ImagePair` becomes a two-up slide, each cell keeping its own caption
 - `.deck-stat` — a `<strong class="deck-stat">` wrapped around a sentence inside a paragraph (or the `Pivot` thesis line) becomes a statement slide
@@ -19,7 +19,7 @@ Every one of these lives in document order, so the deck always mirrors the readi
 
 ## Adding a new case study
 
-Nothing needs to be wired up by hand. Compose the page from the shared kit (`Figure`, `Pull`, `ProcessColumns`, `Pivot`, `Strip`, `ImagePair`, `Metrics`) the way the existing case studies do, pass `deck`/`deckLabel` props where a figure should appear in the deck, and `CaseStudyLayout` takes care of the rest — it renders one `DeckLightbox` per page and owns the scroll-reveal and topbar reading-progress scripts that also live in the same layout.
+Nothing needs to be wired up by hand. Compose the page from the shared kit (`Figure`, `Pull`, `ProcessColumns`, `Pivot`, `Strip`, `ImagePair`, `Metrics`) the way the existing case studies do, pass `deck`/`deckLabel` props where a figure should appear in the deck, and `CaseStudyLayout` takes care of the rest — it renders one `DeckLightbox` per page and owns the topbar reading-progress script. The `.rev` scroll-reveal is shared site-wide and lives in `src/scripts/scroll-sections.ts`.
 
 ## Retired: the old click-to-zoom lightbox and presentation mode
 

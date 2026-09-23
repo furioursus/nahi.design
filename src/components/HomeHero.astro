@@ -1,5 +1,4 @@
 ---
-import homepage03 from "@img/homepage-03.png";
 import homepage04 from "@img/homepage-04.png";
 import logoMark from "@img/logo-mark.svg";
 ---
@@ -7,20 +6,20 @@ import logoMark from "@img/logo-mark.svg";
 <section class="panel" id="hero" data-label="Home">
 	<div class="hero-full">
 		<div class="hero-inner panel-inner">
-			<div class="eyebrow hero-anim d1"><span class="dot"></span>Nahi Kennedy-Nuñez: Product and UX Designer</div>
-			<h1 class="hero-name hero-anim d2">I design tools for people working <span class="hl">under pressure.</span></h1>
-			<p class="hero-desc hero-anim d3">
+			<div class="eyebrow hero-anim" data-enter-delay="50"><span class="dot"></span>Nahi Kennedy-Nuñez: Product and UX Designer</div>
+			<h1 class="hero-name hero-anim" data-enter-delay="160">I design tools for people working <span class="hl">under pressure.</span></h1>
+			<p class="hero-desc hero-anim" data-enter-delay="360">
 				Hi, I'm Nahi. Most of my work is in AI and data-heavy products, where someone has twenty minutes to
 				find a broken number before an auditor asks about it. The interface is rarely the hard part.
 				Understanding what people are actually afraid of getting wrong usually is.
 			</p>
-			<p class="hero-avail hero-anim d4">Open to full-time product design roles on mission-driven teams.</p>
-			<div class="hero-marks hero-anim d5">
+			<p class="hero-avail hero-anim" data-enter-delay="480">Open to full-time product design roles on mission-driven teams.</p>
+			<div class="hero-marks hero-anim" data-enter-delay="580">
 				<div
 					class="hero-mark hero-mark-photo"
 					role="img"
 					aria-label="Woodblock print portrait of Nahi Kennedy-Nuñez"
-					style={`-webkit-mask-image:url('${homepage03.src}');mask-image:url('${homepage04.src}')`}
+					style={`-webkit-mask-image:url('${homepage04.src}');mask-image:url('${homepage04.src}')`}
 				>
 				</div>
 				<div
@@ -34,6 +33,23 @@ import logoMark from "@img/logo-mark.svg";
 		</div>
 	</div>
 </section>
+
+<script is:inline>
+	// Entrance fade runs on the Web Animations API, not CSS keyframes — see README "Hero entrance".
+	(function () {
+		if (!Element.prototype.animate || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+		var ease = getComputedStyle(document.documentElement).getPropertyValue("--ease").trim() || "ease-out";
+		document.querySelectorAll("#hero .hero-anim").forEach(function (el) {
+			el.animate(
+				[
+					{ opacity: 0, transform: "translateY(16px)" },
+					{ opacity: 1, transform: "none" },
+				],
+				{ duration: 800, delay: Number(el.dataset.enterDelay) || 0, easing: ease, fill: "backwards" },
+			);
+		});
+	})();
+</script>
 
 <style>
 	.hero-full {
@@ -131,40 +147,7 @@ import logoMark from "@img/logo-mark.svg";
 		mask-repeat: no-repeat;
 		transition: background-position 0.3s ease-out;
 	}
-	@keyframes heroUp {
-		from {
-			opacity: 0;
-			transform: translateY(16px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-	.hero-anim {
-		animation: heroUp 0.8s var(--ease) both;
-	}
-	.hero-anim.d1 {
-		animation-delay: 0.05s;
-	}
-	.hero-anim.d2 {
-		animation-delay: 0.16s;
-	}
-	.hero-anim.d3 {
-		animation-delay: 0.36s;
-	}
-	.hero-anim.d4 {
-		animation-delay: 0.48s;
-	}
-	.hero-anim.d5 {
-		animation-delay: 0.58s;
-	}
 	@media (prefers-reduced-motion: reduce) {
-		.hero-anim {
-			animation: none;
-			opacity: 1;
-			transform: none;
-		}
 		.hero-mark {
 			transition: none;
 		}
