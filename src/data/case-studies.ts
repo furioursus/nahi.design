@@ -18,17 +18,6 @@ export interface CaseStudyCard {
 
 export const caseStudies: CaseStudyCard[] = [
 	{
-		slug: "hivaz-hiv-care-arizona",
-		label: "HIVAZ.org",
-		eyebrow: "UX design · Aunt Rita's Foundation",
-		title: "Designing HIV care for the people outreach was missing",
-		blurb:
-			"Arizona's HIV portal was losing the people its programs most needed to reach. I chose to design for them first, cut a quiz that tested well down to one question, and bounce rates fell by 60%.",
-		meta: "3 months · solo",
-		thumb: hivazThumb,
-		thumbAlt: "The HIVAZ.org status-check screen, reading \"OK. Let's start. Tap your status.\" with three icon choices",
-	},
-	{
 		slug: "ibm-data-lineage",
 		label: "IBM",
 		eyebrow: "Product design · IBM",
@@ -60,5 +49,16 @@ export const caseStudies: CaseStudyCard[] = [
 		meta: "40 hours · solo",
 		thumb: quantalyricThumb,
 		thumbAlt: "QuantaLyric's demand forecast dashboard, a dark-themed chart comparing two models against actual demand with an open detail tooltip",
+	},
+	{
+		slug: "hivaz-hiv-care-arizona",
+		label: "HIVAZ.org",
+		eyebrow: "UX design · Aunt Rita's Foundation",
+		title: "Designing HIV care for the people outreach was missing",
+		blurb:
+			"Arizona's HIV portal was losing the people its programs most needed to reach. I chose to design for them first, cut a quiz that tested well down to one question, and bounce rates fell by 60%.",
+		meta: "3 months · solo",
+		thumb: hivazThumb,
+		thumbAlt: "The HIVAZ.org status-check screen, reading \"OK. Let's start. Tap your status.\" with three icon choices",
 	},
 ];

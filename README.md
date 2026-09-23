@@ -12,10 +12,10 @@ Live at [nahi.design](https://www.nahi.design).
 
 **Case study pages** (`src/pages/case-studies/*.astro`) — four in-depth write-ups, each composed directly from a shared component kit and wrapped in `CaseStudyLayout`:
 
-- **HIVAZ.org — HIV care in Arizona** (`hivaz-hiv-care-arizona`): redesigning the front door to HIV care for Aunt Rita's Foundation and Arizona's Department of Health and Human Services.
 - **IBM — Data Lineage** (`ibm-data-lineage`): redesigning IBM's data lineage tooling for watsonx. Red Dot Award winner.
 - **HPE — AI Troubleshooting Agent** (`hpe-ai-troubleshooting-agent`): a coded proof-of-concept AI assistant for debugging ML data pipelines, built and shipped the week before the team was laid off.
 - **QuantaLyric — MVP** (`quantalyric-mvp`): scoping and shipping an MVP, brand, and design system for an AI energy-forecasting startup in forty hours.
+- **HIVAZ.org — HIV care in Arizona** (`hivaz-hiv-care-arizona`): redesigning the front door to HIV care for Aunt Rita's Foundation and Arizona's Department of Health and Human Services.
 
 Each page composes the same shared kit: `CaseStudyHero`, `CaseStudyMeta`, `Figure` (numbered, captioned images with a labeled-placeholder fallback when no screenshot exists, or a looping muted screen recording in place of a still image via its `video` prop), `Pull` (quotes), `ProcessColumns` (a grid of captioned frames, with optional step labels and frame numbers for when the columns are a real sequence), `Pivot` (the thesis slab where the argument turns, with an optional `label` for its eyebrow, which defaults to "What changed"), `Strip` (a row of frames, numbered only when `frameN` is given), `ImagePair` (before/after), `Metrics`, and `NextCaseStudy`. `CaseStudyLayout` wraps all of it with a sticky topbar (back link, live reading-progress bar and section wayfinding label, a "View as deck" trigger) and the deck lightbox itself — see [`docs/deck-lightbox.md`](docs/deck-lightbox.md) for how a case study's own markup turns into a fullscreen slide deck with no separate slide list to maintain.
 
