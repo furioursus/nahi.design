@@ -35,7 +35,7 @@ import logoMark from "@img/logo-mark.svg";
 </section>
 
 <script is:inline>
-	// Entrance fade runs on the Web Animations API, not CSS keyframes — see README "Hero entrance".
+	// Entrance fade runs on the Web Animations API, not CSS keyframes — see docs/scroll-flow.md.
 	(function () {
 		if (!Element.prototype.animate || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 		var ease = getComputedStyle(document.documentElement).getPropertyValue("--ease").trim() || "ease-out";

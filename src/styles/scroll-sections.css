@@ -1,25 +1,4 @@
-/* ============================================================
-   scroll-sections.css
-   Shared motion layer: the pin-and-cover panel mechanic. Two
-   modes, read from <html data-scroll="paged|flow">.
-
-     paged   Homepage only. Every .panel pins as you scroll past
-             it and the next one covers it, with a wayfinding rail.
-
-     flow    Every other page. Only .page-open and .page-close
-             pin. The document between them scrolls normally,
-             same as it does today.
-
-   Assumes the page already defines the site's own tokens
-   (--paper, --ink, --rule, --mark, --font-mono, --ease,
-   --dur-s/m/l) via tokens.css. Adds no colors of its own beyond
-   the shadow/tear tokens below.
-
-   Degradation, handled in scroll-sections.ts: if GSAP is
-   missing, motion is reduced, or a panel's content is taller
-   than the viewport, the page falls back to plain native
-   scrolling with nothing pinned and nothing clipped.
-   ============================================================ */
+/* Pin-and-cover panels — see docs/scroll-flow.md. */
 
 .panel {
   position: relative;
@@ -45,27 +24,7 @@
   }
 }
 
-/* A shadow color pulled from the site's own paper/ink blend, not a
-   generic neutral black — keeps the shadow in the same warm family
-   as the page instead of reading as a bolted-on UI effect. A torn,
-   irregular top edge on every panel, loose sheets of paper rather
-   than cleanly cut rectangles: percentage X so it scales to any
-   panel width, small fixed-pixel Y jitter so the tear reads as a
-   consistent physical texture regardless of viewport size.
-
-   Three variants, not one: every panel that's ever been scrolled
-   past stays pinned underneath forever (see lock() in
-   scroll-sections.ts) — that permanent stack is what makes the
-   cover effect work at all. If every panel tore along the exact
-   same line, the gaps would land in the exact same place on every
-   layer of that stack, and the tear would become a tunnel straight
-   down to whatever's at the very bottom of it. Cycling three
-   out-of-phase shapes across panels (assigned in the markup via
-   data-tear, since :nth-of-type can't tell adjacent panels apart
-   here either — GSAP's per-panel wrapping breaks position-based
-   selectors the same way it breaks :first-of-type) means an open
-   gap in one layer almost never lines up with an open gap in the
-   layer right behind it. */
+/* Shadow tint and three out-of-phase torn edges — see docs/scroll-flow.md "The look". */
 :root {
   --ink-paper-blend: color-mix(in srgb, var(--ink) 55%, var(--paper) 45%);
   --shadow-tint: color-mix(in srgb, var(--ink-paper-blend) 32%, transparent);
@@ -89,11 +48,7 @@
   );
 }
 
-/* Locked panels only exist once JS has confirmed the content fits.
-   Until then, and forever after if it doesn't, panels are just
-   tall sections and the page scrolls normally. The torn edge applies
-   to every panel uniformly — even the first one, since it's still
-   meant to read as a loose sheet. */
+/* Only once JS has confirmed every panel fits. */
 [data-scroll-locked] .panel {
   height: 100svh;
   min-height: 0;
@@ -106,36 +61,7 @@
   clip-path: var(--torn-top-c);
 }
 
-/* The pin-spacer needs a solid backing so every panel's tear reveals
-   something intentional instead of tunneling through to whatever's
-   stacked underneath — every panel that's ever been scrolled past
-   stays pinned underneath forever (see lock() in scroll-sections.ts),
-   and even with three tear shapes in rotation, panels several layers
-   deep still occasionally line up a gap in one with a gap in the one
-   right behind it.
-
-   The backing color can't just match the panel's own surface, though
-   — a gap that reveals the exact same color as what it cut through
-   has nothing to show. --ink-paper-blend (the same warm ink/paper mix
-   --shadow-tint is itself built from, just fully opaque rather than
-   translucent) reads as a genuine shadowed recess against every
-   surface, dark enough to show against paper, soft, and raised alike,
-   while staying solid enough to still block whatever's stacked
-   underneath. The ink surface itself is already dark enough that this
-   blend would come out lighter than the panel, not darker — so that
-   one gets a deliberately darker fill instead, keeping "shadow"
-   meaning the same thing everywhere: darker than what it's cut into,
-   never lighter.
-
-   This has to be a plain background-color, not something the shadow
-   itself could layer onto with drop-shadow: drop-shadow reads the
-   full composited alpha of everything inside the element, so once the
-   pin-spacer has any opaque content of its own, its shape for shadow
-   purposes goes back to being a plain rectangle. A plain box-shadow,
-   which only ever reads the box's own rectangular geometry, doesn't
-   have that conflict. The shadow is still turned off on the first
-   thing on a page — hero and every .page-open — since nothing is
-   being covered there. */
+/* Tinted backing so lined-up tears read as a recess; box-shadow, not drop-shadow — see docs/scroll-flow.md. */
 [data-scroll-locked] .pin-spacer {
   background-color: var(--shadow-tint);
   box-shadow: 0 -10px 16px -4px var(--shadow-tint);
@@ -147,17 +73,7 @@
   box-shadow: none;
 }
 
-/* Content clipping lives on .panel-inner (excluding hero-inner, which
-   doesn't need it — .hero-full already clips its own watermark
-   independently), not on .panel itself: an element's own
-   overflow:hidden clips everything that would render outside its box,
-   including its own box-shadow or filter effects — so a panel that
-   clips its content can't also cast a visible shadow or show a
-   clipped (torn) silhouette of its own edge. Splitting the two
-   responsibilities across two elements is what makes both work: the
-   outer .panel is free to carry the torn clip-path and its shadow,
-   while the inner wrapper quietly keeps content from spilling past
-   its box. */
+/* Clip on .panel-inner so .panel keeps its torn edge and shadow — see docs/scroll-flow.md. */
 [data-scroll-locked] .panel-inner:not(.hero-inner) {
   height: 100%;
   overflow: hidden;
@@ -165,12 +81,6 @@
   flex-direction: column;
   justify-content: center;
 }
-
-/* (:first-of-type doesn't work here for excluding the very first
-   panel — GSAP wraps every pinned panel in its own individual
-   pin-spacer, so every panel is the lone, first-of-type child of its
-   own wrapper. Excluding by content instead of DOM position, as
-   above, is what actually works.) */
 
 .panel[data-surface="raised"] {
   background-color: var(--surface);
@@ -192,23 +102,14 @@
 .panel[data-surface="ink"] .btn-primary {
   color: var(--ink);
 }
-/* Contact sits directly on the homepage's dark panel, not in a separate
-   dark card of its own — the panel is already the dark surface. About and
-   CV close on a "raised" panel instead, where Contact keeps its own boxed
-   dark card (see .contact in marketing.css). */
+/* The ink panel is already the dark surface; About/CV keep Contact's own card. */
 .panel[data-surface="ink"] .contact {
   background: none;
   padding: 0;
   border-radius: 0;
 }
 
-/* ── flow mode: the two bookends ─────────────────────────────
-   The body of a case study, the About page, and the CV is a
-   document and stays one. Only the opening scene and the closing
-   hand-off behave like panels, so every page on the site starts
-   and ends the same way the homepage moves. The reading column
-   needs its own opaque background and a higher stacking order, or
-   it would scroll over the pinned hero and show it through. */
+/* ── flow mode: the body covers the pinned hero ── */
 [data-scroll="flow"] .page-body {
   position: relative;
   z-index: 2;
@@ -246,13 +147,7 @@
   }
 }
 
-/* ── centered section headers, panels only ────────────────────
-   .sec-head/.sec-rule are shared with every case study's own
-   content sections (flow mode, not panels) — the rule there is a
-   flex:1 line filling the space beside a left-aligned heading,
-   which is exactly wrong once centered. Scoped to .panel so About
-   and Get in touch (the only two panels that use it) center
-   correctly without touching how it looks anywhere else. */
+/* ── section heads inside panels (only Contact) ── */
 .panel .sec-head {
   flex-direction: column;
   align-items: flex-start;
@@ -264,13 +159,7 @@
   width: 64px;
 }
 
-/* ── flow mode: sizing the bookends to their own screen ───────
-   The hero and closing blocks carry padding meant for a document
-   that continues below them. Once each sits alone in its own
-   centered panel, that padding either fights the centering or
-   leaves a stray rule and margin with nothing to separate it
-   from. Case studies, About, and CV all use these same block
-   names, so one rule set covers all of them. */
+/* ── flow mode: strip document padding from the bookends ── */
 .page-open .hero {
   padding: 0;
 }

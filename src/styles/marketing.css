@@ -1,10 +1,4 @@
-/*
- * Marketing-page nav & chrome — shared by the homepage, About, and CV pages:
- * top nav, wordmark, mobile nav toggle, button styles, contact slab, and an
- * eyebrow override (mark-colored, bold) that wins over site-kit.css's
- * quieter case-study eyebrow by cascade order. Not used by case-study
- * pages, which have their own simpler topbar (site-kit.css).
- */
+/* Homepage/About/CV nav and chrome — see docs/styling.md. */
 
 .wordmark {
   font-family: var(--font-display);
@@ -116,9 +110,7 @@
   border-radius: 50%;
   background: var(--mark);
   flex-shrink: 0;
-  /* Centers the dot on the first line's cap-height instead of the whole
-     block's, so it doesn't drift to the seam when the eyebrow text wraps
-     to two lines on narrow screens. */
+  /* Centers the dot on the first line, so it stays put when the eyebrow wraps. */
   margin-top: calc((1.7em - 6px) / 2);
 }
 
