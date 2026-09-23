@@ -14,6 +14,7 @@ export interface CaseStudyCard {
 	meta: string;
 	thumb: ImageMetadata;
 	thumbAlt: string;
+	wireframe: "a" | "b" | "c" | "d";
 }
 
 export const caseStudies: CaseStudyCard[] = [
@@ -27,6 +28,7 @@ export const caseStudies: CaseStudyCard[] = [
 		meta: "9 months · design lead",
 		thumb: ibmThumb,
 		thumbAlt: "IBM Watson Knowledge Catalog's data lineage view, showing a lineage graph tracing SAVINGS_ACCOUNTS through source tables to final reports and models",
+		wireframe: "b",
 	},
 	{
 		slug: "hpe-ai-troubleshooting-agent",
@@ -38,6 +40,7 @@ export const caseStudies: CaseStudyCard[] = [
 		meta: "1 week · solo",
 		thumb: hpeThumb,
 		thumbAlt: "An internal log viewer at HPE with an AI chat panel open beside it, explaining a pipeline failure",
+		wireframe: "c",
 	},
 	{
 		slug: "quantalyric-mvp",
@@ -49,6 +52,7 @@ export const caseStudies: CaseStudyCard[] = [
 		meta: "40 hours · solo",
 		thumb: quantalyricThumb,
 		thumbAlt: "QuantaLyric's demand forecast dashboard, a dark-themed chart comparing two models against actual demand with an open detail tooltip",
+		wireframe: "d",
 	},
 	{
 		slug: "hivaz-hiv-care-arizona",
@@ -60,5 +64,6 @@ export const caseStudies: CaseStudyCard[] = [
 		meta: "3 months · solo",
 		thumb: hivazThumb,
 		thumbAlt: "The HIVAZ.org status-check screen, reading \"OK. Let's start. Tap your status.\" with three icon choices",
+		wireframe: "a",
 	},
 ];
