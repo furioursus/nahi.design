@@ -35,6 +35,8 @@
 
 The fit check re-runs on load, when fonts finish loading (fonts change every height), and on resize — but **only when the width changes**. Mobile browsers fire `resize` when the address bar shows or hides mid-scroll; re-running then would rebuild every pin and jump the page back toward the top. `ScrollTrigger.config({ ignoreMobileResize: true })` covers the same problem inside ScrollTrigger itself.
 
+**Keep every page exactly viewport-wide on phones.** If anything sticks out past the right edge, iOS Safari zooms the page out to fit it and re-zooms as the address bar moves, so the width *does* change mid-scroll, the fit check re-runs, and every pin is rebuilt — the panels jump back. In September 2026 the homepage panel art did exactly this until it was clipped to its panel (see [`homepage-panel-art.md`](homepage-panel-art.md)). A quick check at phone width: `document.documentElement.scrollWidth` should equal `innerWidth`.
+
 ## The look: torn edges and shadows
 
 **TL;DR** — Three torn-edge shapes (`--torn-top-a/b/c`) cycled across panels via `data-tear`, and a warm shadow tint on each pin-spacer. All only while locked.
