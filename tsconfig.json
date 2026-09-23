@@ -10,7 +10,6 @@
 			"@pages/*": ["./src/pages/*"],
 			"@/*": ["./src/*"],
 			"@img/*": ["./src/img/*"],
-			"@video/*": ["./src/video/*"],
 			"@styles/*": ["./src/styles/*"],
 		},
 	},
