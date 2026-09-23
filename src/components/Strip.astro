@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
 interface StripItem {
-	frameN: string;
+	frameN?: string;
 	dataLabel: string;
 	imgSrc?: ImageMetadata;
 	imgAlt: string;
@@ -35,7 +35,7 @@ const { items, figNum, lead, deckLabel, land, full, solo, spaced = true } = Astr
 		{
 			items.map((item) => (
 				<div class="frame has-img" data-label={item.dataLabel} data-fit="contain">
-					<span class="frame-n">{item.frameN}</span>
+					{item.frameN && <span class="frame-n">{item.frameN}</span>}
 					{item.imgSrc ? (
 						<Image src={item.imgSrc} alt={item.imgAlt} />
 					) : (
