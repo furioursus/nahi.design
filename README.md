@@ -4,101 +4,97 @@ Nahi Kennedy-Nuñez's UX design portfolio — built with [Astro](https://astro.b
 
 Live at [nahi.design](https://www.nahi.design).
 
+**TL;DR** — A static Astro 7 site with no CSS framework and no client-side framework. Seven pages: the homepage, About, CV, and four case studies. Every page pins its opening and closing panels as you scroll (GSAP), and every case study can be viewed as a slide deck generated from its own markup. How each piece works lives in [`docs/`](docs/) — start with the table below. Agents: read [`CLAUDE.md`](CLAUDE.md) first.
+
+## Docs
+
+| Doc | Covers | Read it before you… |
+| :-- | :-- | :-- |
+| [`CLAUDE.md`](CLAUDE.md) | Rules for agents: where docs go, commits, the "before you touch" checklist | …change anything |
+| [`docs/scroll-flow.md`](docs/scroll-flow.md) | Pinned panels, torn edges, the `.rev` scroll-reveal, the hero entrance and mark gradient, smooth scrolling | …animate anything, or touch a page's layout or `scroll-sections.*` |
+| [`docs/case-study-kit.md`](docs/case-study-kit.md) | Every case study component and its props, and how to add a case study | …edit or add a case study |
+| [`docs/deck-lightbox.md`](docs/deck-lightbox.md) | "View as deck": how slides are generated from the page | …change which content becomes a slide |
+| [`docs/homepage-panel-art.md`](docs/homepage-panel-art.md) | The sketches, doodles, and logos on the homepage panels, the pencil texture, the hover animation | …edit panel art or `case-studies.ts` ordering |
+| [`docs/styling.md`](docs/styling.md) | Stylesheet map, the "Techo" palette, dark mode, breakpoints and editor setup, legacy tokens | …write CSS |
+| [`docs/fonts.md`](docs/fonts.md) | The four fonts, their roles, why they're self-hosted, adding a weight | …touch typography or `fonts.ts` |
+| [`docs/reduced-motion.md`](docs/reduced-motion.md) | Everything that moves and what it does under `prefers-reduced-motion` | …add anything that moves, or any video |
+| [`docs/deploy-notifications.md`](docs/deploy-notifications.md) | The Telegram deploy plugin and its setup | …touch `plugins/` or Netlify config |
+| [`docs/open-decisions.md`](docs/open-decisions.md) | Known issues, waiting on Nahi or on a follow-up PR | …starting cleanup work |
+| [`docs/history/`](docs/history/) | Dated records (the September 2026 audit). Not current reference | …digging into why something changed |
+
 ## What's on the site
 
-**Home page** (`src/pages/index.astro`) is a pinned, one-screen-at-a-time sequence rather than a single scrolling page: a merged hero/about panel (`HomeHero`, name treatment plus a short bio, a woodblock portrait and a hand-drawn Baybayin mark whose gradient fill tracks the mouse), one full-panel card per case study (`CaseStudies` + `CaseStudyCard`, each on its own dot-grid-and-hand-drawn-sketch background), and a closing dark contact panel (`Contact`, wrapped in the homepage's own `section#contact` panel — the component itself carries no `id`, since About and CV reuse it in their closing panels). See "Scroll-flow panels" below for the mechanic behind the pinning.
-
-**About** (`src/pages/about.astro`) and **CV** (`src/pages/cv.astro`) are their own pages rather than homepage sections — About covers the non-work side (photo, a few facts, four hobby videos), CV is the full work history plus an "Open as PDF" link to the CV in `public/`, with its content in `src/data/cv.ts`. Both open and close on a pinned panel too (via `PageFlow`), with the body between scrolling normally.
-
-**Case study pages** (`src/pages/case-studies/*.astro`) — four in-depth write-ups, each composed directly from a shared component kit and wrapped in `CaseStudyLayout`:
-
-- **IBM — Data Lineage** (`ibm-data-lineage`): redesigning IBM's data lineage tooling for watsonx. Red Dot Award winner.
-- **HPE — AI Troubleshooting Agent** (`hpe-ai-troubleshooting-agent`): a coded proof-of-concept AI assistant for debugging ML data pipelines, built and shipped the week before the team was laid off.
-- **QuantaLyric — MVP** (`quantalyric-mvp`): scoping and shipping an MVP, brand, and design system for an AI energy-forecasting startup in forty hours.
-- **HIVAZ.org — HIV care in Arizona** (`hivaz-hiv-care-arizona`): redesigning the front door to HIV care for Aunt Rita's Foundation and Arizona's Department of Health and Human Services.
-
-Each page composes the same shared kit: `CaseStudyHero`, `CaseStudyMeta`, `Figure` (numbered, captioned images with a labeled-placeholder fallback when no screenshot exists, or a looping muted screen recording in place of a still image via its `video` prop), `Pull` (quotes), `ProcessColumns` (a grid of captioned frames, with optional step labels and frame numbers for when the columns are a real sequence), `Pivot` (the thesis slab where the argument turns, with an optional `label` for its eyebrow, which defaults to "What changed"), `Strip` (a row of frames, numbered only when `frameN` is given), `ImagePair` (before/after), `Metrics`, and `NextCaseStudy`. `CaseStudyLayout` wraps all of it with a sticky topbar (back link, live reading-progress bar and section wayfinding label, a "View as deck" trigger) and the deck lightbox itself — see [`docs/deck-lightbox.md`](docs/deck-lightbox.md) for how a case study's own markup turns into a fullscreen slide deck with no separate slide list to maintain.
-
-**Nav bar** (`NavBar`) — sticky header with a wordmark and a mobile menu toggle, shared by the homepage, About, and CV. Case study pages use their own topbar instead (`BaseLayout`'s `showNav={false}`).
+- **Home** (`src/pages/index.astro`) — one pinned panel after another: a hero with Nahi's name, a short bio, a woodblock portrait, and a hand-drawn Baybayin mark (`HomeHero`); one full-panel card per case study, each dressed in hand-drawn sketches (`CaseStudies` + `CaseStudyCard`, data in `src/data/case-studies.ts`); and a dark "Get in touch" panel (`Contact`).
+- **About** (`src/pages/about.astro`) — the non-work side: a photo, a few facts, four hobby videos.
+- **CV** (`src/pages/cv.astro`) — the full work history from `src/data/cv.ts`, plus an "Open as PDF" link to the CV in `public/`.
+- **Case studies** (`src/pages/case-studies/*.astro`), each built from the shared kit in `CaseStudyLayout`:
+  - **IBM — Data Lineage** (`ibm-data-lineage`): redesigning IBM's data lineage tooling for watsonx. Red Dot Award winner.
+  - **HPE — AI Troubleshooting Agent** (`hpe-ai-troubleshooting-agent`): a coded proof-of-concept AI assistant for debugging ML data pipelines, built and shipped the week before the team was laid off.
+  - **QuantaLyric — MVP** (`quantalyric-mvp`): scoping and shipping an MVP, brand, and design system for an AI energy-forecasting startup in forty hours.
+  - **HIVAZ.org — HIV care in Arizona** (`hivaz-hiv-care-arizona`): redesigning the front door to HIV care for Aunt Rita's Foundation and Arizona's Department of Health and Human Services.
+- **Nav** — `NavBar` (wordmark, links, mobile menu) on the homepage, About, and CV. Case studies use their own topbar instead, with a reading-progress bar, the current section's name, and the "View as deck" button.
 
 ## Project structure
 
 ```
 /
-├── docs/                → longer write-ups split out of this README (deck lightbox, homepage panel art, deploy notifications, audit records)
+├── docs/                → how things work (see the table above); docs/history/ holds dated records
 ├── plugins/
-│   └── telegram-notify/ → local Netlify build plugin, see "Deployment"
+│   └── telegram-notify/ → local Netlify build plugin for deploy notifications
 ├── scripts/
-│   └── roughen-panel-art.mjs → bakes the pencil texture and tilt into the homepage panel art SVGs (`npm run art:roughen`)
-├── public/              → static files served as-is (favicon, CV PDF, self-hosted fonts in fonts/, hobby videos, case study screen recordings, OG image)
+│   └── roughen-panel-art.mjs → bakes pencil texture and tilt into the homepage panel art (`npm run art:roughen`)
+├── public/              → served as-is: favicon, CV PDF, fonts/, video/ (hobby videos, case study screen recordings), OG image
 ├── src/
-│   ├── components/       → the shared case-study kit, marketing nav, and page-specific pieces
+│   ├── components/      → the case study kit, homepage pieces, NavBar, Contact, PageFlow, DeckLightbox
 │   ├── data/
-│   │   ├── case-studies.ts   → homepage card metadata (title, blurb, meta line, thumb) — full case
-│   │   │                       study copy lives in each page file
-│   │   ├── cv.ts              → CV experience, education, and certifications content
-│   │   ├── fonts.ts           → the astro-font config: which font files, weights, and unicode ranges get loaded (see "Fonts")
-│   │   └── panel-art.ts       → which sketch, doodle, and logo sits where on each homepage case-study panel
-│   ├── img/               → case study and homepage images (optimized by Astro at build time); img/panels/ holds the homepage panel art SVGs
+│   │   ├── case-studies.ts → homepage card content and order (case study copy lives in each page file)
+│   │   ├── cv.ts           → CV content
+│   │   ├── fonts.ts        → astro-font config
+│   │   └── panel-art.ts    → which sketch, doodle, and logo sits where on each homepage panel
+│   ├── img/             → images, optimized by sharp at build time; img/panels/ holds the panel art SVGs
 │   ├── layouts/
-│   │   ├── BaseLayout.astro       → shared <head>, fonts, SEO tags, marketing nav (`showNav`, `scrollMode` props)
-│   │   └── CaseStudyLayout.astro  → case-study topbar, deck lightbox, reading-progress/wayfinding script, wraps content in `PageFlow`
-│   ├── pages/
-│   │   ├── index.astro                    → the home page
-│   │   ├── about.astro                    → the About page
-│   │   ├── cv.astro                       → the CV page
-│   │   └── case-studies/*.astro           → the four case study pages
+│   │   ├── BaseLayout.astro      → <head>, fonts, SEO, nav, ambient-video start (props: title, description, showNav, scrollMode, ogType)
+│   │   └── CaseStudyLayout.astro → case study topbar, deck, reading-progress script, wraps content in PageFlow
+│   ├── pages/           → index, about, cv, case-studies/*
 │   ├── scripts/
-│   │   └── scroll-sections.ts     → the pin-and-cover scroll mechanic (see "Scroll-flow panels") and the `.rev` scroll-reveal every page shares
-│   └── styles/            → global.css (imports reset, tokens, site-kit, marketing, scroll-sections), plus homepage-panels.css, imported only by the homepage's CaseStudies component
-├── CLAUDE.md             → rules for Claude agents working in this repo (read the top section first)
-├── astro.config.mjs      → site URL and integrations
-├── netlify.toml          → registers the Telegram deploy plugin (build settings stay in the Netlify dashboard)
-├── postcss.config.cjs    → wires up postcss-custom-media (breakpoint tokens, see below)
-├── .prettierrc.json      → Prettier + prettier-plugin-astro config
-├── css-custom-data.json  → teaches VS Code's CSS language service about @custom-media (see "Breakpoints")
+│   │   └── scroll-sections.ts    → pinned panels, scroll-reveal, hero mark gradient
+│   └── styles/          → global.css and what it imports, plus homepage-panels.css (see docs/styling.md)
+├── CLAUDE.md            → rules for agents
+├── astro.config.mjs     → site URL and integrations
+├── netlify.toml         → registers the deploy plugin only; build settings live in the Netlify dashboard
+├── postcss.config.cjs   → breakpoint tokens (see docs/styling.md)
+├── css-custom-data.json → teaches VS Code about @custom-media
+├── .prettierrc.json     → Prettier + prettier-plugin-astro
 └── package.json
 ```
 
-## Notable pieces under the hood
-
-- **Fonts**: Shippori Mincho (display headings), Noto Serif JP (body prose), M PLUS 1 (interactive chrome — buttons, nav, the topbar's back link and section label, the deck lightbox's controls, the homepage's wayfinding rail), and Space Mono (metadata only — eyebrows, dates, figure/frame numbers, the deck's slide counter), self-hosted from `public/fonts/` and loaded through `astro-font`, configured in `src/data/fonts.ts`. `--font-ui` is the token for the M PLUS 1 role. Despite three of them being Japanese typefaces, the site uses them only for their Latin letterforms — there's no Japanese text anywhere — so only each font's **Latin** and **Latin Extended** subsets are shipped: 16 `woff2` files, 268KB in total, each declared with Google's own `unicode-range` so a page downloads only the files its characters need. Weights shipped are the ones the site actually renders: Shippori Mincho 400/500/600/700, Noto Serif JP 400–600 and M PLUS 1 400 (both variable fonts, one file per subset), Space Mono 400/700. Four files are preloaded (the Latin files for Noto Serif JP, Shippori Mincho 600, M PLUS 1, and Space Mono 400). The three arrows the site uses (→ ← ↗) aren't in any of these subsets and are drawn by the visitor's system fonts — that was already true when the fonts came from Google. All four are SIL Open Font License, which permits self-hosting.
-  - **Why self-hosted.** Loading these from Google Fonts meant astro-font inlined every `@font-face` rule Google serves for the Japanese typefaces — about 1,345 of them, 1.2MB of HTML (~330KB gzipped) on every page — and, with `preload: true`, a preload link for each, which had browsers downloading ~30MB of font files per page. Self-hosting the Latin subsets took the homepage HTML from 1.2MB to 19KB.
-  - **Adding a weight or a character range.** Request the family from `https://fonts.googleapis.com/css2?family=...&display=swap` with a modern browser user agent, copy the `/* latin */` or `/* latin-ext */` block's `woff2` URL into `public/fonts/`, and add a `face(...)` line in `src/data/fonts.ts`. A weight that isn't shipped falls back to the nearest one that is; a character outside both subsets falls back to a system font.
-- **Scroll-flow panels**: every page pins its opening hero in place while the next section slides up and covers it (a torn-paper edge and a matching drop shadow at the seam), then reads as a normal document until a closing panel — the homepage's "Get in touch," or the case-study/About/CV `page-close` — pins the same way. The homepage instead pins *every* panel in sequence (hero/about, one panel per case study, contact), with a wayfinding rail built from each panel's `data-label`. No scroll-snap between panels — it fought wheel/trackpad momentum and stuttered. Built with GSAP + ScrollTrigger (`src/scripts/scroll-sections.ts`, styles in `src/styles/scroll-sections.css`), driven by `data-scroll="flow"` (default) or `"paged"` (homepage only, set via `BaseLayout`'s `scrollMode` prop) on `<html>`. `PageFlow.astro` is the shared shell (`hero`/default/`close` named slots) that every non-homepage page wraps its content in to get the open/close panels; `CaseStudyLayout` does this for case studies automatically. Three things fall back to plain scrolling, any one of them enough: reduced motion, a missing GSAP, or a panel whose content measures taller than the viewport (checked on load, on font-load, and on resize) — a pinned panel clips its overflow, so locking a page that doesn't fit would hide content with no way to reach it. The homepage's four case-study panels also carry a dot-grid texture plus hand-drawn UI-mockup sketches and (on three of them) a dimmed employer logo — see "Homepage panel art" below.
-- **Hero entrance**: the homepage hero's staggered fade-in (`.hero-anim` elements in `HomeHero`, each with a `data-enter-delay` in ms) runs on the Web Animations API from a small inline script placed right after the hero markup — not on CSS `@keyframes`. That's deliberate: ScrollTrigger pins a panel by moving it into a `div.pin-spacer`, and does it again on every `ScrollTrigger.refresh()` (on load, on font-load, on resize). Moving an element out of the page and back cancels and restarts its CSS animations, so a keyframe entrance on the hero played twice — fully visible, then blank, then fading in again about a second later. A Web Animations API animation survives the move and keeps its place. Rule of thumb for anything inside a pinned panel: no CSS `@keyframes` entrances; use `element.animate()` or a CSS transition. The script skips itself under reduced motion and when `element.animate` isn't supported, so the hero simply shows; without JavaScript it shows too.
-- **Homepage panel art**: each homepage case-study panel is dressed with hand-drawn wireframe sketches, two of Nahi's doodles, and (on three panels) a dimmed employer logo over a dot grid. Each piece is its own element, laid out in `src/data/panel-art.ts` and styled in `src/styles/homepage-panels.css` (homepage only). Which art set a panel gets is keyed to the case study by the `wireframe` field in `src/data/case-studies.ts`, so reordering the lineup keeps each logo with its case study. The sketches carry a baked-in pencil texture and a slight random tilt, and Nahi's doodles the same texture at half strength — after adding or editing any of those SVGs, run `npm run art:roughen`. Hovering a sketch or doodle wobbles, bounces, or boings it; the logos stay still. Full write-up: [`docs/homepage-panel-art.md`](docs/homepage-panel-art.md).
-- **Design tokens & the "Techo" palette**: `src/styles/tokens.css` defines a warm paper/ink color system (`--paper`, `--ink`, `--ink-mid`, `--ink-soft`, `--accent`, `--mark`, `--rule`, `--surface`) with a real dark-mode block — both a `@media (prefers-color-scheme: dark)` block and an explicit `:root[data-theme="dark"]` override. `BaseLayout` currently sets `data-theme="light"` on every page, which the dark-mode media query already treats as an explicit override (`:root:not([data-theme="light"])` is the exact condition it checks for) — so the site reads light regardless of the visitor's OS preference; drop that attribute to let the dark-mode block take over automatically again. `src/styles/site-kit.css` holds the shared case-study component kit (topbar, numbered frames, pull quotes, the pivot slab, metrics grid, the deck lightbox) and `src/styles/marketing.css` holds the nav/contact chrome shared by the homepage, About, and CV — both are pulled in once via `global.css` so no page has to import them individually.
-- **View as deck**: see [`docs/deck-lightbox.md`](docs/deck-lightbox.md).
-- **Hand-built diagram assets**: the IBM case study's three "Three sources, one view" process-column diagrams (`src/img/ibm-05.svg` through `ibm-07.svg`) are recreated SVGs, not screenshots — the originals never made it into this repo. `astro:assets`/`Image` handles SVG imports the same as raster ones, no special-casing needed.
-- **SEO**: page titles, descriptions, and Open Graph tags are handled per-page via `astro-seo`. `site: "https://www.nahi.design"` in `astro.config.mjs` is what lets `astro-seo` emit absolute canonical/`og:url` values instead of falling back to the dev server's `localhost` origin. `BaseLayout`'s `ogType` prop (default `"website"`) sets `og:type`; `CaseStudyLayout` passes `"article"`.
-- **Icons**: inline SVGs written straight into the markup (e.g. `Contact`, `CaseStudyTopbar`). No icon library — `@twodft/astro-icon` was installed early on but never used, and was removed.
-- **Formatting**: Prettier with `prettier-plugin-astro`, configured in `.prettierrc.json` (tabs). Both are `devDependencies`, so `npm install` is all a fresh machine needs — Zed's format-on-save (`.zed/settings.json`) resolves them from `node_modules`. The existing files haven't all been run through it yet, so expect formatting-only diffs the first time you save an older file.
-- **Email obfuscation**: `astro-mail-obfuscation` scrambles the `mailto:` links against scraper bots.
-- **Images**: everything in `src/img/` is processed by `sharp` at build time (Astro's built-in image optimization).
-- **Breakpoints**: defined once in `tokens.css` as `@custom-media` (`--bp-xs` 30rem, `--bp-sm` 40rem, `--bp-md` 48rem, `--bp-lg` 60rem, `--bp-xl` 64rem, `--bp-2xl` 80rem) and used in any component's `<style>` block as `@media (--bp-md) { ... }` (or `@media screen and (--bp-md) { ... }`). Plain CSS can't reference a custom property inside a media condition, so this is resolved at build time by the `postcss-custom-media` plugin, configured in `postcss.config.cjs` — that file also loads `@csstools/postcss-global-data` to make the `tokens.css` breakpoint definitions visible to every component's `<style>` block, since Astro/Vite processes each one as its own separate stylesheet. Nothing to run by hand: `npm install` pulls both packages in, and `npm run dev`/`build` pick up `postcss.config.cjs` automatically. Add a new breakpoint by adding one more `@custom-media --bp-name (min-width: ...)` line in `tokens.css`. The underlying CSS language service (used by both VS Code and Zed) doesn't know this at-rule and would otherwise flag it as "Unknown at rule" — handled per editor since the fix isn't portable:
-  - **VS Code**: `css-custom-data.json` at the repo root describes `@custom-media` to the language service (with a hover description), wired in via `.vscode/settings.json`'s `css.customData`.
-  - **Zed**: the same fix doesn't work — its bundled CSS server only accepts custom-data file paths through a notification VS Code's own client extension sends, which Zed doesn't implement, so `css.customData` is a no-op there regardless of how it's wired up. `.zed/settings.json` instead sets `css.lint.unknownAtRules` to `"ignore"` for the language server, which silences the whole "unknown at-rule" category (not just `@custom-media` — Zed has no way to scope this narrower).
-- **Reduced motion**: looping videos marked `data-ambient` — the About page's hobby videos and any case study `Figure` passed a `video` prop instead of `src` — only play when the visitor hasn't set `prefers-reduced-motion`. None of them carry an `autoplay` attribute — that attribute would start them regardless of the preference — so `BaseLayout` calls `play()` on every `video[data-ambient]` client-side, since a static site has no server-side way to know that preference ahead of time. The deck lightbox generates its slides after that one-time pass has run, so it calls the same reduced-motion check (`playAmbient`) on each slide it renders — see [`docs/deck-lightbox.md`](docs/deck-lightbox.md). Keep `autoplay` out of any new ambient video markup. The case study pages' scroll-reveal and deck-open animations, the homepage hero's entrance animation, the scroll-flow pin-and-cover mechanic, the homepage panel art and its hover animation (hidden entirely, see [`docs/homepage-panel-art.md`](docs/homepage-panel-art.md)), and the hero marks' mouse-tracking gradient (which sits at a fixed resting position instead) all collapse under the same media query.
-
-## Keeping docs in sync
-
-This README and `docs/*.md` are the source of truth for how the site works — not code comments. Every behavior change updates the matching section here in the same commit, and code comments stay to a one-line pointer back to it. The full rule, written for the Claude agents that work on this repo (Claude Code, Claude, and Claude Design), is the top section of [`CLAUDE.md`](CLAUDE.md). The [September 2026 audit](docs/codebase-audit-2026-09.md) is why: it found an inline comment that had drifted into describing the opposite of what the code did.
+Path aliases in `tsconfig.json`: `@components`, `@data`, `@layouts`, `@img`, `@styles`, `@pages`, and `@/` for `src/`. Videos are referenced by URL from `public/video/`; there is no `src/video/`.
 
 ## Commands
 
-Run from the project root:
+Run from the project root. Requires Node.js ≥ 22.12.0. Run `npm install` after every pull.
 
-| Command           | Action                                       |
-| :----------------- | :-------------------------------------------- |
-| `npm install`       | Install dependencies                           |
-| `npm run dev`       | Start local dev server at `localhost:4321`     |
-| `npm run build`     | Build the production site to `./dist/`         |
-| `npm run preview`   | Preview the production build locally           |
-| `npm run astro ...` | Run any Astro CLI command (e.g. `astro check`) |
+| Command | Action |
+| :-- | :-- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Start the dev server at `localhost:4321` |
+| `npm run build` | Build the production site to `./dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run art:roughen` | Re-bake pencil texture and tilt into the panel art SVGs — run after adding or editing one |
+| `npm run astro ...` | Any Astro CLI command (e.g. `astro check`) |
 
-Requires Node.js ≥ 22.12.0.
+## Smaller pieces
+
+- **SEO** — `astro-seo`, per page, through `BaseLayout`. `site` in `astro.config.mjs` is what makes canonical and `og:url` absolute. `ogType` defaults to `website`; `CaseStudyLayout` passes `article`.
+- **Images** — everything in `src/img/` goes through Astro's image pipeline (sharp). The IBM case study's three "Three sources, one view" diagrams (`ibm-05.svg`–`ibm-07.svg`) are hand-rebuilt SVGs, not screenshots — the originals never made it into this repo.
+- **Icons** — inline SVGs in the markup. No icon library.
+- **Email** — `astro-mail-obfuscation` scrambles `mailto:` links against scrapers.
+- **Formatting** — Prettier with `prettier-plugin-astro` (tabs), both dev dependencies. Zed formats on save (`.zed/settings.json`). Most older files haven't been through it yet, so expect formatting-only diffs the first time you save one.
 
 ## Deployment
 
-Hosted on Netlify, deploying straight from this repo. A local Netlify Build Plugin (`plugins/telegram-notify/`, registered in `netlify.toml`) posts a Telegram message on every deploy success or failure — see [`docs/deploy-notifications.md`](docs/deploy-notifications.md) for how it's built and how to set up the bot on a new Netlify site.
+Netlify deploys straight from this repo. Build command and publish directory are set in the Netlify dashboard, not in `netlify.toml`. Every deploy posts to Telegram — see [`docs/deploy-notifications.md`](docs/deploy-notifications.md).
+
+## Keeping docs in sync
+
+This README and `docs/*.md` are the source of truth for how the site works — not code comments. A behavior change updates the matching doc in the same commit, and code comments stay to a one-line pointer. The full rule is the top of [`CLAUDE.md`](CLAUDE.md); the [September 2026 audit](docs/history/codebase-audit-2026-09.md) is why.

@@ -44,7 +44,7 @@ Every file gets its own seeds, frequencies, and strengths, drawn from fixed rang
 
 - **Moves:** wobble (rocks side to side), bounce (hops ~12px with a squash on landing), boing (swells and settles). 650ms each; they always finish, even if the pointer leaves, and hovering again mid-animation is ignored.
 - **Where:** one delegated `pointerover` listener in `CaseStudies.astro`, so it only ships on the homepage.
-- **Web Animations API, not CSS `@keyframes`** — pinned panels get moved into GSAP's pin-spacers on every refresh, which restarts CSS animations; `element.animate()` survives the move. See README "Hero entrance".
+- **Web Animations API, not CSS `@keyframes`** — pinned panels get moved into GSAP's pin-spacers on every refresh, which restarts CSS animations; `element.animate()` survives the move. See [`scroll-flow.md`](scroll-flow.md), "Pin-spacers restart CSS animations".
 - **Mouse and pen only.** Touch is skipped so a finger scrolling past doesn't set every sketch off.
 - **Logos opt out** with `still: true` in `panel-art.ts`, which renders `data-still` on the span; the listener skips anything carrying it.
 - **Pointer layering:** `.cs-panel .panel-inner` has `pointer-events: none` and `.cs-content` turns it back on, so the sketches can be hovered through the empty parts of the content wrapper while the card itself stays clickable.
