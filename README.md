@@ -6,7 +6,7 @@ Live at [nahi.design](https://www.nahi.design).
 
 ## What's on the site
 
-**Home page** (`src/pages/index.astro`) is a pinned, one-screen-at-a-time sequence rather than a single scrolling page: a merged hero/about panel (`HomeHero`, name treatment plus a short bio, a woodblock portrait and a hand-drawn Baybayin mark whose gradient fill tracks the mouse), one full-panel card per case study (`CaseStudies` + `CaseStudyCard`, each on its own dot-grid-and-hand-drawn-sketch background), and a closing dark contact panel (`Contact`). See "Scroll-flow panels" below for the mechanic behind the pinning.
+**Home page** (`src/pages/index.astro`) is a pinned, one-screen-at-a-time sequence rather than a single scrolling page: a merged hero/about panel (`HomeHero`, name treatment plus a short bio, a woodblock portrait and a hand-drawn Baybayin mark whose gradient fill tracks the mouse), one full-panel card per case study (`CaseStudies` + `CaseStudyCard`, each on its own dot-grid-and-hand-drawn-sketch background), and a closing dark contact panel (`Contact`, wrapped in the homepage's own `section#contact` panel — the component itself carries no `id`, since About and CV reuse it in their closing panels). See "Scroll-flow panels" below for the mechanic behind the pinning.
 
 **About** (`src/pages/about.astro`) and **CV** (`src/pages/cv.astro`) are their own pages rather than homepage sections — About covers the non-work side (photo, a few facts, four hobby videos), CV is the full work history plus an "Open as PDF" link to the CV in `public/`, with its content in `src/data/cv.ts`. Both open and close on a pinned panel too (via `PageFlow`), with the body between scrolling normally.
 
