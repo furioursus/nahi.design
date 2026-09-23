@@ -276,7 +276,7 @@ const { title } = Astro.props;
 				.map((s) => '<source src="' + s.src + '"' + (s.media ? ' media="' + esc(s.media) + '"' : "") + ' type="video/mp4">')
 				.join("");
 			return (
-				'<video autoplay muted loop playsinline data-ambient poster="' +
+				'<video muted loop playsinline data-ambient poster="' +
 				esc(v.poster) +
 				'" aria-label="' +
 				esc(alt) +
