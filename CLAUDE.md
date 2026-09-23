@@ -23,7 +23,7 @@ This is nahi.design — Nahi Kennedy-Nuñez's UX design portfolio, built with As
 - **Astro** (v7) — the framework; pages are `.astro` files under `src/pages/`, components under `src/components/`
 - **TypeScript** — strict config (`astro/tsconfigs/strict`), with path aliases (`@components`, `@data`, `@layouts`, `@img`, `@styles`, `@pages`, and the catch-all `@/` for `src/`) defined in `tsconfig.json`
 - **GSAP + ScrollTrigger** — the pin-and-cover scroll mechanic in `src/scripts/scroll-sections.ts` (see README "Scroll-flow panels")
-- **astro-font** — Google Fonts loading (Shippori Mincho, Noto Serif JP, M PLUS 1, Space Mono — roles listed in README "Fonts")
+- **astro-font** — Google Fonts loading (Shippori Mincho, Noto Serif JP, M PLUS 1, Space Mono — roles listed in README "Fonts"). Keep `preload: false`; README "Fonts" explains why turning it on costs about 30MB per page
 - **astro-seo** — per-page SEO/Open Graph tags
 - **astro-mail-obfuscation** — scrambles `mailto:` links against scrapers
 - **sharp** — build-time image optimization for everything in `src/img/`
