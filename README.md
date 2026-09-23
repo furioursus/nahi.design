@@ -25,6 +25,9 @@ Each page composes the same shared kit: `CaseStudyHero`, `CaseStudyMeta`, `Figur
 
 ```
 /
+├── docs/                → longer write-ups split out of this README (deck lightbox, deploy notifications, audit records)
+├── plugins/
+│   └── telegram-notify/ → local Netlify build plugin, see "Deployment"
 ├── public/              → static files served as-is (favicon, CV PDF, hobby videos, case study screen recordings, OG image)
 ├── src/
 │   ├── components/       → the shared case-study kit, marketing nav, and page-specific pieces
@@ -44,7 +47,12 @@ Each page composes the same shared kit: `CaseStudyHero`, `CaseStudyMeta`, `Figur
 │   ├── scripts/
 │   │   └── scroll-sections.ts     → the pin-and-cover scroll mechanic (see "Scroll-flow panels") and the `.rev` scroll-reveal every page shares
 │   └── styles/            → global.css, reset.css, tokens.css, site-kit.css, marketing.css, scroll-sections.css, homepage-panels.css
+├── CLAUDE.md             → rules for Claude agents working in this repo (read the top section first)
+├── astro.config.mjs      → site URL and integrations
+├── netlify.toml          → registers the Telegram deploy plugin (build settings stay in the Netlify dashboard)
 ├── postcss.config.cjs    → wires up postcss-custom-media (breakpoint tokens, see below)
+├── .prettierrc.json      → Prettier + prettier-plugin-astro config
+├── css-custom-data.json  → teaches VS Code's CSS language service about @custom-media (see "Breakpoints")
 └── package.json
 ```
 
@@ -64,6 +72,10 @@ Each page composes the same shared kit: `CaseStudyHero`, `CaseStudyMeta`, `Figur
   - **VS Code**: `css-custom-data.json` at the repo root describes `@custom-media` to the language service (with a hover description), wired in via `.vscode/settings.json`'s `css.customData`.
   - **Zed**: the same fix doesn't work — its bundled CSS server only accepts custom-data file paths through a notification VS Code's own client extension sends, which Zed doesn't implement, so `css.customData` is a no-op there regardless of how it's wired up. `.zed/settings.json` instead sets `css.lint.unknownAtRules` to `"ignore"` for the language server, which silences the whole "unknown at-rule" category (not just `@custom-media` — Zed has no way to scope this narrower).
 - **Reduced motion**: looping videos marked `data-ambient` — the About page's hobby videos and any case study `Figure` passed a `video` prop instead of `src` — only play when the visitor hasn't set `prefers-reduced-motion`. None of them carry an `autoplay` attribute — that attribute would start them regardless of the preference — so `BaseLayout` calls `play()` on every `video[data-ambient]` client-side, since a static site has no server-side way to know that preference ahead of time. The deck lightbox generates its slides after that one-time pass has run, so it calls the same reduced-motion check (`playAmbient`) on each slide it renders — see [`docs/deck-lightbox.md`](docs/deck-lightbox.md). Keep `autoplay` out of any new ambient video markup. The case study pages' scroll-reveal and deck-open animations, the homepage hero's entrance animation, the scroll-flow pin-and-cover mechanic, and the hero marks' mouse-tracking gradient (which sits at a fixed resting position instead) all collapse under the same media query.
+
+## Keeping docs in sync
+
+This README and `docs/*.md` are the source of truth for how the site works — not code comments. Every behavior change updates the matching section here in the same commit, and code comments stay to a one-line pointer back to it. The full rule, written for the Claude agents that work on this repo (Claude Code, Claude, and Claude Design), is the top section of [`CLAUDE.md`](CLAUDE.md). The [September 2026 audit](docs/codebase-audit-2026-09.md) is why: it found an inline comment that had drifted into describing the opposite of what the code did.
 
 ## Commands
 
