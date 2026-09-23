@@ -19,7 +19,7 @@ Every one of these lives in document order, so the deck always mirrors the readi
 
 ## Adding a new case study
 
-Nothing needs to be wired up by hand. Compose the page from the shared kit (`Figure`, `Pull`, `ProcessColumns`, `Pivot`, `Strip`, `ImagePair`, `Metrics`) the way the existing case studies do, pass `deck`/`deckLabel` props where a figure should appear in the deck, and `CaseStudyLayout` takes care of the rest — it renders one `DeckLightbox` per page and owns the scroll-reveal and topbar reading-progress scripts that also live in the same layout.
+Nothing needs to be wired up by hand. Compose the page from the shared kit (`Figure`, `Pull`, `ProcessColumns`, `Pivot`, `Strip`, `ImagePair`, `Metrics`) the way the existing case studies do, pass `deck`/`deckLabel` props where a figure should appear in the deck, and `CaseStudyLayout` takes care of the rest — it renders one `DeckLightbox` per page and owns the topbar reading-progress script. The `.rev` scroll-reveal is shared site-wide and lives in `src/scripts/scroll-sections.ts`.
 
 ## Retired: the old click-to-zoom lightbox and presentation mode
 

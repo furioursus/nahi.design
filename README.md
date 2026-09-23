@@ -35,14 +35,14 @@ Each page composes the same shared kit: `CaseStudyHero`, `CaseStudyMeta`, `Figur
 │   ├── img/               → case study and homepage images (optimized by Astro at build time)
 │   ├── layouts/
 │   │   ├── BaseLayout.astro       → shared <head>, fonts, SEO tags, marketing nav (`showNav`, `scrollMode` props)
-│   │   └── CaseStudyLayout.astro  → case-study topbar, deck lightbox, scroll-reveal/wayfinding scripts, wraps content in `PageFlow`
+│   │   └── CaseStudyLayout.astro  → case-study topbar, deck lightbox, reading-progress/wayfinding script, wraps content in `PageFlow`
 │   ├── pages/
 │   │   ├── index.astro                    → the home page
 │   │   ├── about.astro                    → the About page
 │   │   ├── cv.astro                       → the CV page
 │   │   └── case-studies/*.astro           → the four case study pages
 │   ├── scripts/
-│   │   └── scroll-sections.ts     → the pin-and-cover scroll mechanic (see "Scroll-flow panels")
+│   │   └── scroll-sections.ts     → the pin-and-cover scroll mechanic (see "Scroll-flow panels") and the `.rev` scroll-reveal every page shares
 │   └── styles/            → global.css, reset.css, tokens.css, site-kit.css, marketing.css, scroll-sections.css, homepage-panels.css
 ├── postcss.config.cjs    → wires up postcss-custom-media (breakpoint tokens, see below)
 └── package.json
