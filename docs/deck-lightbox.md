@@ -23,7 +23,7 @@ Every one of these lives in document order, so the deck always mirrors the readi
 
 ## Controls
 
-- Arrow keys move between slides, Esc closes, and focus returns to the button that opened it. At phone width the arrows give way to swipe, and the topbar trigger becomes a sticky bar at the bottom of the page.
+- Arrow keys move between slides, Esc closes, and focus returns to the button that opened it. At phone width the arrows give way to swipe, and the topbar trigger becomes a sticky bar at the bottom of the page. `body:has(.deck-cta)` gets 76px of bottom padding so the bar never covers the end of the page; it's scoped with `:has()` because pages without the bar (homepage, About, CV) would otherwise end on a blank 76px strip below their closing panel.
 - A thumbnail rail under the canvas jumps to any slide.
 - The lightbox is the only fixed-dark surface on the site, by design. Slide type is sized in `cqw` so it scales with the canvas.
 
