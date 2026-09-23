@@ -1,13 +1,4 @@
-/*
- * Shared "Techo" case-study component kit — topbar, page wrap, section heads,
- * numbered frames/figures, pull quotes, process columns, the pivot slab,
- * metrics grid, next-case-study link, and the view-as-deck lightbox
- * (including its ds-* slide styles). Used by every case study page and,
- * for the page-chrome basics (.wrap, .hero, .eyebrow, .meta, h1, .lede),
- * by the homepage/About/CV too — see marketing.css for what those add on
- * top. Ported from the Claude Design handoff's design-system.css and
- * template.css, with the tokens themselves living in tokens.css instead.
- */
+/* Case-study component kit and deck lightbox — see docs/styling.md and docs/case-study-kit.md. */
 
 img {
   max-width: 100%;
@@ -731,10 +722,7 @@ p .inline-q {
   cursor: pointer;
 }
 
-/* ── deck lightbox — the only fixed-dark surface in the system, by design.
-     The canvas fills the stage (as wide as the viewport allows, capped so a
-     16:9 fits under the bar and above the rail), and slide type is set in
-     cqw so it scales with the canvas. ── */
+/* ── deck lightbox — fixed dark by design; slide type in cqw — see docs/deck-lightbox.md ── */
 .deck-lb {
   position: fixed;
   inset: 0;

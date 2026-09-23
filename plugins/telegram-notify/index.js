@@ -1,16 +1,8 @@
-// Local Netlify Build Plugin — see docs/deploy-notifications.md.
-//
-// Runs inside Netlify's own build process (no relay server needed) and posts to Telegram's Bot
-// API directly. TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID must be set as Netlify environment
-// variables (Site settings → Environment variables) — never hardcode them here or in
-// netlify.toml, both of which are committed to this public repo.
+// Local Netlify Build Plugin — see docs/deploy-notifications.md. Secrets live in Netlify env vars only; this repo is public.
 
 import { execSync } from "node:child_process";
 
-// Netlify's standard build env vars expose COMMIT_REF (the SHA) but not the message itself — the
-// plugin runs inside the checked-out repo, so `git log` reads it straight from there. Subject
-// line only (%s), not the full body, to keep the notification skimmable. Never throws: a shallow
-// clone, a detached-HEAD edge case, or any other git hiccup should drop this line, not the build.
+// Netlify exposes the SHA but not the message; never throws — see docs/deploy-notifications.md "Gotchas".
 function getCommitMessage() {
 	try {
 		return execSync("git log -1 --pretty=%s", { encoding: "utf8" }).trim() || null;
@@ -19,16 +11,12 @@ function getCommitMessage() {
 	}
 }
 
-// Telegram's `parse_mode: "HTML"` treats <, >, and & as markup — a commit subject is freeform
-// text and can contain any of them (e.g. a stray "<" in a description), which would otherwise
-// break the message's formatting or silently swallow part of it.
+// parse_mode "HTML" treats <, >, & as markup.
 function escapeHtml(text) {
 	return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-// TELEGRAM_CHAT_ID accepts one ID or a comma-separated list, so the same deploy notification can
-// DM several people (e.g. both of you) without standing up a group chat. Whitespace around each
-// ID is trimmed so "111, 222" and "111,222" behave the same.
+// One ID or a comma-separated list; whitespace around each is ignored.
 function getChatIds() {
 	const raw = process.env.TELEGRAM_CHAT_ID;
 	if (!raw) return [];
@@ -43,14 +31,12 @@ async function sendTelegramMessage(text) {
 	const chatIds = getChatIds();
 
 	if (!token || chatIds.length === 0) {
-		// Missing credentials shouldn't ever fail a deploy over a notification — just skip, loudly,
-		// in the build log.
+		// A notification must never fail a deploy.
 		console.warn("[telegram-notify] Skipping: TELEGRAM_BOT_TOKEN and/or TELEGRAM_CHAT_ID not set.");
 		return;
 	}
 
-	// Sent independently per recipient, in parallel, so one bad chat ID (typo, someone blocked the
-	// bot) doesn't stop the others from getting notified.
+	// Independent per recipient, so one bad ID doesn't stop the rest.
 	await Promise.all(
 		chatIds.map(async (chatId) => {
 			const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
@@ -65,8 +51,7 @@ async function sendTelegramMessage(text) {
 			});
 
 			if (!res.ok) {
-				// Same reasoning as above — a Telegram API hiccup (rate limit, bad chat id) shouldn't
-				// take the site down with it.
+				// Logged, not thrown — same reason as above.
 				console.warn(
 					`[telegram-notify] Telegram API responded ${res.status} for chat ${chatId}: ${await res.text()}`,
 				);
@@ -79,10 +64,7 @@ function pick(variants) {
 	return variants[Math.floor(Math.random() * variants.length)];
 }
 
-// Each variant is [opening line, closing line] — the info line between them (context/branch,
-// url or error) stays fixed across all of them, only the flavor text varies. `${site}` is
-// interpolated into the opener at call time, not baked into these arrays, so it stays in one
-// place rather than duplicated per variant.
+// [opening, closing] flavor text; the info line between them is fixed — see docs/deploy-notifications.md.
 const SUCCESS_VARIANTS = [
 	["☕💬 Ooh, {site} just deployed — ang bilis naman ng build!", "Letting the whole group chat know — chismis time!"],
 	["💅✨ {site} shipped clean, walang drama, walang kaso!", "Grabe, so proud — bongga talaga."],
@@ -100,14 +82,10 @@ const ERROR_VARIANTS = [
 	["😖☎️ Uy, {site} just went down — don't panic, but fix it agad!", "Go check the log, baka simpleng typo lang 'yan."],
 ];
 
-// SITE_NAME/URL/CONTEXT/BRANCH/COMMIT_REF are standard Netlify build environment variables —
-// see https://docs.netlify.com/configure-builds/environment-variables/.
+// Standard Netlify build env vars: https://docs.netlify.com/configure-builds/environment-variables/
 export async function onSuccess() {
 	const site = process.env.SITE_NAME ?? "site";
-	// `URL` is the site's actual domain (custom domain if verified), constant across every
-	// deploy regardless of context. `DEPLOY_PRIME_URL` varies by context instead — it's the
-	// custom domain only for a genuine production deploy, but a `<branch>--sitename.netlify.app`
-	// link for a branch deploy — so it's the fallback here, not the primary.
+	// URL first, not DEPLOY_PRIME_URL — see docs/deploy-notifications.md "Gotchas".
 	const url = process.env.URL ?? process.env.DEPLOY_PRIME_URL;
 	const context = process.env.CONTEXT ?? "unknown";
 	const branch = process.env.BRANCH ?? "unknown";
@@ -128,8 +106,7 @@ export async function onError({ error }) {
 	const context = process.env.CONTEXT ?? "unknown";
 	const branch = process.env.BRANCH ?? "unknown";
 	const commitMessage = getCommitMessage();
-	// Telegram caps messages at 4096 chars; keep this well under that so it stays skimmable in a
-	// chat notification rather than dumping a full stack trace.
+	// Telegram caps messages at 4096 chars; 500 keeps it skimmable.
 	const message = (error?.message ?? String(error)).slice(0, 500);
 	const [open, close] = pick(ERROR_VARIANTS);
 

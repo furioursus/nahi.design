@@ -1,9 +1,4 @@
-/*
- * Breakpoints, as custom media queries (resolved at build time by postcss-custom-media —
- * see postcss.config.cjs). Plain CSS custom properties can't be used inside @media conditions,
- * so these live here instead of in the :root token block below. Usage: @media (--bp-md) { ... }
- * or @media screen and (--bp-md) { ... }.
- */
+/* Breakpoints, resolved at build time: @media (--bp-md) { … } — see docs/styling.md. */
 @custom-media --bp-xs (min-width: 30rem);
 @custom-media --bp-sm (min-width: 40rem);
 @custom-media --bp-md (min-width: 48rem);
@@ -130,13 +125,7 @@
   --space-78: 19.5rem;
   --space-80: 20rem;
 
-  /*
-   * "Techo" redesign tokens (Sept 2026) — the paper/ink palette and Fraunces + Source Serif 4 +
-   * Space Mono type system used by the homepage, About, CV, and all case study pages. Kept
-   * alongside the tokens above rather than replacing them outright, since removing the old
-   * --color- and --text-font- tokens is only safe once every component that reads them has
-   * been migrated or retired.
-   */
+  /* "Techo" tokens — the ones in use. Everything above in :root is legacy; see docs/styling.md. */
   --paper: #f7f4ec;
   --surface: #ffffff;
   --rule: #dbd5c5;
