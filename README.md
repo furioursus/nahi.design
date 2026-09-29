@@ -30,8 +30,8 @@ Live at [nahi.design](https://www.nahi.design).
 - **Case studies** (`src/pages/case-studies/*.astro`), each built from the shared kit in `CaseStudyLayout`:
   - **IBM — Data Lineage** (`ibm-data-lineage`): redesigning IBM's data lineage tooling for watsonx. Red Dot Award winner.
   - **HPE — AI Troubleshooting Agent** (`hpe-ai-troubleshooting-agent`): a coded proof-of-concept AI assistant for debugging ML data pipelines, built and shipped the week before the team was laid off.
-  - **QuantaLyric — MVP** (`quantalyric-mvp`): scoping and shipping an MVP, brand, and design system for an AI energy-forecasting startup in forty hours.
-  - **HIVAZ.org — HIV care in Arizona** (`hivaz-hiv-care-arizona`): redesigning the front door to HIV care for Aunt Rita's Foundation and Arizona's Department of Health and Human Services.
+  - **QuantaLyric — MVP** (`quantalyric-mvp`): scoping and shipping an MVP and brand for an AI energy-forecasting startup in forty hours.
+  - **HIVAZ.org — HIV care in Arizona** (`hivaz-hiv-care-arizona`): redesigning the front door to HIV care for Aunt Rita's Foundation and the Arizona Department of Health Services.
 - **Nav** — `NavBar` (wordmark, links, mobile menu) on the homepage, About, and CV. Case studies use their own topbar instead, with a reading-progress bar, the current section's name, and the "View as deck" button.
 
 ## Project structure

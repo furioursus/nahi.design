@@ -19,20 +19,20 @@ import hpe11 from "@img/hpe-11.webp";
 
 const title = "Selling the big idea, shipping the smallest one";
 const description =
-	"Leadership asked HPE's AI team for an AI feature. Interviews pointed to guilt, not missing tools. A north star prototype won buy-in, and its smallest form shipped in a week.";
+	"Leadership asked HPE's AI team for an AI feature. Interviews pointed to guilt, not missing tools. A prototype of the full idea won leadership over, and its smallest form shipped in a week.";
 ---
 
 <CaseStudyLayout title={title} description={description}>
 	<Fragment slot="hero">
 	<CaseStudyHero eyebrow={["Product design", "HPE", "Agentic AI for ML pipelines"]} title="Selling the big idea, shipping the smallest one">
-		Leadership asked for an AI feature. Ten out of ten interviews pointed somewhere else: data scientists felt guilty, not stuck, when an expensive pipeline failed and they couldn't tell the engineer why. I reframed the brief, won leadership over with a north star prototype, and shipped its smallest form in one week. The following week, the whole department was laid off.
+		Leadership asked for an AI feature. Ten out of ten interviews pointed somewhere else: data scientists felt guilty, not stuck, when an expensive pipeline failed and they couldn't tell the engineer why. I reframed the brief, won leadership over with a prototype of the full idea, and shipped its smallest form in one week. The following week, the whole department was laid off.
 	</CaseStudyHero>
 
 	<CaseStudyMeta
 		items={[
 			{ label: "Role", value: "Product designer, solo" },
 			{ label: "Team", value: "One developer intern, one language model wired to live pipeline logs" },
-			{ label: "Timeline", value: "North star pitch, then a 1-week build" },
+			{ label: "Timeline", value: "A pitch for the full idea, then a 1-week build" },
 			{ label: "Research base", value: "10 user interviews, 1 cross-functional workshop" },
 		]}
 	/>
@@ -48,12 +48,12 @@ const description =
 		deck
 		deckLabel="Shipped"
 	>
-		An "explain logs" panel where the failure already is. It tells a data scientist whether the fault is theirs to fix or the engineer's, so they arrive at the engineer's desk with an answer instead of a question.
+		An Explain Logs panel, right where the failure already is. It tells a data scientist whether the fault is theirs to fix or the engineer's, so they arrive at the engineer's desk with an answer instead of a question.
 	</Figure>
 
 	<section id="ask">
 		<div class="sec-head"><span class="sec-num">01</span><h2>An ask for AI, and a team feeling guilty</h2><span class="sec-rule"></span></div>
-		<p>Running a machine learning pipeline could cost tens of thousands of dollars a day, and a typical run lasted four to seven days. When one failed, a data scientist usually had to ask an ML engineer to find out why.</p>
+		<p>Running a machine learning pipeline could cost $10,000 or more a day, and a typical run lasted four to seven days. When one failed, a data scientist usually had to ask a machine learning engineer to find out why.</p>
 		<ImagePair
 			mid
 			deckLabel="The handoff"
@@ -61,16 +61,16 @@ const description =
 				{
 					fn: "Fig. 02",
 					imgSrc: hpe02,
-					imgAlt: "The old right panel during the same failure: pipeline name, job ID, and roles at the top, then a Subjob Summary reporting the job Failed, 106 total datums, 45 processed, 32 skipped, 19 failed, 10 recovered, with no explanation of what went wrong or what to do next.",
+					imgAlt: "The old right panel during the same failure: pipeline name, job ID, and roles at the top, then a Subjob Summary reporting the job Failed: 106 total datums, 45 processed, 32 skipped, 19 failed, 10 recovered, with no explanation of what went wrong or what to do next.",
 					fit: "contain",
-					caption: '<strong class="fig-lead">A count, not an answer.</strong>The old panel reported 19 of 106 datums failed. It never said why, or what to do next.',
+					caption: '<strong class="fig-lead">A count, not an answer.</strong>The old panel reported that 19 of 106 data items failed. It never said why, or what to do next.',
 				},
 				{
 					fn: "Fig. 03",
 					imgSrc: hpe03,
-					imgAlt: "A simplified diagram of the two roles around the AI model: the data scientist supplies business context, datasets, tuning, and training; the ML engineer builds and maintains the infrastructure, feature engineering, and scaling underneath a model running at roughly $10k a day.",
+					imgAlt: "A simplified diagram of the two roles around the AI model: the data scientist supplies business context, datasets, tuning, and training; the ML engineer builds and maintains the infrastructure, feature engineering, and scaling underneath a model running at $10,000 or more a day.",
 					fit: "contain",
-					caption: '<strong class="fig-lead">Two roles, one expensive model.</strong>The data scientist supplies context and data, the engineer keeps the infrastructure running, and each side only sees half of a model burning about $10k a day.',
+					caption: '<strong class="fig-lead">Two roles, one expensive pipeline.</strong>The data scientist supplies context and data, the engineer keeps the infrastructure running, and each side only sees half of a pipeline costing $10,000 or more a day.',
 				},
 			]}
 		/>
@@ -87,13 +87,13 @@ const description =
 			deck
 			deckLabel="The reframe"
 		>
-			"Build an AI tool" became a tool that helps people gain clarity into opaque AI systems and infrastructure. AI stayed the answer. The question changed.
+			"Build an AI tool" became a tool that helps people see into AI systems they can't read. AI stayed the answer. The question changed.
 		</Figure>
 	</section>
 
 	<section id="bigidea">
 		<div class="sec-head"><span class="sec-num">02</span><h2>Selling a bigger idea than we could build</h2><span class="sec-rule"></span></div>
-		<p>The strongest concept was a passive agent that watched pipelines in the background and alerted people when something broke. It scored high on desirability and low on feasibility. It also fit how people actually used the product: about once a week once a pipeline was stable. Nobody would be watching when it failed.</p>
+		<p>The strongest concept was a passive agent that watched pipelines in the background and alerted people when something broke. It scored high on what people wanted and low on what we could build. It also fit how people actually used the product. Once a pipeline was stable, they checked on it about once a week, so nobody would be watching when it failed.</p>
 		<Figure
 			src={hpe07}
 			alt="A Big Ideas workshop board: a mocked-up 'Welcome back' events screen listing failed pipelines on the left, and on the right an idea note reading 'It's like concierge for my work: take the pressure off of having to find where this has gone wrong, and provide me ways to fix the problem,' scored Feasibility: Low and Desirability: High."
@@ -104,15 +104,15 @@ const description =
 			deck
 			deckLabel="The big idea"
 		>
-			A "welcome back" screen listing what failed while you were away, described by one participant as a concierge for their work. High on desirability, low on feasibility.
+			A "welcome back" screen listing what failed while you were away, described by one participant as a concierge for their work. High on what people wanted, low on what we could build.
 		</Figure>
-		<p>Leadership was dubious, and the scope was the reason. So I built a north star prototype of the full agent and presented it to leadership, development, and design together. Seeing it won everyone over, and the one-week build started from there.</p>
+		<p>Leadership had doubts, and the scope was the reason. So I built a prototype of the full agent, a north star for where the product could go, and presented it to leadership, development, and design together. Seeing it won everyone over, and the one-week build started from there.</p>
 
 		<Pivot label="The call" heading="Keep the vision. Ship the smallest piece of it.">
-			With a week to build, I scaled the agent all the way down, and that had a real cost. The agent's value was that people wouldn't have to watch their models so closely, and the smallest version couldn't do that. What shipped is an "explain logs" button where a person already is when a pipeline fails. One tap returns a plain-language summary, including the one thing that used to take a conversation: whether the fault was in the pipeline itself or in the infrastructure underneath it.
+			With a week to build, I scaled the agent all the way down, and that had a real cost. The agent's value was that people wouldn't have to watch their pipelines so closely, and the smallest version couldn't do that. What shipped is an Explain Logs button, right where a person already is when a pipeline fails. One tap returns a plain-language summary, including the one thing that used to take a conversation: whether the fault was in the pipeline itself or in the infrastructure underneath it.
 		</Pivot>
 
-		<p style="margin-top:40px">I argued for building it in code, wired to a live model reading HPE's real pipeline logs. The riskiest unknown was whether people would trust the answers, and trust only shows up when the answers are real.</p>
+		<p style="margin-top:40px">I argued for building it in code, wired to a live language model reading HPE's real pipeline logs. The riskiest unknown was whether people would trust the answers, and trust only shows up when the answers are real.</p>
 
 		<Strip
 			land
@@ -135,13 +135,13 @@ const description =
 				},
 				{
 					frameN: "03",
-					dataLabel: "Point it at your own model",
+					dataLabel: "Use your own language model",
 					imgSrc: hpe11,
 					imgAlt: "The Explain Logs setup panel, asking for an OpenAI API token, or for teams with their own LLM, a model URL and token instead.",
 				},
 			]}
 		>
-			The dashboard shows which subjob failed, one click opens the explainer on the same screen, and teams can run it on their own model instead of sending anything out.
+			The dashboard shows which step failed, one click opens the explanation on the same screen, and teams can connect their own language model instead of sending logs outside the company.
 		</Strip>
 	</section>
 

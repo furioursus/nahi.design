@@ -23,19 +23,19 @@ import hivaz13 from "@img/hivaz-13.webp";
 
 const title = "Designing HIV care for the people outreach was missing";
 const description =
-	"Arizona's HIV portal was losing the people its programs most needed to reach. A redesign built for them first, around a single question.";
+	"Arizona's main HIV website was losing the people its programs most needed to reach. A redesign built for them first, around a single question.";
 ---
 
 <CaseStudyLayout title={title} description={description}>
 	<Fragment slot="hero">
 	<CaseStudyHero eyebrow={["UX design", "Capacity 4 Health", "Aunt Rita's Foundation"]} title="Designing HIV care for the people outreach was missing">
-		Arizona's HIV portal was losing the people its programs most needed to reach. I chose to design for them first, cut a quiz that tested well down to a single question, and shipped a site that starts a conversation instead of a search.
+		Arizona's main HIV website was losing the people its programs most needed to reach. I chose to design for them first, cut a quiz that tested well down to a single question, and shipped a site that starts a conversation instead of a search.
 	</CaseStudyHero>
 
 	<CaseStudyMeta
 		items={[
 			{ label: "Role", value: "UX designer, solo" },
-			{ label: "Partner", value: "Aunt Rita's Foundation, for Arizona DHS" },
+			{ label: "Partner", value: "Aunt Rita's Foundation, for the Arizona Department of Health Services" },
 			{ label: "Timeline", value: "3 months" },
 			{ label: "Research base", value: "20+ counselor interviews, 5 lived-experience interviews, 1 co-design workshop" },
 		]}
@@ -87,7 +87,7 @@ const description =
 		>
 			Confidence drops at the start, "where do I even start with these search results?", climbs while choosing a provider, then falls again in person: "they told me they're not taking new clients."
 		</Figure>
-		<p>People with money and steady access to care usually already have prevention, so they rarely test positive. They were also the easiest people to design for, and existing outreach already served them well. The people the programs most needed had the least access: unhoused, immigrant, BIPOC, and underage Arizonans. "I need someone to be my lifeline," one person told me.</p>
+		<p>People with steady access to care usually already have prevention in place, so they rarely test positive. They were also the easiest people to design for, and existing outreach already served them well. The people the programs most needed were the ones with the least access to care: unhoused, immigrant, BIPOC, and underage Arizonans. "I need someone to be my lifeline," one person told me.</p>
 		<Figure
 			src={hivaz04}
 			alt="A two-by-two: aware versus unaware of resources on the vertical axis, less versus more empowered to act on the horizontal. Four user archetypes with a quote and needs each: Meet me where I'm at, Self-sufficient, Needing a guide, and Activated."
@@ -98,14 +98,14 @@ const description =
 			deck
 			deckLabel="Who we chose"
 		>
-			Unaware of the care available and least able to act on it, the "needing a guide" group was the least served by outreach. Their needs, guidance and positive feedback, became the brief.
+			Unaware of the care available and least able to act on it, the "needing a guide" group was the least served by outreach. What they asked for became the brief: someone to guide them, and encouragement along the way.
 		</Figure>
-		<p><strong class="deck-stat" data-deck-foot="Who the redesign prioritized|HIVAZ.org">Health organizations know these are the people to reach. The difficulty is reaching them.</strong> So the question shifted from who the site was for to what someone frightened, with little support, could actually do on a phone. The answer cost the site its original promise. HIVAZ.org was built to be "all things HIV in Arizona," and designing for people with the least access meant moving most of that information into the background so the site could do one thing well.</p>
+		<p><strong class="deck-stat" data-deck-foot="Who the redesign prioritized|HIVAZ.org">Health organizations know these are the people to reach. The hard part is reaching them.</strong> So the question changed from who the site was for to what a frightened person with little support could actually do on a phone. The answer cost the site its original promise. HIVAZ.org was built to be "all things HIV in Arizona," and designing for people with the least access meant moving most of that information to a separate part of the site, so the main path could do one thing well.</p>
 	</section>
 
 	<section id="quiz">
 		<div class="sec-head"><span class="sec-num">03</span><h2>Cutting a quiz that tested well</h2><span class="sec-rule"></span></div>
-		<p>My first two concepts, a checklist and a provider directory, both added structure, and both overwhelmed people who were already anxious. The third, a short quiz ending in recommended providers, did remarkably well in testing. The question was who it did well with. Each added question helped people with resources, who wanted specifics about providers and the convenience of matching care to their own needs.</p>
+		<p>My first two concepts, an action plan and a provider directory, both added structure, and both overwhelmed people who were already anxious. The third, a short quiz ending in recommended providers, tested best of the three. The question was who it worked for. Each added question helped people with steady access to care, who wanted details about providers and the convenience of care matched to their own needs.</p>
 		<ProcessColumns
 			deckLabel="Three concepts"
 			deckCaption="Each concept added structure, and the one that tested best served the people who needed help least."
@@ -129,11 +129,11 @@ const description =
 					imgSrc: hivaz07,
 					imgAlt:
 						"Wireframe of the guided-search concept: 'Find the right HIV services', promising to identify the services you need, give you a short-list of providers, and provide a script for the phone call, with a Ready? button",
-					body: "A few questions ending in recommended providers. It tested remarkably well, mostly with people who had resources and wanted specifics.",
+					body: "A few questions ending in recommended providers. It tested best, mostly with people who had steady access to care and wanted details.",
 				},
 			]}
 		/>
-		<p style="margin-top:40px">That finding brought the tension with Aunt Rita's Foundation into the open. Giving those users the detail they wanted meant gathering more provider information than a team of three could handle, and the foundation pushed back right away. The turning point was returning to what we all already knew: people with the least access need the most help, and they have the highest rate of undiagnosed HIV. Once we were designing for them again, the answer got smaller, not bigger.</p>
+		<p style="margin-top:40px">That finding brought the tension with Aunt Rita's Foundation into the open. Giving those people the detail they wanted meant gathering more provider information than a team of three could handle, and the foundation pushed back right away. The turning point was returning to what we all already knew: people with the least access need the most help, and they have the highest rate of undiagnosed HIV. Once we were designing for them again, the answer got smaller, not bigger.</p>
 		<p>So I cut the quiz down to one question.</p>
 
 		<Pivot label="The call" heading="The fix wasn't a smarter filter. It was one question.">
@@ -175,11 +175,11 @@ const description =
 		<p>Measured after launch, against the site it replaced:</p>
 		<Metrics
 			items={[
-				{ n: "−60%", label: "Bounce rate on the pages people needed to reach" },
-				{ n: "−90%", label: "Smaller site structure, with the rest moved into the background" },
+				{ n: "80% → 20%", label: "People leaving after one page, on the pages visitors most needed to reach" },
+				{ n: "−90%", label: "Pages and navigation items in the main site, with everything else kept in its own section" },
 			]}
 		/>
-		<p>Program use rose too, the measure the state cared about most.</p>
+		<p>Use of the state's HIV programs rose too, and that was the measure the state cared about most.</p>
 		<Figure
 			src={hivaz13}
 			alt="The shipped site on a tablet and a phone: the tablet shows the not-sure route, 'Don't know your status? Let's get you tested', and the phone shows its Next Steps page, both in the same violet and mint"
