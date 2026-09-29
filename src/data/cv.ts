@@ -68,8 +68,8 @@ export const experience: ExperienceItem[] = [
 			"Led design of watsonx Data Lineage from brief to ship in nine months, with a two-person UX team and three named enterprise banking partners, securing $100K+ in new contracts and three new Fortune 500 clients.",
 			"The work won a Red Dot Award and is still in production six years after delivery.",
 			"Owned design of IBM Data Privacy, a new watsonx product enabling automated privacy-policy enforcement on provisioned datasets; managed a design intern and researcher from zero to shipped across a large, ambiguous scope; core product architecture persists in IBM Software Hub today.",
-			"Generalized the Data Lineage pattern beyond the original three-team mandate to serve ETL, AI model, and additional internal teams, negotiating adoption across seven teams without formal authority. The abstraction remained in production through six subsequent years of development.",
-			"Ran co-creation workshops with enterprise clients including ING, State Street, Rabobank, GM, and Ford across three time zones to validate and pressure-test designs for two major watsonx platform products.",
+			"Shared the Data Lineage patterns beyond the original three-team mandate with the data integration, AI model, and other internal teams, negotiating adoption across seven teams without formal authority. The patterns remained in production through six subsequent years of development.",
+			"Ran design workshops with enterprise clients including ING, State Street, Rabobank, GM, and Ford across three time zones to validate and pressure-test designs for two major watsonx platform products.",
 		],
 	},
 	{
@@ -79,7 +79,7 @@ export const experience: ExperienceItem[] = [
 		location: "Oakland, California",
 		bullets: [
 			"Provided capacity-building services to federally funded HIV clinics nationwide as part of Capacity for Health, a CDC-funded initiative; personally partnered with at least 10 organizations across the United States.",
-			"Researched and designed HIVAZ.org, a statewide HIV care connection platform for Arizona's Department of Health and Human Services and Aunt Rita's Foundation.",
+			"Researched and designed HIVAZ.org, a statewide HIV care connection platform for the Arizona Department of Health Services and Aunt Rita's Foundation.",
 			"Led a statewide service-delivery evaluation for Washington State, identifying capacity gaps across funded grantees and driving a major process shift, including a new statewide resource clearinghouse.",
 			"Developed Design Thinking trainings and a CDC-approved brand development curriculum for the national provider network; trained 30+ personnel and coached leadership on human-centered problem-solving.",
 			"Led concept development, theory of change, and information architecture for one of the first online education platforms in the HIV healthcare field.",

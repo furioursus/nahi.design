@@ -23,7 +23,7 @@ export const caseStudies: CaseStudyCard[] = [
 		eyebrow: "Product design · IBM",
 		title: "Drawing less of the map for the questions banks ask every day",
 		blurb:
-			"IBM's lineage tool was built for audits and took hours to draw. I made a folded view the everyday default and kept the full map one click away. Load times fell by up to 90%, and the redesign won a Red Dot Award.",
+			"IBM's data lineage tool was built for audits and took hours to draw. I made a simple Summary View the everyday default and kept the full map one click away. Answers that took hours now take seconds, and the redesign won a Red Dot Award.",
 		meta: "9 months · design lead",
 		thumb: ibmThumb,
 		thumbAlt: "IBM Watson Knowledge Catalog's data lineage view, showing a lineage graph tracing SAVINGS_ACCOUNTS through source tables to final reports and models",
@@ -34,7 +34,7 @@ export const caseStudies: CaseStudyCard[] = [
 		eyebrow: "Product design · HPE",
 		title: "Selling the big idea, shipping the smallest one",
 		blurb:
-			"Leadership asked for an AI feature, but interviews pointed to guilt, not missing tools. I won buy-in with a north star prototype and shipped its smallest form in a week. The team was laid off the week after.",
+			"Leadership asked for an AI feature, but interviews pointed to guilt, not missing tools. I won leadership over with a prototype of the full idea and shipped its smallest form in a week. The team was laid off the week after.",
 		meta: "1 week · solo",
 		thumb: hpeThumb,
 		thumbAlt: "An internal log viewer at HPE with an AI chat panel open beside it, explaining a pipeline failure",
@@ -56,7 +56,7 @@ export const caseStudies: CaseStudyCard[] = [
 		eyebrow: "UX design · Aunt Rita's Foundation",
 		title: "Designing HIV care for the people outreach was missing",
 		blurb:
-			"Arizona's HIV portal was losing the people its programs most needed to reach. I chose to design for them first, cut a quiz that tested well down to one question, and bounce rates fell by 60%.",
+			"Arizona's main HIV website was losing the people its programs most needed to reach. I chose to design for them first and cut a quiz that tested well down to one question. The share of people leaving after one page fell from 80% to 20%.",
 		meta: "3 months · solo",
 		thumb: hivazThumb,
 		thumbAlt: "The HIVAZ.org status-check screen, reading \"OK. Let's start. Tap your status.\" with three icon choices",

@@ -21,13 +21,13 @@ import ibm10 from "@img/ibm-10.webp";
 
 const title = "Drawing less of the map for the questions banks ask every day";
 const description =
-	"IBM's data lineage tool was built for the audit. A redesign that made a folded view the everyday default and kept the full map one click away.";
+	"IBM's data lineage tool was built for audits. A redesign that made a simple Summary View the everyday default and kept the full map one click away.";
 ---
 
 <CaseStudyLayout title={title} description={description}>
 	<Fragment slot="hero">
 	<CaseStudyHero eyebrow={["Product design", "IBM", "Data lineage in watsonx"]} title="Drawing less of the map for the questions banks ask every day">
-		IBM's data lineage tool was built for the audit: draw every step of a bank's data pipeline, however long it takes. But more and more people were opening it for quick, everyday questions, and waiting hours for an answer. I chose to show almost nothing by default, kept the full audit view one click away, and built the model so other teams could use it too.
+		IBM's data lineage tool was built for audits: it drew every step of a bank's data pipeline, however long that took. But more and more people were opening it for quick, everyday questions and waiting hours for an answer. I chose to show almost nothing by default, kept the full map one click away, and designed the patterns so other teams could use them too.
 	</CaseStudyHero>
 
 	<CaseStudyMeta
@@ -35,7 +35,7 @@ const description =
 			{ label: "Role", value: "Design lead, three-person UX team" },
 			{ label: "Partners", value: "ING, State Street, Rabobank" },
 			{ label: "Timeline", value: "9 months" },
-			{ label: "Research base", value: "20+ interviews, co-creation workshops every two weeks with three client banks" },
+			{ label: "Research base", value: "20+ interviews, workshops every two weeks with three client banks" },
 		]}
 	/>
 	</Fragment>
@@ -57,26 +57,26 @@ const description =
 		deckLabel="What shipped"
 	>
 		IBM's lineage product still opens by saying what it's for: trust your data, investigate the pipeline,
-		analyze what you find. Behind those three lines sit nine months, three client banks, and a model the ETL
-		and AI teams went on to adapt for their own data.
+		analyze what you find. Behind those three lines sit nine months, three client banks, and patterns the data integration
+		and AI model teams went on to adapt for their own data.
 	</Figure>
 
 	<Figure
 		src={ibm01}
 		alt="IBM Watson Knowledge Catalog, Lineage tab for SAVINGS_ACCOUNTS. The starting asset sits in the centre with its business terms and 2 masked columns; three original-source CSV files sit on the left grouped as Client 360 and Customer 360 with counts like 2 of 24 assets; two reports and a model marked Final target sit on the right, each showing business terms and column counts."
 		figNum="Fig. 02"
-		lead="The everyday view."
+		lead="The Summary View."
 		wide
 		fit="contain"
 		deck
 		deckLabel="Shipped"
 	>
-		Lineage opens on the asset in question, its sources on the left and final targets on the right, with everything between folded into counts like "2 of 24 assets" until someone asks.
+		Lineage opens on the data in question, with where it came from on the left and where it ends up on the right. Everything in between folds into counts like "2 of 24 assets" until someone asks.
 	</Figure>
 
 	<section id="audit">
 		<div class="sec-head"><span class="sec-num">01</span><h2>A tool built only for the audit</h2><span class="sec-rule"></span></div>
-		<p>Data lineage is how a bank proves where a number came from. Regulators expect it, and getting it wrong can cost up to $23 million in fines. IBM Infosphere had drawn that map for a decade by rendering every one of a pipeline's three hundred possible failure points, which meant millions of queries before anything appeared.</p>
+		<p>Data lineage is how a bank proves where a number came from. Regulators expect it, and getting it wrong can cost up to $23 million in fines. For a decade, IBM Infosphere drew that map by showing every one of a pipeline's three hundred possible failure points, which took millions of database queries before anything appeared on screen.</p>
 		<Figure
 			src={ibm02}
 			alt="IBM Infosphere Information Governance Catalog, Data Lineage for EFF_DURATION: an inventory panel listing 281 assets on the left and, on the right, a dense diagram of hundreds of tiny nodes joined by grey lines, too small to read"
@@ -93,7 +93,7 @@ const description =
 
 	<section id="everyday">
 		<div class="sec-head"><span class="sec-num">02</span><h2>Designing for the everyday question</h2><span class="sec-rule"></span></div>
-		<p>ING's Chief Data Officer described the ideal as seeing the whole factory floor, "where everything is and where things are going wrong." That vision was real, and audits depend on it. But in co-creation sessions with the three client banks every two weeks, everyday users kept asking for something narrower: the first useful answer, then the option to keep going. In desirability testing, "show me the headline, then let me drill in" beat "show me everything."</p>
+		<p>ING's Chief Data Officer described the ideal as seeing the whole factory floor, "where everything is and where things are going wrong." That vision was real, and audits depend on it. But in workshops with the three client banks every two weeks, everyday users kept asking for something narrower: the first useful answer, then the option to keep going. When we tested which approach people wanted, "show me the headline, then let me drill in" beat "show me everything."</p>
 		<Figure
 			src={ibm03}
 			alt="Persona and experience map for Betty, a business analyst who consumes data. The top block lists her asks, need statements, negative emotions, pain points, and requested metadata. Below, an emotional curve runs through five phases, naive use of data, guided use, development of autonomy, continuing collaboration, and mastery, with the lowest points where she cannot answer why her data is trustworthy and realizes she depends on data producers."
@@ -132,10 +132,10 @@ const description =
 				},
 			]}
 		/>
-		<p style="margin-top:40px">Showing less carried a real risk. An audit needs everything a piece of bad data touched, and a view that folds steps away can look like it's hiding the problem. But drawing everything was exactly what made the old tool slow and expensive. So the design kept both. The folded view became the default for everyday questions, and one button draws the full map for an audit, with a message saying it will take time and roughly how long. <strong class="deck-stat" data-deck-label="Both views" data-deck-foot="The audit view, kept one click away|IBM watsonx">The factory floor was still there. It just wasn't the first thing anyone had to wait for.</strong></p>
+		<p style="margin-top:40px">Showing less carried a real risk. An audit needs everything a piece of bad data touched, and a view that folds steps away can look like it's hiding the problem. But drawing everything was exactly what made the old tool slow and expensive. So the design kept both. A folded view, the Summary View, became the default for everyday questions, and one button draws the full map for an audit, with a message saying roughly how long it will take. <strong class="deck-stat" data-deck-label="Both views" data-deck-foot="The full map, kept one click away|IBM watsonx">The factory floor was still there. It just wasn't the first thing anyone had to wait for.</strong></p>
 
-		<Pivot label="The call" heading="Show the source and the consumer. Draw nothing else until someone asks.">
-			The Summary View opens on the first source and the final consumer, with everything between them folded into counts like "2 of 24 assets." That's the business lineage, a quick look for stakeholders who need the high-level story. The technical lineage sits beneath it, reached through filters, for people doing deep investigation: expand a step, filter to poor quality scores or ownership, or narrow the view to a single column out of thousands. The concept won testing on both desirability and usability the first time out, and the time to a useful answer went from hours to seconds.
+		<Pivot label="The call" heading="Show where the data starts and where it ends. Draw nothing else until someone asks.">
+			The Summary View opens on where the data came from and where it ends up, with everything between folded into counts like "2 of 24 assets." Stakeholders get the high-level story at a glance. People investigating a problem go deeper from the same screen: expand a step, filter to low quality scores or a specific owner, or narrow the view to a single column out of thousands. Built closely with the three banks, the concept beat both the other concepts and Infosphere in testing on how quickly people got to a useful answer. The first source made the difference. It was often the system of record, the one place a bank treats as the official version of its data, so seeing it right away got people to everyday answers far faster. Hours became seconds.
 		</Pivot>
 
 		<Strip
@@ -147,7 +147,7 @@ const description =
 			items={[
 				{
 					frameN: "01",
-					dataLabel: "Land on source and consumer",
+					dataLabel: "Land on start and end",
 					imgSrc: ibm08,
 					imgAlt: "IBM Watson Knowledge Catalog Lineage view for SAVINGS_ACCOUNTS, with an annotation reading: assets at either end of a lineage do not change often so it's safe to cache them, assets in the middle can change by the hour which means frequent calls to the back end for updates",
 				},
@@ -165,14 +165,14 @@ const description =
 				},
 			]}
 		>
-			Land on source and consumer, expand on demand, then filter down to the columns that matter. The diagram never gets bigger than the question.
+			Land on where the data starts and ends, expand a step when needed, then filter down to the columns that matter. The diagram never gets bigger than the question.
 		</Strip>
 	</section>
 
 	<section id="mandate">
 		<div class="sec-head"><span class="sec-num">03</span><h2>Designing past the mandate</h2><span class="sec-rule"></span></div>
-		<p>The mandate was lineage for this one project. When the ETL team and the AI model team came asking for the same logic, for pipeline runs and training data that looked nothing like banking transactions, I saw that their needs weren't all that different from ours. <strong class="deck-stat" data-deck-label="One model" data-deck-foot="Generalizing the lineage model|IBM watsonx">Generalizing the model risked the ship date. Staying narrow risked several teams quietly rebuilding the same thing.</strong></p>
-		<p>I recommended generalizing, and it wasn't a hard sell. Design leadership was glad to see the project contribute new patterns to the whole IBM design community, and the design systems team suggested changes so the patterns fit the wider system. The model generalized, and the original timeline held.</p>
+		<p>The mandate was lineage for this one project. Then two other IBM teams came asking for the same patterns: the data integration team, tracking pipeline runs, and the AI model team, tracking training data. Neither looked anything like banking transactions, but their needs weren't all that different from ours. <strong class="deck-stat" data-deck-label="Shared patterns" data-deck-foot="Sharing the lineage patterns|IBM watsonx">Making the patterns work for everyone risked the ship date. Staying narrow risked several teams quietly rebuilding the same thing.</strong></p>
+		<p>I recommended sharing them, and it wasn't a hard sell. Design leadership was glad to see the project contribute new patterns to the whole IBM design community, and the design systems team suggested changes so the patterns fit the wider system. We shipped the shared patterns on the original timeline.</p>
 	</section>
 
 	<section id="outcome">
@@ -180,11 +180,11 @@ const description =
 		<p>Measured after launch, and in the years since:</p>
 		<Metrics
 			items={[
-				{ n: "−90%", label: "Loading time, at the high end, from hours to seconds" },
+				{ n: "Hours to seconds", label: "Loading time for the largest lineage maps" },
 				{ n: "Red Dot", label: "Award for the redesign" },
 			]}
 		/>
-		<p>Six years later, IBM still ships the same patterns, and the ETL and AI model teams adapted the model rather than building their own.</p>
+		<p>Six years later, IBM still ships the same patterns, and the data integration and AI model teams adapted them rather than building their own.</p>
 		<Figure
 			video={{
 				poster: "/video/lineage-six-years-on-poster.webp",
@@ -201,16 +201,14 @@ const description =
 			deck
 			deckLabel="Six years on"
 		>
-			The work outlived the team that built it. Open IBM's lineage today and it still opens folded to
-			source and consumer, still expands a step at a time, and still asks which columns are worth showing
-			before it draws them.
+			IBM's lineage today still opens folded to where the data starts and ends, expands a step at a time, and asks which columns are worth showing before it draws them.
 		</Figure>
 	</section>
 
 	<section id="reflection">
 		<div class="sec-head"><span class="sec-num">05</span><h2>Looking back</h2><span class="sec-rule"></span></div>
-		<p>The call I was least sure of was how to move between levels of detail. A quick business view for stakeholders and deep technical detective work serve very different people, and a single dataset could carry thousands of columns, tags, and other metadata. Getting the step from one to the other right took a lot of research and many rounds of iteration.</p>
-		<p>The hardest part to manage wasn't the design, though. It was keeping seven teams aligned on decisions they had already made, and I spent hours re-litigating choices people had agreed to a month earlier. Since then, every project I work on has a shared decision diary from the first week, recording what we decided, when, and why.</p>
+		<p>The call I was least sure of was how to move between levels of detail. A quick look for stakeholders and a deep investigation serve very different people, and a single dataset could carry thousands of columns, tags, and other metadata. Getting the step from one to the other right took a lot of research and many rounds of iteration.</p>
+		<p>The hardest part to manage wasn't the design, though. It was keeping seven teams aligned on decisions they had already made, and I spent hours revisiting choices people had agreed to a month earlier. Since then, every project I work on has a shared decision diary from the first week, recording what we decided, when, and why.</p>
 	</section>
 
 	<NextCaseStudy slot="close" href="/case-studies/hpe-ai-troubleshooting-agent" label="Selling the big idea, shipping the smallest one" />
