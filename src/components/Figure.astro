@@ -42,7 +42,7 @@ const { src, video, alt, figNum, lead, wide, tall, bare, fit, deck, deckLabel, p
 			src ? (
 				<Image src={src} alt={alt} />
 			) : video ? (
-				<video autoplay muted loop playsinline preload="metadata" data-ambient poster={video.poster} aria-label={alt}>
+				<video muted loop playsinline preload="metadata" data-ambient poster={video.poster} aria-label={alt}>
 					{video.sources.map((s) => (
 						<source src={s.src} media={s.media} type="video/mp4" />
 					))}

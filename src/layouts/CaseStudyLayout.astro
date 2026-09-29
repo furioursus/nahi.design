@@ -26,53 +26,6 @@ const { title, description } = Astro.props;
 </BaseLayout>
 
 <script>
-	document.documentElement.classList.add("js-reveal");
-
-	/* Scroll reveal — figures, quotes, and process columns only. Fails open:
-	   content is visible unless the browser confirms it can observe and animate it. */
-	(function () {
-		const html = document.documentElement;
-		const items = Array.from(document.querySelectorAll(".rev"));
-		function showAll() {
-			html.classList.remove("js-reveal");
-		}
-		if (!items.length) {
-			showAll();
-		} else if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
-			showAll();
-		} else {
-			let fired = false;
-			const io = new IntersectionObserver(
-				(es) => {
-					fired = true;
-					es.forEach((e) => {
-						if (!e.isIntersecting) return;
-						const sibs = Array.from(e.target.parentNode!.children).filter((n) => n.classList.contains("rev"));
-						const k = sibs.indexOf(e.target);
-						(e.target as HTMLElement).style.transitionDelay = (k > 0 ? Math.min(k, 3) * 55 : 0) + "ms";
-						e.target.classList.add("in");
-						io.unobserve(e.target);
-					});
-				},
-				{ threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
-			);
-			items.forEach((n) => io.observe(n));
-			const net = () => {
-				if (!fired) {
-					showAll();
-					return;
-				}
-				items.forEach((n) => {
-					if (n.classList.contains("in")) return;
-					const r = n.getBoundingClientRect();
-					if (r.top < window.innerHeight && r.bottom > 0) n.classList.add("in");
-				});
-			};
-			window.addEventListener("load", () => setTimeout(net, 400));
-			setTimeout(net, 2500);
-		}
-	})();
-
 	/* Reading progress + section wayfinding label in the topbar. */
 	(function () {
 		const bar = document.querySelector(".topbar") as HTMLElement | null,

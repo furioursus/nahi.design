@@ -1,11 +1,5 @@
 ---
-/*
- * The "flow" scroll mode's shared shell: an opening panel that pins in
- * place (hero content), a normal scrolling document in between, and a
- * closing panel that pins in place (hand-off/contact). Used by every
- * page except the homepage, which pins every section instead (see
- * index.astro) — see scroll-sections.css for the mechanic itself.
- */
+// Shell for flow-mode pages: pinned open, scrolling body, pinned close — see docs/scroll-flow.md.
 interface Props {
 	closeSurface?: "raised" | "soft" | "ink";
 }

@@ -70,7 +70,7 @@ const hobbies = [
 						hobbies.map((hobby) => (
 							<div class="hobby">
 								<div class="hobby-video">
-									<video autoplay muted loop playsinline data-ambient aria-label={hobby.alt}>
+									<video muted loop playsinline preload="metadata" data-ambient aria-label={hobby.alt}>
 										<source src={hobby.src} type="video/mp4" />
 									</video>
 								</div>

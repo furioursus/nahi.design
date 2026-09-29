@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+
+# Netlify CLI / Deno edge-function cache lockfile — no edge functions in this repo
+deno.lock

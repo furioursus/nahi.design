@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { CaseStudyCard } from "@data/case-studies";
+import { panelArt } from "@data/panel-art";
 
 interface Props {
 	card: CaseStudyCard;
@@ -10,19 +11,39 @@ interface Props {
 }
 
 const { card, wireframe, tear, id } = Astro.props;
+// Reversed so the first piece listed paints on top, as it did when these were stacked background-image layers.
+const art = [...panelArt[wireframe]].reverse();
 ---
 
-<section class="panel cs-panel" id={id} data-texture="dots-32" data-wireframe={wireframe} data-tear={tear} data-label={card.label}>
+<section
+	class="panel cs-panel"
+	id={id}
+	data-texture="dots-32"
+	data-tear={tear}
+	data-label={card.label}
+>
+	<div class="panel-art" aria-hidden="true">
+		{art.map((p) => (
+			<span
+				data-still={p.still}
+				style={`background-image:var(${p.art});width:${p.w}px;height:${p.h}px;${p.pos}`}
+			/>
+		))}
+	</div>
 	<div class="panel-inner wrap">
 		<a class="cs-content" href={`/case-studies/${card.slug}`}>
-			<div class="cs-media"><Image src={card.thumb} alt={card.thumbAlt} /></div>
+			<div class="cs-media">
+				<Image src={card.thumb} alt={card.thumbAlt} />
+			</div>
 			<div class="cs-text">
 				<div class="card-eyebrow">{card.eyebrow}</div>
 				<h2 class="cs-title">{card.title}</h2>
 				<p class="card-blurb">{card.blurb}</p>
 				<div class="card-foot">
 					<span class="card-meta">{card.meta}</span>
-					<span class="card-cta">Read the case study <span class="card-arw">→</span></span>
+					<span class="card-cta">
+						Read the case study <span class="card-arw">→</span>
+					</span>
 				</div>
 			</div>
 		</a>

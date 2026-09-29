@@ -1,5 +1,7 @@
 # Deploy notifications
 
+**TL;DR** — Every Netlify deploy DMs a Telegram message on success or failure, sent by a local build plugin in `plugins/telegram-notify/`. The bot token and chat IDs live only in Netlify's environment variables, never in this public repo. A notification failure never fails the deploy.
+
 Telegram messages on deploy success/failure, via a local Netlify Build Plugin — no relay server, no third-party automation platform. The plugin runs inside Netlify's own build process and calls Telegram's Bot API directly.
 
 ## How it's built
@@ -9,6 +11,8 @@ Telegram messages on deploy success/failure, via a local Netlify Build Plugin �
 
 ## Setup (one-time, per Netlify site)
 
+**TL;DR** — Make a bot, collect chat IDs, set two env vars in the Netlify dashboard.
+
 1. **Create the bot** — message [`@BotFather`](https://t.me/BotFather) on Telegram, `/newbot`, save the token it gives you.
 2. **Get chat IDs** — each person who wants notifications messages [`@userinfobot`](https://t.me/userinfobot); it replies with their numeric ID directly. Each person also needs to message the bot itself at least once (e.g. `/start`) — Telegram won't let a bot DM someone who hasn't started a conversation with it first.
 3. **Set two environment variables** in the Netlify dashboard (Site settings → Environment variables) — `TELEGRAM_BOT_TOKEN`, and `TELEGRAM_CHAT_ID` (one ID, or a comma-separated list to notify several people — e.g. `111111,222222`). Both **must** live there, never in `netlify.toml` or anywhere in this repo — it's public.
@@ -17,7 +21,11 @@ Nothing else to wire up — the plugin picks up both vars from `process.env` at 
 
 ## Gotchas
 
+**TL;DR** — Everything in the plugin logs instead of throwing, so Telegram trouble can't break a deploy. Use `URL`, not `DEPLOY_PRIME_URL`, for the site link.
+
 - **Missing env vars don't fail the build.** `sendTelegramMessage` in `index.js` checks for both vars up front and just logs a warning + returns if either is missing, rather than throwing. A notification hiccup (forgotten env var, Telegram API error, rate limit) should never be able to take the actual site deploy down with it — same reasoning for why a non-`ok` Telegram API response is logged, not thrown, and why a bad ID in a multi-recipient `TELEGRAM_CHAT_ID` list doesn't stop the rest from being notified (each ID's `sendMessage` call is independent, sent in parallel via `Promise.all`).
+- **Message shape.** Each message is an opening line of flavor text, a fixed info block (context and branch, the commit subject, then the site URL or the error), and a closing line. The success and failure variants are `[opening, closing]` pairs in `index.js`, picked at random; the site name fills the opener's `{site}` placeholder when the message is sent, so it lives in one place.
+- **`TELEGRAM_CHAT_ID` parsing.** Whitespace around each ID is trimmed, so `111, 222` and `111,222` behave the same.
 - **`onError` only covers the build/deploy stage**, not post-deploy issues (CDN propagation, edge function runtime errors after the fact) — it fires when the build command or Netlify's own build process fails, which covers "deploy broke" in the common case (bad commit, failing build step) but isn't a full uptime monitor.
 - **Message length.** Telegram caps messages at 4096 characters; `onError` truncates the error text to 500 chars so a long stack trace doesn't dump illegibly into a chat notification — check the Netlify deploy log for the full error, the Telegram message is a pointer, not a substitute.
 - **`SITE_NAME`/`URL`/`CONTEXT`/`BRANCH`** are [standard Netlify build environment variables](https://docs.netlify.com/configure-builds/environment-variables/) — no extra config needed for the plugin to read them, they're already present in every build's `process.env`.

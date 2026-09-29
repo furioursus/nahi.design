@@ -1,5 +1,3 @@
-# Deliberately no [build] section here — build command / publish directory stay configured in
-# the Netlify dashboard (Site settings → Build & deploy) rather than being duplicated/overridden
-# here. This file exists solely to register the local build plugin below.
+# Only registers the deploy plugin; build settings stay in the Netlify dashboard — see docs/deploy-notifications.md.
 [[plugins]]
   package = "./plugins/telegram-notify"
