@@ -69,6 +69,7 @@ export const experience: ExperienceItem[] = [
 			"The work won a Red Dot Award and is still in production six years after delivery.",
 			"Owned design of IBM Data Privacy, a new watsonx product enabling automated privacy-policy enforcement on provisioned datasets; managed a design intern and researcher from zero to shipped across a large, ambiguous scope; core product architecture persists in IBM Software Hub today.",
 			"Shared the Data Lineage patterns beyond the original three-team mandate with the data integration, AI model, and other internal teams, negotiating adoption across seven teams without formal authority. The patterns remained in production through six subsequent years of development.",
+			"Coached teams of experienced hires through IBM's three-day Design Thinking program for new professionals, teaching the methods and guiding my team as they applied them to a pitch for improving their own products.",
 			"Ran design workshops with enterprise clients including ING, State Street, Rabobank, GM, and Ford across three time zones to validate and pressure-test designs for two major watsonx platform products.",
 		],
 	},
