@@ -109,10 +109,10 @@ const description =
 		<p>Leadership had doubts, and the scope was the reason. So I built a prototype of the full agent, a north star for where the product could go, and presented it to leadership, development, and design together. Seeing it won everyone over, and the one-week build started from there.</p>
 
 		<Pivot label="The call" heading="Keep the vision. Ship the smallest piece of it.">
-			With a week to build, I scaled the agent all the way down, and that had a real cost. The agent's value was that people wouldn't have to watch their pipelines so closely, and the smallest version couldn't do that. What shipped is an Explain Logs button, right where a person already is when a pipeline fails. One tap returns a plain-language summary, including the one thing that used to take a conversation: whether the fault was in the pipeline itself or in the infrastructure underneath it.
+			With a week to build, I scaled the agent all the way down, and that had a real cost. The agent's value was that people wouldn't have to watch their pipelines so closely, and the smallest version couldn't do that. What shipped is an Explain Logs button, right where a person already is when a pipeline fails. One tap returns a plain-language summary, including the one thing that used to take a conversation: whether the fault was in the pipeline itself or in the infrastructure underneath it. It also suggests a next step, such as checking the data contracts, and the person decides whether to act on it.
 		</Pivot>
 
-		<p style="margin-top:40px">I argued for building it in code, wired to a live language model reading HPE's real pipeline logs. The riskiest unknown was whether people would trust the answers, and trust only shows up when the answers are real.</p>
+		<p style="margin-top:40px">I argued for building it in code, wired to a live language model reading HPE's real pipeline logs. The riskiest unknown was whether people would trust an automated explanation of their own failure. A mocked-up answer can't test that, because trust depends on the answer being right, and only a real model reading real logs can be wrong in the ways that cost it.</p>
 
 		<Strip
 			land

@@ -36,7 +36,7 @@ export const caseStudies: CaseStudyCard[] = [
 		eyebrow: "Product design · HPE",
 		title: "Selling the big idea, shipping the smallest one",
 		blurb:
-			"Leadership asked for an AI feature, but interviews pointed to guilt, not missing tools. I won leadership over with a prototype of the full idea and shipped its smallest form in a week. The team was laid off the week after.",
+			"Leadership asked for an AI feature, but interviews pointed to guilt, not missing tools. I won leadership over with a prototype of the full idea and shipped its smallest form in a week.",
 		meta: "1 week · solo",
 		thumb: hpeThumb,
 		thumbAlt: "An internal log viewer at HPE with an AI chat panel open beside it, explaining a pipeline failure",
@@ -48,7 +48,7 @@ export const caseStudies: CaseStudyCard[] = [
 		eyebrow: "Product design · QuantaLyric",
 		title: "Helping a founder find the one chart worth building",
 		blurb:
-			"A pre-seed founder wanted three products, and I had forty hours. Asking where the value lived and who it was for led us to one chart for energy traders. I designed the rest and built only that.",
+			"A pre-seed founder wanted three products, and I had forty hours. Asking where the value lived and who it was for led us to one chart for energy traders. I designed the rest, built only that, and checked its colors against color blindness.",
 		meta: "40 hours · solo",
 		thumb: quantalyricThumb,
 		thumbAlt: "QuantaLyric's demand forecast dashboard, a dark-themed chart comparing two models against actual demand with an open detail tooltip",

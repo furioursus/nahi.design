@@ -132,7 +132,7 @@ const description =
 				},
 			]}
 		/>
-		<p style="margin-top:40px">Showing less carried a real risk. An audit needs everything a piece of bad data touched, and a view that folds steps away can look like it's hiding the problem. But drawing everything was exactly what made the old tool slow and expensive. So the design kept both. A folded view, the Summary View, became the default for everyday questions, and one button draws the full map for an audit, with a message saying roughly how long it will take. <strong class="deck-stat" data-deck-label="Both views" data-deck-foot="The full map, kept one click away|IBM watsonx">The factory floor was still there. It just wasn't the first thing anyone had to wait for.</strong></p>
+		<p style="margin-top:40px">Showing less carried a real risk. An audit needs everything a piece of bad data touched, and a view that folds steps away can look like it's hiding the problem. But drawing everything was exactly what made the old tool slow and expensive. So the design kept both. The Summary View became the default for everyday questions, and one button draws the full map for an audit, with a message saying roughly how long it will take. <strong class="deck-stat" data-deck-label="Both views" data-deck-foot="The full map, kept one click away|IBM watsonx">The factory floor was still there. It just wasn't the first thing anyone had to wait for.</strong></p>
 
 		<Pivot label="The call" heading="Show where the data starts and where it ends. Draw nothing else until someone asks.">
 			The Summary View opens on where the data came from and where it ends up, with everything between folded into counts like "2 of 24 assets." Stakeholders get the high-level story at a glance. People investigating a problem go deeper from the same screen: expand a step, filter to low quality scores or a specific owner, or narrow the view to a single column out of thousands. Built closely with the three banks, the concept beat both the other concepts and Infosphere in testing on how quickly people got to a useful answer. The first source made the difference. It was often the system of record, the one place a bank treats as the official version of its data, so seeing it right away got people to everyday answers far faster. Hours became seconds.
@@ -180,7 +180,7 @@ const description =
 		<p>Measured after launch, and in the years since:</p>
 		<Metrics
 			items={[
-				{ n: "Hours to seconds", label: "Loading time for the largest lineage maps" },
+				{ n: "Hours to seconds", label: "Time to a useful answer" },
 				{ n: "Red Dot", label: "Award for the redesign" },
 			]}
 		/>
@@ -201,7 +201,7 @@ const description =
 			deck
 			deckLabel="Six years on"
 		>
-			IBM's lineage today still opens folded to where the data starts and ends, expands a step at a time, and asks which columns are worth showing before it draws them.
+			IBM's lineage today still opens on a Summary View of where the data starts and ends, expands a step at a time, and asks which columns are worth showing before it draws them.
 		</Figure>
 	</section>
 
