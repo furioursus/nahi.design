@@ -44,7 +44,7 @@
 | `Strip` | **`items`**, **`figNum`**, **`lead`**, **`deckLabel`**, `land`, `full`, `solo`, `spaced` (default `true`) | Caption text after the bold lead | Always, as a strip slide (or one slide per frame with `solo`) |
 | `ImagePair` | **`items`**, **`deckLabel`**, `mid` | — | Always, as a two-up slide |
 | `Metrics` | **`items`** (`{ n, label }[]`), `three` | — | Always, as a metrics slide |
-| `DataTable` | **`caption`**, **`columns`** (string[]), **`rows`** (string[][]), `deckLabel` | — | Always, as a table slide (rail label defaults to the caption) |
+| `DataTable` | **`caption`**, **`columns`** (string[]), **`rows`** (string[][]), `deckLabel`, `highlight` | — | Always, as a table slide (rail label defaults to the caption) |
 | `NextCaseStudy` | **`href`**, **`label`** | — | No |
 
 ### Prop details
@@ -59,7 +59,7 @@
   - `Strip` items: **`dataLabel`** (the frame's label on the deck) and optional `frameN`; frames are numbered only when it's given. `land` makes frames 5:4; `full` stacks them full width at 16:10, for screenshots too detailed to survive a thumbnail column; `solo` gives each frame its own deck slide; `spaced={false}` drops the 40px top margin.
   - `ImagePair` items: **`fn`** (the figure number) and **`caption`**, which is rendered as HTML so it can carry `<strong>`. Optional `fit` per item. `mid` tightens the pair's margins when it sits mid-paragraph.
 - **`Metrics`** is two columns by default; `three` makes it three (one column on phones).
-- **`DataTable`** renders a plain `<table>` with `caption` as its visible title. The first cell of each row becomes the row header. It breaks out past the text column like a `wide` figure, and at 820px and below each row stacks into a card, with every cell labeled from its column header (`data-label`). On the deck it becomes one table slide; keep it to a few short rows so it fits.
+- **`DataTable`** renders a plain `<table>` with `caption` as its visible title. The first cell of each row becomes the row header, set in the display face. It draws horizontal rules only (a heavier rule under the mono uppercase header row and after the last row), no vertical lines and no fills, so it sits with the rest of the page rather than reading as a spreadsheet. `highlight` names one column (by its header text) whose cells render in full ink instead of `--ink-mid`; use it for the column the reader should land on, such as what was chosen. It breaks out past the text column like a `wide` figure, and at 820px and below each row stacks into a group, with every cell labeled from its column header (`data-label`); the highlight still applies there. On the deck it becomes one table slide in the same style; keep it to a few short rows so it fits.
 
 ## Page-level pieces
 

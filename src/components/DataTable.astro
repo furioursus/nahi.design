@@ -4,9 +4,10 @@ interface Props {
 	columns: string[];
 	rows: string[][];
 	deckLabel?: string;
+	highlight?: string;
 }
 
-const { caption, columns, rows, deckLabel } = Astro.props;
+const { caption, columns, rows, deckLabel, highlight } = Astro.props;
 ---
 
 <div class="data-table rev" data-deck-label={deckLabel}>
@@ -21,7 +22,9 @@ const { caption, columns, rows, deckLabel } = Astro.props;
 					<tr>
 						<th scope="row">{head}</th>
 						{cells.map((cell, i) => (
-							<td data-label={columns[i + 1]}>{cell}</td>
+							<td data-label={columns[i + 1]} data-highlight={columns[i + 1] === highlight ? "" : undefined}>
+								{cell}
+							</td>
 						))}
 					</tr>
 				))

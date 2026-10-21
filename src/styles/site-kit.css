@@ -572,21 +572,45 @@ p .inline-q {
   color: var(--ink);
   margin-bottom: 16px;
 }
+/* Horizontal rules only; the phone cards below set the same mono-label style. See docs/case-study-kit.md, DataTable. */
 .data-table th,
 .data-table td {
-  border: 1px solid var(--rule);
-  padding: 12px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  padding: 18px 20px 18px 0;
   text-align: left;
   vertical-align: top;
 }
+.data-table th:last-child,
+.data-table td:last-child {
+  padding-right: 0;
+}
 .data-table thead th {
-  background: color-mix(in srgb, var(--rule) 40%, var(--paper));
-  color: var(--ink);
-  font-weight: 600;
+  border-bottom-color: var(--ink);
+  padding-top: 0;
+  padding-bottom: 10px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
 }
 .data-table tbody th {
+  width: 15%;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
   color: var(--ink);
-  font-weight: 600;
+}
+.data-table td[data-highlight] {
+  color: var(--ink);
+}
+.data-table tbody tr:last-child th,
+.data-table tbody tr:last-child td {
+  border-bottom-color: var(--ink);
 }
 
 .next {
@@ -686,15 +710,14 @@ p .inline-q {
     display: block;
   }
   .data-table tbody tr {
-    border: 1px solid var(--rule);
-    margin-bottom: 14px;
+    border-top: 1px solid var(--ink);
+    margin-bottom: 28px;
   }
   .data-table tbody th,
   .data-table td {
     border: 0;
-  }
-  .data-table tbody th {
-    background: color-mix(in srgb, var(--rule) 40%, var(--paper));
+    padding: 14px 0;
+    width: auto;
   }
   .data-table td {
     border-top: 1px solid var(--rule);
@@ -1071,17 +1094,40 @@ p .inline-q {
 }
 .ds-table th,
 .ds-table td {
-  border: 1px solid var(--rule);
-  padding: 0.9cqw 1cqw;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  padding: 1.1cqw 1.4cqw 1.1cqw 0;
   text-align: left;
   vertical-align: top;
 }
-.ds-table th {
-  color: var(--ink);
-  font-weight: 600;
+.ds-table th:last-child,
+.ds-table td:last-child {
+  padding-right: 0;
 }
 .ds-table thead th {
-  background: color-mix(in srgb, var(--rule) 40%, var(--paper));
+  border-bottom-color: var(--ink);
+  padding-top: 0;
+  padding-bottom: 0.7cqw;
+  font-family: var(--font-mono);
+  font-size: max(8px, 1.1cqw);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.ds-table tbody th {
+  width: 15%;
+  font-family: var(--font-display);
+  font-size: max(10px, 1.7cqw);
+  font-weight: 500;
+  color: var(--ink);
+}
+.ds-table td[data-highlight] {
+  color: var(--ink);
+}
+.ds-table tbody tr:last-child th,
+.ds-table tbody tr:last-child td {
+  border-bottom-color: var(--ink);
 }
 .ds-meta {
   margin-top: auto;

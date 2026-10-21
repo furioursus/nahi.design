@@ -266,7 +266,9 @@ const { title } = Astro.props;
 			const info = sectionInfo(box);
 			const caption = text(box.querySelector("caption"));
 			const columns = Array.from(box.querySelectorAll("thead th")).map(text);
-			const rows = Array.from(box.querySelectorAll("tbody tr")).map((tr) => Array.from(tr.querySelectorAll("th, td")).map(text));
+			const rows = Array.from(box.querySelectorAll("tbody tr")).map((tr) =>
+				Array.from(tr.querySelectorAll("th, td")).map((c) => ({ t: text(c), hi: c.hasAttribute("data-highlight") })),
+			);
 			return {
 				type: "table",
 				label: lbl(box, caption || info.label || "Table"),
@@ -420,7 +422,7 @@ const { title } = Astro.props;
 			} else if (s.type === "table") {
 				const head = "<tr>" + s.columns.map((c: string) => "<th>" + esc(c) + "</th>").join("") + "</tr>";
 				const body = s.rows
-					.map((r: string[]) => "<tr>" + r.map((c, i) => (i ? "<td>" : "<th>") + esc(c) + (i ? "</td>" : "</th>")).join("") + "</tr>")
+					.map((r: { t: string; hi: boolean }[]) => "<tr>" + r.map((c, i) => (i ? "<td" + (c.hi ? " data-highlight" : "") + ">" : "<th>") + esc(c.t) + (i ? "</td>" : "</th>")).join("") + "</tr>")
 					.join("");
 				canvas.innerHTML =
 					'<div class="deck-slide"><div class="ds-eye"><span class="spine"></span>' +
