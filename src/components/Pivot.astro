@@ -3,13 +3,14 @@ interface Props {
 	heading: string;
 	label?: string;
 	points?: string[];
+	deckLabel?: string;
 }
 
-const { heading, label = "What changed", points } = Astro.props;
+const { heading, label = "What changed", points, deckLabel = label } = Astro.props;
 ---
 
 <div class="pivot">
 	<div class="pivot-k"><span class="dot"></span>{label}</div>
-	<div class="pivot-h deck-stat" data-deck-eyebrow={label} data-deck-points={points?.join(" | ")}>{heading}</div>
+	<div class="pivot-h deck-stat" data-deck-eyebrow={label} data-deck-label={deckLabel} data-deck-points={points?.join(" | ")}>{heading}</div>
 	<div class="pivot-b"><slot /></div>
 </div>

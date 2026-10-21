@@ -87,7 +87,7 @@ const description =
 		>
 			A small lineage by Infosphere's standards still drew 281 assets, every node too small to read, before anyone could ask a simple question.
 		</Figure>
-		<p><strong class="deck-stat" data-deck-foot="IBM Infosphere, before the redesign|Up to $23M in compliance fines at stake" data-deck-points="Lineage is how a bank proves where a number came from. Regulators expect it, and getting it wrong can cost up to $23 million. | Infosphere drew every one of a pipeline's three hundred possible failure points, millions of queries before anything appeared on screen. | More and more people opened it for one quick answer, then waited hours and clicked more than a hundred times to get it.">That thoroughness made sense for an audit.</strong> It made no sense for the growing number of people who opened lineage for a quick answer about where one number came from, then waited hours and clicked more than a hundred times to get it.</p>
+		<p><strong class="deck-stat" data-deck-label="Built for the audit" data-deck-foot="IBM Infosphere, before the redesign|Up to $23M in compliance fines at stake" data-deck-points="Lineage is how a bank proves where a number came from. Regulators expect it, and getting it wrong can cost up to $23 million. | Infosphere drew every one of a pipeline's three hundred possible failure points, millions of queries before anything appeared on screen. | More and more people opened it for one quick answer, then waited hours and clicked more than a hundred times to get it.">That thoroughness made sense for an audit.</strong> It made no sense for the growing number of people who opened lineage for a quick answer about where one number came from, then waited hours and clicked more than a hundred times to get it.</p>
 	</section>
 
 	<section id="everyday">
@@ -131,14 +131,14 @@ const description =
 				},
 			]}
 		/>
-		<p style="margin-top:40px">Showing less carried a real risk. An audit needs everything a piece of bad data touched, and a view that folds steps away can look like it's hiding the problem. But drawing everything was exactly what made the old tool slow and expensive. So the design kept both. The Summary View became the default for everyday questions, and one button draws the full map for an audit, with a message saying roughly how long it will take. <strong class="deck-stat" data-deck-label="Both views" data-deck-foot="The full map, kept one click away|IBM watsonx" data-deck-points="Showing less was a real risk. To an auditor, a view that folds steps away can look like it's hiding the problem. | Drawing everything was exactly what made the old tool slow and expensive. | The Summary View became the default. One button draws the full map, with a note on how long it will take.">The factory floor was still there. It just wasn't the first thing anyone had to wait for.</strong></p>
+		<p style="margin-top:40px">Showing less carried a real risk. An audit needs everything a piece of bad data touched, and a view that folds steps away can look like it's hiding the problem. But drawing everything was exactly what made the old tool slow and expensive. So the design kept both. The Summary View became the default for everyday questions, and one button draws the full map for an audit, with a message saying roughly how long it will take. The factory floor was still there. It just wasn't the first thing anyone had to wait for.</p>
 
 		<Pivot
 			label="The call"
 			heading="Show where the data starts and where it ends. Draw nothing else until someone asks."
 			points={[
 				"Open on the source and the destination, with everything in between folded into a single count.",
-				"From the same screen, expand a step, filter to low quality scores or one owner, or narrow to a single column out of thousands.",
+				"Showing less was a real risk. To an auditor, a view that folds steps away can look like it's hiding the problem. So the full map stayed one button away.",
 				"Built with three banks, it beat the other concepts and Infosphere on time to a useful answer. Hours became seconds.",
 			]}
 		>
@@ -243,7 +243,7 @@ const description =
 	<section id="reflection">
 		<div class="sec-head"><span class="sec-num">05</span><h2>Looking back</h2><span class="sec-rule"></span></div>
 		<p>The call I was least sure of was how to move between levels of detail. A quick look for stakeholders and a deep investigation serve very different people, and a single dataset could carry thousands of columns, tags, and other metadata. Getting the step from one to the other right took a lot of research and many rounds of iteration.</p>
-		<p>The hardest part to manage wasn't the design, though. It was keeping seven teams aligned on decisions they had already made, and I spent hours revisiting choices people had agreed to a month earlier. Since then, every project I work on has a shared decision diary from the first week, recording what we decided, when, and why.</p>
+		<p>The hardest part to manage wasn't the design, though. It was keeping seven teams aligned on decisions they had already made, and I spent hours revisiting choices people had agreed to a month earlier. <strong class="deck-stat" data-deck-label="Looking back" data-deck-foot="What I kept|IBM watsonx" data-deck-points="The call I was least sure of was how to move between a quick look and a deep investigation. Getting it right took many rounds of research and iteration. | The hardest part wasn't the design. It was keeping seven teams aligned on decisions they had already made. | I spent hours revisiting choices people had agreed to a month earlier.">Since then, every project I work on has a shared decision diary from the first week, recording what we decided, when, and why.</strong></p>
 	</section>
 
 	<NextCaseStudy slot="close" href="/case-studies/hpe-ai-troubleshooting-agent" label="Selling the big idea, shipping the smallest one" />

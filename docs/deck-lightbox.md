@@ -22,6 +22,10 @@ A title slide is always generated first, built from the page's `<h1>`, eyebrow t
 
 Every one of these lives in document order, so the deck always mirrors the reading order of the case study. Optional `data-deck-label`, `data-deck-eyebrow`, `data-deck-foot`, and `data-deck-caption` attributes (set by the component props — see `Figure`, `Strip`, `ProcessColumns`, `ImagePair`, `Pivot`) override the slide's rail label, eyebrow, footer, or caption where the section heading isn't the right default.
 
+### The beat order every deck follows
+
+Because the deck mirrors the page, the page's structure decides the presentation's. All four case studies are laid out so their decks run the same seven beats: title, the shipped product (a promise of where the story ends, not a spoiler), the problem (evidence figures, then a statement), who or what was chosen, the call (`Pivot`), what shipped (frames), what changed (`Metrics` or a statement), and a closing statement from the "Looking back" paragraph. Keep that order when adding or moving content, and avoid two statement slides in a row: a statement reads best right after the figure or strip that earns it. The closing slide is a `.deck-stat` around the one sentence of the reflection that should be the last thing on screen, labeled "Looking back".
+
 ### Statement slide key points
 
 A statement slide on its own is one sentence and a footer, which reads as a title and not much else to someone skimming the deck. `data-deck-points` on the `.deck-stat` element adds a short list under the sentence: two or three points separated by `|`, each giving the context the sentence leaves out (the situation, what was done, what came of it). `Pivot` takes the same thing as a `points` string array prop and joins it with `|` for you. The list is rendered as `.ds-points` with a square marker; points are plain text (any HTML is escaped). Keep each point to one line of thought and the set to three at most, since a long headline plus four points no longer fits a 16:9 canvas at laptop height. The points live only on the slide; the page's paragraph is unchanged.

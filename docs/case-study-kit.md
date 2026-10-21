@@ -40,7 +40,7 @@
 | `Figure` | **`alt`**, **`figNum`**, **`lead`**, `src` or `video`, `wide`, `tall`, `bare`, `fit`, `deck`, `deckLabel`, `placeholderLabel` | Caption text after the bold lead | Only with `deck` |
 | `Pull` | **`quote`**, **`attribution`**, `deckLabel` | — | Always, as a quote slide |
 | `ProcessColumns` | **`items`**, **`deckLabel`**, **`deckCaption`**, `land` | — | Always, as a strip slide |
-| `Pivot` | **`heading`**, `label` (default "What changed"), `points` (string[]) | The body text | Always — the heading is a statement slide, with `points` listed under it |
+| `Pivot` | **`heading`**, `label` (default "What changed"), `points` (string[]), `deckLabel` (defaults to `label`) | The body text | Always — the heading is a statement slide, with `points` listed under it |
 | `Strip` | **`items`**, **`figNum`**, **`lead`**, **`deckLabel`**, `land`, `full`, `solo`, `spaced` (default `true`) | Caption text after the bold lead | Always, as a strip slide (or one slide per frame with `solo`) |
 | `ImagePair` | **`items`**, **`deckLabel`**, `mid` | — | Always, as a two-up slide |
 | `Metrics` | **`items`** (`{ n, label }[]`), `three` | — | Always, as a metrics slide |
