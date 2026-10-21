@@ -27,7 +27,7 @@
 - **`CaseStudyLayout`** (props: `title`, `description`) renders `BaseLayout` with the marketing nav off, `og:type` set to `article`, a skip link, `CaseStudyTopbar`, `PageFlow` (see [`scroll-flow.md`](scroll-flow.md)), and one `DeckLightbox`.
 - **Topbar wayfinding** is built from every `main section[id]`: the label is the `.sec-num` text plus the `<h2>`, e.g. "01 · A tool built only for the audit". A section without an `id` doesn't get a label. Under reduced motion the label swaps instantly instead of fading.
 - **Reading progress** runs from the top of `<main>` to the `.next` block, capped at the furthest point the page can actually scroll so the bar always fills.
-- **`.deck-stat`** — wrap one sentence of a paragraph in `<strong class="deck-stat">` to make it a statement slide. Optional `data-deck-label` (rail label) and `data-deck-foot` (footer, two parts separated by `|`).
+- **`.deck-stat`** — wrap one sentence of a paragraph in `<strong class="deck-stat">` to make it a statement slide. Optional `data-deck-label` (rail label), `data-deck-foot` (footer, two parts separated by `|`), and `data-deck-points` (two or three key points separated by `|`, listed under the sentence on the slide — see [`deck-lightbox.md`](deck-lightbox.md), "Statement slide key points").
 
 ## Components
 
@@ -35,12 +35,12 @@
 
 | Component | Props | Slot | Deck |
 | :-- | :-- | :-- | :-- |
-| `CaseStudyHero` | **`eyebrow`** (string[]), **`title`** | The lede paragraph | Title slide from the `<h1>`, eyebrow, and the lede's first sentence |
-| `CaseStudyMeta` | **`items`** (`{ label, value }[]`) | — | No |
+| `CaseStudyHero` | **`eyebrow`** (string[]), **`title`** | The lede paragraph | Title slide from the `<h1>`, eyebrow, and the whole lede |
+| `CaseStudyMeta` | **`items`** (`{ label, value }[]`) | — | Rendered as the title slide's bottom row |
 | `Figure` | **`alt`**, **`figNum`**, **`lead`**, `src` or `video`, `wide`, `tall`, `bare`, `fit`, `deck`, `deckLabel`, `placeholderLabel` | Caption text after the bold lead | Only with `deck` |
 | `Pull` | **`quote`**, **`attribution`**, `deckLabel` | — | Always, as a quote slide |
 | `ProcessColumns` | **`items`**, **`deckLabel`**, **`deckCaption`**, `land` | — | Always, as a strip slide |
-| `Pivot` | **`heading`**, `label` (default "What changed") | The body text | Always — the heading is a statement slide |
+| `Pivot` | **`heading`**, `label` (default "What changed"), `points` (string[]) | The body text | Always — the heading is a statement slide, with `points` listed under it |
 | `Strip` | **`items`**, **`figNum`**, **`lead`**, **`deckLabel`**, `land`, `full`, `solo`, `spaced` (default `true`) | Caption text after the bold lead | Always, as a strip slide (or one slide per frame with `solo`) |
 | `ImagePair` | **`items`**, **`deckLabel`**, `mid` | — | Always, as a two-up slide |
 | `Metrics` | **`items`** (`{ n, label }[]`), `three` | — | Always, as a metrics slide |

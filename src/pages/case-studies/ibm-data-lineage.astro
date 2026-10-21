@@ -87,7 +87,7 @@ const description =
 		>
 			A small lineage by Infosphere's standards still drew 281 assets, every node too small to read, before anyone could ask a simple question.
 		</Figure>
-		<p><strong class="deck-stat" data-deck-foot="IBM Infosphere, before the redesign|Up to $23M in compliance fines at stake">That thoroughness made sense for an audit.</strong> It made no sense for the growing number of people who opened lineage for a quick answer about where one number came from, then waited hours and clicked more than a hundred times to get it.</p>
+		<p><strong class="deck-stat" data-deck-foot="IBM Infosphere, before the redesign|Up to $23M in compliance fines at stake" data-deck-points="Lineage is how a bank proves where a number came from. Regulators expect it, and getting it wrong can cost up to $23 million. | Infosphere drew every one of a pipeline's three hundred possible failure points, millions of queries before anything appeared on screen. | More and more people opened it for one quick answer, then waited hours and clicked more than a hundred times to get it.">That thoroughness made sense for an audit.</strong> It made no sense for the growing number of people who opened lineage for a quick answer about where one number came from, then waited hours and clicked more than a hundred times to get it.</p>
 	</section>
 
 	<section id="everyday">
@@ -131,9 +131,17 @@ const description =
 				},
 			]}
 		/>
-		<p style="margin-top:40px">Showing less carried a real risk. An audit needs everything a piece of bad data touched, and a view that folds steps away can look like it's hiding the problem. But drawing everything was exactly what made the old tool slow and expensive. So the design kept both. The Summary View became the default for everyday questions, and one button draws the full map for an audit, with a message saying roughly how long it will take. <strong class="deck-stat" data-deck-label="Both views" data-deck-foot="The full map, kept one click away|IBM watsonx">The factory floor was still there. It just wasn't the first thing anyone had to wait for.</strong></p>
+		<p style="margin-top:40px">Showing less carried a real risk. An audit needs everything a piece of bad data touched, and a view that folds steps away can look like it's hiding the problem. But drawing everything was exactly what made the old tool slow and expensive. So the design kept both. The Summary View became the default for everyday questions, and one button draws the full map for an audit, with a message saying roughly how long it will take. <strong class="deck-stat" data-deck-label="Both views" data-deck-foot="The full map, kept one click away|IBM watsonx" data-deck-points="Showing less was a real risk. To an auditor, a view that folds steps away can look like it's hiding the problem. | Drawing everything was exactly what made the old tool slow and expensive. | The Summary View became the default. One button draws the full map, with a note on how long it will take.">The factory floor was still there. It just wasn't the first thing anyone had to wait for.</strong></p>
 
-		<Pivot label="The call" heading="Show where the data starts and where it ends. Draw nothing else until someone asks.">
+		<Pivot
+			label="The call"
+			heading="Show where the data starts and where it ends. Draw nothing else until someone asks."
+			points={[
+				"Open on the source and the destination, with everything between folded into counts like '2 of 24 assets.'",
+				"From the same screen, expand a step, filter to low quality scores or one owner, or narrow to a single column out of thousands.",
+				"Built with three banks, it beat the other concepts and Infosphere on time to a useful answer. Hours became seconds.",
+			]}
+		>
 			The Summary View opens on where the data came from and where it ends up, with everything between folded into counts like "2 of 24 assets." Stakeholders get the high-level story at a glance. People investigating a problem go deeper from the same screen: expand a step, filter to low quality scores or a specific owner, or narrow the view to a single column out of thousands. Built closely with the three banks, the concept beat both the other concepts and Infosphere in testing on how quickly people got to a useful answer. The first source made the difference. It was often the system of record, the one place a bank treats as the official version of its data, so seeing it right away got people to everyday answers far faster. Hours became seconds.
 		</Pivot>
 
@@ -198,7 +206,7 @@ const description =
 
 	<section id="mandate">
 		<div class="sec-head"><span class="sec-num">03</span><h2>Designing past the mandate</h2><span class="sec-rule"></span></div>
-		<p>The mandate was lineage for this one project. Then two other IBM teams came asking for the same patterns: the data integration team, tracking pipeline runs, and the AI model team, tracking training data. Neither looked anything like banking transactions, but their needs weren't all that different from ours. <strong class="deck-stat" data-deck-label="Shared patterns" data-deck-foot="Sharing the lineage patterns|IBM watsonx">Making the patterns work for everyone risked the ship date. Staying narrow risked several teams quietly rebuilding the same thing.</strong></p>
+		<p>The mandate was lineage for this one project. Then two other IBM teams came asking for the same patterns: the data integration team, tracking pipeline runs, and the AI model team, tracking training data. Neither looked anything like banking transactions, but their needs weren't all that different from ours. <strong class="deck-stat" data-deck-label="Shared patterns" data-deck-foot="Sharing the lineage patterns|IBM watsonx" data-deck-points="The data integration and AI model teams came asking for the same patterns, for data that looked nothing like banking transactions. | I recommended sharing them, and the design systems team suggested changes so they fit the wider system. | The shared patterns shipped on the original timeline. Six years later, IBM still ships them.">Making the patterns work for everyone risked the ship date. Staying narrow risked several teams quietly rebuilding the same thing.</strong></p>
 		<p>I recommended sharing them, and it wasn't a hard sell. Design leadership was glad to see the project contribute new patterns to the whole IBM design community, and the design systems team suggested changes so the patterns fit the wider system. We shipped the shared patterns on the original timeline.</p>
 	</section>
 

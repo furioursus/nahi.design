@@ -1029,6 +1029,55 @@ p .inline-q {
   margin-top: 1.5cqw;
   max-width: 88%;
 }
+.ds-points {
+  list-style: none;
+  margin: 2.2cqw 0 0;
+  padding: 0;
+  max-width: 88%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9cqw;
+}
+.ds-points li {
+  position: relative;
+  padding-left: 2.2cqw;
+  font-family: var(--font-body);
+  font-size: max(11px, 1.75cqw);
+  line-height: 1.55;
+  color: var(--ink-mid);
+}
+.ds-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75cqw;
+  width: 0.9cqw;
+  min-width: 5px;
+  height: 0.9cqw;
+  min-height: 5px;
+  background: var(--mark);
+}
+.ds-meta {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2cqw 3cqw;
+  padding-top: 1.8cqw;
+  border-top: 1px solid var(--rule);
+}
+.ds-meta-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4cqw;
+  flex: 1 1 18cqw;
+  min-width: 0;
+}
+.ds-meta-v {
+  font-family: var(--font-body);
+  font-size: max(9px, 1.35cqw);
+  line-height: 1.4;
+  color: var(--ink-mid);
+}
 .ds-foot {
   margin-top: auto;
   display: flex;

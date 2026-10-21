@@ -69,7 +69,7 @@ const description =
 		>
 			Red and orange throughout, including the pages with nothing urgent to say, for visitors who were already frightened.
 		</Figure>
-		<p>The state wanted more people using its HIV programs. But those programs don't measure success by traffic. <strong class="deck-stat" data-deck-foot="How HIV testing programs measure success|HIVAZ.org">A testing program succeeds when it reaches people who have HIV and don't know it yet, and they are the hardest people to reach.</strong></p>
+		<p>The state wanted more people using its HIV programs. But those programs don't measure success by traffic. <strong class="deck-stat" data-deck-foot="How HIV testing programs measure success|HIVAZ.org" data-deck-points="The state wanted more people using its HIV programs, but 80% of visitors left the site after one page. | People with steady access to care already have prevention in place, so they rarely test positive. | The site's job wasn't traffic. It was reaching the people outreach kept missing.">A testing program succeeds when it reaches people who have HIV and don't know it yet, and they are the hardest people to reach.</strong></p>
 	</section>
 
 	<section id="audience">
@@ -100,7 +100,7 @@ const description =
 		>
 			Unaware of the care available and least able to act on it, the "needing a guide" group was the least served by outreach. What they asked for became the brief: someone to guide them, and encouragement along the way.
 		</Figure>
-		<p><strong class="deck-stat" data-deck-foot="Who the redesign prioritized|HIVAZ.org">Health organizations know these are the people to reach. The hard part is reaching them.</strong> So the question changed from who the site was for to what a frightened person with little support could actually do on a phone. The answer cost the site its original promise. HIVAZ.org was built to be "all things HIV in Arizona," and designing for people with the least access meant moving most of that information to a separate part of the site, so the main path could do one thing well.</p>
+		<p><strong class="deck-stat" data-deck-foot="Who the redesign prioritized|HIVAZ.org" data-deck-points="The people the programs most needed had the least access to care: unhoused, immigrant, BIPOC, and underage Arizonans. | The question became what a frightened person with little support could actually do on a phone. | The cost: most of 'all things HIV in Arizona' moved to its own section so the main path could do one thing well.">Health organizations know these are the people to reach. The hard part is reaching them.</strong> So the question changed from who the site was for to what a frightened person with little support could actually do on a phone. The answer cost the site its original promise. HIVAZ.org was built to be "all things HIV in Arizona," and designing for people with the least access meant moving most of that information to a separate part of the site, so the main path could do one thing well.</p>
 	</section>
 
 	<section id="quiz">
@@ -136,7 +136,15 @@ const description =
 		<p style="margin-top:40px">That finding brought the tension with Aunt Rita's Foundation into the open. Giving those people the detail they wanted meant gathering more provider information than a team of three could handle, and the foundation pushed back right away. The turning point was returning to what we all already knew: people with the least access need the most help, and they have the highest rate of undiagnosed HIV. Once we were designing for them again, the answer got smaller, not bigger.</p>
 		<p>So I cut the quiz down to one question.</p>
 
-		<Pivot label="The call" heading="The fix wasn't a smarter filter. It was one question.">
+		<Pivot
+			label="The call"
+			heading="The fix wasn't a smarter filter. It was one question."
+			points={[
+				"The quiz tested best, but every added question helped the people who needed help least.",
+				"Giving them that detail meant gathering more provider information than a team of three could handle.",
+				"Now the site opens with 'Tap your status.' Each answer leads to one page, and 'not sure' leads to a test.",
+			]}
+		>
 			The shipped site opens with "Tap your status": positive, negative, or not sure. Answering asks a person to reflect on where they are right now. That's a small enough step to take, and taking it builds momentum toward the harder steps that follow. Each answer leads to one page written for that situation, and "not sure" leads to a test rather than a list of providers. The provider information the foundation had already collected is still there, in its own part of the site, for anyone who wants it.
 		</Pivot>
 

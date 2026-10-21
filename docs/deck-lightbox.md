@@ -17,9 +17,13 @@ Every case study page has a "View as deck" button in its topbar (and a sticky mo
 - `.deck-stat` — a `<strong class="deck-stat">` wrapped around a sentence inside a paragraph (or the `Pivot` thesis line) becomes a statement slide
 - `.metrics` — a `Metrics` grid becomes a metrics slide
 
-A title slide is always generated first, built from the page's `<h1>`, eyebrow tags, and the first sentence of the lede.
+A title slide is always generated first, built from the page's `<h1>`, eyebrow tags, the whole lede paragraph, and the `CaseStudyMeta` cells (role, partner, timeline, and so on), which render as a row along the bottom of the slide.
 
 Every one of these lives in document order, so the deck always mirrors the reading order of the case study. Optional `data-deck-label`, `data-deck-eyebrow`, `data-deck-foot`, and `data-deck-caption` attributes (set by the component props — see `Figure`, `Strip`, `ProcessColumns`, `ImagePair`, `Pivot`) override the slide's rail label, eyebrow, footer, or caption where the section heading isn't the right default.
+
+### Statement slide key points
+
+A statement slide on its own is one sentence and a footer, which reads as a title and not much else to someone skimming the deck. `data-deck-points` on the `.deck-stat` element adds a short list under the sentence: two or three points separated by `|`, each giving the context the sentence leaves out (the situation, what was done, what came of it). `Pivot` takes the same thing as a `points` string array prop and joins it with `|` for you. The list is rendered as `.ds-points` with a square marker; points are plain text (any HTML is escaped). Keep each point to one line of thought and the set to three at most, since a long headline plus four points no longer fits a 16:9 canvas at laptop height. The points live only on the slide; the page's paragraph is unchanged.
 
 ## Controls
 

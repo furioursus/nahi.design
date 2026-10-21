@@ -32,10 +32,7 @@ const { title } = Astro.props;
 </div>
 
 <script>
-	/* View-as-deck lightbox. Builds its slide list from the page itself —
-	   .deck-stat elements, figure[data-deck], .pull quotes, and .metrics —
-	   in document order, so the deck mirrors the reading order of the
-	   case study without a separate slide list to maintain. */
+	/* See docs/deck-lightbox.md. */
 	(function () {
 		const lb = document.getElementById("deckLb") as HTMLElement | null;
 		if (!lb) return;
@@ -71,12 +68,25 @@ const { title } = Astro.props;
 				.join(" · ");
 			const h1 = text(document.querySelector(".hero h1"));
 			const lede = text(document.querySelector(".hero .lede"));
-			const first = lede.split(/(?<=[.?!])\s+/)[0] || "";
-			return { type: "title", label: "Title", source: "Hero", eyebrow, html: h1, sub: first };
+			const meta = Array.from(document.querySelectorAll(".meta .meta-cell")).map((c) => ({
+				k: text(c.querySelector(".meta-k")),
+				v: text(c.querySelector(".meta-v")),
+			}));
+			return { type: "title", label: "Title", source: "Hero", eyebrow, html: h1, sub: lede, meta };
 		}
 
 		function lbl(el: Element, def: string) {
 			return el.getAttribute("data-deck-label") || def;
+		}
+
+		function pointsOf(el: Element) {
+			const raw = el.getAttribute("data-deck-points");
+			return raw
+				? raw
+						.split("|")
+						.map((p) => p.trim())
+						.filter(Boolean)
+				: [];
 		}
 
 		function buildStatement(el: Element) {
@@ -97,6 +107,7 @@ const { title } = Astro.props;
 				source: info.label || "Statement",
 				eyebrow,
 				html: (el as HTMLElement).innerHTML.trim(),
+				points: pointsOf(el),
 				fk,
 				fv,
 			};
@@ -308,6 +319,18 @@ const { title } = Astro.props;
 			);
 		}
 
+		function pointsHtml(points: string[]) {
+			return points.length ? '<ul class="ds-points">' + points.map((p) => "<li>" + esc(p) + "</li>").join("") + "</ul>" : "";
+		}
+
+		function metaHtml(meta: { k: string; v: string }[]) {
+			return meta.length
+				? '<div class="ds-meta">' +
+						meta.map((m) => '<div class="ds-meta-cell"><span class="ds-fk">' + esc(m.k) + '</span><span class="ds-meta-v">' + esc(m.v) + "</span></div>").join("") +
+						"</div>"
+				: "";
+		}
+
 		function renderSlide(s: any) {
 			if (s.type === "title") {
 				canvas.innerHTML =
@@ -317,6 +340,7 @@ const { title } = Astro.props;
 					esc(s.html) +
 					"</div>" +
 					(s.sub ? '<div class="ds-sub">' + esc(s.sub) + "</div>" : "") +
+					metaHtml(s.meta) +
 					"</div>";
 			} else if (s.type === "statement") {
 				canvas.innerHTML =
@@ -325,6 +349,7 @@ const { title } = Astro.props;
 					'</div><div class="ds-h">' +
 					s.html +
 					"</div>" +
+					pointsHtml(s.points) +
 					(s.fk || s.fv
 						? '<div class="ds-foot"><span class="ds-fk">' + esc(s.fk) + '</span><span class="ds-fv">' + esc(s.fv) + "</span></div>"
 						: "") +
