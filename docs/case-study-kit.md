@@ -1,6 +1,6 @@
 # Case study component kit
 
-**TL;DR** — Every case study page (`src/pages/case-studies/*.astro`) is composed by hand from the same ten components, wrapped in `CaseStudyLayout`. There's no content collection and no slide list: the page's own markup is the content, the deck (see [`deck-lightbox.md`](deck-lightbox.md)), and the topbar's section labels. Styles for all of it live in `src/styles/site-kit.css`. To add a case study, copy an existing page and follow "Adding a case study" at the bottom.
+**TL;DR** — Every case study page (`src/pages/case-studies/*.astro`) is composed by hand from the same eleven components, wrapped in `CaseStudyLayout`. There's no content collection and no slide list: the page's own markup is the content, the deck (see [`deck-lightbox.md`](deck-lightbox.md)), and the topbar's section labels. Styles for all of it live in `src/styles/site-kit.css`. To add a case study, copy an existing page and follow "Adding a case study" at the bottom.
 
 ## Page skeleton
 
@@ -44,6 +44,7 @@
 | `Strip` | **`items`**, **`figNum`**, **`lead`**, **`deckLabel`**, `land`, `full`, `solo`, `spaced` (default `true`) | Caption text after the bold lead | Always, as a strip slide (or one slide per frame with `solo`) |
 | `ImagePair` | **`items`**, **`deckLabel`**, `mid` | — | Always, as a two-up slide |
 | `Metrics` | **`items`** (`{ n, label }[]`), `three` | — | Always, as a metrics slide |
+| `DataTable` | **`caption`**, **`columns`** (string[]), **`rows`** (string[][]) | — | No |
 | `NextCaseStudy` | **`href`**, **`label`** | — | No |
 
 ### Prop details
@@ -58,6 +59,7 @@
   - `Strip` items: **`dataLabel`** (the frame's label on the deck) and optional `frameN`; frames are numbered only when it's given. `land` makes frames 5:4; `full` stacks them full width at 16:10, for screenshots too detailed to survive a thumbnail column; `solo` gives each frame its own deck slide; `spaced={false}` drops the 40px top margin.
   - `ImagePair` items: **`fn`** (the figure number) and **`caption`**, which is rendered as HTML so it can carry `<strong>`. Optional `fit` per item. `mid` tightens the pair's margins when it sits mid-paragraph.
 - **`Metrics`** is two columns by default; `three` makes it three (one column on phones).
+- **`DataTable`** renders a plain `<table>` with `caption` as its visible title. The first cell of each row becomes the row header. It breaks out past the text column like a `wide` figure, and at 820px and below each row stacks into a card, with every cell labeled from its column header (`data-label`). It doesn't join the deck.
 
 ## Page-level pieces
 
