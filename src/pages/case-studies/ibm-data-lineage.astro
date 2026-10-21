@@ -7,6 +7,7 @@ import ProcessColumns from "@components/ProcessColumns.astro";
 import Pivot from "@components/Pivot.astro";
 import Strip from "@components/Strip.astro";
 import Metrics from "@components/Metrics.astro";
+import DataTable from "@components/DataTable.astro";
 import NextCaseStudy from "@components/NextCaseStudy.astro";
 
 import ibm01 from "@img/ibm-01.webp";
@@ -70,9 +71,7 @@ const description =
 		fit="contain"
 		deck
 		deckLabel="Shipped"
-	>
-		Lineage opens on the data in question, with where it came from on the left and where it ends up on the right. Everything in between folds into counts like "2 of 24 assets" until someone asks.
-	</Figure>
+	/>
 
 	<section id="audit">
 		<div class="sec-head"><span class="sec-num">01</span><h2>A tool built only for the audit</h2><span class="sec-rule"></span></div>
@@ -167,6 +166,34 @@ const description =
 		>
 			Land on where the data starts and ends, expand a step when needed, then filter down to the columns that matter. The diagram never gets bigger than the question.
 		</Strip>
+
+		<DataTable
+			caption="What each choice cost"
+			columns={["Trade-off", "Design wanted", "Engineering needed", "What we chose", "What we gave up"]}
+			rows={[
+				[
+					"Completeness",
+					"Every step bad data touched, for the audit",
+					"Fewer queries: each node on screen was one",
+					"Summary View by default; the full map on request, with a time estimate",
+					"Audits still wait for the full map",
+				],
+				[
+					"Freshness",
+					"Current data across the whole map",
+					"No re-querying the whole graph on every view",
+					"Cache sources and targets; load the middle when someone opens it",
+					"Cached ends can go out of date. They're stable, and expanding refreshes them.",
+				],
+				[
+					"Detail",
+					"Every column and its metadata",
+					"No drawing thousands of columns at once",
+					"Filter columns before drawing; deeper metadata in a panel",
+					"One more step to see everything",
+				],
+			]}
+		/>
 	</section>
 
 	<section id="mandate">
