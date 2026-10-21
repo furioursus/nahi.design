@@ -6,7 +6,7 @@ Every case study page has a "View as deck" button in its topbar (and a sticky mo
 
 ## How it's built
 
-**TL;DR** — On open, a script scans the page for six kinds of marked-up content and builds one slide per match, after a generated title slide.
+**TL;DR** — On open, a script scans the page for seven kinds of marked-up content and builds one slide per match, after a generated title slide.
 
 `DeckLightbox.astro` renders the modal markup (`.deck-lb`, the canvas, the thumbnail rail, prev/next controls) plus one inline `<script>` that does the work. When a visitor clicks "View as deck", the script queries the page for:
 
@@ -16,6 +16,7 @@ Every case study page has a "View as deck" button in its topbar (and a sticky mo
 - `[data-deck="pair"]` — an `ImagePair` becomes a two-up slide, each cell keeping its own caption
 - `.deck-stat` — a `<strong class="deck-stat">` wrapped around a sentence inside a paragraph (or the `Pivot` thesis line) becomes a statement slide
 - `.metrics` — a `Metrics` grid becomes a metrics slide
+- `.data-table` — a `DataTable` becomes a table slide: its caption as the heading, then the whole table redrawn at slide scale. It's sized for a few short rows; a table wider than five columns or longer than four rows won't fit a 16:9 canvas
 
 A title slide is always generated first, built from the page's `<h1>`, eyebrow tags, the whole lede paragraph, and the `CaseStudyMeta` cells (role, partner, timeline, and so on), which render as a row along the bottom of the slide.
 

@@ -262,19 +262,36 @@ const { title } = Astro.props;
 			};
 		}
 
+		function buildTable(box: Element) {
+			const info = sectionInfo(box);
+			const caption = text(box.querySelector("caption"));
+			const columns = Array.from(box.querySelectorAll("thead th")).map(text);
+			const rows = Array.from(box.querySelectorAll("tbody tr")).map((tr) => Array.from(tr.querySelectorAll("th, td")).map(text));
+			return {
+				type: "table",
+				label: lbl(box, caption || info.label || "Table"),
+				source: info.label || "Table",
+				eyebrow: info.num ? info.num + " · " + info.label : info.label,
+				caption,
+				columns,
+				rows,
+			};
+		}
+
 		function buildSlides() {
 			const list: any[] = [buildTitle()];
-			Array.from(document.querySelectorAll('.pull, figure[data-deck], [data-deck="strip"], [data-deck="pair"], .deck-stat, .metrics')).forEach(
-				(el) => {
-					const kind = el.getAttribute("data-deck");
-					if (el.classList.contains("pull")) list.push(buildQuote(el));
-					else if (el.tagName === "FIGURE") list.push(buildImage(el));
-					else if (kind === "strip") (el.hasAttribute("data-deck-solo") ? buildStripSolo(el) : [buildStrip(el)]).forEach((s) => list.push(s));
-					else if (kind === "pair") list.push(buildPair(el));
-					else if (el.classList.contains("metrics")) list.push(buildMetrics(el));
-					else if (el.classList.contains("deck-stat")) list.push(buildStatement(el));
-				},
-			);
+			Array.from(
+				document.querySelectorAll('.pull, figure[data-deck], [data-deck="strip"], [data-deck="pair"], .deck-stat, .metrics, .data-table'),
+			).forEach((el) => {
+				const kind = el.getAttribute("data-deck");
+				if (el.classList.contains("pull")) list.push(buildQuote(el));
+				else if (el.tagName === "FIGURE") list.push(buildImage(el));
+				else if (kind === "strip") (el.hasAttribute("data-deck-solo") ? buildStripSolo(el) : [buildStrip(el)]).forEach((s) => list.push(s));
+				else if (kind === "pair") list.push(buildPair(el));
+				else if (el.classList.contains("metrics")) list.push(buildMetrics(el));
+				else if (el.classList.contains("data-table")) list.push(buildTable(el));
+				else if (el.classList.contains("deck-stat")) list.push(buildStatement(el));
+			});
 			return list;
 		}
 
@@ -400,6 +417,21 @@ const { title } = Astro.props;
 					"</div>";
 			} else if (s.type === "quote") {
 				canvas.innerHTML = '<div class="deck-slide"><div class="ds-q">' + esc(s.q) + '</div><div class="ds-qa">' + esc(s.a) + "</div></div>";
+			} else if (s.type === "table") {
+				const head = "<tr>" + s.columns.map((c: string) => "<th>" + esc(c) + "</th>").join("") + "</tr>";
+				const body = s.rows
+					.map((r: string[]) => "<tr>" + r.map((c, i) => (i ? "<td>" : "<th>") + esc(c) + (i ? "</td>" : "</th>")).join("") + "</tr>")
+					.join("");
+				canvas.innerHTML =
+					'<div class="deck-slide"><div class="ds-eye"><span class="spine"></span>' +
+					esc(s.eyebrow) +
+					'</div><div class="ds-h ds-h-sm">' +
+					esc(s.caption) +
+					'</div><table class="ds-table"><thead>' +
+					head +
+					"</thead><tbody>" +
+					body +
+					"</tbody></table></div>";
 			} else if (s.type === "metrics") {
 				const cols = s.items
 					.map((m: any) => '<div class="ds-col"><div class="ds-cn">' + esc(m.n) + '</div><div class="ds-cl">' + esc(m.l) + "</div></div>")

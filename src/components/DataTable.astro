@@ -3,12 +3,13 @@ interface Props {
 	caption: string;
 	columns: string[];
 	rows: string[][];
+	deckLabel?: string;
 }
 
-const { caption, columns, rows } = Astro.props;
+const { caption, columns, rows, deckLabel } = Astro.props;
 ---
 
-<div class="data-table rev">
+<div class="data-table rev" data-deck-label={deckLabel}>
 	<table>
 		<caption>{caption}</caption>
 		<thead>
