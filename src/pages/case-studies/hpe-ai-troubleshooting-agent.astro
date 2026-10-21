@@ -75,7 +75,7 @@ const description =
 			]}
 		/>
 		<p style="margin-top:40px">Leadership arrived with a reasonable ask: ship an AI feature. The team had just invested in expanded documentation and a ChatGPT assistant wired to it, hoping people would learn to build pipelines that failed less.</p>
-		<p>All ten interviews named the same problem without being asked: miscommunication between data scientists and engineers. Data scientists didn't say they lacked tools. <strong class="deck-stat" data-deck-label="Guilt, not tools" data-deck-foot="What ten out of ten interviews surfaced|HPE" data-deck-points="A pipeline could cost $10,000 or more a day. When one failed, a data scientist had to ask an engineer why. | Leadership asked for an AI feature. The team already had a documentation chatbot ready to ship. | A chatbot answers a different question. The brief became helping people see into systems they can't read.">They said they felt guilty, that they were letting a teammate down.</strong> One wanted "a translator to go between us."</p>
+		<p>All ten interviews named the same problem without being asked: miscommunication between data scientists and engineers. Data scientists didn't say they lacked tools. <strong class="deck-stat" data-deck-label="Guilt, not tools" data-deck-foot="What ten out of ten interviews surfaced|HPE" data-deck-points="A pipeline could cost $10,000 or more a day. When one failed, a data scientist had to ask an engineer why. | Leadership asked for an AI feature. The team had just built a chatbot wired to its documentation. | A chatbot answers a different question. The brief became helping people see into systems they can't read.">They said they felt guilty, that they were letting a teammate down.</strong> One wanted "a translator to go between us."</p>
 		<p>That's a relationship problem, and a documentation chatbot answers a different question. So I reframed the brief from "build an AI tool" to "help people see into AI systems and infrastructure they can't read."</p>
 		<Figure
 			src={hpe06}
@@ -114,7 +114,7 @@ const description =
 			points={[
 				"The strongest concept was an agent that watched pipelines and reported what broke. People wanted it, and we couldn't build it in a week.",
 				"A prototype of the full agent won over leadership, development, and design in one room.",
-				"What shipped: an Explain Logs button that says whether the fault is in the pipeline or the infrastructure, built on real logs.",
+				"What shipped: Explain Logs, which says whether the fault is in the pipeline or the infrastructure underneath it, built on real logs.",
 			]}
 		>
 			With a week to build, I scaled the agent all the way down, and that had a real cost. The agent's value was that people wouldn't have to watch their pipelines so closely, and the smallest version couldn't do that. What shipped is an Explain Logs button, right where a person already is when a pipeline fails. One tap returns a plain-language summary, including the one thing that used to take a conversation: whether the fault was in the pipeline itself or in the infrastructure underneath it. It also suggests a next step, such as checking the data contracts, and the person decides whether to act on it.
@@ -155,12 +155,12 @@ const description =
 
 	<section id="outcome">
 		<div class="sec-head"><span class="sec-num">03</span><h2>What happened</h2><span class="sec-rule"></span></div>
-		<p><strong class="deck-stat" data-deck-label="What happened" data-deck-foot="The week after the proof of concept shipped|HPE AI Solutions" data-deck-points="The user test that would have proved or challenged the idea never ran. | What the week did settle: it could be built on real logs, by one designer and an intern. | Since then, I write every research readout as if the team might not be there to present it.">The proof of concept shipped on a Friday. Within the week, the entire AI Solutions department, this team included, was laid off.</strong> The user test that would have proved or challenged the idea never ran. What the week did settle is that it could be built on real logs, by one designer and an intern.</p>
+		<p><strong class="deck-stat" data-deck-label="What happened" data-deck-foot="The week after the proof of concept shipped|HPE AI Solutions" data-deck-points="The user test that would have proved or challenged the idea never ran. | What the week did settle: one designer and an intern could build it on real logs.">The proof of concept shipped on a Friday. Within the week, the entire AI Solutions department, this team included, was laid off.</strong> The user test that would have proved or challenged the idea never ran. What the week did settle is that it could be built on real logs, by one designer and an intern.</p>
 	</section>
 
 	<section id="reflection">
 		<div class="sec-head"><span class="sec-num">04</span><h2>Looking back</h2><span class="sec-rule"></span></div>
-		<p>The most valuable things this project produced weren't the prototype. They were the reframe and the insight behind it. If I'd known how little runway was left, I'd have spent less of the week polishing the build and more of it writing the research down so it could travel without the team. <strong class="deck-stat" data-deck-label="Looking back" data-deck-foot="What I kept|HPE" data-deck-points="The most valuable things the project produced were the reframe and the insight behind it, not the prototype. | With the runway that short, the week should have gone to writing the research down so it could travel without the team.">On every project since, I've written the research readout as if the team might not be there to present it.</strong></p>
+		<p>The most valuable things this project produced weren't the prototype. They were the reframe and the insight behind it. If I'd known how little runway was left, I'd have spent less of the week polishing the build and more of it writing the research down so it could travel without the team. <strong class="deck-stat" data-deck-label="Looking back" data-deck-foot="What I kept|HPE" data-deck-points="The most valuable things the project produced were the reframe and the insight behind it, not the prototype. | With so little time left, the week should have gone to writing the research down so it could travel without the team.">On every project since, I've written the research readout as if the team might not be there to present it.</strong></p>
 	</section>
 
 	<NextCaseStudy slot="close" href="/case-studies/quantalyric-mvp" label="Helping a founder find the one chart worth building" />
